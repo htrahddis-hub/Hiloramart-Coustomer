@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../Styles/pages/Login.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {useAlert} from 'react-alert';
-import {useNavigate} from 'react-router-dom';
+import { useAlert } from 'react-alert';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setformData] = useState({
     email: '',
     password: '',
   });
-  const {email, password} = formData;
+  const { email, password } = formData;
   const onChangeHandler = (e) => {
-    setformData({...formData, [e.target.name]: e.target.value});
+    setformData({ ...formData, [e.target.name]: e.target.value });
   };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -22,17 +22,17 @@ const Login = () => {
         'Content-Type': 'application/json',
       },
     };
-    const body = JSON.stringify({email, password});
-    console.log(body);
+    const body = { email, password };
+    // console.log(body);
     try {
       const res = await axios.post(
         'https://hiloramart-user.herokuapp.com/auth/login',
         body,
         config
       );
-      console.log(res);
+      console.log(res.data);
       window.alert('Logged in sucessfuky');
-      localStorage.setItem('token', res.token);
+      localStorage.setItem('token', res.data.token);
       navigate('/');
       // alert.success(res);
     } catch (err) {
@@ -65,7 +65,7 @@ const Login = () => {
               />
               <Link
                 to='/forgotpassword'
-                style={{color: 'inherit', textDecoration: 'none'}}
+                style={{ color: 'inherit', textDecoration: 'none' }}
               >
                 <div id='forgotPas'>Forgot Password?</div>
               </Link>
@@ -74,7 +74,7 @@ const Login = () => {
               </button>
             </form>
             <Link to='/signup'>
-              <button style={{marginLeft: '8rem'}} className='SignUpButton'>
+              <button style={{ marginLeft: '8rem' }} className='SignUpButton'>
                 Sign up
               </button>
             </Link>

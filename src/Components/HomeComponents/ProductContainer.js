@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import ProductImage from '../../Assets/Images/Home/ProductImage.png';
-import {Rating} from 'react-simple-star-rating';
+import { Rating } from 'react-simple-star-rating';
 import '../../Styles/Components/ProductContainer.css';
 
-const ProductContainer = () => {
+const ProductContainer = ({ product }) => {
   const [rating, setRating] = useState(0); // initial rating value
 
   // Catch Rating value
@@ -14,7 +14,7 @@ const ProductContainer = () => {
   return (
     <div className='ProductMainContainer'>
       <div
-        style={{height: '5px', padding: '2%', paddingBottom: '3%'}}
+        style={{ height: '5px', padding: '2%', paddingBottom: '3%' }}
         className='Stars'
       >
         <Rating onClick={handleRating} ratingValue={rating} />
@@ -23,7 +23,7 @@ const ProductContainer = () => {
         <img
           src={ProductImage}
           alt=''
-          style={{height: '8rem', width: '8rem'}}
+          style={{ height: '8rem', width: '8rem' }}
         />
       </div>
       <div className='discription'>

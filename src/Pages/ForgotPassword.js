@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../Styles/pages/ForgotPass.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {useAlert} from 'react-alert';
-import {useNavigate} from 'react-router-dom';
+import { useAlert } from 'react-alert';
+import { useNavigate } from 'react-router-dom';
 const ForgotPassword = () => {
   const navigate = useNavigate();
 
   const [formData, setformData] = useState({
     email: '',
   });
-  const {email} = formData;
+  const { email } = formData;
   const onChangeHandler = (e) => {
-    setformData({...formData, [e.target.name]: e.target.value});
+    setformData({ ...formData, [e.target.name]: e.target.value });
   };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ const ForgotPassword = () => {
         'Content-Type': 'application/json',
       },
     };
-    const body = JSON.stringify({email});
+    const body = JSON.stringify({ email });
     console.log(body);
     try {
       const res = await axios.post(
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
     } catch (err) {
       // alert.error('Request Failed');
 
-      console.log(err.message);
+      console.log(err);
     }
   };
   return (

@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductContainer from './ProductContainer';
 import '../../Styles/Components/DealOfDayContainer.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const DealOfDayContainer = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('https://hiloramart.herokuapp.com/product/getProducts')
+      .then((res) => {
+        setProducts(res.data.data);
+      });
+  }, []);
+
   return (
     <div className='DoDmainContainer'>
       <div className='DodContainer1'>
@@ -11,24 +22,15 @@ const DealOfDayContainer = () => {
         <div className='DoDTime'>09:50:34</div>
       </div>
       <div className='ProductCarousal'>
-        <Link
-          to='/HomeProductDetail'
-          style={{color: 'inherit', textDecoration: 'none'}}
-        >
-          <ProductContainer />
-        </Link>
-        <Link
-          to='/HomeProductDetail'
-          style={{color: 'inherit', textDecoration: 'none'}}
-        >
-          <ProductContainer />
-        </Link>
-        <Link
-          to='/HomeProductDetail'
-          style={{color: 'inherit', textDecoration: 'none'}}
-        >
-          <ProductContainer />
-        </Link>
+        {products.map((p, idx) => (
+          <Link
+            to='/HomeProductDetail'
+            style={{ color: 'inherit', textDecoration: 'none' }}
+            key={idx}
+          >
+            <ProductContainer product={p} />
+          </Link>
+        ))}
       </div>
     </div>
   );
