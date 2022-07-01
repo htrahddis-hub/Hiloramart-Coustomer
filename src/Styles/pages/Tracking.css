@@ -1,0 +1,105 @@
+#trackingHead {
+  font-size: 26px;
+  font-weight: bold;
+  padding: 2%;
+  text-align: center;
+}
+#Estdate {
+  font-size: 14px;
+  opacity: 50%;
+  font-weight: 400;
+  text-align: center;
+}
+#TrackDate {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+#progressLine {
+  text-align: center;
+}
+#TrackButtonCont {
+  text-align: center;
+}
+#DownloadInvoice {
+  background-color: #fafafa;
+  color: #000000;
+  border: 0px;
+  height: 45px;
+  width: 427px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#TrackButtonCont {
+  display: flex;
+  justify-content: center;
+}
+.track2 {
+  background-color: #fafafa;
+  padding: 1%;
+}
+#Detail1 {
+  text-align: center;
+  font-size: 24px;
+}
+#trackCont1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.trackInCont1 {
+  text-align: center;
+}
+.trackHead {
+  font-size: 26px;
+}
+.trackAdd {
+  font-size: 16px;
+  opacity: 70%;
+  padding: 3%;
+}
+#trackCont2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 2% 1% 2%;
+}
+#trackCont3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1% 2% 1% 2%;
+  font-size: 16px;
+  font-weight: 400;
+}
+#status {
+  background-color: #05ad11;
+  color: #ffffff;
+  border: 0px;
+  height: 25px;
+  width: 150px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item1 {
+  font-size: 24px;
+  font-weight: 400;
+  padding-bottom: 6%;
+}
+.item2 {
+  font-size: 16px;
+  font-weight: 400;
+}
+#Detail1 {
+  font-size: 28px;
+  font-weight: 700;
+}

@@ -1,0 +1,68 @@
+.WelMainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.welContainer1 {
+  border: 2px solid black;
+  border-radius: 14px;
+  padding: 4% 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+#welcomeDiv {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+#WelContainer3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.button1 {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 40px;
+  width: 300px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+.button1:active {
+  background-color: #ff8d22;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(4px);
+}
+.button2 {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 40px;
+  width: 300px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+.button2:active {
+  background-color: white;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(4px);
+}
+#WelContainer2 {
+  font-size: 24px;
+  font-weight: 550;
+  padding-bottom: 8%;
+}

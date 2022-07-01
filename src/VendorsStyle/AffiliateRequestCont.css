@@ -1,0 +1,52 @@
+#AFcontainer {
+  background-color: #fcfcfc;
+  padding: 1%;
+  margin: 1%;
+  border-radius: 25px;
+  width: 275px;
+  height: 220px;
+}
+#name {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 5%;
+}
+#Text {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  padding-bottom: 10%;
+}
+#Deny {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 30px;
+  width: 100px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#accept {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 30px;
+  width: 100px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#ReqButtonCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7%;
+}
+#image {
+  text-align: center;
+  padding: 4%;
+}

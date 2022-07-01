@@ -1,0 +1,41 @@
+#BuyCont1 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.BuyerItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 7% 0% 7% 0%;
+}
+#buyMainCont {
+  border-radius: 30px;
+  padding: 1%;
+  margin: 2%;
+  background: #fcfcfc;
+  width: 620px;
+  height: 450px;
+}
+.lighterText {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 50%;
+}
+.darkerText {
+  font-size: 14px;
+  font-weight: 500;
+}
+#Assigned {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 30px;
+  width: 144px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#buttonCont {
+  text-align: center;
+}

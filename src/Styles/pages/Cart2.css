@@ -1,0 +1,159 @@
+#cartDiv1 {
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 1%;
+  margin: 2%;
+}
+#cart2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 2% 0% 2% 0%;
+  /* font-size: 20px; */
+}
+
+#Change {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 40px;
+  width: 150px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#cart1 {
+  font-size: 20px;
+  font-weight: 800;
+}
+#add {
+  font-size: 18px;
+  font-weight: 400;
+  /* font-weight: bold; */
+  width: 40%;
+}
+#CartIn1 {
+  text-align: center;
+}
+.CartRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+#CartIn3 {
+  padding-top: 20px;
+}
+.DarkcartText {
+  font-size: 18px;
+  font-weight: 700;
+}
+.ColCart1 {
+  /* border: 1px solid; */
+  margin: 1%;
+  padding: 1%;
+  border-radius: 6px;
+  /* width: 45%; */
+  padding-bottom: 10%;
+  padding-top: 2%;
+}
+#CartDiv2main {
+  display: flex;
+  justify-content: space-between;
+  margin: 2%;
+}
+#cartDiv2 {
+  width: 50%;
+}
+#cartDiv3 {
+  width: 50%;
+  padding-left: 10px;
+  margin-left: 5%;
+  /* border-left: 1px solid; */
+  border-radius: 12px;
+  padding: 1%;
+}
+#OtherPayment {
+  font-size: 18px;
+  font-weight: 600;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+.paymentImg {
+  /* padding-right: 4%; */
+}
+
+.rowCenter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50%;
+}
+/* .radioButton{
+    padding-left: 20%;
+} */
+
+.PayBox {
+  display: flex;
+  align-items: center;
+}
+.PayTEXT {
+  margin-left: 25%;
+}
+.radio {
+  /* margin: 2%; */
+}
+#row_spaceBTW {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5%;
+}
+#PAyNOw {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 40px;
+  width: 450px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+.PayNow {
+  padding-top: 10%;
+}
+
+.PaymentOp {
+  padding-top: 5%;
+  margin-bottom: 5%;
+}
+
+/* CartProductCont */
+
+.CPCmain {
+  display: flex;
+  justify-content: space-between;
+  /* width: 35%; */
+  /* border: 1px solid; */
+  border-radius: 10px;
+  padding: 1%;
+  margin: 1%;
+}
+.CPCin1 {
+  font-size: 18px;
+  font-weight: 500;
+
+  padding-bottom: 8px;
+}
+.CPCin2 {
+  font-size: 20px;
+  font-weight: 700;
+
+  padding-bottom: 8px;
+}
+.CPC2 {
+  /* border: 1px solid; */
+  border-radius: 2px;
+  padding: 5px;
+}

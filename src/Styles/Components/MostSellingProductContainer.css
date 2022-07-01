@@ -1,0 +1,15 @@
+.MSPCont2 {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
+.MSPcontiner1 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  padding: 1%;
+}
+.MSPmainContainer {
+  padding-bottom: 30px;
+  padding-top: 30px;
+}

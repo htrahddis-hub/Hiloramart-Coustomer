@@ -1,0 +1,57 @@
+.VinputBox {
+  width: 786px;
+  height: 40px;
+  padding-left: 13px;
+  margin: 1%;
+  background: #fcfcfc;
+  border: 1px solid #ff8d22;
+  color: #ff8d22;
+}
+.VContainer1 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 3%;
+}
+.Vhead {
+  font-size: 26px;
+  font-weight: bold;
+}
+.VsmallInputBox {
+  background: #fcfcfc;
+  border: 1px solid #ff8d22;
+  color: #ff8d22;
+  width: 120px;
+  height: 40px;
+  padding-left: 13px;
+  margin: 1%;
+}
+.VsmallInputCon {
+  display: flex;
+  justify-content: space-between;
+}
+#Vsubmit {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 30px;
+  width: 558px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#VsubCont {
+  text-align: center;
+}
+input.VinputBox::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ff8d22;
+  opacity: 1; /* Firefox */
+}
+input.VsmallInputBox::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ff8d22;
+  opacity: 1; /* Firefox */
+}

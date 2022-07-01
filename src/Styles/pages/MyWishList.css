@@ -1,0 +1,17 @@
+#OHhead {
+  font-size: 22px;
+  font-weight: bold;
+}
+#OHtime {
+  font-size: 18px;
+  font-weight: 400;
+}
+#OHcont1 {
+  display: flex;
+  justify-content: center;
+}
+.OHCont2 {
+  display: flex;
+  justify-content: space-around;
+  padding: 4% 0% 4% 0%;
+}

@@ -1,0 +1,39 @@
+#WishListButtonCont {
+  padding: 10% 0% 10% 0%;
+  text-align: center;
+}
+#BUYbutton1 {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 40px;
+  width: 250px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+#BUYbutton1:active {
+  background-color: #ff8d22;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(4px);
+}
+#BUYbutton2 {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 35px;
+  width: 250px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+#BUYbutton2:active {
+  background-color: #ff8d22;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(4px);
+}

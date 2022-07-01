@@ -1,0 +1,85 @@
+.OHCmainCont {
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  width: 372px;
+  flex-direction: column;
+  padding: 1%;
+}
+#OHCcont1 {
+  display: flex;
+}
+#OhcDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.OHCitem {
+  display: flex;
+  justify-content: space-between;
+}
+#OHcCont3 {
+  display: flex;
+  justify-content: space-around;
+}
+#OHcCount4 {
+  display: flex;
+  justify-content: center;
+}
+#BuyItAgain {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 45px;
+  width: 166px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 1%;
+}
+#Return {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 45px;
+  width: 166px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#invoice {
+  background-color: #fafafa;
+  color: #000000;
+  border: 0px;
+  height: 45px;
+  width: 416px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#ProdName {
+  font-size: 14px;
+  font-weight: 500;
+}
+#DeliveryDate {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 50%;
+}
+#OhcDetails {
+  padding-left: 4%;
+}
+.OHCitem {
+  padding: 2% 0% 2% 0%;
+}
+#OHcCont3 {
+  padding: 4% 0% 4% 0%;
+}

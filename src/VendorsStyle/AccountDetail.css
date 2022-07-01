@@ -1,0 +1,33 @@
+#ADcont1 {
+  background: #fcfcfc;
+  border-radius: 54px;
+  padding: 1%;
+  width: 600px;
+  height: 400px;
+}
+.ADrow {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#AdmainCont {
+  display: flex;
+  justify-content: space-around;
+}
+.TopHead {
+  font-size: 20px;
+  font-weight: 600;
+  /* text-align: center; */
+  padding: 2%;
+  margin-top: 3%;
+  margin-left: 3%;
+}
+/* last transection */
+#LastTcont1 {
+  width: 100%;
+  padding: 2%;
+  margin: 4%;
+  background: #fcfcfc;
+  border-radius: 30px;
+}

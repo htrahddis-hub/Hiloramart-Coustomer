@@ -1,0 +1,26 @@
+#LPmainCont {
+  display: flex;
+  padding: 3%;
+  justify-content: space-between;
+}
+#LPtext1 {
+  font-size: 22px;
+  padding-bottom: 4%;
+  font-weight: bold;
+  width: 70%;
+}
+
+#LPtext2 {
+  font-size: 20px;
+  padding-bottom: 20%;
+}
+#LPtext3 {
+  font-size: 20px;
+  font-weight: 500px;
+  font-weight: bold;
+  padding-top: -2%;
+  font-family: Roboto 22px;
+}
+#LPtextCont {
+  text-align: left;
+}

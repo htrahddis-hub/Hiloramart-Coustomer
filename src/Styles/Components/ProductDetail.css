@@ -1,0 +1,75 @@
+.productDMainCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1%;
+}
+.SmallImageCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-left: 5%;
+}
+.imageAndVideo {
+  display: flex;
+}
+#BuyNow {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 40px;
+  width: 420px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+}
+#AddToCart {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  height: 40px;
+  width: 420px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 1%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#PriceCont {
+  display: flex;
+  justify-content: space-between;
+}
+.counter {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid;
+  border-radius: 2px;
+  height: 30px;
+  width: 30px;
+}
+#ProHead {
+  font-size: 22px;
+  font-weight: 500;
+
+  padding-bottom: 10px;
+
+  width: 60%;
+}
+#ProdPrice {
+  font-size: 25px;
+  font-weight: bold;
+}
+.ProdInfo {
+  width: 40%;
+  padding-right: 5%;
+}
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15%;
+}
