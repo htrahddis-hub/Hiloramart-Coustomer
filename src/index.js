@@ -33,6 +33,12 @@ const root = createRoot(rootElement);
 
 // axios.defaults.baseURL = 'https://hiloramart.herokuapp.com/';
 
+axios.interceptors.request.use(function (config) {
+  config.headers.token = localStorage.getItem('token');
+  // console.log('headers set');
+  return config;
+});
+
 // 👇️ if you use TypeScript, add non-null (!) assertion operator
 // const root = createRoot(rootElement!);
 

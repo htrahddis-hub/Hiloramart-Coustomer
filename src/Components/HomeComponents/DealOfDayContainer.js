@@ -11,6 +11,7 @@ const DealOfDayContainer = () => {
     axios
       .get('https://hiloramart.herokuapp.com/product/getProducts')
       .then((res) => {
+        // console.log(res.data.data);
         setProducts(res.data.data);
       });
   }, []);
@@ -24,7 +25,7 @@ const DealOfDayContainer = () => {
       <div className='ProductCarousal'>
         {products.map((p, idx) => (
           <Link
-            to='/HomeProductDetail'
+            to={`/HomeProductDetail/${p._id}`}
             style={{ color: 'inherit', textDecoration: 'none' }}
             key={idx}
           >

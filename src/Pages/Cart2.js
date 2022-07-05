@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CartProductCont from '../Components/Cart/CartProductCont';
 import '../Styles/pages/Cart2.css';
 import MasterCard from '../Assets/Images/cart/MasterCard.png';
@@ -7,9 +7,44 @@ import upi from '../Assets/Images/cart/upi.png';
 import cod from '../Assets/Images/cart/cod.png';
 import Ppay from '../Assets/Images/cart/Ppay.png';
 import gPay from '../Assets/Images/cart/gPay.png';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../Components/Footer';
+import axios from 'axios';
+
 const Cart2 = () => {
+  const [cartItems, setCartitems] = useState([]);
+
+  //todo -> GET ALL ITEMS IN THE CART
+  const getCartItems = async () => {
+    try {
+      const { data } = await axios.get(
+        'https://hiloramart-user.herokuapp.com/cart'
+      );
+      // console.log(data);
+      setCartitems(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //todo -> DELTE FROM CART function will be passed with each item as a prop
+  const deleteFromCart = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `https://hiloramart-user.herokuapp.com/cart/remove?product_id=${id}`
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, [deleteFromCart]);
+
+  // console.log(cartItems);
+
   return (
     <>
       <NavBar />
@@ -34,8 +69,13 @@ const Cart2 = () => {
                 <div>Your Orders</div>
               </div>
               <div id='CartIn2'>
-                <CartProductCont />
-                <CartProductCont />
+                {cartItems.map((item, idx) => (
+                  <CartProductCont
+                    key={idx}
+                    deleteFromCart={deleteFromCart}
+                    item={item}
+                  />
+                ))}
               </div>
               <div id='CartIn3'>
                 <div className='CartRow'>
@@ -131,10 +171,10 @@ const Cart2 = () => {
                 <div>Total Pay</div>
                 <div>RS. 7000</div>
               </div>
-              <div style={{textAlign: 'center'}}>
+              <div style={{ textAlign: 'center' }}>
                 <Link
                   to='/cart'
-                  style={{color: 'inherit', textDecoration: 'none'}}
+                  style={{ color: 'inherit', textDecoration: 'none' }}
                 >
                   <button id='PAyNOw'>Pay now</button>
                 </Link>

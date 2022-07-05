@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../Styles/pages/SignUp.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {useAlert} from 'react-alert';
-import {useNavigate} from 'react-router-dom';
+import { useAlert } from 'react-alert';
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const navigate = useNavigate();
   // const alert = useAlert();
@@ -14,9 +14,9 @@ const SignUp = () => {
     confirmPassword: ' ',
     name: ' ',
   });
-  const {mobile, email, password, confirmPassword, name} = formData;
+  const { mobile, email, password, confirmPassword, name } = formData;
   const onChangeHandler = (e) => {
-    setformData({...formData, [e.target.name]: e.target.value});
+    setformData({ ...formData, [e.target.name]: e.target.value });
   };
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const SignUp = () => {
         'Content-Type': 'application/json',
       },
     };
-    const body = JSON.stringify({name, email, mobile, password});
+    const body = JSON.stringify({ name, email, mobile, password });
     console.log(body);
     try {
       const res = await axios.post(
@@ -36,21 +36,20 @@ const SignUp = () => {
         body,
         config
       );
-      console.log(res);
+      // console.log(res);
       window.alert('Mail Sent');
       navigate('/');
       // alert.success(res);
     } catch (err) {
       // alert.error('Request Failed');
-
-      console.log(err);
+      // console.log(err);
     }
   };
   return (
     <>
       <div className='LoginMainContainer'>
-        <div className='LoginContainer1' style={{padding: '2% 10%'}}>
-          <div id='loginDiv1' style={{fontSize: '22px'}}>
+        <div className='LoginContainer1' style={{ padding: '2% 10%' }}>
+          <div id='loginDiv1' style={{ fontSize: '22px' }}>
             Create Account
           </div>
           <div id='loginDiv2'>Sign up to Your Account</div>

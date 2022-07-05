@@ -1,9 +1,8 @@
 import React from 'react';
-
 import CartImage from '../Assets/Images/cart/CartImage.png';
 import NavBar from '../Components/NavBar';
 import '../Styles/pages/Cart.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Footer from '../Components/Footer';
 
 const Cart = () => {
@@ -21,7 +20,10 @@ const Cart = () => {
         has shipped.
       </div>
       <div id='C6'>
-        <Link to='/Tracking' style={{textDecoration: 'none', color: 'inherit'}}>
+        <Link
+          to='/Tracking'
+          style={{ textDecoration: 'none', color: 'inherit' }}
+        >
           <button id='TrackOrder'>Track Order</button>
         </Link>
       </div>

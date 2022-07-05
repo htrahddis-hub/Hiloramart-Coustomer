@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import logo from './logo.svg';
 import './App.css';
 import Welcome from './Pages/Welcome';
 import Login from './Pages/Login';
@@ -18,7 +16,6 @@ import MyWallet from './Pages/MyWallet';
 import Cart2 from './Pages/Cart2';
 import VNavBar from './VendorsComponents/VNavBar';
 import VHome from './VendorsPages/NavPages/VHome';
-import Footer from './Components/Footer';
 import AddProduct from './VendorsComponents/AddProduct';
 import VmyProduct from './VendorsPages/NavPages/VmyProduct';
 import VmyRevenue from './VendorsPages/NavPages/VmyRevenue';
@@ -31,22 +28,8 @@ import '../src/Main.css';
 function App() {
   return (
     <>
-      {/* <Home/> */}
-      {/* <HomeProductDetail/> */}
-      {/* <MyWishList/> */}
-      {/* <Affiliate/> */}
-      {/* <AffiliateProgram/> */}
-      {/* <MyWishList2/> */}
-      {/* <Cart/> */}
-      {/* <Tracking/> */}
-      {/* <MyWallet/> */}
-      {/* <Cart2/> */}
-
-      {/* Vendors */}
-
       <Router>
         <Routes>
-          {/* nav */}
           <Route exact path='/' element={<Home />}></Route>
           <Route exact path='/welcome' element={<Welcome />}></Route>
           <Route exact path='/login' element={<Login />}></Route>
@@ -63,7 +46,7 @@ function App() {
           <Route exact path='/cart' element={<Cart />}></Route>
           <Route
             exact
-            path='/HomeProductDetail'
+            path='/HomeProductDetail/:id'
             element={<HomeProductDetail />}
           ></Route>
           <Route
@@ -85,12 +68,8 @@ function App() {
           ></Route>
           <Route exact path='/VmyWallet' element={<VmyWallet />}></Route>
           <Route exact path=' ' element={<VHome2 />}></Route>
-          {/* <Route exact path='/' element={<Home />}></Route> */}
         </Routes>
       </Router>
-      {/* <VNavBar />
-      <VHome2 />
-      <Footer /> */}
     </>
   );
 }

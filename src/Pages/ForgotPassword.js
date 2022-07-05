@@ -32,7 +32,7 @@ const ForgotPassword = () => {
       );
       console.log(res);
       window.alert('forgot password api sucessfull');
-      navigate('/');
+      navigate('/otp');
       // alert.success(res);
     } catch (err) {
       // alert.error('Request Failed');
