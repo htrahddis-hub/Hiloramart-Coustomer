@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Rating} from 'react-simple-star-rating';
+import React, { useState } from 'react';
+import { Rating } from 'react-simple-star-rating';
 import ProductImage from '../../Assets/Images/Home/ProductImage.png';
 import '../../Styles/Components/ProductContainer.css';
 import '../../Styles/Components/YourWishlistCont.css';
 
-const YourWishlistCont = () => {
+const YourWishlistCont = ({ item, removeFromWishlist }) => {
   const [rating, setRating] = useState(0); // initial rating value
 
   // Catch Rating value
@@ -12,13 +12,15 @@ const YourWishlistCont = () => {
     setRating(rate);
     // other logic
   };
+
+  console.log(item);
   return (
     <div className='ProductMainContainer'>
       <div className='ProCont1'>
         {/* <div className='ProHead'>Arihant ERP</div> */}
         <div
           className='Stars'
-          style={{height: '5px', padding: '2%', paddingBottom: '3%'}}
+          style={{ height: '5px', padding: '2%', paddingBottom: '3%' }}
         >
           <Rating onClick={handleRating} ratingValue={rating} />
         </div>
@@ -28,7 +30,7 @@ const YourWishlistCont = () => {
         <img
           src={ProductImage}
           alt=''
-          style={{height: '8rem', width: '8rem'}}
+          style={{ height: '8rem', width: '8rem' }}
         />
       </div>
       <div className='discription'>
@@ -40,7 +42,9 @@ const YourWishlistCont = () => {
           <button id='BUYbutton1'>BUY NOW</button>
         </div>
         <div>
-          <button id='BUYbutton2'>BUY NOW</button>
+          <button id='BUYbutton2' onClick={() => removeFromWishlist(item)}>
+            BUY NOW
+          </button>
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ function App() {
             element={<ForgotPassword />}
           ></Route>
           <Route exact path='/affiliate' element={<Affiliate />}></Route>
-          <Route exact path='/MyWishList' element={<MyWishList />}></Route>
+          <Route exact path='/MyWishList' element={<MyWishList2 />}></Route>
           <Route exact path='/mywallet' element={<MyWallet />}></Route>
           <Route exact path='/cart' element={<Cart />}></Route>
           <Route
