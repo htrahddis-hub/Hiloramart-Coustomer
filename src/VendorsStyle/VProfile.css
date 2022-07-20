@@ -1,0 +1,37 @@
+.details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  font-size: 24px;
+}
+.cont {
+  width: 600px;
+  /* height: 1008px; */
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.mainCont {
+  position: absolute;
+  display: flex;
+  background-color: white;
+  margin-top: -100px;
+  border-radius: 20px;
+  margin-left: 100px;
+  width: 1080px;
+  border: 0.5px solid gray;
+}
+
+.details p:first-of-type {
+  color: grey;
+}
+
+.img {
+  margin-left: 130px;
+  margin-top: 50px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

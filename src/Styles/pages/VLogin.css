@@ -28,9 +28,9 @@
   color: #ff8d22;
   padding: 2%;
   margin: 5%;
-  width: 390px;
+  width: 424px;
   border-radius: 8px;
-  height: 26px;
+  height: 50px;
 }
 .loginButton {
   /* background-color: white;
@@ -43,9 +43,9 @@
   font-weight: 700;
   margin: 1%;
   margin-bottom: 4%; */
-  background-color: #ff8d22;
-  color: white;
-  border: 0px;
+  background-color: rgba(255, 141, 34, 0.2);
+  color: #ff8d22;
+  border: 1px solid #ff8d22;
   height: 40px;
   width: 200px;
   border-radius: 20px;
@@ -74,7 +74,7 @@
   font-weight: 700;
   cursor: pointer;
   transition-duration: 0.4s;
-  margin: 1%;
+  margin-top: 10px;
 }
 .loginButton:active {
   background-color: #ff8d22;
@@ -106,19 +106,19 @@ input.inputBox::placeholder {
 
 #forgotPas {
   text-align: right;
-  width: 100%;
+  width: 420px;
   color: #ff8d22;
   padding-bottom: 7%;
   font-weight: bold;
 }
 
-.vinputbox {
-  background: rgba(255, 141, 34, 0.05);
-  border: 1px solid #ff8d22;
-  color: #ff8d22;
-  padding: 2%;
-  margin: 5%;
-  width: 424px;
-  border-radius: 8px;
-  height: 26px;
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

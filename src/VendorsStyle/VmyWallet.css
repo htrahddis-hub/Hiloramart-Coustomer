@@ -15,3 +15,13 @@
   padding-right: 4%;
   align-items: center;
 }
+
+.svg {
+  width: 72px;
+  height: 70px;
+  margin-left: 10px;
+}
+
+.center {
+  margin-top: 30px;
+}

@@ -1,11 +1,15 @@
 .VinputBox {
   width: 786px;
-  height: 40px;
+  height: 120px;
+  padding-top: 20px;
   padding-left: 13px;
   margin: 1%;
   background: #fcfcfc;
   border: 1px solid #ff8d22;
   color: #ff8d22;
+  background-color: rgba(255, 141, 34, 0.1);
+  margin-top: 40px;
+  border-radius: 20px;
 }
 .VContainer1 {
   display: flex;
@@ -15,17 +19,19 @@
   margin: 3%;
 }
 .Vhead {
-  font-size: 26px;
-  font-weight: bold;
+  font-size: 32px;
+  font-weight: 600;
+  margin-top: 100px;
 }
 .VsmallInputBox {
   background: #fcfcfc;
   border: 1px solid #ff8d22;
   color: #ff8d22;
   width: 120px;
-  height: 40px;
+  height: 120px;
   padding-left: 13px;
-  margin: 1%;
+  margin-top: 10px;
+  border-radius: 20px;
 }
 .VsmallInputCon {
   display: flex;
@@ -35,7 +41,7 @@
   background-color: #ff8d22;
   color: white;
   border: 0px;
-  height: 30px;
+  height: 60px;
   width: 558px;
   border-radius: 12px;
   font-size: 16px;
@@ -45,13 +51,42 @@
 #VsubCont {
   text-align: center;
 }
-input.VinputBox::placeholder {
+textarea.VinputBox::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ff8d22;
+  opacity: 1; /* Firefox */
+  vertical-align: top;
+}
+textarea.VsmallInputBox::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #ff8d22;
   opacity: 1; /* Firefox */
 }
-input.VsmallInputBox::placeholder {
-  /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #ff8d22;
-  opacity: 1; /* Firefox */
+
+#hide input[type="file"] {
+  display: none;
+  margin: 10px;
+}
+#hide input[type="file"] + label {
+  display: inline-block;
+  margin: 20px;
+  padding: 4px 32px;
+  background-color: #ffffff;
+  border: solid 1px #666f77;
+  border-radius: 6px;
+  color: #666f77;
+}
+#hide input[type="file"]:active + label {
+  background-image: none;
+  background-color: #2d6c7a;
+  color: #ffffff;
+}
+
+.imagecont {
+  margin-top: 29px;
+}
+
+svg {
+  margin: 10px;
+  margin-left: 25px;
 }
