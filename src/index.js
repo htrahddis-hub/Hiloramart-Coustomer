@@ -21,20 +21,20 @@
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './App';
-import axios from 'axios';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import axios from "axios";
 
 // 👇️ IMPORTANT: use correct ID of your root element
 // this is the ID of the div in your index.html file
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 // axios.defaults.baseURL = 'https://hiloramart.herokuapp.com/';
 
 axios.interceptors.request.use(function (config) {
-  config.headers.token = localStorage.getItem('token');
+  config.headers.token = localStorage.getItem("token");
   // console.log('headers set');
   return config;
 });
@@ -43,7 +43,7 @@ axios.interceptors.request.use(function (config) {
 // const root = createRoot(rootElement!);
 
 root.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+  // <StrictMode> // enable this in production mode
+  <App />
+  // </StrictMode>
 );

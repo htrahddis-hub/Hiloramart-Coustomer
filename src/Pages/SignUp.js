@@ -1,135 +1,196 @@
-import React, { useState } from 'react';
-import '../Styles/pages/SignUp.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useAlert } from 'react-alert';
-import { useNavigate } from 'react-router-dom';
+import React, { memo, useContext, useState } from "react";
+import "../Styles/pages/SignUp.css";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import CircularProgress from "@mui/material/CircularProgress";
+import { AuthContext } from "../Context/AuthContext";
+import { USER_SIGNUP, VENDOR_SIGNUP } from "../Context/Types";
 const SignUp = () => {
-  const navigate = useNavigate();
-  // const alert = useAlert();
-  const [formData, setformData] = useState({
-    mobile: '',
-    email: '',
-    password: '',
-    confirmPassword: ' ',
-    name: ' ',
-  });
-  const { mobile, email, password, confirmPassword, name } = formData;
-  const onChangeHandler = (e) => {
-    setformData({ ...formData, [e.target.name]: e.target.value });
+  const { dispatch } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const initialValues = {
+    number: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
   };
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    if (confirmPassword !== password) {
-      window.alert('Password dosent match');
-    }
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    const body = JSON.stringify({ name, email, mobile, password });
-    console.log(body);
-    try {
-      const res = await axios.post(
-        'https://hiloramart-user.herokuapp.com/auth/register',
-        body,
-        config
-      );
-      // console.log(res);
-      window.alert('Mail Sent');
-      navigate('/');
-      // alert.success(res);
-    } catch (err) {
-      // alert.error('Request Failed');
-      // console.log(err);
-    }
+  const validate = Yup.object().shape({
+    name: Yup.string().required("This Field is required"),
+    number: Yup.number()
+      .typeError("Please enter valid mobile number")
+      .required("This is required")
+      .test("len", "Must be 10 digits", (val) => val?.toString().length === 10),
+
+    email: Yup.string()
+      .email("This is invalid email")
+      .required("This is required"),
+    password: Yup.string().required("Please Enter your password"),
+    confirmPassword: Yup.string()
+      .required("Please confirm your password")
+      .oneOf([Yup.ref("password")], "Passwords does not match"),
+  });
+
+  const handleSubmit = (values, resetForm) => {
+    // dispatch({type:USER_SIGNUP,payload:values,resetForm,setIsLoading})
+    dispatch({
+      type: VENDOR_SIGNUP,
+      payload: values,
+      resetForm,
+      setIsLoading: setIsLoading,
+    });
   };
   return (
     <>
-      <div className='LoginMainContainer'>
-        <div className='LoginContainer1' style={{ padding: '2% 10%' }}>
-          <div id='loginDiv1' style={{ fontSize: '22px' }}>
+      <div className="LoginMainContainer">
+        <div className="LoginContainer1" style={{ padding: "2% 10%" }}>
+          <div id="loginDiv1" style={{ fontSize: "22px" }}>
             Create Account
           </div>
-          <div id='loginDiv2'>Sign up to Your Account</div>
-          <div>
-            <form id='loginDiv3' onSubmit={(e) => onSubmitHandler(e)}>
-              <input
-                onChange={(e) => onChangeHandler(e)}
-                name='name'
-                className='inputBox'
-                placeholder='Name'
-                required
-              />
+          <div id="loginDiv2">Sign up to Your Account</div>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validate}
+            onSubmit={(values, { resetForm }) => {
+              handleSubmit(values, resetForm);
+              // alert("Form is validated! Submitting the form...");
+            }}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleChange,
+              setFieldValue,
+              handleBlur,
+            }) => (
+              <Form>
+                <div className="form-container">
+                  <div>
+                    <input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="name"
+                      className="inputBox"
+                      placeholder="Name"
+                    />
+                    <div className="error-container">
+                      <div className="error">
+                        {errors.name && touched.name && errors.name}
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="number"
+                      className="inputBox"
+                      placeholder="Phone"
+                      // type="password"
+                      // value={this.state.password}
+                      // onChange={this.handleInputChange}
+                    />
+                    <div className="error-container">
+                      <div className="error">
+                        {errors.number && touched.number && errors.number}
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="email"
+                      className="inputBox"
+                      placeholder="Email"
+                      // type="password"
+                      // value={this.state.password}
+                      // onChange={this.handleInputChange}
+                    />
+                    <div className="error-container">
+                      <div className="error">
+                        {errors.email && touched.email && errors.email}
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="password"
+                      className="inputBox"
+                      placeholder="Password"
+                      type="password"
+                      // value={this.state.password}
+                      // onChange={this.handleInputChange}
+                    />
+                    <div className="error-container">
+                      <div className="error">
+                        {errors.password && touched.password && errors.password}
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <input
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      name="confirmPassword"
+                      className="inputBox"
+                      placeholder="Confirm Password"
+                      // type="password"
+                      // value={this.state.password}
+                      // onChange={this.handleInputChange}
+                    />
+                    <div className="error-container">
+                      <div className="error">
+                        {errors.confirmPassword &&
+                          touched.confirmPassword &&
+                          errors.confirmPassword}
+                      </div>
+                    </div>
+                  </div>
 
-              <input
-                onChange={(e) => onChangeHandler(e)}
-                name='mobile'
-                className='inputBox'
-                placeholder='Phone'
-                required
-                // type="password"
-                // value={this.state.password}
-                // onChange={this.handleInputChange}
-              />
-              <input
-                onChange={(e) => onChangeHandler(e)}
-                name='email'
-                className='inputBox'
-                placeholder='Email'
-                required
-                // type="password"
-                // value={this.state.password}
-                // onChange={this.handleInputChange}
-              />
-              <input
-                onChange={(e) => onChangeHandler(e)}
-                name='password'
-                className='inputBox'
-                placeholder='Password'
-                required
-                // type="password"
-                // value={this.state.password}
-                // onChange={this.handleInputChange}
-              />
-              <input
-                onChange={(e) => onChangeHandler(e)}
-                name='confirmPassword'
-                className='inputBox'
-                placeholder='Confirm Password'
-                required
-                // type="password"
-                // value={this.state.password}
-                // onChange={this.handleInputChange}
-              />
-
-              <button className='SignUpButton' type='submit'>
-                Sign up
-              </button>
-              <div>
-                Already have an account?{' '}
-                <Link to='/login'>
                   <button
-                    style={{
-                      cursor: 'pointer',
-                      border: 'none',
-                      backgroundColor: 'white',
-                      color: '#FF8D22',
-                      fontWeight: 'bold',
-                    }}
+                    className="SignUpButton"
+                    type="submit"
+                    disabled={isLoading}
                   >
-                    Login
+                    {isLoading ? (
+                      <CircularProgress
+                        sx={{ color: "white", fontSize: "1rem" }}
+                        size={25}
+                      />
+                    ) : (
+                      "Sign up"
+                    )}
                   </button>
-                </Link>
-              </div>
-            </form>
-          </div>
-          <div id='loginDiv4'></div>
+                  <div>
+                    Already have an account?{" "}
+                    <Link to="/login">
+                      <button
+                        style={{
+                          cursor: "pointer",
+                          border: "none",
+                          backgroundColor: "white",
+                          color: "#FF8D22",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Login
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </div>
     </>
   );
 };
 
-export default SignUp;
+export default memo(SignUp);

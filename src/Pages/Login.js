@@ -16,10 +16,6 @@ const Login = () => {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const passRef = useRef();
-  const [formData, setformData] = useState({
-    email: "",
-    password: "",
-  });
 
   const handleSubmit = (values, resetForm) => {
     dispatch({ type: VENDOR_LOGIN, payload: values, resetForm });
