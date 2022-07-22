@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Vendor } from "./Context/VContext";
+import "react-notifications-component/dist/theme.css";
+
+import AuthContextComponent from "./Context/AuthContext";
 
 import "./App.css";
 import Welcome from "./Pages/Welcome";
@@ -28,71 +30,89 @@ import VLogin from "./VendorsPages/NavPages/VLogin";
 import VSignup from "./VendorsPages/NavPages/VSignup";
 import VBank from "./VendorsPages/NavPages/VBank";
 import VHome2 from "./VendorsPages/NavPages/VHome2";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "../src/Main.css";
 import VReturn from "./VendorsPages/NavPages/VReturn";
 import Validation from "./VendorsPages/NavPages/Validation";
 import VProfile from "./VendorsPages/NavPages/VProfile";
 import VForgot from "./VendorsPages/NavPages/VForgot";
 import Votp from "./VendorsPages/NavPages/Votp";
+import ProtectedRoutes from "./Context/ProtectedRoutes";
+import UnprotectedRoutes from "./Context/UnprotectedRoutes";
 
 function App() {
   const [vEmail, setVEmail] = useState("");
 
   return (
     <>
-      <Vendor.Provider value={{ vEmail, setVEmail }}>
+      <AuthContextComponent>
         <Router>
           <Routes>
-            <Route exact path="/" element={<Home />}></Route>
-            <Route exact path="/welcome" element={<Welcome />}></Route>
-            <Route exact path="/login" element={<Login />}></Route>
-            <Route exact path="/signup" element={<SignUp />}></Route>
-            <Route exact path="/otp" element={<Otp />}></Route>
-            <Route
-              exact
-              path="/forgotpassword"
-              element={<ForgotPassword />}
-            ></Route>
-            <Route exact path="/affiliate" element={<Affiliate />}></Route>
-            <Route exact path="/MyWishList" element={<MyWishList2 />}></Route>
-            <Route exact path="/mywallet" element={<MyWallet />}></Route>
-            <Route exact path="/cart" element={<Cart />}></Route>
-            <Route
-              exact
-              path="/HomeProductDetail/:id"
-              element={<HomeProductDetail />}
-            ></Route>
-            <Route
-              exact
-              path="/AffiliateProgram"
-              element={<AffiliateProgram />}
-            ></Route>
-            <Route exact path="/MyWishList2" element={<MyWishList2 />}></Route>
-            <Route exact path="/Tracking" element={<Tracking />}></Route>
-            <Route exact path="/Cart2" element={<Cart2 />}></Route>
+            {/* public routes */}
+            <Route element={<UnprotectedRoutes />}>
+              <Route exact path="/welcome" element={<Welcome />}></Route>
+              <Route exact path="/login" element={<Login />}></Route>
+              <Route exact path="/signup" element={<SignUp />}></Route>
+              <Route exact path="/otp" element={<Otp />}></Route>
+              <Route
+                exact
+                path="/forgotpassword"
+                element={<ForgotPassword />}
+              ></Route>
+            </Route>
+            {/* private routes */}
+            <Route element={<ProtectedRoutes />}>
+              <Route exact path="/" element={<Home />}></Route>
+              <Route exact path="/affiliate" element={<Affiliate />}></Route>
+              <Route exact path="/MyWishList" element={<MyWishList2 />}></Route>
+              <Route exact path="/mywallet" element={<MyWallet />}></Route>
+              <Route exact path="/cart" element={<Cart />}></Route>
+              <Route
+                exact
+                path="/HomeProductDetail/:id"
+                element={<HomeProductDetail />}
+              ></Route>
+              <Route
+                exact
+                path="/AffiliateProgram"
+                element={<AffiliateProgram />}
+              ></Route>
+              <Route
+                exact
+                path="/MyWishList2"
+                element={<MyWishList2 />}
+              ></Route>
+              <Route exact path="/Tracking" element={<Tracking />}></Route>
+              <Route exact path="/Cart2" element={<Cart2 />}></Route>
 
-            <Route exact path="/VHome" element={<VHome />}></Route>
-            <Route exact path="/VmyProduct" element={<VmyProduct />}></Route>
-            <Route exact path="/VmyRevenue" element={<VmyRevenue />}></Route>
-            <Route
-              exact
-              path="/VaffiliateRequest"
-              element={<VaffiliateRequest />}
-            ></Route>
-            <Route exact path="/VmyWallet" element={<VmyWallet />}></Route>
-            <Route exact path="/VHome2" element={<VHome2 />}></Route>
+              <Route exact path="/VHome" element={<VHome />}></Route>
+              <Route exact path="/VmyProduct" element={<VmyProduct />}></Route>
+              <Route exact path="/VmyRevenue" element={<VmyRevenue />}></Route>
+              <Route
+                exact
+                path="/VaffiliateRequest"
+                element={<VaffiliateRequest />}
+              ></Route>
+              <Route exact path="/VBank" element={<VBank />}></Route>
+              <Route exact path="/VReturn" element={<VReturn />}></Route>
+              <Route exact path="/VProfile" element={<VProfile />}></Route>
+              <Route exact path="/VmyWallet" element={<VmyWallet />}></Route>
+              <Route exact path="/VHome2" element={<VHome2 />}></Route>
+            </Route>
+
             <Route exact path="/VLogin" element={<VLogin />}></Route>
             <Route exact path="/VSignup" element={<VSignup />}></Route>
-            <Route exact path="/VBank" element={<VBank />}></Route>
-            <Route exact path="/VReturn" element={<VReturn />}></Route>
             <Route exact path="/validation" element={<Validation />}></Route>
-            <Route exact path="/VProfile" element={<VProfile />}></Route>
             <Route exact path="/VForgot" element={<VForgot />}></Route>
             <Route exact path="/Votp" element={<Votp />}></Route>
           </Routes>
         </Router>
-      </Vendor.Provider>
+      </AuthContextComponent>
     </>
   );
 }

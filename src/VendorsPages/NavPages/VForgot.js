@@ -2,9 +2,9 @@ import React, { useState, useContext } from "react";
 
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Vendor } from "../../Context/VContext";
+import { AuthContext } from "../../Context/AuthContext";
 const VForgot = () => {
-  const { vEmail, setVEmail } = useContext(Vendor);
+  const { vEmail, setVEmail } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [formData, setformData] = useState({

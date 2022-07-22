@@ -22,16 +22,7 @@
   align-items: center;
   align-content: center;
 }
-.inputBox {
-  background: #fcfcfc;
-  border: 1px solid #ff8d22;
-  color: #ff8d22;
-  padding: 2%;
-  margin: 5%;
-  width: 390px;
-  border-radius: 8px;
-  height: 26px;
-}
+
 .loginButton {
   /* background-color: white;
   color: #ff8d22;
@@ -97,11 +88,11 @@
   font-weight: 500;
   padding-bottom: 10%;
 }
-input.inputBox::placeholder {
+.inputBox::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #ff8d22;
+  color: #707070;
   opacity: 1; /* Firefox */
-  padding: 2%;
+  font-weight: 600;
 }
 
 #forgotPas {
@@ -111,14 +102,12 @@ input.inputBox::placeholder {
   padding-bottom: 7%;
   font-weight: bold;
 }
-
-.vinputbox {
-  background: rgba(255, 141, 34, 0.05);
-  border: 1px solid #ff8d22;
-  color: #ff8d22;
-  padding: 2%;
-  margin: 5%;
-  width: 424px;
-  border-radius: 8px;
-  height: 26px;
+.password-input {
+  position: relative;
+}
+.eye-icon {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  cursor: pointer;
 }

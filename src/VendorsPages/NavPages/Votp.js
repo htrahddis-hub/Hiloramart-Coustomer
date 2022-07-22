@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import { Vendor } from "../../Context/VContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Votp = () => {
-  const { VEmail } = useContext(Vendor);
+  const { VEmail } = useContext(AuthContext);
   const [code, setCode] = useState(null);
 
   const onChangeHandler = (e) => {
