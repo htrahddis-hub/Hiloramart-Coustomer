@@ -2,6 +2,7 @@ import { createContext, useReducer, useState } from "react";
 import { userLogin, vendorLogin, vendorSignup } from "./Reducer/AuthReducer";
 import { USER_LOGIN, VENDOR_LOGIN, VENDOR_SIGNUP } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
+import Cookies from "js-cookie";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -14,15 +15,27 @@ export const notification = {
   },
 };
 const AuthContextComponent = ({ children }) => {
-  const [auth, setAuth] = useState(false);
-
+  const [auth, setAuth] = useState(Cookies.get("auth_token"));
+  const [AuthRole, setAuthRole] = useState(Cookies.get("role"));
   const reducer = (state, action) => {
     switch (action.type) {
-      // case USER_LOGIN:
-      //   userLogin(action.payload, action.resetForm, action.setIsLoading);
-      //   break;
+      case USER_LOGIN:
+        userLogin(
+          action.payload,
+          action.resetForm,
+          action.setIsLoading,
+          action.navigate,
+          setAuth
+        );
+        break;
       case VENDOR_LOGIN:
-        vendorLogin(action.payload, action.resetForm, action.setIsLoading);
+        vendorLogin(
+          action.payload,
+          action.resetForm,
+          action.setIsLoading,
+          action.navigate,
+          setAuth
+        );
         break;
       case VENDOR_SIGNUP:
         vendorSignup(action.payload, action.resetForm, action.setIsLoading);
@@ -35,6 +48,8 @@ const AuthContextComponent = ({ children }) => {
   const values = {
     auth,
     dispatch,
+    AuthRole,
+    setAuthRole,
   };
   return (
     <AuthContext.Provider value={values}>

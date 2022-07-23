@@ -1,7 +1,7 @@
 .ProductMainContainer {
-  background: #ffffff;
+  background: #fafafa;
   width: 200px;
-  padding: 5px;
+  padding: 0.5rem;
   border-radius: 8px;
 }
 .Images {
@@ -10,18 +10,28 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  padding: 14%;
+  padding: 1rem;
 }
 .discription {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 0.8rem;
   padding-bottom: 2px;
-  text-align: center;
+  text-align: left;
+  font-weight: 500;
+  font-style: normal;
+  font-family: Poppins;
+  letter-spacing: 0px;
+  color: #121212;
+  opacity: 1;
 }
 .price {
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
+  font-style: normal;
+  letter-spacing: 0px;
+  font-family: Poppins;
+  color: #121212;
+  opacity: 1;
 }
 .Stars {
   text-align: end;

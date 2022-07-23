@@ -13,9 +13,9 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-// const userLoginRequest = (values) => {
-//   return API.post();
-// };
+export const userLoginRequest = (values) => {
+  return API.post("https://hiloramart0.herokuapp.com/auth/login", values);
+};
 export const vendorLoginRequest = (values) => {
   return API.post("https://hiloramart0.herokuapp.com/api/vendor/login", values);
 };

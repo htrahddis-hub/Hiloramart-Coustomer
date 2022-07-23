@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "react-notifications-component/dist/theme.css";
 
-import AuthContextComponent from "./Context/AuthContext";
+import AuthContextComponent, { AuthContext } from "./Context/AuthContext";
 
 import "./App.css";
 import Welcome from "./Pages/Welcome";
@@ -44,10 +44,10 @@ import VForgot from "./VendorsPages/NavPages/VForgot";
 import Votp from "./VendorsPages/NavPages/Votp";
 import ProtectedRoutes from "./Context/ProtectedRoutes";
 import UnprotectedRoutes from "./Context/UnprotectedRoutes";
+import RoleLogin from "./Pages/RoleLogin";
+import NavBar from "./Components/NavBar";
 
 function App() {
-  const [vEmail, setVEmail] = useState("");
-
   return (
     <>
       <AuthContextComponent>
@@ -57,6 +57,11 @@ function App() {
             <Route element={<UnprotectedRoutes />}>
               <Route exact path="/welcome" element={<Welcome />}></Route>
               <Route exact path="/login" element={<Login />}></Route>
+              <Route
+                exact
+                path="/choose-role-login"
+                element={<RoleLogin />}
+              ></Route>
               <Route exact path="/signup" element={<SignUp />}></Route>
               <Route exact path="/otp" element={<Otp />}></Route>
               <Route
@@ -100,16 +105,16 @@ function App() {
               ></Route>
               <Route exact path="/VBank" element={<VBank />}></Route>
               <Route exact path="/VReturn" element={<VReturn />}></Route>
-              <Route exact path="/VProfile" element={<VProfile />}></Route>
+              <Route exact path="/profile" element={<VProfile />}></Route>
               <Route exact path="/VmyWallet" element={<VmyWallet />}></Route>
               <Route exact path="/VHome2" element={<VHome2 />}></Route>
             </Route>
 
-            <Route exact path="/VLogin" element={<VLogin />}></Route>
+            {/* <Route exact path="/VLogin" element={<VLogin />}></Route>
             <Route exact path="/VSignup" element={<VSignup />}></Route>
             <Route exact path="/validation" element={<Validation />}></Route>
             <Route exact path="/VForgot" element={<VForgot />}></Route>
-            <Route exact path="/Votp" element={<Votp />}></Route>
+            <Route exact path="/Votp" element={<Votp />}></Route> */}
           </Routes>
         </Router>
       </AuthContextComponent>

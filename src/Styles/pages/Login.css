@@ -111,3 +111,44 @@
   right: 1rem;
   cursor: pointer;
 }
+.user-btn {
+  min-width: 300px;
+}
+.vendor-btn {
+  background-color: white;
+  color: #ff8d22;
+  border: 1px solid #ff8d22;
+  min-width: 300px;
+}
+.or-container {
+  position: relative;
+  margin: 0.5rem 0;
+}
+.or {
+  color: #707070;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.or::before {
+  content: "-----";
+  position: absolute;
+  left: -3.5rem;
+  top: 0rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0px;
+  color: #121212;
+  opacity: 0.5;
+}
+
+.or::after {
+  content: "-----";
+  position: absolute;
+  right: -3.5rem;
+  top: 0rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0px;
+  color: #121212;
+  opacity: 0.5;
+}

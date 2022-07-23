@@ -7,27 +7,15 @@ import "../../VendorsStyle/VProfile.css";
 
 const VProfile = () => {
   return (
-    <>
-      <VNavBar />
-      <div>
-        <img
-          style={{
-            width: "1180px",
-            height: "311px",
-            marginLeft: "50px",
-          }}
-          src={Img}
-          alt="image"
-        />
+    <div className="profile-container">
+      <div className="top-image-container">
+        <img src={Img} alt="image" className="top-image" />
       </div>
       <div className="mainCont">
         <div className="cont">
-          <h5 style={{ textAlign: "center", marginBottom: "30px" }}>
-            Basic Settings
-          </h5>
           <div className="details">
             <p>Name</p>
-            <p>Rohit</p>
+            <p className="details-value">Rohit</p>
           </div>
           <div className="details">
             <p>Number</p>
@@ -41,18 +29,8 @@ const VProfile = () => {
             <p> location</p>
             <p> addsa </p>
           </div>
-          <h5 style={{ textAlign: "center", marginBottom: "30px" }}>Account</h5>
-          <div className="details">
-            <p>Account Number</p>
-            <p>1234567890</p>
-          </div>
-          <div className="details">
-            <p>Account Holder Name</p>
-            <p>Rohit</p>
-          </div>
-          <div className="details">
-            <p>IFSC code</p>
-            <p>bobdabdj</p>
+          <div className="logout-cont">
+            <button className="loginButton btn-profile">Logout</button>
           </div>
         </div>
         <div className="img">
@@ -72,7 +50,7 @@ const VProfile = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

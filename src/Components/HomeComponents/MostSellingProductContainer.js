@@ -11,36 +11,16 @@ const MostSellingProductContainer = () => {
         <div className="MSPCont2">
           <Row style={{ width: "100%" }}>
             <Col>
-              <Link
-                to="/HomeProductDetail"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <ProductContainer2 />
-              </Link>
+              <ProductContainer2 />
             </Col>
             <Col>
-              <Link
-                to="/HomeProductDetail"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <ProductContainer2 />
-              </Link>
+              <ProductContainer2 />
             </Col>
             <Col>
-              <Link
-                to="/HomeProductDetail"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <ProductContainer2 />
-              </Link>
+              <ProductContainer2 />
             </Col>
             <Col>
-              <Link
-                to="/HomeProductDetail"
-                style={{ color: "inherit", textDecoration: "none" }}
-              >
-                <ProductContainer2 />
-              </Link>
+              <ProductContainer2 />
             </Col>
           </Row>
         </div>

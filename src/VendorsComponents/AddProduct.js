@@ -10,7 +10,7 @@ const AddProduct = () => {
         <div>
           <form>
             <div>
-              <textarea
+              <input
                 style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Categories"
@@ -18,7 +18,7 @@ const AddProduct = () => {
               />
             </div>
             <div>
-              <textarea
+              <input
                 style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Brand Name"
@@ -26,7 +26,7 @@ const AddProduct = () => {
               />
             </div>
             <div>
-              <textarea
+              <input
                 style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Product Name"
@@ -34,7 +34,7 @@ const AddProduct = () => {
               />
             </div>
             <div>
-              <textarea
+              <input
                 style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Price"

@@ -1,14 +1,50 @@
-import { vendorLoginRequest, vendorSignupRequest } from "../API";
+import {
+  userLoginRequest,
+  vendorLoginRequest,
+  vendorSignupRequest,
+} from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
-export const userLogin = (values, resetForm) => {
+import Cookies from "js-cookie";
+
+export const userLogin = async (
+  values,
+  resetForm,
+  setIsLoading,
+  navigate,
+  setAuth
+) => {
+  setIsLoading(true);
   try {
-  } catch (err) {}
+    const res = await userLoginRequest(values);
+    if (res.data) {
+      Cookies.set("auth_token", res.data.token);
+      Cookies.set("role", "user");
+      setAuth((prev) => true);
+      navigate("/", { replace: true });
+    }
+  } catch (err) {
+  } finally {
+    setIsLoading(false);
+  }
 };
 
-export const vendorLogin = async (values, resetForm) => {
+export const vendorLogin = async (
+  values,
+  resetForm,
+  setIsLoading,
+  navigate,
+  setAuth
+) => {
+  setIsLoading(true);
   try {
     const res = await vendorLoginRequest(values);
+    if (res.data.success) {
+      Cookies.set("auth_token", res.data.data.token);
+      Cookies.set("role", "vendor");
+      setAuth((prev) => true);
+      navigate("/", { replace: true });
+    }
     if (!res.data.success) {
       Store.addNotification({
         ...notification,
@@ -17,11 +53,12 @@ export const vendorLogin = async (values, resetForm) => {
     }
   } catch (err) {
     console.log(err.message);
+  } finally {
+    setIsLoading(false);
   }
 };
 
 export const vendorSignup = async (values, resetForm, setIsLoading) => {
-  console.log("called");
   setIsLoading(true);
   try {
     const res = await vendorSignupRequest(values);

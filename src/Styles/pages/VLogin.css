@@ -36,28 +36,7 @@
   font-weight: 600;
   font-size: 1rem;
 }
-.loginButton {
-  /* background-color: white;
-  color: #ff8d22;
-  border: 1px solid;
-  height: 40px;
-  width: 190px;
-  border-radius: 20px;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 1%;
-  margin-bottom: 4%; */
-  background-color: rgba(255, 141, 34, 0.2);
-  color: #ff8d22;
-  border: 1px solid #ff8d22;
-  height: 40px;
-  width: 200px;
-  border-radius: 20px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition-duration: 0.4s;
-}
+
 .SignUpButton {
   /* background-color: #ff8d22;
   color: white;

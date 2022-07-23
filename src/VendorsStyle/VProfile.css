@@ -1,8 +1,29 @@
+.profile-container {
+  position: relative;
+}
+.top-image-container {
+  width: 100%;
+  padding: 1rem 2rem;
+  height: 300px;
+}
+.top-image {
+  width: 100%;
+}
 .details {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
-  font-size: 24px;
+  font-size: 1rem;
+  font-family: "Poppins";
+  letter-spacing: 0.48px;
+  color: #000000;
+  font-size: 1.2rem;
+}
+.details-value {
+  font-family: "Poppins";
+  letter-spacing: 0.48px;
+  color: #000000;
+  opacity: 1;
+  font-weight: 500;
 }
 .cont {
   width: 600px;
@@ -15,11 +36,10 @@
   position: absolute;
   display: flex;
   background-color: white;
-  margin-top: -100px;
   border-radius: 20px;
-  margin-left: 100px;
-  width: 1080px;
   border: 0.5px solid gray;
+  transform: translate(17%, -5rem);
+  margin-bottom: 2rem;
 }
 
 .details p:first-of-type {
@@ -34,4 +54,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.logout-cont {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+.btn-profile {
+  background-color: white;
+  color: orange;
+  border: 1px solid orange;
 }
