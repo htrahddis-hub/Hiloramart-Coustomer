@@ -8,8 +8,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { AuthContext } from "../Context/AuthContext";
 import { USER_SIGNUP, VENDOR_SIGNUP } from "../Context/Types";
 const SignUp = () => {
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, AuthRole } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const initialValues = {
     number: "",
     email: "",
@@ -34,13 +35,23 @@ const SignUp = () => {
   });
 
   const handleSubmit = (values, resetForm) => {
-    // dispatch({type:USER_SIGNUP,payload:values,resetForm,setIsLoading})
-    dispatch({
-      type: VENDOR_SIGNUP,
-      payload: values,
-      resetForm,
-      setIsLoading: setIsLoading,
-    });
+    if (AuthRole === "user") {
+      dispatch({
+        type: USER_SIGNUP,
+        payload: values,
+        resetForm,
+        setIsLoading,
+        navigate,
+      });
+    } else {
+      dispatch({
+        type: VENDOR_SIGNUP,
+        payload: values,
+        resetForm,
+        setIsLoading: setIsLoading,
+        navigate,
+      });
+    }
   };
   return (
     <>

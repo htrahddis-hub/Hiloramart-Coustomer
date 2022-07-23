@@ -1,11 +1,35 @@
 import {
   userLoginRequest,
+  userSignUpRequest,
   vendorLoginRequest,
   vendorSignupRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
 import Cookies from "js-cookie";
+
+export const userSignup = async (values, resetForm, setIsLoading, navigate) => {
+  setIsLoading(true);
+  try {
+    values.mobile = values.number;
+    delete values.number;
+    delete values.confirmPassword;
+    const res = await userSignUpRequest(values);
+    if (res.data.message === "Account Activation Mail Sent!") {
+      resetForm({ values: "" });
+      navigate("/otp", { state: { isSigned: true } });
+    }
+  } catch (err) {
+    console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
 
 export const userLogin = async (
   values,

@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // for live server
 const API = axios.create({
-  baseURL: "https://hiloramart-user.herokuapp.com/",
+  baseURL: "https://hiloramart0.herokuapp.com/",
 });
 
 API.interceptors.request.use((req) => {
@@ -13,15 +13,15 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+export const userSignUpRequest = (values) => {
+  return API.post("/auth/register", values);
+};
 export const userLoginRequest = (values) => {
-  return API.post("https://hiloramart0.herokuapp.com/auth/login", values);
+  return API.post("/auth/login", values);
 };
 export const vendorLoginRequest = (values) => {
-  return API.post("https://hiloramart0.herokuapp.com/api/vendor/login", values);
+  return API.post("/api/vendor/login", values);
 };
 export const vendorSignupRequest = (values) => {
-  return API.post(
-    "https://hiloramart0.herokuapp.com/api/vendor/signup",
-    values
-  );
+  return API.post("/api/vendor/signup", values);
 };

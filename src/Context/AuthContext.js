@@ -1,6 +1,11 @@
 import { createContext, useReducer, useState } from "react";
-import { userLogin, vendorLogin, vendorSignup } from "./Reducer/AuthReducer";
-import { USER_LOGIN, VENDOR_LOGIN, VENDOR_SIGNUP } from "./Types";
+import {
+  userLogin,
+  userSignup,
+  vendorLogin,
+  vendorSignup,
+} from "./Reducer/AuthReducer";
+import { USER_LOGIN, USER_SIGNUP, VENDOR_LOGIN, VENDOR_SIGNUP } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
 export const AuthContext = createContext();
@@ -19,6 +24,14 @@ const AuthContextComponent = ({ children }) => {
   const [AuthRole, setAuthRole] = useState(Cookies.get("role"));
   const reducer = (state, action) => {
     switch (action.type) {
+      case USER_SIGNUP:
+        userSignup(
+          action.payload,
+          action.resetForm,
+          action.setIsLoading,
+          action.navigate
+        );
+        break;
       case USER_LOGIN:
         userLogin(
           action.payload,
@@ -38,7 +51,12 @@ const AuthContextComponent = ({ children }) => {
         );
         break;
       case VENDOR_SIGNUP:
-        vendorSignup(action.payload, action.resetForm, action.setIsLoading);
+        vendorSignup(
+          action.payload,
+          action.resetForm,
+          action.setIsLoading,
+          action.navigate
+        );
         break;
     }
   };
