@@ -3,23 +3,36 @@
   background-color: #09bfdb;
   padding: 1%;
 }
+.carousalParent {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
 .ProductCarousal {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-evenly;
   align-items: center;
   align-content: center;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  padding: 0 1rem;
+}
+.ProductCarousal::-webkit-scrollbar {
+  display: none;
+}
+.product-container {
+  margin: 0 0.5rem;
 }
 .DoDTime {
   font-size: 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
 }
 
 .DodHead {
   font-size: 19px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   width: 70%;
 }
@@ -28,4 +41,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+  margin: 0 2rem;
+}
+
+.arrow {
+  background-color: white;
+  padding: 0.8rem;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.backward-arrow {
+  left: 0;
+}
+.forward-arrow {
+  right: 0;
 }

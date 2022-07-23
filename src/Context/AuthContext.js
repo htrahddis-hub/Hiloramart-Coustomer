@@ -48,6 +48,8 @@ const AuthContextComponent = ({ children }) => {
   const values = {
     auth,
     dispatch,
+    auth,
+    setAuth,
     AuthRole,
     setAuthRole,
   };

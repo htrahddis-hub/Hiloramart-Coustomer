@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Img from "../../Assets/Images/NoPath.png";
 
 import Profile from "../../VendorsAssets/AffliateReqProfile.png";
 import "../../VendorsStyle/VProfile.css";
+import Cookies from "js-cookie";
+import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const VProfile = () => {
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    Cookies.remove("auth_token");
+    Cookies.remove("role");
+    setAuth(false);
+    navigate("/choose-role-login", { replace: true });
+  };
   return (
     <div className="profile-container">
       <div className="top-image-container">
@@ -30,7 +41,9 @@ const VProfile = () => {
             <p> addsa </p>
           </div>
           <div className="logout-cont">
-            <button className="loginButton btn-profile">Logout</button>
+            <button className="loginButton btn-profile" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
         <div className="img">

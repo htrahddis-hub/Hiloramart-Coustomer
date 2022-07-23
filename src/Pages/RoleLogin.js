@@ -11,7 +11,7 @@ function RoleLogin() {
         <div>
           <img src={logo} />
         </div>
-        <div>Are you</div>
+        <div className="text-style">Are you</div>
         <div>
           <Link to="/login" state={{ role: "user" }}>
             <button className="SignUpButton user-btn">User</button>

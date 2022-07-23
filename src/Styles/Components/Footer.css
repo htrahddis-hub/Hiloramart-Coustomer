@@ -1,9 +1,7 @@
 .footerMain {
   background: #ff8d22;
-  padding: 1%;
+  padding: 4rem 2rem 2rem 2rem;
   color: white;
-  color: white;
-  font-size: 18px;
 }
 .Fcontainer1 {
   display: flex;
@@ -45,10 +43,32 @@
 .item {
   font-weight: 500;
   padding-bottom: 1px;
-  font-size: 14px;
+  font-size: 1rem;
+  font-family: "Poppins";
+  line-height: 2rem;
 }
-/* #horizLine{
-    margin-top: 12px;
-    background: white;
-    margin-bottom: 12px;
-} */
+.footer-input-container {
+  position: relative;
+}
+.footer-inputBox {
+  padding: 1rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Poppins";
+  border: none;
+  border-radius: 10px;
+  margin-top: 1rem;
+  outline: none;
+}
+.footer-signup-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  border: none;
+  background-color: #ff8d22;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+}

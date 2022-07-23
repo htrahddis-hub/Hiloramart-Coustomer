@@ -13,10 +13,7 @@ const ProductContainer = ({ product }) => {
   };
   return (
     <div className="ProductMainContainer">
-      <div
-        style={{ height: "5px", padding: "2%", paddingBottom: "3%" }}
-        className="Stars"
-      >
+      <div className="Stars">
         <Rating
           onClick={handleRating}
           ratingValue={rating}
