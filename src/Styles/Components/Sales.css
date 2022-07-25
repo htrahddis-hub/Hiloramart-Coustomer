@@ -1,0 +1,50 @@
+.sales-cont {
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  display: flex;
+  flex: 1;
+  padding: 1rem 2rem;
+}
+.topbar :nth-child(1) {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+  font-size: 2rem;
+  font-family: "Poppins";
+}
+.filter {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.sale-product-parent {
+  padding: 0 2rem;
+}
+.sale-product-container {
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+.sale-product-container :nth-child(1) {
+  flex: 1;
+}
+.sale-product-container :nth-child(2) {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-family: "Poppins";
+}
+.sale-product-container :nth-child(3) {
+  flex: 1;
+  text-align: right;
+  font-weight: 600;
+}

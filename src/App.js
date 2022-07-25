@@ -47,6 +47,7 @@ import UnprotectedRoutes from "./Context/UnprotectedRoutes";
 import RoleLogin from "./Pages/RoleLogin";
 import NavBar from "./Components/NavBar";
 import CompletedOrders from "./VendorsPages/CompletedOrders";
+import Sales from "./Components/Sales";
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
               <Route exact path="/MyWishList" element={<MyWishList2 />}></Route>
               <Route exact path="/mywallet" element={<MyWallet />}></Route>
               <Route exact path="/cart" element={<Cart />}></Route>
+              <Route exact path="/my-sales" element={<Sales />}></Route>
               <Route
                 exact
                 path="/HomeProductDetail/:id"
