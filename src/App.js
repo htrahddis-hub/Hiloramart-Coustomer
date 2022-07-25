@@ -46,6 +46,7 @@ import ProtectedRoutes from "./Context/ProtectedRoutes";
 import UnprotectedRoutes from "./Context/UnprotectedRoutes";
 import RoleLogin from "./Pages/RoleLogin";
 import NavBar from "./Components/NavBar";
+import CompletedOrders from "./VendorsPages/CompletedOrders";
 
 function App() {
   return (
@@ -100,14 +101,19 @@ function App() {
               <Route exact path="/my-revenue" element={<VmyRevenue />}></Route>
               <Route
                 exact
-                path="/VaffiliateRequest"
+                path="/affiliate-request"
                 element={<VaffiliateRequest />}
               ></Route>
               <Route exact path="/VBank" element={<VBank />}></Route>
-              <Route exact path="/VReturn" element={<VReturn />}></Route>
+              <Route exact path="/orders-current" element={<VHome2 />}></Route>
+              <Route exact path="/orders-return" element={<VReturn />}></Route>
+              <Route
+                exact
+                path="/orders-completed"
+                element={<CompletedOrders />}
+              ></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
-              <Route exact path="/VHome2" element={<VHome2 />}></Route>
             </Route>
 
             {/* <Route exact path="/VLogin" element={<VLogin />}></Route>

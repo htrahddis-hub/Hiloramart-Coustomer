@@ -62,7 +62,7 @@ const NavBar = () => {
     },
     {
       name: "Orders",
-      navigation: "/orders",
+      navigation: "/orders-current",
     },
   ];
   const data = AuthRole === "user" ? user_nav_data : vendor_nav_data;

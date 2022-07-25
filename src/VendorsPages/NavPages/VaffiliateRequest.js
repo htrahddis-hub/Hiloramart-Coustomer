@@ -6,7 +6,6 @@ import Footer from "../../Components/Footer";
 const VaffiliateRequest = () => {
   return (
     <>
-      <VNavBar />
       <div style={{ paddingBottom: "10%" }}>
         <h1
           style={{

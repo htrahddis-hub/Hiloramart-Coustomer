@@ -4,10 +4,11 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 
 import Image from "../../Assets/Images/MyWishList/Image.svg";
 import Footer from "../../Components/Footer";
+import { Link } from "react-router-dom";
+import OrderTable from "../../Components/OrderTable";
 const VReturn = () => {
   return (
     <>
-      <VNavBar />
       <div
         style={{
           fontSize: "24px",
@@ -16,12 +17,21 @@ const VReturn = () => {
           marginTop: "50px",
         }}
       >
-        <a href="/VHome2" style={{ color: "gray", textDecoration: "none" }}>
+        <Link
+          to="/orders-current"
+          style={{ color: "gray", textDecoration: "none" }}
+        >
           Current Orders
-        </a>
+        </Link>
         <span style={{ marginLeft: "50px", borderBottom: "1px solid orange" }}>
           Return Requests
         </span>
+        <Link
+          to="/orders-completed"
+          style={{ marginLeft: "50px", color: "gray", textDecoration: "none" }}
+        >
+          Completed Orders
+        </Link>
       </div>
       {/* <div style={{ marginBottom: "40px" }}>
         <div
@@ -81,54 +91,10 @@ const VReturn = () => {
           </div>
         </div>
       </div> */}
-      <div style={{ display: "flex" }}>
-        <div id="buyMainCont">
-          <div id="BuyCont1">
-            <div>
-              <img src={Image} alt="" />
-              <div className="BuyerItem">
-                <div className="darkerText">
-                  {" "}
-                  SCANO 1100 <br />
-                  HAND HELD
-                  <br />
-                  METAL DETECTOR
-                </div>
-              </div>
-            </div>
-            <div style={{ width: "300px" }}>
-              <div>Buyer Details</div>
-              <div className="BuyerItem">
-                <div className="lighterText">Name</div>
-                <div className="darkerText">Rohit</div>
-              </div>
-              <div className="BuyerItem">
-                <div className="lighterText">Phone No</div>
-                <div className="darkerText">+91 65477722112</div>
-              </div>
-              <div className="BuyerItem">
-                <div className="lighterText">Delivery Address</div>
-                <div className="darkerText">
-                  India , New Delhi
-                  <br />
-                  Pitampura
-                </div>
-              </div>
-              <div className="BuyerItem">
-                <div className="lighterText">Reason of return</div>
-                <div style={{ marginLeft: "35px" }} className="darkerText">
-                  {" "}
-                  Quality issue
-                </div>
-              </div>
-              <div className="BuyerItem">
-                <div className="lighterText">Product ID</div>
-                <div className="darkerText">#444422226576</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <OrderTable />
       </div>
+
       <Footer />
     </>
   );
