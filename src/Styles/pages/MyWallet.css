@@ -1,14 +1,14 @@
 .WalletCont1 {
   display: flex;
-  border: 1px solid;
-  border-radius: 10px;
+  box-shadow: 1px 1px 4px 2px #c7c7c7;
+  border-radius: 30px;
   padding: 2rem;
   gap: 2rem;
   margin: 2rem 0;
 }
 .total-sale-cont {
-  border: 1px solid;
-  border-radius: 10px;
+  box-shadow: 1px 1px 4px 2px #c7c7c7;
+  border-radius: 30px;
   margin: 2rem 0;
   padding: 2rem;
 }
