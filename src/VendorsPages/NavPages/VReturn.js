@@ -2,7 +2,7 @@ import React from "react";
 import VNavBar from "../../VendorsComponents/VNavBar";
 // import BuyersDetailCont from "../../VendorsComponents/BuyersDetailCont";
 
-import Image from "../../Assets/Images/MyWishList/Image.png";
+import Image from "../../Assets/Images/MyWishList/Image.svg";
 import Footer from "../../Components/Footer";
 const VReturn = () => {
   return (

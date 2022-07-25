@@ -96,7 +96,7 @@ function App() {
               <Route exact path="/Cart2" element={<Cart2 />}></Route>
 
               <Route exact path="/VHome" element={<VHome />}></Route>
-              <Route exact path="/VmyProduct" element={<VmyProduct />}></Route>
+              <Route exact path="/my-products" element={<VmyProduct />}></Route>
               <Route exact path="/VmyRevenue" element={<VmyRevenue />}></Route>
               <Route
                 exact

@@ -1,15 +1,18 @@
+.addProduct-container {
+  width: 100%;
+  padding: 2rem 8rem;
+}
 .VinputBox {
-  width: 786px;
-  height: 120px;
-  padding-top: 20px;
-  padding-left: 13px;
-  margin: 1%;
+  width: 100%;
+  height: 80px;
   background: #fcfcfc;
   border: 1px solid #ff8d22;
   color: #ff8d22;
   background-color: rgba(255, 141, 34, 0.1);
-  margin-top: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
+  outline-color: #ff8d22;
+  padding: 0 1rem;
+  margin: 1rem 0;
 }
 .VContainer1 {
   display: flex;
@@ -19,34 +22,45 @@
   margin: 3%;
 }
 .Vhead {
-  font-size: 32px;
-  font-weight: 600;
-  margin-top: 100px;
+  font-size: 2rem;
+  font-weight: 400;
+}
+.VsmallInputLabel {
+  display: block;
 }
 .VsmallInputBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #fcfcfc;
   border: 1px solid #ff8d22;
   color: #ff8d22;
   width: 120px;
   height: 120px;
-  padding-left: 13px;
-  margin-top: 10px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .VsmallInputCon {
   display: flex;
   justify-content: space-between;
 }
+.video-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 #Vsubmit {
   background-color: #ff8d22;
   color: white;
   border: 0px;
+  width: 100%;
   height: 60px;
-  width: 558px;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
-  margin: 1%;
 }
 #VsubCont {
   text-align: center;
@@ -81,12 +95,3 @@ textarea.VsmallInputBox::placeholder {
   background-color: #2d6c7a;
   color: #ffffff;
 }
-
-.imagecont {
-  margin-top: 29px;
-}
-/* 
-svg {
-  margin: 10px;
-  margin-left: 25px;
-} */

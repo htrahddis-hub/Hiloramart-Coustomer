@@ -142,8 +142,9 @@
   margin: 1%;
 }
 .CPCin1 {
-  font-size: 18px;
+  font-size: 1rem;
   font-weight: 500;
+  font-family: "Poppins";
 
   padding-bottom: 8px;
 }
@@ -156,11 +157,28 @@
 .CPC2 {
   /* border: 1px solid; */
   border-radius: 2px;
-  padding: 5px;
-  margin-top: 10px;
   cursor: pointer;
 }
 
 .CPC1 {
-  padding-top: 10px;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+}
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  flex: 2;
+}
+.product-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.remove-icon {
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  text-align: center;
 }

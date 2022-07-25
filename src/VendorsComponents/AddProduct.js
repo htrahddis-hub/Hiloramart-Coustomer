@@ -7,11 +7,10 @@ const AddProduct = () => {
     <Container>
       <div className="VContainer1">
         <div className="Vhead">WANT TO ADD YOUR PRODUCTS</div>
-        <div>
+        <div className="addProduct-container">
           <form>
             <div>
               <input
-                style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Categories"
                 className="VinputBox"
@@ -19,7 +18,6 @@ const AddProduct = () => {
             </div>
             <div>
               <input
-                style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Brand Name"
                 className="VinputBox"
@@ -27,17 +25,18 @@ const AddProduct = () => {
             </div>
             <div>
               <input
-                style={{ verticalAlign: "text-top" }}
                 type="text"
                 placeholder="Product Name"
                 className="VinputBox"
               />
             </div>
             <div>
+              <input type="text" placeholder="Price" className="VinputBox" />
+            </div>
+            <div>
               <input
-                style={{ verticalAlign: "text-top" }}
                 type="text"
-                placeholder="Price"
+                placeholder="Product Description"
                 className="VinputBox"
               />
             </div>
@@ -274,66 +273,57 @@ const AddProduct = () => {
                   />
                 </label>
               </div>
-              <label className="VsmallInputLabel">
-                <div placeholder="Add Image" className="VinputBox">
-                  <div style={{ marginLeft: "47%" }}>Add Video</div>
-                  <svg
-                    style={{ marginLeft: "50%" }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="40"
-                    height="40"
-                    viewBox="0 0 40 40"
+              <div placeholder="Add Image" className="VinputBox video-cont">
+                <div>Add Video</div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                >
+                  <g
+                    id="Group_2477"
+                    data-name="Group 2477"
+                    transform="translate(-755 -2389)"
+                    opacity="0.5"
                   >
+                    <rect
+                      id="Rectangle_2948"
+                      data-name="Rectangle 2948"
+                      width="40"
+                      height="40"
+                      transform="translate(755 2389)"
+                      fill="none"
+                    />
                     <g
-                      id="Group_2477"
-                      data-name="Group 2477"
-                      transform="translate(-755 -2389)"
-                      opacity="0.5"
+                      id="Group_2476"
+                      data-name="Group 2476"
+                      transform="translate(760 2394)"
                     >
-                      <rect
-                        id="Rectangle_2948"
-                        data-name="Rectangle 2948"
-                        width="40"
-                        height="40"
-                        transform="translate(755 2389)"
+                      <path
+                        id="Path_982"
+                        data-name="Path 982"
+                        d="M0,0H30V30H0Z"
                         fill="none"
                       />
-                      <g
-                        id="Group_2476"
-                        data-name="Group 2476"
-                        transform="translate(760 2394)"
-                      >
-                        <path
-                          id="Path_982"
-                          data-name="Path 982"
-                          d="M0,0H30V30H0Z"
-                          fill="none"
-                        />
-                        <path
-                          id="Path_983"
-                          data-name="Path 983"
-                          d="M20.091,4a1.327,1.327,0,0,1,1.273,1.375V11.15L28,6.131a.608.608,0,0,1,.887.171A.733.733,0,0,1,29,6.695v16.61a.664.664,0,0,1-.636.688A.611.611,0,0,1,28,23.869L21.364,18.85v5.775A1.327,1.327,0,0,1,20.091,26H2.273A1.327,1.327,0,0,1,1,24.625V5.375A1.327,1.327,0,0,1,2.273,4ZM18.818,6.75H3.545v16.5H18.818ZM11.182,9.5,16.273,15H12.455v5.5H9.909V15H6.091Zm15.273,1.156-5.091,3.85v.987l5.091,3.85V10.655Z"
-                        />
-                      </g>
+                      <path
+                        id="Path_983"
+                        data-name="Path 983"
+                        d="M20.091,4a1.327,1.327,0,0,1,1.273,1.375V11.15L28,6.131a.608.608,0,0,1,.887.171A.733.733,0,0,1,29,6.695v16.61a.664.664,0,0,1-.636.688A.611.611,0,0,1,28,23.869L21.364,18.85v5.775A1.327,1.327,0,0,1,20.091,26H2.273A1.327,1.327,0,0,1,1,24.625V5.375A1.327,1.327,0,0,1,2.273,4ZM18.818,6.75H3.545v16.5H18.818ZM11.182,9.5,16.273,15H12.455v5.5H9.909V15H6.091Zm15.273,1.156-5.091,3.85v.987l5.091,3.85V10.655Z"
+                      />
                     </g>
-                  </svg>
-                  <input
-                    className="VinputBox"
-                    type="file"
-                    id="vid"
-                    name="vid"
-                    accept="video/*"
-                  />
-                </div>
-              </label>
+                  </g>
+                </svg>
+                <input
+                  className="VinputBox"
+                  type="file"
+                  id="vid"
+                  name="vid"
+                  accept="video/*"
+                />
+              </div>
             </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Product Description"
-                className="VinputBox"
-              />
-            </div>
+
             <div id="VsubCont">
               <Link
                 to="/VmyProduct"
