@@ -97,7 +97,7 @@ function App() {
 
               <Route exact path="/VHome" element={<VHome />}></Route>
               <Route exact path="/my-products" element={<VmyProduct />}></Route>
-              <Route exact path="/VmyRevenue" element={<VmyRevenue />}></Route>
+              <Route exact path="/my-revenue" element={<VmyRevenue />}></Route>
               <Route
                 exact
                 path="/VaffiliateRequest"
@@ -106,7 +106,7 @@ function App() {
               <Route exact path="/VBank" element={<VBank />}></Route>
               <Route exact path="/VReturn" element={<VReturn />}></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
-              <Route exact path="/VmyWallet" element={<VmyWallet />}></Route>
+              <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
               <Route exact path="/VHome2" element={<VHome2 />}></Route>
             </Route>
 

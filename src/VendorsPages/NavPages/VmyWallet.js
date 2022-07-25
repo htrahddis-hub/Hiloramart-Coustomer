@@ -4,19 +4,19 @@ import "../../VendorsStyle/VmyWallet.css";
 import DownIcon from "../../Assets/Images/DownIcon.png";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
+import AccordionAffiliate from "../../Components/AccordionAffiliate";
 
 const VmyWallet = () => {
   return (
     <>
-      <VNavBar />
       <div>
         <div id="MWcont4">
           <img src={DownIcon} alt="" />
           April 2022
         </div>
         <div id="MWcont1">
-          <div id="WalletCont1">
-            <div className="center">
+          <div className="WalletCont1">
+            <div>
               <img
                 style={{ width: "72px", height: "70px" }}
                 src={wallet}
@@ -24,110 +24,105 @@ const VmyWallet = () => {
               />
             </div>
             <div id="walletCont4">
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                Total Profit
+              <div className="wallet-text">Total Profit</div>
+              <div className="wallet-text">RS. 20,000</div>
+            </div>
+          </div>
+          <div className="total-sale-cont">
+            <div className="total-sale">
+              <div>
+                <svg
+                  className="svg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="71.193"
+                  height="81.207"
+                  viewBox="0 0 71.193 81.207"
+                >
+                  <g id="noun-sale-2997751" transform="translate(-90.385 -35)">
+                    <path
+                      id="Path_994"
+                      data-name="Path 994"
+                      d="M273.43,42.251a10.145,10.145,0,0,0-2.181-6.274,7.257,7.257,0,0,1,10.9,6.274v2.9H273.43Z"
+                      transform="translate(-138.004 0)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_995"
+                      data-name="Path 995"
+                      d="M341.25,56.876a7.2,7.2,0,0,1,1.453-4.345,7.244,7.244,0,0,1,1.453,4.345v2.9H341.25Z"
+                      transform="translate(-211.636 -14.626)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_996"
+                      data-name="Path 996"
+                      d="M371.811,45.151h-8.717v-2.9A7.264,7.264,0,0,1,374,35.976a10.081,10.081,0,0,0-2.185,6.274Z"
+                      transform="translate(-245.103 0)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_997"
+                      data-name="Path 997"
+                      d="M446.25,113.75h4.359v45.1a22.368,22.368,0,0,0-4.359.478Z"
+                      transform="translate(-335.524 -65.699)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_998"
+                      data-name="Path 998"
+                      d="M242.062,183.75l2.906,2.175V199.7H236.25V185.925l2.906-2.175v2.9h2.906Z"
+                      transform="translate(-95.013 -124.098)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_999"
+                      data-name="Path 999"
+                      d="M529.326,420v17.4H516.25V420Zm-5.812,14.5a2.907,2.907,0,1,0-2.054-.851,2.909,2.909,0,0,0,2.054.851Z"
+                      transform="translate(-425.865 -321.194)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_1000"
+                      data-name="Path 1000"
+                      d="M225.749,168.928a5.805,5.805,0,0,0-5.609-7.32H209.371l-.046-.025a22.541,22.541,0,0,0-8.073-2.571V113.754h8.717v4.35h2.906v-4.35H227.4v7.976l-5.23,3.915a1.449,1.449,0,0,0-.581,1.16v15.951a1.451,1.451,0,0,0,1.453,1.45h11.623a1.452,1.452,0,0,0,1.453-1.45V126.8a1.449,1.449,0,0,0-.581-1.16l-5.23-3.915v-7.976h8.717v49.106l-.066.028Z"
+                      transform="translate(-83.261 -65.702)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_1001"
+                      data-name="Path 1001"
+                      d="M490,113.75h4.359v46.391a22.4,22.4,0,0,0-3.279,1.464H490Z"
+                      transform="translate(-386.539 -65.699)"
+                      fill="#ff8d22"
+                    />
+                    <path
+                      id="Path_1002"
+                      data-name="Path 1002"
+                      d="M184.557,405.729l.371.2a1.452,1.452,0,0,0,.7.177h11.139a2.9,2.9,0,1,1,0,5.8H185.14a1.45,1.45,0,1,0,0,2.9h14.529a1.447,1.447,0,0,0,.605-.132l16.521-7.552a3.294,3.294,0,0,1,4.667,2.99v.315a3.273,3.273,0,0,1-1.821,2.942l-16.94,8.454a16.087,16.087,0,0,1-7.148,1.684h-29.3V405.52a19.557,19.557,0,0,1,18.305.208Z"
+                      transform="translate(-59.885 -307.303)"
+                      fill="#ff8d22"
+                    />
+                  </g>
+                </svg>
               </div>
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                RS. 20,000
+              <div id="walletCont4">
+                <div className="wallet-text">Total Sale</div>
+                <div className="wallet-text">RS. 20,000</div>
+              </div>
+            </div>
+            <div className="sale-cont">
+              <div>
+                <div className="amount-text">Direct sale</div>
+                <div className="amount-text">Indirect sale</div>
+              </div>
+              <div>
+                <div className="amount-text">Rs. 10,000</div>
+                <div className="amount-text">RS. 10,000</div>
               </div>
             </div>
           </div>
-          <div id="WalletCont1">
-            <div className="center">
-              <svg
-                className="svg"
-                xmlns="http://www.w3.org/2000/svg"
-                width="71.193"
-                height="81.207"
-                viewBox="0 0 71.193 81.207"
-              >
-                <g id="noun-sale-2997751" transform="translate(-90.385 -35)">
-                  <path
-                    id="Path_994"
-                    data-name="Path 994"
-                    d="M273.43,42.251a10.145,10.145,0,0,0-2.181-6.274,7.257,7.257,0,0,1,10.9,6.274v2.9H273.43Z"
-                    transform="translate(-138.004 0)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_995"
-                    data-name="Path 995"
-                    d="M341.25,56.876a7.2,7.2,0,0,1,1.453-4.345,7.244,7.244,0,0,1,1.453,4.345v2.9H341.25Z"
-                    transform="translate(-211.636 -14.626)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_996"
-                    data-name="Path 996"
-                    d="M371.811,45.151h-8.717v-2.9A7.264,7.264,0,0,1,374,35.976a10.081,10.081,0,0,0-2.185,6.274Z"
-                    transform="translate(-245.103 0)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_997"
-                    data-name="Path 997"
-                    d="M446.25,113.75h4.359v45.1a22.368,22.368,0,0,0-4.359.478Z"
-                    transform="translate(-335.524 -65.699)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_998"
-                    data-name="Path 998"
-                    d="M242.062,183.75l2.906,2.175V199.7H236.25V185.925l2.906-2.175v2.9h2.906Z"
-                    transform="translate(-95.013 -124.098)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_999"
-                    data-name="Path 999"
-                    d="M529.326,420v17.4H516.25V420Zm-5.812,14.5a2.907,2.907,0,1,0-2.054-.851,2.909,2.909,0,0,0,2.054.851Z"
-                    transform="translate(-425.865 -321.194)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_1000"
-                    data-name="Path 1000"
-                    d="M225.749,168.928a5.805,5.805,0,0,0-5.609-7.32H209.371l-.046-.025a22.541,22.541,0,0,0-8.073-2.571V113.754h8.717v4.35h2.906v-4.35H227.4v7.976l-5.23,3.915a1.449,1.449,0,0,0-.581,1.16v15.951a1.451,1.451,0,0,0,1.453,1.45h11.623a1.452,1.452,0,0,0,1.453-1.45V126.8a1.449,1.449,0,0,0-.581-1.16l-5.23-3.915v-7.976h8.717v49.106l-.066.028Z"
-                    transform="translate(-83.261 -65.702)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_1001"
-                    data-name="Path 1001"
-                    d="M490,113.75h4.359v46.391a22.4,22.4,0,0,0-3.279,1.464H490Z"
-                    transform="translate(-386.539 -65.699)"
-                    fill="#ff8d22"
-                  />
-                  <path
-                    id="Path_1002"
-                    data-name="Path 1002"
-                    d="M184.557,405.729l.371.2a1.452,1.452,0,0,0,.7.177h11.139a2.9,2.9,0,1,1,0,5.8H185.14a1.45,1.45,0,1,0,0,2.9h14.529a1.447,1.447,0,0,0,.605-.132l16.521-7.552a3.294,3.294,0,0,1,4.667,2.99v.315a3.273,3.273,0,0,1-1.821,2.942l-16.94,8.454a16.087,16.087,0,0,1-7.148,1.684h-29.3V405.52a19.557,19.557,0,0,1,18.305.208Z"
-                    transform="translate(-59.885 -307.303)"
-                    fill="#ff8d22"
-                  />
-                </g>
-              </svg>
-            </div>
-            <div id="walletCont4">
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                Total Sale
-              </div>
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                RS. 20,000
-              </div>
-            </div>
-
-            {/* <div>
-                            <div>
-                                Direct sale
-                            </div>
-                            <div>
-                                RS. 10,000
-                            </div>
-                        </div> */}
-          </div>
-          <div id="WalletCont1">
-            <div className="center">
+          <div className="WalletCont1">
+            <div>
               <svg
                 className="svg"
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,12 +144,8 @@ const VmyWallet = () => {
               </svg>
             </div>
             <div id="walletCont4">
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                Total Profit
-              </div>
-              <div style={{ fontSize: "24px", fontWeight: "600" }}>
-                RS. 20,000
-              </div>
+              <div className="wallet-text">Total Profit</div>
+              <div className="wallet-text">RS. 20,000</div>
             </div>
           </div>
         </div>
@@ -163,90 +154,9 @@ const VmyWallet = () => {
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
-              <div className="ADrow">
-                <div>Arihant ERP</div>
-                <div>Total Profit RS. 1,000</div>
-                <div>
-                  <img src={DownIcon} alt="" />
-                </div>
-              </div>
+              {[1, 2, 3, 4, 5, 6].map((item, index) => {
+                return <AccordionAffiliate />;
+              })}
             </div>
           </div>
         </div>

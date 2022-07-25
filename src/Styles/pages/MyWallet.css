@@ -1,26 +1,31 @@
-#WalletCont1 {
+.WalletCont1 {
   display: flex;
   border: 1px solid;
-  margin: 5%;
-  width: 400px;
-  height: 260px;
   border-radius: 10px;
-  padding: 1%;
+  padding: 1rem;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+.total-sale-cont {
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+.total-sale {
+  display: flex;
+  gap: 2rem;
 }
 #WalletCont2 {
   display: flex;
   justify-content: space-between;
   padding: 2%;
 }
-/* #{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+
 .WalCont1 {
   display: flex;
   justify-content: space-between;
-  padding: 1%;
+  padding: 1rem;
   font-size: 18px;
   font-weight: 600;
 }
@@ -34,10 +39,9 @@
   padding: 2%;
 }
 #walletCont4 {
-  padding-left: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 1rem;
 }
 #WalletCont5 {
   display: flex;
@@ -50,4 +54,28 @@
 #GreenText {
   color: #05ad11;
   font-weight: 700;
+}
+.sale-cont {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+.wallet-text {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.amount-text {
+  font-weight: 600;
+  opacity: 0.5;
+}
+.accordion-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+.arrow-right {
+  transform: rotate(270deg);
+}
+.rotate-arrow {
+  transform: rotate(180deg);
 }

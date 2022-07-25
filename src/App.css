@@ -6,3 +6,9 @@
 .error {
   color: red;
 }
+.color-green {
+  color: rgb(0, 216, 0);
+}
+.f-500 {
+  font-weight: 500;
+}

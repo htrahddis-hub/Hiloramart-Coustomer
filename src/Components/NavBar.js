@@ -42,7 +42,7 @@ const NavBar = () => {
     },
     {
       name: "My Revenue",
-      navigation: "/my-revenve",
+      navigation: "/my-revenue",
     },
     {
       name: "My Sale",
