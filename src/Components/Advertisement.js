@@ -5,7 +5,7 @@ import arrow from "../Assets/Images/arrow.svg";
 import google from "../Assets/Images/google.svg";
 const AdContainer = ({ image }) => {
   return (
-    <div className="ad-box">
+    <div className="adver-box">
       <div>
         <img src={image} />
       </div>
@@ -26,8 +26,8 @@ const AdContainer = ({ image }) => {
 };
 function Advertisement() {
   return (
-    <div className="ad-container">
-      <div className="ad-title">Advertisement</div>
+    <div className="adver-container">
+      <div className="adver-title">Advertisement</div>
       <div>
         <AdContainer image={Hiloramart} />
       </div>
