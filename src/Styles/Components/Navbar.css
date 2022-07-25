@@ -36,3 +36,12 @@
 .linkT {
   text-decoration: none;
 }
+.active > div {
+  color: #ff8d22;
+  text-decoration: underline;
+  text-decoration-color: #ff8d22;
+  text-decoration-style: solid;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 2px;
+  opacity: 1;
+}

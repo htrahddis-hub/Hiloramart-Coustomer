@@ -3,7 +3,7 @@ import Bell from "../Assets/Images/Navbar/Bell.png";
 import Profile from "../Assets/Images/Navbar/Profile.png";
 import Hiloramart from "../Assets/Images/Navbar/Hiloramart.png";
 import "../Styles/Components/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 
 const NavBar = () => {
@@ -70,24 +70,29 @@ const NavBar = () => {
     <>
       <div className="NavMain">
         <div className="Nav1">
-          <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+          <NavLink to="/" style={{ color: "inherit", textDecoration: "none" }}>
             <div id="logo">
               <img style={{ height: "3rem" }} src={Hiloramart} alt="" />
             </div>
-          </Link>
+          </NavLink>
         </div>
 
         <div className="Nav2">
           {data.map((item, index) => {
             return (
-              <Link to={item.navigation} className="linkT">
+              <NavLink
+                to={item.navigation}
+                className={({ isActive }) =>
+                  (isActive ? "active" : "inactive") + " " + "linkT"
+                }
+              >
                 <div className="NavLink">{item.name}</div>
-              </Link>
+              </NavLink>
             );
           })}
-          <Link to="/profile" className="linkT NavICon">
+          <NavLink to="/profile" className="linkT NavICon">
             <img src={Profile} alt="Profile" />
-          </Link>
+          </NavLink>
         </div>
       </div>
     </>
