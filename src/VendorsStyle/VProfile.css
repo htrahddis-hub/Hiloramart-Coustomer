@@ -65,3 +65,16 @@
   color: orange;
   border: 1px solid orange;
 }
+.basic-cont {
+  display: flex;
+  flex-direction: column;
+}
+.basic-cont :nth-child(1),
+.account-cont :nth-child(1) {
+  justify-self: center;
+  align-self: center;
+}
+.account-cont {
+  display: flex;
+  flex-direction: column;
+}

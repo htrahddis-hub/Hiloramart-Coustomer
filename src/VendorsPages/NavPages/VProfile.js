@@ -9,7 +9,8 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const VProfile = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, AuthRole } = useContext(AuthContext);
+  console.log(AuthRole);
   const navigate = useNavigate();
   const handleLogout = () => {
     Cookies.remove("auth_token");
@@ -24,22 +25,49 @@ const VProfile = () => {
       </div>
       <div className="mainCont">
         <div className="cont">
-          <div className="details">
-            <p>Name</p>
-            <p className="details-value">Rohit</p>
+          <div className="basic-cont">
+            <div>Basic settings</div>
+            <div>
+              <div className="details">
+                <p>Name</p>
+                <p className="details-value">Rohit</p>
+              </div>
+              <div className="details">
+                <p>Number</p>
+                <p>+91-9876543210</p>
+              </div>
+              <div className="details">
+                <p>Email</p>
+                <p>adsnajk</p>
+              </div>
+              <div className="details">
+                <p> location</p>
+                <p> addsa </p>
+              </div>
+            </div>
           </div>
-          <div className="details">
-            <p>Number</p>
-            <p>+91-9876543210</p>
-          </div>
-          <div className="details">
-            <p>Email</p>
-            <p>adsnajk</p>
-          </div>
-          <div className="details">
-            <p> location</p>
-            <p> addsa </p>
-          </div>
+          {/* vendor's side */}
+          {AuthRole === "vendor" && (
+            <div className="account-cont">
+              <div>Accounts</div>
+              <div>
+                {" "}
+                <div className="details">
+                  <p>Account Number</p>
+                  <p className="details-value">872222612741</p>
+                </div>
+                <div className="details">
+                  <p>Account Holder Name</p>
+                  <p>Rohit</p>
+                </div>
+                <div className="details">
+                  <p>IFSC Code</p>
+                  <p>RBI002343</p>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div className="logout-cont">
             <button className="loginButton btn-profile" onClick={handleLogout}>
               Logout
