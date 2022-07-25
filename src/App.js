@@ -48,6 +48,7 @@ import RoleLogin from "./Pages/RoleLogin";
 import NavBar from "./Components/NavBar";
 import CompletedOrders from "./VendorsPages/CompletedOrders";
 import Sales from "./Components/Sales";
+import Advertisement from "./Components/Advertisement";
 
 function App() {
   return (
@@ -80,6 +81,11 @@ function App() {
               <Route exact path="/mywallet" element={<MyWallet />}></Route>
               <Route exact path="/cart" element={<Cart />}></Route>
               <Route exact path="/my-sales" element={<Sales />}></Route>
+              <Route
+                exact
+                path="/advertisement"
+                element={<Advertisement />}
+              ></Route>
               <Route
                 exact
                 path="/HomeProductDetail/:id"
