@@ -7,8 +7,8 @@ const API = axios.create({
 });
 
 API.interceptors.request.use((req) => {
-  if (Cookies.get("token")) {
-    req.headers["token"] = `${Cookies.get("token")}`;
+  if (Cookies.get("auth_token")) {
+    req.headers["authorization"] = `${Cookies.get("auth_token")}`;
   }
   return req;
 });
@@ -24,4 +24,13 @@ export const vendorLoginRequest = (values) => {
 };
 export const vendorSignupRequest = (values) => {
   return API.post("/api/vendor/signup", values);
+};
+
+//products
+export const getAllCategoryRequest = () => {
+  return API.get("/product/getProductCategory");
+};
+
+export const addProductRequest = (values) => {
+  return API.post("/product/addProduct", values);
 };

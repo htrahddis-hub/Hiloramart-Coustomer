@@ -5,9 +5,18 @@ import {
   vendorLogin,
   vendorSignup,
 } from "./Reducer/AuthReducer";
-import { USER_LOGIN, USER_SIGNUP, VENDOR_LOGIN, VENDOR_SIGNUP } from "./Types";
+import {
+  ADD_PRODUCT,
+  GET_ALL_CATEGORY,
+  USER_LOGIN,
+  USER_SIGNUP,
+  VENDOR_LOGIN,
+  VENDOR_SIGNUP,
+} from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
+import { addProduct, getALlCategory } from "./Reducer/ProductReducer";
+import jwtDecode from "jwt-decode";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -22,6 +31,9 @@ export const notification = {
 const AuthContextComponent = ({ children }) => {
   const [auth, setAuth] = useState(Cookies.get("auth_token"));
   const [AuthRole, setAuthRole] = useState(Cookies.get("role"));
+  const [currentUser, setCurrentUser] = useState({
+    id: Cookies.get("auth_token") && jwtDecode(Cookies.get("auth_token")),
+  });
   const reducer = (state, action) => {
     switch (action.type) {
       case USER_SIGNUP:
@@ -58,6 +70,18 @@ const AuthContextComponent = ({ children }) => {
           action.navigate
         );
         break;
+      case GET_ALL_CATEGORY:
+        getALlCategory(action.upDateState);
+        break;
+      case ADD_PRODUCT:
+        addProduct(
+          action.payload,
+          action.urls,
+          action.catId,
+          action.setIsLoading,
+          action.resetform
+        );
+        break;
     }
   };
   const initialValues = {};
@@ -70,6 +94,7 @@ const AuthContextComponent = ({ children }) => {
     setAuth,
     AuthRole,
     setAuthRole,
+    currentUser,
   };
   return (
     <AuthContext.Provider value={values}>
