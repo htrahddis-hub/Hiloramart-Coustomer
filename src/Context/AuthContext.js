@@ -7,7 +7,9 @@ import {
 } from "./Reducer/AuthReducer";
 import {
   ADD_PRODUCT,
+  DELETE_PRODUCT,
   GET_ALL_CATEGORY,
+  GET_VENDOR_PRODUCTS,
   USER_LOGIN,
   USER_SIGNUP,
   VENDOR_LOGIN,
@@ -15,7 +17,12 @@ import {
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
-import { addProduct, getALlCategory } from "./Reducer/ProductReducer";
+import {
+  addProduct,
+  deleteProduct,
+  getALlCategory,
+  getVendorProducts,
+} from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 export const AuthContext = createContext();
 export const notification = {
@@ -81,6 +88,12 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.resetform
         );
+        break;
+      case GET_VENDOR_PRODUCTS:
+        getVendorProducts(currentUser.id, action.upDateState);
+        break;
+      case DELETE_PRODUCT:
+        deleteProduct(action.payload, action.setIsLoading, action.cb);
         break;
     }
   };

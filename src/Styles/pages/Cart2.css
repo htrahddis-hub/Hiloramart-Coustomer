@@ -133,8 +133,8 @@
 
 .CPCmain {
   display: flex;
-  justify-content: space-between;
-  width: 620px;
+  /* justify-content: space-between; */
+  width: 530px;
   height: 200px;
   /* border: 1px solid; */
   border-radius: 10px;

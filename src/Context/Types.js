@@ -4,3 +4,5 @@ export const VENDOR_LOGIN = "vendor login";
 export const VENDOR_SIGNUP = "vendor signup";
 export const GET_ALL_CATEGORY = "get all catergory";
 export const ADD_PRODUCT = "add product";
+export const GET_VENDOR_PRODUCTS = "get vendor products";
+export const DELETE_PRODUCT = "delete product";

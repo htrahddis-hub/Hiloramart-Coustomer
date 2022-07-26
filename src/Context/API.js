@@ -34,3 +34,11 @@ export const getAllCategoryRequest = () => {
 export const addProductRequest = (values) => {
   return API.post("/product/addProduct", values);
 };
+
+export const getVendorProductsRequest = (id) => {
+  return API.get(`/product/allproducts/${id}`);
+};
+
+export const deleteProductRequest = (id) => {
+  return API.post(`/product/deleteProduct?id=${id}`);
+};
