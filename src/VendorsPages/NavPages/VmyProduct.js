@@ -5,6 +5,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
 import { GET_VENDOR_PRODUCTS } from "../../Context/Types";
+import ProductsLoading from "../../Components/Skeleton-loading/Products-loading";
 
 const VmyProduct = () => {
   const { dispatch } = useContext(AuthContext);
@@ -20,9 +21,20 @@ const VmyProduct = () => {
     <>
       <div style={{ margin: "3%" }}>
         <div className="RowContainer">
-          {allProducts.map((item, index) => {
-            return <MyProductCont key={item._id} cb={getProducts} {...item} />;
-          })}
+          {allProducts.length !== 0 ? (
+            allProducts.map((item, index) => {
+              return (
+                <MyProductCont key={item._id} cb={getProducts} {...item} />
+              );
+            })
+          ) : (
+            <>
+              <ProductsLoading />
+              <ProductsLoading />
+              <ProductsLoading />
+              <ProductsLoading />
+            </>
+          )}
         </div>
       </div>
       <Footer />
