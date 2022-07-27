@@ -13,7 +13,9 @@ import {
   ADD_PRODUCT,
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
+  GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
+  GET_VENDOR_PROFILE,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
   USER_RESEND_OTP,
@@ -32,6 +34,7 @@ import {
   getVendorProducts,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
+import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -129,6 +132,12 @@ const AuthContextComponent = ({ children }) => {
         break;
       case VENDOR_RESEND_OTP:
         vendorResendOtp(action.payload, action.setIsLoading);
+        break;
+      case GET_USER_PROFILE:
+        userProfile(action.upDateState);
+        break;
+      case GET_VENDOR_PROFILE:
+        vendorProfile(action.payload, action.upDateState);
         break;
     }
   };

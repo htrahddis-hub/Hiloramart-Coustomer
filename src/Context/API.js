@@ -9,6 +9,7 @@ const API = axios.create({
 API.interceptors.request.use((req) => {
   if (Cookies.get("auth_token")) {
     req.headers["authorization"] = `${Cookies.get("auth_token")}`;
+    req.headers["token"] = `${Cookies.get("auth_token")}`;
   }
   return req;
 });
@@ -39,6 +40,13 @@ export const userResendOtpRequest = (values) => {
 
 export const vendorResendOtpRequest = (values) => {
   return API.post("api/vendor/resendOtp", values);
+};
+
+export const userProfileRequest = () => {
+  return API.get("profile");
+};
+export const vendorProfileRequest = (id) => {
+  return API.get(`/vendor/getVendorProfile/${id}`);
 };
 //products
 export const getAllCategoryRequest = () => {

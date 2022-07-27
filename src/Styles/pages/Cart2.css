@@ -138,8 +138,9 @@
   height: 200px;
   /* border: 1px solid; */
   border-radius: 10px;
-  padding: 1%;
-  margin: 1%;
+  margin: 1rem;
+  padding: 1rem;
+  gap: 1rem;
 }
 .CPCin1 {
   font-size: 1rem;

@@ -10,3 +10,5 @@ export const USER_ACCOUNT_ACTIVATE = "user account activate";
 export const VENDOR_ACCOUNT_ACTIVATE = "vendor account activate";
 export const USER_RESEND_OTP = "user resend_otp";
 export const VENDOR_RESEND_OTP = "vendor resend_otp";
+export const GET_VENDOR_PROFILE = "vendor profile";
+export const GET_USER_PROFILE = "user profile";

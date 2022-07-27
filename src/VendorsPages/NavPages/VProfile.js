@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Img from "../../Assets/Images/NoPath.png";
 
@@ -7,18 +7,37 @@ import "../../VendorsStyle/VProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { GET_USER_PROFILE, GET_VENDOR_PROFILE } from "../../Context/Types";
+import ProfileSkeleton from "../../Components/Skeleton-loading/Profile.skeleton";
 
 const VProfile = () => {
-  const { setAuth, AuthRole } = useContext(AuthContext);
+  const { setAuth, AuthRole, dispatch, currentUser } = useContext(AuthContext);
   console.log(AuthRole);
   const navigate = useNavigate();
+  const [profileData, setProfileData] = useState();
+  useEffect(() => {
+    if (AuthRole === "user") {
+      console.log("ssss");
+      dispatch({ type: GET_USER_PROFILE, upDateState: setProfileData });
+    } else {
+      console.log("ssssaaaa");
+      dispatch({
+        type: GET_VENDOR_PROFILE,
+        payload: currentUser.id,
+        upDateState: setProfileData,
+      });
+    }
+  }, []);
   const handleLogout = () => {
     Cookies.remove("auth_token");
     Cookies.remove("role");
     setAuth(false);
     navigate("/choose-role-login", { replace: true });
   };
-  return (
+
+  return !profileData ? (
+    <ProfileSkeleton />
+  ) : (
     <div className="profile-container">
       <div className="top-image-container">
         <img src={Img} alt="image" className="top-image" />
@@ -30,19 +49,19 @@ const VProfile = () => {
             <div>
               <div className="details">
                 <p>Name</p>
-                <p className="details-value">Rohit</p>
+                <p className="details-value">{profileData.name}</p>
               </div>
               <div className="details">
                 <p>Number</p>
-                <p>+91-9876543210</p>
+                <p>{profileData.number || profileData.mobile}</p>
               </div>
               <div className="details">
                 <p>Email</p>
-                <p>adsnajk</p>
+                <p>{profileData.email}</p>
               </div>
               <div className="details">
                 <p> location</p>
-                <p> addsa </p>
+                <p>{profileData?.address[0]?.line1} </p>
               </div>
             </div>
           </div>
@@ -77,7 +96,7 @@ const VProfile = () => {
         <div className="img">
           <img width={100} height={100} src={Profile} alt="/" />
           <div style={{ textAlign: "center" }}>
-            <p style={{ fontSize: "20px" }}>Hello Rohit</p>
+            <p style={{ fontSize: "20px" }}>Hello {profileData.name}</p>
             <button
               style={{
                 border: "none",
