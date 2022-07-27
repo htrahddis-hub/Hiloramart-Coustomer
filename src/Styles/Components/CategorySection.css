@@ -1,0 +1,30 @@
+.cat-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+.cat-cont::-webkit-scrollbar {
+  display: none;
+}
+.cat-li-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  min-width: max-content;
+}
+.cat-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: white;
+  border: 1px solid orange;
+}

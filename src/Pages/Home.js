@@ -7,13 +7,19 @@ import Detectors from "../Components/HomeComponents/Detectors";
 import Footer from "../Components/Footer";
 import { AuthContext } from "../Context/AuthContext";
 import AddProduct from "../VendorsComponents/AddProduct";
+import CategorySection from "../Components/CategorySection";
+import SearchInput from "../Components/SearchInput";
 
 const Home = () => {
   const { AuthRole } = useContext(AuthContext);
   return (
     <>
-      <div>
+      <div className="">
+        <div className="search-cont">
+          <SearchInput />
+        </div>
         <LandingPageBanner />
+        <CategorySection />
         {AuthRole === "user" ? (
           <>
             <DealOfDayContainer />

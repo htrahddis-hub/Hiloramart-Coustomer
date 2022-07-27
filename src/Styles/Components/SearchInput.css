@@ -1,0 +1,22 @@
+.search-cont {
+  display: flex;
+  justify-content: end;
+  padding: 0 3rem;
+}
+.search-input-cont {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  opacity: 0.8;
+  width: max-content;
+  padding: 1rem;
+  border-radius: 20px;
+}
+.search-input {
+  padding: 0 1rem;
+  border: none;
+  outline: none;
+  background-color: #f0f0f0;
+}

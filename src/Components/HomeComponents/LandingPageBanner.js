@@ -12,13 +12,7 @@ const ImageGallaryComponent = () => {
   const { AuthRole } = useContext(AuthContext);
   if (AuthRole === "user")
     return (
-      <div
-        style={{
-          margin: "1.5%",
-          background: "#FFC577",
-          borderRadius: "30px",
-        }}
-      >
+      <div className="landing-top-section">
         <Link
           to="/HomeProductDetail"
           style={{ textDecoration: "none", color: "inherit" }}
