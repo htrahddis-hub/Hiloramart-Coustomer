@@ -26,6 +26,20 @@ export const vendorSignupRequest = (values) => {
   return API.post("/api/vendor/signup", values);
 };
 
+export const userAccActivateRequest = (values) => {
+  return API.post("auth/activate", values);
+};
+export const vendorAccActivateRequest = (values) => {
+  return API.post("api/vendor/activate", values);
+};
+
+export const userResendOtpRequest = (values) => {
+  return API.post("auth/resendOtp", values);
+};
+
+export const vendorResendOtpRequest = (values) => {
+  return API.post("api/vendor/resendOtp", values);
+};
 //products
 export const getAllCategoryRequest = () => {
   return API.get("/product/getProductCategory");

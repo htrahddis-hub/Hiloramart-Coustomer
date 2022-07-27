@@ -1,6 +1,6 @@
-import React, { memo, useContext, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import "../Styles/pages/SignUp.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -8,9 +8,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { AuthContext } from "../Context/AuthContext";
 import { USER_SIGNUP, VENDOR_SIGNUP } from "../Context/Types";
 const SignUp = () => {
-  const { dispatch, AuthRole } = useContext(AuthContext);
+  const { dispatch, AuthRole, setAuthRole } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setAuthRole(location.state?.role);
+  }, []);
+
   const initialValues = {
     number: "",
     email: "",
@@ -18,6 +24,7 @@ const SignUp = () => {
     confirmPassword: "",
     name: "",
   };
+  console.log(initialValues);
   const validate = Yup.object().shape({
     name: Yup.string().required("This Field is required"),
     number: Yup.number()
@@ -53,6 +60,7 @@ const SignUp = () => {
       });
     }
   };
+  if (location.state == null) return <Navigate to={-1} />; // to have role defined is user or vendor
   return (
     <>
       <div className="LoginMainContainer">

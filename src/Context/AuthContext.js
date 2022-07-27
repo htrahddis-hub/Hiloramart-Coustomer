@@ -1,8 +1,12 @@
-import { createContext, useReducer, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import {
+  userAccActivate,
   userLogin,
+  userResendOtp,
   userSignup,
+  vendorAccActivate,
   vendorLogin,
+  vendorResendOtp,
   vendorSignup,
 } from "./Reducer/AuthReducer";
 import {
@@ -10,9 +14,13 @@ import {
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
   GET_VENDOR_PRODUCTS,
+  USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
+  USER_RESEND_OTP,
   USER_SIGNUP,
+  VENDOR_ACCOUNT_ACTIVATE,
   VENDOR_LOGIN,
+  VENDOR_RESEND_OTP,
   VENDOR_SIGNUP,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
@@ -41,6 +49,11 @@ const AuthContextComponent = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({
     id: Cookies.get("auth_token") && jwtDecode(Cookies.get("auth_token")),
   });
+
+  // useEffect(() => {
+  //   console.log(Cookies.get("auth_token"));
+  // }, []);
+
   const reducer = (state, action) => {
     switch (action.type) {
       case USER_SIGNUP:
@@ -94,6 +107,28 @@ const AuthContextComponent = ({ children }) => {
         break;
       case DELETE_PRODUCT:
         deleteProduct(action.payload, action.setIsLoading, action.cb);
+        break;
+      case USER_ACCOUNT_ACTIVATE:
+        userAccActivate(
+          action.payload,
+          action.id,
+          action.setIsLoading,
+          action.navigate
+        );
+        break;
+      case VENDOR_ACCOUNT_ACTIVATE:
+        vendorAccActivate(
+          action.payload,
+          action.id,
+          action.setIsLoading,
+          action.navigate
+        );
+        break;
+      case USER_RESEND_OTP:
+        userResendOtp(action.payload, action.setIsLoading);
+        break;
+      case VENDOR_RESEND_OTP:
+        vendorResendOtp(action.payload, action.setIsLoading);
         break;
     }
   };

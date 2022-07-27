@@ -1,7 +1,11 @@
 import {
+  userAccActivateRequest,
   userLoginRequest,
+  userResendOtpRequest,
   userSignUpRequest,
+  vendorAccActivateRequest,
   vendorLoginRequest,
+  vendorResendOtpRequest,
   vendorSignupRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
@@ -10,17 +14,28 @@ import Cookies from "js-cookie";
 
 export const userSignup = async (values, resetForm, setIsLoading, navigate) => {
   setIsLoading(true);
+  let formValues = new Object({
+    name: values.name,
+    email: values.email,
+    mobile: values.number,
+    password: values.password,
+  });
   try {
-    values.mobile = values.number;
-    delete values.number;
-    delete values.confirmPassword;
-    const res = await userSignUpRequest(values);
+    const res = await userSignUpRequest(formValues);
     if (res.data.message === "Account Activation Mail Sent!") {
       resetForm({ values: "" });
-      navigate("/otp", { state: { isSigned: true } });
+      navigate("/otp", {
+        state: {
+          isSigned: true,
+          id: res.data.user._id,
+          email: res.data.user.email,
+          role: "user",
+        },
+      });
     }
   } catch (err) {
     console.log(err);
+    console.log(formValues, values);
     Store.addNotification({
       ...notification,
       type: "danger",
@@ -82,7 +97,12 @@ export const vendorLogin = async (
   }
 };
 
-export const vendorSignup = async (values, resetForm, setIsLoading) => {
+export const vendorSignup = async (
+  values,
+  resetForm,
+  setIsLoading,
+  navigate
+) => {
   setIsLoading(true);
   try {
     const res = await vendorSignupRequest(values);
@@ -91,6 +111,122 @@ export const vendorSignup = async (values, resetForm, setIsLoading) => {
         ...notification,
         type: "success",
         message: res.data.message,
+      });
+      resetForm({ values: "" });
+      navigate("/otp", {
+        state: {
+          isSigned: true,
+          id: res.data.user._id,
+          email: res.data.user.email,
+          role: "user",
+        },
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const userAccActivate = async (values, id, setIsLoading, navigate) => {
+  setIsLoading(true);
+  const otp = Number(values.otp1 + values.otp2 + values.otp3 + values.otp4);
+  const formvalues = {
+    id: id,
+    code: otp,
+  };
+  console.log(values, otp);
+  try {
+    const res = await userAccActivateRequest(formvalues);
+    if (res.data) {
+      navigate("/login", {
+        state: {
+          role: "user",
+        },
+        replace: true,
+      });
+    }
+  } catch (err) {
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const vendorAccActivate = async (values, id, setIsLoading, navigate) => {
+  setIsLoading(true);
+  const otp = Number(values.otp1 + values.otp2 + values.otp3 + values.otp4);
+  const formvalues = {
+    id: id,
+    code: otp,
+  };
+  try {
+    const res = await vendorAccActivateRequest(formvalues);
+    if (res.data) {
+      navigate("/login", {
+        state: {
+          role: "vendor",
+        },
+        replace: true,
+      });
+    }
+  } catch (err) {
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const userResendOtp = async (id, setIsLoading) => {
+  setIsLoading(true);
+  const values = {
+    id: id,
+  };
+  try {
+    const res = await userResendOtpRequest(values);
+    if (res.data) {
+      Store.addNotification({
+        ...notification,
+        type: "success",
+        message: "OTP sent to you registered email",
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const vendorResendOtp = async (id, setIsLoading) => {
+  setIsLoading(true);
+  const values = {
+    id: id,
+  };
+  try {
+    const res = await vendorResendOtpRequest(values);
+    if (res.data) {
+      Store.addNotification({
+        ...notification,
+        type: "success",
+        message: "OTP sent to you registered email",
       });
     }
   } catch (err) {

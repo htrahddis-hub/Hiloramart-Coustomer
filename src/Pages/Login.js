@@ -20,7 +20,7 @@ const Login = () => {
   const location = useLocation();
 
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log(location.state?.role);
   useEffect(() => {
     setAuthRole(location.state?.role);
   }, []);
@@ -134,7 +134,7 @@ const Login = () => {
                     </button>
                   </div>
                   <div>
-                    <Link to="/signup">
+                    <Link to="/signup" state={{ role: AuthRole }}>
                       <button className="SignUpButton">Sign up</button>
                     </Link>
                   </div>
