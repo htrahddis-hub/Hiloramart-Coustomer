@@ -2,6 +2,7 @@ import {
   addProductRequest,
   deleteProductRequest,
   getAllCategoryRequest,
+  getAllProductsRequest,
   getVendorProductsRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
@@ -70,5 +71,16 @@ export const deleteProduct = async (id, setIsLoading, cb) => {
     console.log(err);
   } finally {
     setIsLoading(false);
+  }
+};
+
+export const getALLproducts = async (upDateState) => {
+  try {
+    const res = await getAllProductsRequest();
+    if (res.data) {
+      upDateState(res.data.data);
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

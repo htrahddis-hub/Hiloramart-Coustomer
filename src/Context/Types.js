@@ -12,3 +12,4 @@ export const USER_RESEND_OTP = "user resend_otp";
 export const VENDOR_RESEND_OTP = "vendor resend_otp";
 export const GET_VENDOR_PROFILE = "vendor profile";
 export const GET_USER_PROFILE = "user profile";
+export const GET_ALL_PRODUCTS = "get all products";

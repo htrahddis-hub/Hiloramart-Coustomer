@@ -3,7 +3,8 @@ import ProductImage from "../../Assets/Images/Home/ProductImage.png";
 import { Rating } from "react-simple-star-rating";
 import "../../Styles/Components/ProductContainer.css";
 import { Link } from "react-router-dom";
-const ProductContainer2 = () => {
+const ProductContainer2 = (props) => {
+  const { price, title, description, ratings, productImage } = props;
   const [rating, setRating] = useState(0); // initial rating value
 
   // Catch Rating value
@@ -35,15 +36,13 @@ const ProductContainer2 = () => {
 
       <div className="Images">
         <img
-          src={ProductImage}
+          src={productImage ? productImage[0] : null}
           alt=""
           style={{ height: "8rem", width: "8rem" }}
         />
       </div>
-      <div className="discription">
-        LOOP SCANO 1100 HAND HELD METAL DETECTOR
-      </div>
-      <div className="price">RS. 4000</div>
+      <div className="discription">{description}</div>
+      <div className="price">RS. {price}</div>
     </div>
   );
 };

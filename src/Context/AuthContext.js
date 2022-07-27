@@ -13,6 +13,7 @@ import {
   ADD_PRODUCT,
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
+  GET_ALL_PRODUCTS,
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
@@ -31,6 +32,7 @@ import {
   addProduct,
   deleteProduct,
   getALlCategory,
+  getALLproducts,
   getVendorProducts,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
@@ -138,6 +140,9 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_VENDOR_PROFILE:
         vendorProfile(action.payload, action.upDateState);
+        break;
+      case GET_ALL_PRODUCTS:
+        getALLproducts(action.upDateState);
         break;
     }
   };

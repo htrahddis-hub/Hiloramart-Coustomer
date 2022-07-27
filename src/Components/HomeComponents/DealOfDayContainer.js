@@ -19,7 +19,6 @@ const DealOfDayContainer = () => {
   }, []);
 
   const handleBackward = () => {
-    console.log(carousalRef);
     carousalRef.current.scrollLeft -= 200;
   };
   const handleForward = () => {

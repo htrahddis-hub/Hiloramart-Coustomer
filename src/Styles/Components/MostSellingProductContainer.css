@@ -1,7 +1,8 @@
 .MSPCont2 {
   display: flex;
   justify-content: space-between;
-  padding: 1%;
+  padding: 1rem;
+  flex-direction: column;
 }
 .MSPcontiner1 {
   font-size: 22px;
@@ -12,4 +13,32 @@
 .MSPmainContainer {
   padding-bottom: 30px;
   padding-top: 30px;
+}
+.row-container {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+}
+.row-container::-webkit-scrollbar {
+  display: none;
+}
+.arrow-scroll-cont {
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+  margin-bottom: 1rem;
+}
+.scroll-arrow {
+  width: 40px;
+  height: 40px;
+  /* background: cadetblue; */
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.prod-cont {
+  margin: 0 1rem;
 }

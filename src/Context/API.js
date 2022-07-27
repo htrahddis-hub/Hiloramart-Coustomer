@@ -64,3 +64,7 @@ export const getVendorProductsRequest = (id) => {
 export const deleteProductRequest = (id) => {
   return API.post(`/product/deleteProduct?id=${id}`);
 };
+
+export const getAllProductsRequest = () => {
+  return API.get("product/getProducts");
+};

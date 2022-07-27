@@ -17,7 +17,8 @@ const Home = () => {
         {AuthRole === "user" ? (
           <>
             <DealOfDayContainer />
-            <MostSellingProductContainer />
+            {/* <MostSellingProductContainer /> */}
+            <Detectors />
             <Detectors />
           </>
         ) : (
