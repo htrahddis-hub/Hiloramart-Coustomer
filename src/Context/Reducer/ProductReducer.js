@@ -1,9 +1,13 @@
 import {
+  addItemToWishlistRequest,
   addProductRequest,
+  checkItemWishlistStatus,
   deleteProductRequest,
   getAllCategoryRequest,
   getAllProductsRequest,
+  getProductDetailsRequest,
   getVendorProductsRequest,
+  removeItemFromWishlistRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -82,5 +86,53 @@ export const getALLproducts = async (upDateState) => {
     }
   } catch (err) {
     console.log(err);
+  }
+};
+
+export const getProductDetails = async (id, upDateState) => {
+  try {
+    const res = await getProductDetailsRequest(id);
+    if (res.data) {
+      upDateState(res.data.data);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const addItemToWishlist = async (id, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await addItemToWishlistRequest(id);
+    if (res.data === "Item Added!") {
+      upDateState(true);
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const removeItemFromWishlist = async (id, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await removeItemFromWishlistRequest(id);
+    if (res.data === "Item removed") {
+      upDateState(false);
+    }
+  } catch (e) {
+    console.log(e);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const checkProductWishlistStatus = async (id, upDateState) => {
+  try {
+    const res = await checkItemWishlistStatus(id);
+    upDateState(res.data.status);
+  } catch (e) {
+    console.log(e);
   }
 };

@@ -45,7 +45,7 @@ const Detectors = () => {
               return (
                 <div key={item._id} className="prod-cont">
                   <Link
-                    to="/HomeProductDetail"
+                    to={`/HomeProductDetail/${item._id}`}
                     style={{ color: "inherit", textDecoration: "none" }}
                   >
                     <ProductContainer2 {...item} />

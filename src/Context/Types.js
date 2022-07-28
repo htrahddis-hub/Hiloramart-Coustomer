@@ -13,3 +13,7 @@ export const VENDOR_RESEND_OTP = "vendor resend_otp";
 export const GET_VENDOR_PROFILE = "vendor profile";
 export const GET_USER_PROFILE = "user profile";
 export const GET_ALL_PRODUCTS = "get all products";
+export const GET_PRODUCT_DETAILS = "get product details";
+export const ADD_ITEM_TO_WISHLIST = "add item to wishlist";
+export const REMOVE_ITEM_TO_WISHLIST = "remove item to wishlist";
+export const CHECK_WISHLIST_STATUS = "check product wishlist status";

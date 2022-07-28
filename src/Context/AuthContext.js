@@ -10,13 +10,17 @@ import {
   vendorSignup,
 } from "./Reducer/AuthReducer";
 import {
+  ADD_ITEM_TO_WISHLIST,
   ADD_PRODUCT,
+  CHECK_WISHLIST_STATUS,
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAILS,
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
+  REMOVE_ITEM_TO_WISHLIST,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
   USER_RESEND_OTP,
@@ -29,11 +33,15 @@ import {
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
 import {
+  addItemToWishlist,
   addProduct,
+  checkProductWishlistStatus,
   deleteProduct,
   getALlCategory,
   getALLproducts,
+  getProductDetails,
   getVendorProducts,
+  removeItemFromWishlist,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
@@ -143,6 +151,30 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_ALL_PRODUCTS:
         getALLproducts(action.upDateState);
+        break;
+      case GET_PRODUCT_DETAILS:
+        getProductDetails(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
+      case ADD_ITEM_TO_WISHLIST:
+        addItemToWishlist(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
+      case REMOVE_ITEM_TO_WISHLIST:
+        removeItemFromWishlist(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
+      case CHECK_WISHLIST_STATUS:
+        checkProductWishlistStatus(action.payload, action.upDateState);
         break;
     }
   };

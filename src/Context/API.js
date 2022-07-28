@@ -68,3 +68,20 @@ export const deleteProductRequest = (id) => {
 export const getAllProductsRequest = () => {
   return API.get("product/getProducts");
 };
+
+export const getProductDetailsRequest = (id) => {
+  return API.get(`product/getProductsbyId/${id}`);
+};
+
+export const addItemToWishlistRequest = (id) => {
+  return API.post(`/wishlist/add`, {
+    product_id: id,
+  });
+};
+export const removeItemFromWishlistRequest = (id) => {
+  return API.delete(`/wishlist/remove?product_id=${id}`);
+};
+
+export const checkItemWishlistStatus = (id) => {
+  return API.get(`wishlist/checkItem?product_id=${id}`);
+};
