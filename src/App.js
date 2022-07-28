@@ -77,7 +77,11 @@ function App() {
             <Route element={<ProtectedRoutes />}>
               <Route exact path="/" element={<Home />}></Route>
               <Route exact path="/affiliate" element={<Affiliate />}></Route>
-              <Route exact path="/MyWishList" element={<MyWishList2 />}></Route>
+              <Route
+                exact
+                path="/my-wishlist"
+                element={<MyWishList2 />}
+              ></Route>
               <Route exact path="/mywallet" element={<MyWallet />}></Route>
               <Route exact path="/cart" element={<Cart />}></Route>
               <Route exact path="/my-sales" element={<Sales />}></Route>

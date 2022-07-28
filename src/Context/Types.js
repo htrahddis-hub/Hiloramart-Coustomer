@@ -17,3 +17,4 @@ export const GET_PRODUCT_DETAILS = "get product details";
 export const ADD_ITEM_TO_WISHLIST = "add item to wishlist";
 export const REMOVE_ITEM_TO_WISHLIST = "remove item to wishlist";
 export const CHECK_WISHLIST_STATUS = "check product wishlist status";
+export const GET_WISHLIST_ITEMS = "get wishlist items";

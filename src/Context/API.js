@@ -85,3 +85,7 @@ export const removeItemFromWishlistRequest = (id) => {
 export const checkItemWishlistStatus = (id) => {
   return API.get(`wishlist/checkItem?product_id=${id}`);
 };
+
+export const getWishlistItemsRequest = async (id) => {
+  return API.get(`/wishlist`);
+};

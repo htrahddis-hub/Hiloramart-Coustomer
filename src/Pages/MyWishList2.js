@@ -1,57 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import Footer from '../Components/Footer';
-import YourWishlistCont from '../Components/MyWishList/YourWishlistCont';
-import NavBar from '../Components/NavBar';
-import '../Styles/pages/MyWishList.css';
-import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from "react";
+import Footer from "../Components/Footer";
+import YourWishlistCont from "../Components/MyWishList/YourWishlistCont";
+import NavBar from "../Components/NavBar";
+import "../Styles/pages/MyWishList.css";
+import axios from "axios";
+import { Row, Col } from "react-bootstrap";
+import { AuthContext } from "../Context/AuthContext";
+import {
+  GET_WISHLIST_ITEMS,
+  GET_WWISHLIST_ITEMS,
+  REMOVE_ITEM_TO_WISHLIST,
+} from "../Context/Types";
 
 const MyWishList2 = () => {
+  const { dispatch } = useContext(AuthContext);
   const [wishListItems, setWishListItems] = useState([]);
-  const getWishlist = async () => {
-    try {
-      const { data } = await axios.get(
-        'https://hiloramart-user.herokuapp.com/wishlist'
-      );
-      setWishListItems(data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
-  const removeFromWishlist = async (id) => {
-    try {
-      const { data } = await axios.delete(
-        `https://hiloramart-user.herokuapp.com/wishlist/remove?product_id=${id}`
-      );
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+  const getWishlist = async () => {
+    dispatch({ type: GET_WISHLIST_ITEMS, upDateState: setWishListItems });
   };
 
   useEffect(() => {
     getWishlist();
-  }, [removeFromWishlist]);
+  }, []);
 
   // console.log(wishListItems);
 
   return (
     <>
-      <NavBar />
-      <div id='OHcont1'>
-        <div id='OHhead'>YOUR WISHLIST</div>
+      <div id="OHcont1">
+        <div id="OHhead">YOUR WISHLIST</div>
       </div>
-      <Row>
-        {wishListItems.map((i, idx) => (
-          <Col key={idx} sm={12} md={6} xl={3}>
-            <YourWishlistCont
-              removeFromWishlist={removeFromWishlist}
-              item={i}
-            />
-          </Col>
+      <div className="wishlist-items-cont">
+        {wishListItems.map((item, idx) => (
+          <YourWishlistCont item={item} key={item._id} cb={getWishlist} />
         ))}
-      </Row>
+      </div>
 
       <Footer />
     </>

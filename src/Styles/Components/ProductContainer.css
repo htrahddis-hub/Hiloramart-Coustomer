@@ -1,8 +1,9 @@
 .ProductMainContainer {
   background: #fafafa;
-  width: 200px;
+  width: 220px;
   padding: 0rem 0.5rem 1rem 0.5rem;
   border-radius: 8px;
+  box-shadow: 1px 2px 7px #e4e1e1;
 }
 .Images {
   display: flex;

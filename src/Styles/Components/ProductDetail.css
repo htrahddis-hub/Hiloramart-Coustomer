@@ -7,9 +7,11 @@
 .SmallImageCont {
   display: flex;
   flex-direction: column;
-
   gap: 2rem;
   overflow-y: scroll;
+}
+.SmallImageCont::-webkit-scrollbar {
+  display: none;
 }
 .imageAndVideo {
   display: flex;

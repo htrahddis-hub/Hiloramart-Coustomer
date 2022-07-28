@@ -20,6 +20,7 @@ import {
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
+  GET_WISHLIST_ITEMS,
   REMOVE_ITEM_TO_WISHLIST,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
@@ -41,6 +42,7 @@ import {
   getALLproducts,
   getProductDetails,
   getVendorProducts,
+  getWishlistItems,
   removeItemFromWishlist,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
@@ -170,11 +172,15 @@ const AuthContextComponent = ({ children }) => {
         removeItemFromWishlist(
           action.payload,
           action.upDateState,
-          action.setIsLoading
+          action.setIsLoading,
+          action.cb
         );
         break;
       case CHECK_WISHLIST_STATUS:
         checkProductWishlistStatus(action.payload, action.upDateState);
+        break;
+      case GET_WISHLIST_ITEMS:
+        getWishlistItems(action.upDateState);
         break;
     }
   };

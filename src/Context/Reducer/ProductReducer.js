@@ -7,6 +7,7 @@ import {
   getAllProductsRequest,
   getProductDetailsRequest,
   getVendorProductsRequest,
+  getWishlistItemsRequest,
   removeItemFromWishlistRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
@@ -114,12 +115,18 @@ export const addItemToWishlist = async (id, upDateState, setIsLoading) => {
   }
 };
 
-export const removeItemFromWishlist = async (id, upDateState, setIsLoading) => {
+export const removeItemFromWishlist = async (
+  id,
+  upDateState,
+  setIsLoading,
+  cb
+) => {
   setIsLoading(true);
   try {
     const res = await removeItemFromWishlistRequest(id);
     if (res.data === "Item removed") {
       upDateState(false);
+      if (cb) cb();
     }
   } catch (e) {
     console.log(e);
@@ -132,6 +139,15 @@ export const checkProductWishlistStatus = async (id, upDateState) => {
   try {
     const res = await checkItemWishlistStatus(id);
     upDateState(res.data.status);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getWishlistItems = async (upDateState) => {
+  try {
+    const res = await getWishlistItemsRequest();
+    upDateState(res.data);
   } catch (e) {
     console.log(e);
   }

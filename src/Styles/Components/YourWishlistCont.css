@@ -1,5 +1,8 @@
 #WishListButtonCont {
-  padding: 10% 0% 10% 0%;
+  margin: 1rem 0;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
   text-align: center;
 }
 #BUYbutton1 {
@@ -7,7 +10,7 @@
   color: white;
   border: 0px;
   height: 40px;
-  width: 250px;
+  width: 100%;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
@@ -24,7 +27,7 @@
   color: #ff8d22;
   border: 1px solid;
   height: 35px;
-  width: 250px;
+  width: 100%;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
@@ -36,4 +39,7 @@
   background-color: #ff8d22;
   /* box-shadow: 0 5px #666; */
   transform: translateY(4px);
+}
+.product-title-cont {
+  display: flex;
 }
