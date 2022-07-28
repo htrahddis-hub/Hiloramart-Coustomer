@@ -7,6 +7,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import { GET_ALL_PRODUCTS } from "../../Context/Types";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ProductContainerSkeleton from "../Skeleton-loading/prductConatiner.skeleton";
 
 const Detectors = () => {
   const { dispatch } = useContext(AuthContext);
@@ -41,18 +42,27 @@ const Detectors = () => {
             className="row-container"
             ref={carousalRef}
           >
-            {allProducts?.map((item, index) => {
-              return (
-                <div key={item._id} className="prod-cont">
-                  <Link
-                    to={`/HomeProductDetail/${item._id}`}
-                    style={{ color: "inherit", textDecoration: "none" }}
-                  >
-                    <ProductContainer2 {...item} />
-                  </Link>
-                </div>
-              );
-            })}
+            {allProducts ? (
+              allProducts.map((item, index) => {
+                return (
+                  <div key={item._id} className="prod-cont">
+                    <Link
+                      to={`/HomeProductDetail/${item._id}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      <ProductContainer2 {...item} />
+                    </Link>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="d-flex gap-5">
+                <ProductContainerSkeleton />
+                <ProductContainerSkeleton />
+                <ProductContainerSkeleton />
+                <ProductContainerSkeleton />
+              </div>
+            )}
           </div>
         </div>
       </Container>

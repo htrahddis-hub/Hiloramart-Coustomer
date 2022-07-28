@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Bell from "../Assets/Images/Navbar/Bell.png";
 import Profile from "../Assets/Images/Navbar/Profile.png";
+import notification_icon from "../Assets/Images/notification.svg";
 import Hiloramart from "../Assets/Images/Navbar/Hiloramart.png";
 import "../Styles/Components/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
@@ -90,6 +91,11 @@ const NavBar = () => {
               </NavLink>
             );
           })}
+          {AuthRole === "user" && (
+            <NavLink to="/profile" className="linkT NavICon">
+              <img src={notification_icon} alt="Profile" />
+            </NavLink>
+          )}
           <NavLink to="/profile" className="linkT NavICon">
             <img src={Profile} alt="Profile" />
           </NavLink>

@@ -11,10 +11,11 @@ import {
   GET_WWISHLIST_ITEMS,
   REMOVE_ITEM_TO_WISHLIST,
 } from "../Context/Types";
+import ProductContainerSkeleton from "../Components/Skeleton-loading/prductConatiner.skeleton";
 
 const MyWishList2 = () => {
   const { dispatch } = useContext(AuthContext);
-  const [wishListItems, setWishListItems] = useState([]);
+  const [wishListItems, setWishListItems] = useState();
 
   const getWishlist = async () => {
     dispatch({ type: GET_WISHLIST_ITEMS, upDateState: setWishListItems });
@@ -27,18 +28,27 @@ const MyWishList2 = () => {
   // console.log(wishListItems);
 
   return (
-    <>
+    <div className="wishlist-container">
       <div id="OHcont1">
         <div id="OHhead">YOUR WISHLIST</div>
       </div>
       <div className="wishlist-items-cont">
-        {wishListItems.map((item, idx) => (
-          <YourWishlistCont item={item} key={item._id} cb={getWishlist} />
-        ))}
+        {wishListItems ? (
+          wishListItems.map((item, idx) => (
+            <YourWishlistCont item={item} key={item._id} cb={getWishlist} />
+          ))
+        ) : (
+          <div className="d-flex gap-5">
+            <ProductContainerSkeleton />
+            <ProductContainerSkeleton />
+            <ProductContainerSkeleton />
+            <ProductContainerSkeleton />
+          </div>
+        )}
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 

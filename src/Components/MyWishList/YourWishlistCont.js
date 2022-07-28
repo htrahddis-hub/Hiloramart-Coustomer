@@ -40,15 +40,13 @@ const YourWishlistCont = ({ item, cb }) => {
 
       <div className="Images">
         <img
-          src={ProductImage}
+          src={item.productImage[0]}
           alt=""
           style={{ height: "8rem", width: "8rem" }}
         />
       </div>
       <div className="product-title-cont">
-        <div className="discription">
-          LOOP SCANO 1100 HAND HELD METAL DETECTOR
-        </div>
+        <div className="discription">{item.name}</div>
         <div onClick={() => removeFromWishlist(item._id)}>
           {isWishlistLoading ? (
             <CircularProgress sx={{ color: "black" }} size={25} />
@@ -57,7 +55,7 @@ const YourWishlistCont = ({ item, cb }) => {
           )}
         </div>
       </div>
-      <div className="price">RS. 4000</div>
+      <div className="price">RS. {item.price}</div>
       <div id="WishListButtonCont">
         <div>
           <button id="BUYbutton1">BUY NOW</button>
