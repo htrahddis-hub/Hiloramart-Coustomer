@@ -1,21 +1,20 @@
-
-import React from 'react'
-import ProductContainer2 from '../HomeComponents/ProductContainer2'
+import React from "react";
+import ProductContainer2 from "../HomeComponents/ProductContainer2";
 
 const RelatedProducts = () => {
   return (
     <>
-    <div className="MSPmainContainer">
+      <div className="MSPmainContainer">
         <div className="MSPcontiner1">Related Products</div>
-        <div className="MSPCont2">
-            <ProductContainer2/>
-            <ProductContainer2/>
-            <ProductContainer2/>
-            <ProductContainer2/>
+        <div className="d-flex gap-5">
+          <ProductContainer2 />
+          <ProductContainer2 />
+          <ProductContainer2 />
+          <ProductContainer2 />
         </div>
-    </div>
-</>
-  )
-}
+      </div>
+    </>
+  );
+};
 
-export default RelatedProducts
+export default RelatedProducts;
