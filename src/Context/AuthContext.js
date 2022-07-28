@@ -62,12 +62,14 @@ const AuthContextComponent = ({ children }) => {
   const [auth, setAuth] = useState(Cookies.get("auth_token"));
   const [AuthRole, setAuthRole] = useState(Cookies.get("role"));
   const [currentUser, setCurrentUser] = useState({
-    id: Cookies.get("auth_token") && jwtDecode(Cookies.get("auth_token")),
+    id: null,
   });
 
-  // useEffect(() => {
-  //   console.log(Cookies.get("auth_token"));
-  // }, []);
+  useEffect(() => {
+    setCurrentUser({
+      id: Cookies.get("auth_token") && jwtDecode(Cookies.get("auth_token")),
+    });
+  }, [auth]);
 
   const reducer = (state, action) => {
     switch (action.type) {
