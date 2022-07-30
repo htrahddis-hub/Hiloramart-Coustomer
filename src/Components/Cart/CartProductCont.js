@@ -1,25 +1,76 @@
-import React from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import Image from "../../Assets/Images/MyWishList/Image.svg";
 import Delete from "../../Assets/Images/cart/Delete.png";
 import "../../Styles/pages/Cart2.css";
 
-const CartProductCont = ({ item, deleteFromCart }) => {
+const Counter = ({ counter, setCounter }) => {
   return (
-    <div className="CPCmain">
-      <div className="CPC1">
-        <img src={Image} alt="" />
+    <div className="counter-cont">
+      <div
+        className="counter-minus"
+        onClick={() => {
+          setCounter((prev) => (prev > 1 ? prev - 1 : 1));
+        }}
+      >
+        -
       </div>
-      <div className="CPC1">
-        <div className="CPCin1">LOOP SCANO 1100 HAND HELD METAL DETECTOR</div>
-        <div className="CPCin2">RS. 4000</div>
-        <div className="CPCin1">counter</div>
+      <div className="counter-value">{counter}</div>
+      <div
+        className="counter-plus"
+        onClick={() => {
+          setCounter((prev) => (prev >= 1 ? prev + 1 : 1));
+        }}
+      >
+        +
       </div>
-      <div>
+    </div>
+  );
+};
+
+const CartProductCont = ({
+  item,
+  deleteFromCart,
+  totalCost,
+  setTotalCost,
+  cartProducts,
+  TotalCartCost,
+}) => {
+  const [itemCost, setItemCost] = useState(item.productId.price);
+  const [counter, setCounter] = useState(item.quantity);
+  const calculateCost = () => {
+    setItemCost((prev) => counter * item.productId.price);
+    cartProducts.set(item._id, counter * item.productId.price);
+    TotalCartCost();
+  };
+
+  useEffect(() => {
+    calculateCost();
+  }, [counter]);
+  return (
+    <div className="cart-prod-cont">
+      <div className="cart-prod-image">
+        <img src={item.productId.productImage[0]} alt="" />
+      </div>
+      <div className="cart-prod-details">
+        <div className="cart-prod-title">{item.productId.name}</div>
+        <div className="cart-prod-price" data-price={itemCost}>
+          RS. {itemCost}
+        </div>
+        <div className="cart-prod-counter">
+          <Counter counter={counter} setCounter={setCounter} />
+        </div>
+      </div>
+      <div className="cart-prod-delete">
         <img
-          onClick={() => deleteFromCart(item.product_id)}
+          onClick={() => deleteFromCart(item._id)}
           src={Delete}
           alt="cart_item"
-          className="CPC2"
         />
       </div>
     </div>

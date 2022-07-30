@@ -106,7 +106,7 @@ function App() {
                 element={<MyWishList2 />}
               ></Route>
               <Route exact path="/Tracking" element={<Tracking />}></Route>
-              <Route exact path="/Cart2" element={<Cart2 />}></Route>
+              <Route exact path="/my-cart" element={<Cart2 />}></Route>
 
               <Route exact path="/VHome" element={<VHome />}></Route>
               <Route exact path="/my-products" element={<VmyProduct />}></Route>

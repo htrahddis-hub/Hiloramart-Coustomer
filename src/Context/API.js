@@ -95,5 +95,13 @@ export const addItemToCartRequest = (values) => {
 };
 
 export const checkItemInCartRequest = (id) => {
-  API.get(`/checkItem?productId=${id}`);
+  return API.get(`cart/checkItem?productId=${id}`);
+};
+
+export const getCartItemsRequest = () => {
+  return API.get("/cart");
+};
+
+export const deleteItemFromCartRequest = (values) => {
+  return API.delete("/cart/remove", values);
 };

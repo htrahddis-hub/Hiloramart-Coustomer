@@ -15,9 +15,11 @@ import {
   ADD_PRODUCT,
   CHECK_ITEM_IN_CART,
   CHECK_WISHLIST_STATUS,
+  DELETE_ITEM_FROM_CART,
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
+  GET_CART_ITEMS,
   GET_PRODUCT_DETAILS,
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
@@ -41,9 +43,11 @@ import {
   addProduct,
   checkItemInCart,
   checkProductWishlistStatus,
+  deleteItemFromCart,
   deleteProduct,
   getALlCategory,
   getALLproducts,
+  getCartItems,
   getProductDetails,
   getVendorProducts,
   getWishlistItems,
@@ -193,6 +197,16 @@ const AuthContextComponent = ({ children }) => {
         break;
       case CHECK_ITEM_IN_CART:
         checkItemInCart(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
+      case GET_CART_ITEMS:
+        getCartItems(action.setIsLoading, action.upDateState);
+        break;
+      case DELETE_ITEM_FROM_CART:
+        deleteItemFromCart(
           action.payload,
           action.upDateState,
           action.setIsLoading
