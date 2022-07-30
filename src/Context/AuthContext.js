@@ -10,8 +10,10 @@ import {
   vendorSignup,
 } from "./Reducer/AuthReducer";
 import {
+  ADD_ITEM_CART,
   ADD_ITEM_TO_WISHLIST,
   ADD_PRODUCT,
+  CHECK_ITEM_IN_CART,
   CHECK_WISHLIST_STATUS,
   DELETE_PRODUCT,
   GET_ALL_CATEGORY,
@@ -34,8 +36,10 @@ import {
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
 import {
+  addItemToCart,
   addItemToWishlist,
   addProduct,
+  checkItemInCart,
   checkProductWishlistStatus,
   deleteProduct,
   getALlCategory,
@@ -183,6 +187,16 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_WISHLIST_ITEMS:
         getWishlistItems(action.upDateState);
+        break;
+      case ADD_ITEM_CART:
+        addItemToCart(action.payload, action.upDateState, action.setIsLoading);
+        break;
+      case CHECK_ITEM_IN_CART:
+        checkItemInCart(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading
+        );
         break;
     }
   };

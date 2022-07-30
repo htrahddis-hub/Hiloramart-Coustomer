@@ -89,3 +89,11 @@ export const checkItemWishlistStatus = (id) => {
 export const getWishlistItemsRequest = async (id) => {
   return API.get(`/wishlist`);
 };
+
+export const addItemToCartRequest = (values) => {
+  return API.post("cart/add", values);
+};
+
+export const checkItemInCartRequest = (id) => {
+  API.get(`/checkItem?productId=${id}`);
+};

@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import {
+  ADD_ITEM_CART,
   ADD_ITEM_TO_WISHLIST,
+  CHECK_ITEM_IN_CART,
   CHECK_WISHLIST_STATUS,
   GET_PRODUCT_DETAILS,
   REMOVE_ITEM_TO_WISHLIST,
@@ -24,6 +26,8 @@ const ProductDetail = ({ item, id }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isWishlist, setIsWishlist] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [isAddedToCartLoading, setIsAddedToCartLoading] = useState(false);
   // Catch Rating value
   const handleRating = (rate) => {
     setRating(rate);
@@ -36,7 +40,20 @@ const ProductDetail = ({ item, id }) => {
     if (counter >= 2) setCounter((prev) => prev - 1);
   };
 
-  const addToCart = async (e) => {};
+  const addToCart = async (e) => {
+    const values = [
+      {
+        productId: id,
+        quantity: counter,
+      },
+    ];
+    dispatch({
+      type: ADD_ITEM_CART,
+      payload: values,
+      upDateState: setIsAddedToCart,
+      setIsLoading: setIsAddedToCartLoading,
+    });
+  };
 
   const addToWishlist = async (e) => {
     dispatch({
@@ -64,6 +81,12 @@ const ProductDetail = ({ item, id }) => {
       type: CHECK_WISHLIST_STATUS,
       payload: id,
       upDateState: setIsWishlist,
+    });
+    dispatch({
+      type: CHECK_ITEM_IN_CART,
+      payload: id,
+      upDateState: setIsAddedToCart,
+      setIsLoading: setIsAddedToCartLoading,
     });
   }, []);
   return productDetails ? (
@@ -134,8 +157,14 @@ const ProductDetail = ({ item, id }) => {
         <div id="buttonContainer">
           <div>
             <button id="AddToCart" onClick={addToCart}>
-              <img src={Cart} alt="" />
-              Add to cart
+              {isAddedToCartLoading ? (
+                <CircularProgress sx={{ color: "black" }} size={25} />
+              ) : (
+                <>
+                  <img src={Cart} alt="" />
+                  {isAddedToCart ? "Added to cart" : "Add to cart"}
+                </>
+              )}
             </button>
           </div>
           {/* <div>

@@ -1,6 +1,8 @@
 import {
+  addItemToCartRequest,
   addItemToWishlistRequest,
   addProductRequest,
+  checkItemInCartRequest,
   checkItemWishlistStatus,
   deleteProductRequest,
   getAllCategoryRequest,
@@ -150,5 +152,40 @@ export const getWishlistItems = async (upDateState) => {
     upDateState(res.data);
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const addItemToCart = async (values, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await addItemToCartRequest({
+      products: values,
+    });
+    if (res.data.message === "Added Successfully") {
+      upDateState(true);
+    }
+  } catch (err) {
+    console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data.message,
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const checkItemInCart = async (values, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await checkItemInCartRequest(values);
+    if (res.data) {
+      upDateState(true);
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
   }
 };
