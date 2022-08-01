@@ -4,9 +4,12 @@ import "../Styles/pages/MyOrder.css";
 function MyOrders() {
   return (
     <div className="my-order-container">
-      <MyOrderCard />
-      <MyOrderCard />
-      <MyOrderCard />
+      <div className="my-order-container-title">ORDER HISTORY</div>
+      <div className="my-order-card-conatiner">
+        <MyOrderCard />
+        <MyOrderCard />
+        <MyOrderCard />
+      </div>
     </div>
   );
 }
