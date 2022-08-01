@@ -2,15 +2,18 @@ import React from "react";
 import "../Styles/pages/MyOrder.css";
 import product from "../Assets/Images/tacking/image.png";
 
-function MyOrderCard() {
+function MyOrderCard({ data }) {
   return (
     <div className="my-order-card-cont">
       <div className="my-order-card-product-details">
-        <div>
-          <img src={product} className="my-order-card-image" />
+        <div className="my-order-card-image-cont">
+          <img
+            src={data.productId.productImage[0]}
+            className="my-order-card-image"
+          />
         </div>
         <div className="my-order-card-text">
-          <div>LOOP SCANO 1100 HAND HELD METAL DETECTOR</div>
+          <div>{data.productId.name}</div>
           <div>Delivered 12-Mar-2022</div>
         </div>
       </div>
@@ -24,8 +27,16 @@ function MyOrderCard() {
         <div className="my-order-card-value-col">
           <div>22-Mar-2022</div>
           <div>1548-5265854-569652</div>
-          <div>RS 4000</div>
-          <div>India , New Delhi Pitampura</div>
+          <div>RS {data.totalPrice}</div>
+          <div>
+            {data.address.line1 +
+              "," +
+              " " +
+              data.address.city +
+              "," +
+              " " +
+              data.address.state}
+          </div>
         </div>
       </div>
       <div className="my-order-card-btn-cont">

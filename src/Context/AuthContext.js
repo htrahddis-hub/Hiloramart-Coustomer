@@ -20,6 +20,7 @@ import {
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
+  GET_MY_ORDERS,
   GET_PRODUCT_DETAILS,
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
@@ -55,6 +56,7 @@ import {
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
+import { getMyOrder } from "./Reducer/OrderReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -207,6 +209,9 @@ const AuthContextComponent = ({ children }) => {
         break;
       case DELETE_ITEM_FROM_CART:
         deleteItemFromCart(action.payload, action.cb, action.setIsLoading);
+        break;
+      case GET_MY_ORDERS:
+        getMyOrder(action.setIsLoading, action.upDateState);
         break;
     }
   };

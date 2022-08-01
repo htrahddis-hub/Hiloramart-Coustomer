@@ -22,3 +22,4 @@ export const ADD_ITEM_CART = "add item to cart";
 export const CHECK_ITEM_IN_CART = "check is in cart";
 export const GET_CART_ITEMS = "get carts items";
 export const DELETE_ITEM_FROM_CART = "delete item from cart";
+export const GET_MY_ORDERS = "get my orders";
