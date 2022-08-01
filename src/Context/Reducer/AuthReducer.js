@@ -63,6 +63,11 @@ export const userLogin = async (
       navigate("/", { replace: true });
     }
   } catch (err) {
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
   } finally {
     setIsLoading(false);
   }
@@ -92,6 +97,11 @@ export const vendorLogin = async (
     }
   } catch (err) {
     console.log(err.message);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data.error,
+    });
   } finally {
     setIsLoading(false);
   }

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../VendorsStyle/AddProduct.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { Container } from "react-bootstrap";
 import { storage } from "../utils/firebase";
@@ -26,7 +26,9 @@ const AddProduct = () => {
   const [file, setFile] = useState([]);
   const [videoFile, setVideoFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   let urlResponse = [];
+  let videoUrlResponse = [];
 
   const handleInputChange = (e) => {
     setInputData((prev) => {
@@ -81,8 +83,7 @@ const AddProduct = () => {
         console.log("uploaded video");
         const response = await getDownloadURL(fileRef);
         if (response) {
-          urlResponse.push(response);
-          // console.log(response);
+          videoUrlResponse.push(response);
           handleSubmit();
         }
       }
@@ -107,15 +108,16 @@ const AddProduct = () => {
     urlResponse = [];
   };
   const handleSubmit = async () => {
-    console.log(urlResponse);
     inputData["id"] = currentUser.id;
     dispatch({
       type: ADD_PRODUCT,
       payload: inputData,
       urls: urlResponse,
+      videoUrlResponse,
       catId: category.id,
       setIsLoading,
       resetform,
+      navigate,
     });
   };
 

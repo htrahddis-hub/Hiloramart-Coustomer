@@ -50,6 +50,7 @@ import CompletedOrders from "./VendorsPages/CompletedOrders";
 import Sales from "./Components/Sales";
 import Advertisement from "./Components/Advertisement";
 import MyOrders from "./Pages/MyOrders";
+import ProductSuccess from "./Pages/ProductSuccess";
 
 function App() {
   return (
@@ -105,6 +106,11 @@ function App() {
               <Route exact path="/Tracking" element={<Tracking />}></Route>
               <Route exact path="/my-cart" element={<Cart2 />}></Route>
               <Route exact path="/my-products" element={<VmyProduct />}></Route>
+              <Route
+                exact
+                path="/product-success"
+                element={<ProductSuccess />}
+              ></Route>
               <Route exact path="/my-revenue" element={<VmyRevenue />}></Route>
               <Route
                 exact

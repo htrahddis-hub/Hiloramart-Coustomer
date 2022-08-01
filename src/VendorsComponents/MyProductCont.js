@@ -8,11 +8,18 @@ import "../Styles/pages/Cart2.css";
 
 const MyProductCont = (props) => {
   const { dispatch } = useContext(AuthContext);
-  const { description, price, productImage, _id, cb } = props;
+  const { description, price, productImage, _id, cb, productVideos } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const deleteProduct = () => {
-    dispatch({ type: DELETE_PRODUCT, payload: _id, setIsLoading, cb });
+    dispatch({
+      type: DELETE_PRODUCT,
+      payload: _id,
+      setIsLoading,
+      cb,
+      productImage,
+      productVideos,
+    });
   };
   return (
     <div className="CPCmain" style={{ background: "rgba(112,112,112,0.05)" }}>

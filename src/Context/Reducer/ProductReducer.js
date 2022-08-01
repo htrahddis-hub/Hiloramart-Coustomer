@@ -16,6 +16,9 @@ import {
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
+import { Navigate } from "react-router-dom";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../../utils/firebase";
 export const getALlCategory = async (upDateState) => {
   try {
     const res = await getAllCategoryRequest();
@@ -28,44 +31,52 @@ export const getALlCategory = async (upDateState) => {
 export const addProduct = async (
   inputData,
   urlResponse,
+  videoUrlResponse,
   catId,
   setIsLoading,
-  resetform
+  resetform,
+  navigate
 ) => {
   try {
     const values = {
       name: inputData.productName,
       description: inputData.prodcutDescription,
       price: inputData.price,
-      productImage: urlResponse.slice(0, -1),
-      productVideos: urlResponse.slice(-1),
+      productImage: urlResponse,
+      productVideos: videoUrlResponse,
       owner: inputData.id,
       category: catId,
     };
     const res = await addProductRequest(values);
     if (res.data.success) {
-      alert("product added successfully");
       resetform();
+      navigate("/product-success", {
+        state: {
+          id: res.data.data._id,
+        },
+        replace: true,
+      });
     }
   } catch (err) {
     console.log(err);
-    alert("some error occured");
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: "somee error occured",
+    });
   } finally {
     setIsLoading(false);
   }
 };
-
-export const getVendorProducts = async (id, upDateState) => {
-  try {
-    const res = await getVendorProductsRequest(id);
-    upDateState(res.data.data);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-export const deleteProduct = async (id, setIsLoading, cb) => {
+export const deleteProduct = async (
+  id,
+  setIsLoading,
+  cb,
+  productImage,
+  productVideos
+) => {
   setIsLoading(true);
+
   try {
     const res = await deleteProductRequest(id);
     if (res.data.success) {
@@ -74,12 +85,43 @@ export const deleteProduct = async (id, setIsLoading, cb) => {
         type: "success",
         message: res.data.message,
       });
+      console.log(productImage, productVideos);
+      if (productImage.length > 0) {
+        productImage.forEach(async (item) => {
+          const desertRef = ref(storage, item);
+          try {
+            await deleteObject(desertRef);
+            console.log("file deleted successfully");
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      }
+      if (productVideos.length > 0) {
+        productVideos.forEach(async (item) => {
+          const desertRef = ref(storage, item);
+          try {
+            await deleteObject(desertRef);
+            console.log("file deleted successfully");
+          } catch (err) {
+            console.log(err);
+          }
+        });
+      }
       cb();
     }
   } catch (err) {
     console.log(err);
   } finally {
     setIsLoading(false);
+  }
+};
+export const getVendorProducts = async (id, upDateState) => {
+  try {
+    const res = await getVendorProductsRequest(id);
+    upDateState(res.data.data);
+  } catch (err) {
+    console.log(err);
   }
 };
 

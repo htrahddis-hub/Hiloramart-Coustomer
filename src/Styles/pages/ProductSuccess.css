@@ -1,0 +1,33 @@
+.product-success-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+.product-success-first {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.product-success-first :nth-child(1) {
+  margin-bottom: 1rem;
+}
+.product-success-first :nth-child(2) {
+  opacity: 0.5;
+  font-weight: 600;
+}
+.my-products-link {
+  color: orange !important;
+  font-weight: 600;
+  text-decoration: none;
+}
+.product-success-second {
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.product-success-second :nth-child(1) {
+  font-weight: 600;
+}

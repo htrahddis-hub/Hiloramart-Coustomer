@@ -124,16 +124,24 @@ const AuthContextComponent = ({ children }) => {
         addProduct(
           action.payload,
           action.urls,
+          action.videoUrlResponse,
           action.catId,
           action.setIsLoading,
-          action.resetform
+          action.resetform,
+          action.navigate
         );
         break;
       case GET_VENDOR_PRODUCTS:
         getVendorProducts(currentUser.id, action.upDateState);
         break;
       case DELETE_PRODUCT:
-        deleteProduct(action.payload, action.setIsLoading, action.cb);
+        deleteProduct(
+          action.payload,
+          action.setIsLoading,
+          action.cb,
+          action.productImage,
+          action.productVideos
+        );
         break;
       case USER_ACCOUNT_ACTIVATE:
         userAccActivate(
