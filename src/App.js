@@ -49,6 +49,7 @@ import NavBar from "./Components/NavBar";
 import CompletedOrders from "./VendorsPages/CompletedOrders";
 import Sales from "./Components/Sales";
 import Advertisement from "./Components/Advertisement";
+import MyOrders from "./Pages/MyOrders";
 
 function App() {
   return (
@@ -82,7 +83,7 @@ function App() {
                 path="/my-wishlist"
                 element={<MyWishList2 />}
               ></Route>
-              <Route exact path="/mywallet" element={<MyWallet />}></Route>
+
               <Route exact path="/cart" element={<Cart />}></Route>
               <Route exact path="/my-sales" element={<Sales />}></Route>
               <Route
@@ -100,15 +101,9 @@ function App() {
                 path="/AffiliateProgram"
                 element={<AffiliateProgram />}
               ></Route>
-              <Route
-                exact
-                path="/MyWishList2"
-                element={<MyWishList2 />}
-              ></Route>
+
               <Route exact path="/Tracking" element={<Tracking />}></Route>
               <Route exact path="/my-cart" element={<Cart2 />}></Route>
-
-              <Route exact path="/VHome" element={<VHome />}></Route>
               <Route exact path="/my-products" element={<VmyProduct />}></Route>
               <Route exact path="/my-revenue" element={<VmyRevenue />}></Route>
               <Route
@@ -117,6 +112,7 @@ function App() {
                 element={<VaffiliateRequest />}
               ></Route>
               <Route exact path="/VBank" element={<VBank />}></Route>
+              <Route exact path="/my-orders" element={<MyOrders />}></Route>
               <Route exact path="/orders-current" element={<VHome2 />}></Route>
               <Route exact path="/orders-return" element={<VReturn />}></Route>
               <Route

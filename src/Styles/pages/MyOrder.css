@@ -1,0 +1,74 @@
+.my-order-container {
+  display: flex;
+}
+.my-order-card-cont {
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 400px;
+  box-shadow: 2px 2px 5px 2px #e9e9e9;
+  border-radius: 10px;
+}
+.my-order-card-product-details {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.my-order-card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.my-order-card-text :nth-child(1) {
+  font-weight: 600;
+  font-family: "Poppins";
+}
+.my-order-card-text :nth-child(2) {
+  opacity: 0.8;
+}
+.my-order-card-order-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.my-order-card-heading-col > div,
+.my-order-card-value-col > div {
+  margin: 1rem 0;
+}
+.my-order-card-heading-col {
+  flex: 1;
+  opacity: 0.5;
+}
+.my-order-card-value-col {
+  flex: 1;
+  text-align: right;
+}
+.my-order-card-btn-cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.my-order-card-btn-cont:nth-child(1),
+.my-order-card-btn-cont:nth-child(2) {
+  flex: 1;
+}
+.return-btn {
+  min-width: 160px;
+  width: 100%;
+  border-radius: 50px !important;
+  height: 40px !important;
+}
+.my-order-card-btn-cont .SignUpButton {
+  margin-top: 0px !important;
+  width: 100%;
+  min-width: 160px;
+}
+.my-order-download-btn-cont {
+  margin-top: 1rem;
+}
+.download-btn {
+  background-color: #fafafa;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+}
