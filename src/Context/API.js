@@ -103,5 +103,7 @@ export const getCartItemsRequest = () => {
 };
 
 export const deleteItemFromCartRequest = (values) => {
-  return API.delete("/cart/remove", values);
+  return API.delete("/cart/remove", {
+    data: values,
+  });
 };

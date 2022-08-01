@@ -207,15 +207,21 @@ export const getCartItems = async (setIsLoading, upDateState) => {
   }
 };
 
-export const deleteItemFromCart = async (values, upDateState, setIsLoading) => {
+export const deleteItemFromCart = async (values, cb, setIsLoading) => {
   setIsLoading(true);
+  // console.log(values);
   try {
     const res = await deleteItemFromCartRequest(values);
-    if (res.data) {
-      // upDateState(res)
+    if (res.data.message === "Deleted Successfully") {
+      cb();
     }
   } catch (err) {
     console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: err.response.data,
+    });
   } finally {
     setIsLoading(false);
   }

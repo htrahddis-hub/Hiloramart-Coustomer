@@ -30,14 +30,7 @@ const Cart2 = () => {
   };
 
   //todo -> DELTE FROM CART function will be passed with each item as a prop
-  const deleteFromCart = async (id) => {
-    console.log(id);
-    dispatch({
-      type: DELETE_ITEM_FROM_CART,
-      payload: { productId: [id] },
-      setIsLoading,
-    });
-  };
+
   const cost = () => {
     let price = 0;
     cartItems.map((item) => {
@@ -90,12 +83,12 @@ const Cart2 = () => {
                   return (
                     <CartProductCont
                       key={item._id}
-                      deleteFromCart={deleteFromCart}
                       item={item}
                       totalCost={totalCost}
                       setTotalCost={setTotalCost}
                       cartProducts={cartProducts}
                       TotalCartCost={TotalCartCost}
+                      getCartItems={getCartItems}
                     />
                   );
                 })}

@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -8,6 +9,9 @@ import React, {
 import Image from "../../Assets/Images/MyWishList/Image.svg";
 import Delete from "../../Assets/Images/cart/Delete.png";
 import "../../Styles/pages/Cart2.css";
+import { CircularProgress } from "@mui/material";
+import { AuthContext } from "../../Context/AuthContext";
+import { DELETE_ITEM_FROM_CART } from "../../Context/Types";
 
 const Counter = ({ counter, setCounter }) => {
   return (
@@ -35,14 +39,24 @@ const Counter = ({ counter, setCounter }) => {
 
 const CartProductCont = ({
   item,
-  deleteFromCart,
   totalCost,
   setTotalCost,
   cartProducts,
   TotalCartCost,
+  getCartItems,
 }) => {
+  const { dispatch } = useContext(AuthContext);
   const [itemCost, setItemCost] = useState(item.productId.price);
   const [counter, setCounter] = useState(item.quantity);
+  const [deletFormCartLoading, setDeletFromCartLoading] = useState(false);
+  const deleteFromCart = async (id) => {
+    dispatch({
+      type: DELETE_ITEM_FROM_CART,
+      payload: { productId: [id] },
+      cb: getCartItems,
+      setIsLoading: setDeletFromCartLoading,
+    });
+  };
   const calculateCost = () => {
     setItemCost((prev) => counter * item.productId.price);
     cartProducts.set(item._id, counter * item.productId.price);
@@ -67,11 +81,15 @@ const CartProductCont = ({
         </div>
       </div>
       <div className="cart-prod-delete">
-        <img
-          onClick={() => deleteFromCart(item._id)}
-          src={Delete}
-          alt="cart_item"
-        />
+        {deletFormCartLoading ? (
+          <CircularProgress sx={{ color: "black" }} size={25} />
+        ) : (
+          <img
+            onClick={() => deleteFromCart(item.productId._id)}
+            src={Delete}
+            alt="cart_item"
+          />
+        )}
       </div>
     </div>
   );
