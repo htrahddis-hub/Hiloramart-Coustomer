@@ -23,3 +23,7 @@ export const CHECK_ITEM_IN_CART = "check is in cart";
 export const GET_CART_ITEMS = "get carts items";
 export const DELETE_ITEM_FROM_CART = "delete item from cart";
 export const GET_MY_ORDERS = "get my orders";
+export const JOIN_AFFILIATE = "join Affiliate";
+export const GET_AFFILIATE_REQUEST = " get affiliate request";
+export const ACCEPT_REQUEST = "accept affiliate request";
+export const DENY_REQUEST = "deny affiliate request";

@@ -10,6 +10,7 @@ import {
   vendorSignup,
 } from "./Reducer/AuthReducer";
 import {
+  ACCEPT_REQUEST,
   ADD_ITEM_CART,
   ADD_ITEM_TO_WISHLIST,
   ADD_PRODUCT,
@@ -17,6 +18,8 @@ import {
   CHECK_WISHLIST_STATUS,
   DELETE_ITEM_FROM_CART,
   DELETE_PRODUCT,
+  DENY_REQUEST,
+  GET_AFFILIATE_REQUEST,
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
@@ -26,6 +29,7 @@ import {
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
   GET_WISHLIST_ITEMS,
+  JOIN_AFFILIATE,
   REMOVE_ITEM_TO_WISHLIST,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
@@ -57,6 +61,13 @@ import {
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
 import { getMyOrder } from "./Reducer/OrderReducer";
+import {
+  acceptAffiliate,
+  denytAffiliate,
+  getAffiliate,
+  joinAffliate,
+} from "./Reducer/AffiliateReducer";
+import { denyAffiliateRequest } from "./API";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -226,6 +237,18 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_MY_ORDERS:
         getMyOrder(action.setIsLoading, action.upDateState);
+        break;
+      case JOIN_AFFILIATE:
+        joinAffliate(action.payload, action.upDateState, action.setIsLoading);
+        break;
+      case GET_AFFILIATE_REQUEST:
+        getAffiliate(action.upDateState, action.setIsLoading);
+        break;
+      case ACCEPT_REQUEST:
+        acceptAffiliate(action.payload, action.setIsLoading, action.cb);
+        break;
+      case DENY_REQUEST:
+        denytAffiliate(action.payload, action.setIsLoading, action.cb);
         break;
     }
   };

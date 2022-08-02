@@ -17,7 +17,6 @@ const Detectors = () => {
     dispatch({ type: GET_ALL_PRODUCTS, upDateState: setAllProducts });
   }, []);
   const handleBackward = () => {
-    console.log(carousalRef);
     carousalRef.current.scrollLeft -= 200;
   };
   const handleForward = () => {

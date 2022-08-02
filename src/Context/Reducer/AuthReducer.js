@@ -128,7 +128,7 @@ export const vendorSignup = async (
           isSigned: true,
           id: res.data.user._id,
           email: res.data.user.email,
-          role: "user",
+          role: "vendor",
         },
       });
     }

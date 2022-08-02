@@ -111,3 +111,27 @@ export const deleteItemFromCartRequest = (values) => {
 export const getMyOrderRequest = () => {
   return API.get("/orders/myOrders");
 };
+
+//affliate
+export const joinAffliateRequest = (id) => {
+  return API.post("/profile/sendAffiliateRequest", {
+    vendor_id: id,
+  });
+};
+
+export const getAffiliateRequest = () => {
+  return API.get("affiliate/getMyAffiliateRequests");
+};
+
+export const acceptAffiliateRequest = (id) => {
+  return API.post("/affiliate/manageRequests", {
+    affiliateId: id,
+    status: "Accepted",
+  });
+};
+export const denyAffiliateRequest = (id) => {
+  return API.post("/affiliate/manageRequests", {
+    affiliateId: id,
+    status: "Rejected",
+  });
+};

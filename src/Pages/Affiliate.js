@@ -5,13 +5,16 @@ import GroundSurveyEquipments from "../Components/Affiliate/GroundSurveyEquipmen
 import Footer from "../Components/Footer";
 import "../Styles/pages/AffiliateProgram.css";
 import arrow from "../Assets/Images/white-arrow.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 const Affiliate = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const owner = location.state;
+
   return (
     <div>
       <div className="affliate-cont">
-        <div className="vendor-title">Arihant ERP</div>
+        <div className="vendor-title">{owner?.name}</div>
         <div className="vendor-affiliate-detail">
           <div>
             <p>Total Products</p>
@@ -19,7 +22,11 @@ const Affiliate = () => {
           </div>
           <div
             onClick={() => {
-              navigate("/AffiliateProgram");
+              navigate("/AffiliateProgram", {
+                state: {
+                  owner,
+                },
+              });
             }}
           >
             <div>My Affiliate Program</div>

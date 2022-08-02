@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductImage from "../../Assets/Images/Home/ProductImage.png";
 import { Rating } from "react-simple-star-rating";
 import "../../Styles/Components/ProductContainer.css";
 import { Link } from "react-router-dom";
 const ProductContainer2 = (props) => {
-  const { price, title, description, ratings, productImage } = props;
+  const { price, title, description, ratings, productImage, name, owner } =
+    props;
   const [rating, setRating] = useState(0); // initial rating value
 
   // Catch Rating value
@@ -12,14 +13,16 @@ const ProductContainer2 = (props) => {
     setRating(rate);
     // other logic
   };
+
   return (
     <div className="ProductMainContainer">
       <div className="ProCont1">
         <Link
           to="/affiliate"
           style={{ color: "inherit", textDecoration: "none" }}
+          state={owner}
         >
-          <div className="ProHead">Arihant ERP</div>
+          <div className="ProHead">{owner?.name}</div>
         </Link>
         <div className="Stars">
           <Rating
@@ -28,7 +31,7 @@ const ProductContainer2 = (props) => {
             iconsCount={5}
             allowHalfIcon={true}
             ratingValue={rating}
-            initialValue={2}
+            initialValue={ratings}
             readonly={true}
           />
         </div>
@@ -41,7 +44,7 @@ const ProductContainer2 = (props) => {
           style={{ height: "8rem", width: "8rem" }}
         />
       </div>
-      <div className="discription">{description}</div>
+      <div className="discription">{name}</div>
       <div className="price">RS. {price}</div>
     </div>
   );

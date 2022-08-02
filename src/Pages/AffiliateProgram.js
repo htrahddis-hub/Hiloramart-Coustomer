@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NavBar from "../Components/NavBar";
 import "../Styles/pages/AffiliateProgram.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
+import { AuthContext } from "../Context/AuthContext";
+import { JOIN_AFFILIATE } from "../Context/Types";
+import { CircularProgress } from "@mui/material";
 const AffiliateProgram = () => {
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isAccepted, setIsAccepted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const owner = location.state.owner;
+
+  const joinAffliate = () => {
+    dispatch({
+      type: JOIN_AFFILIATE,
+      payload: owner._id,
+      upDateState: setIsAccepted,
+      setIsLoading,
+    });
+  };
+  console.log(owner._id);
+  if (!owner) return navigate(-2);
   return (
     <>
       <div id="APmainCont">
@@ -59,12 +79,15 @@ const AffiliateProgram = () => {
           </div>
         </div>
         <div id="APbuttonCont">
-          <Link
-            to="/affiliate"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            <button id="JoinNow">Join Now</button>
-          </Link>
+          <button id="JoinNow" onClick={joinAffliate} disabled={isAccepted}>
+            {isLoading ? (
+              <CircularProgress sx={{ color: "white" }} size={25} />
+            ) : isAccepted ? (
+              "Requested"
+            ) : (
+              " Join Now"
+            )}
+          </button>
         </div>
       </div>
       <Footer />

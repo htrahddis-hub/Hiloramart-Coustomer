@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AffiliateRequestCont from "../../VendorsComponents/affiliateRequestCont";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
+import { AuthContext } from "../../Context/AuthContext";
+import { GET_AFFILIATE_REQUEST } from "../../Context/Types";
 
 const VaffiliateRequest = () => {
+  const { dispatch } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [allRequest, setAllRequest] = useState([]);
+  const getAllAffiliateRequest = () => {
+    dispatch({
+      type: GET_AFFILIATE_REQUEST,
+      upDateState: setAllRequest,
+      setIsLoading,
+    });
+  };
+  useEffect(() => {
+    getAllAffiliateRequest();
+  }, []);
   return (
     <>
       <div style={{ paddingBottom: "10%" }}>
@@ -19,14 +34,11 @@ const VaffiliateRequest = () => {
           Affiliate Request
         </h1>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <AffiliateRequestCont />
-          <AffiliateRequestCont />
-          <AffiliateRequestCont />
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
-          <AffiliateRequestCont />
-          <AffiliateRequestCont />
-          <AffiliateRequestCont />
+          {allRequest?.map((item) => {
+            return (
+              <AffiliateRequestCont {...item} cb={getAllAffiliateRequest} />
+            );
+          })}
         </div>
       </div>
       <Footer />
