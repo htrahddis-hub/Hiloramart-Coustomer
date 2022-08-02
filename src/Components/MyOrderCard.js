@@ -19,23 +19,30 @@ function MyOrderCard({ data }) {
       </div>
       <div className="my-order-card-order-details">
         <div className="my-order-card-heading-col">
-          <div>Order Date</div>
-          <div>Order ID</div>
-          <div>Total Pay</div>
-          <div>Shipping Address</div>
-        </div>
-        <div className="my-order-card-value-col">
-          <div>22-Mar-2022</div>
-          <div>1548-5265854-569652</div>
-          <div>RS {data.totalPrice}</div>
           <div>
-            {data.address.line1 +
-              "," +
-              " " +
-              data.address.city +
-              "," +
-              " " +
-              data.address.state}
+            <div>Order Date</div>
+            <div className="my-order-card-value-col">22-Mar-2022</div>
+          </div>
+          <div>
+            <div>Order ID</div>
+            <div className="my-order-card-value-col">1548-5265854-569652</div>
+          </div>
+          <div>
+            <div>Total Pay</div>
+            <div className="my-order-card-value-col">RS {data.totalPrice}</div>
+          </div>
+          <div>
+            <div>Shipping Address</div>
+            <div className="my-order-card-value-col">
+              {" "}
+              {data.address.line1 +
+                "," +
+                " " +
+                data.address.city +
+                "," +
+                " " +
+                data.address.state}
+            </div>
           </div>
         </div>
       </div>
