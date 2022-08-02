@@ -249,12 +249,19 @@ export const getCartItems = async (setIsLoading, upDateState) => {
   }
 };
 
-export const deleteItemFromCart = async (values, cb, setIsLoading) => {
+export const deleteItemFromCart = async (
+  values,
+  cb,
+  setIsLoading,
+  cartProducts,
+  cartProdId
+) => {
   setIsLoading(true);
   // console.log(values);
   try {
     const res = await deleteItemFromCartRequest(values);
     if (res.data.message === "Deleted Successfully") {
+      cartProducts.delete(cartProdId);
       cb();
     }
   } catch (err) {

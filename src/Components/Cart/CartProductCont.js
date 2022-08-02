@@ -49,12 +49,14 @@ const CartProductCont = ({
   const [itemCost, setItemCost] = useState(item.productId.price);
   const [counter, setCounter] = useState(item.quantity);
   const [deletFormCartLoading, setDeletFromCartLoading] = useState(false);
-  const deleteFromCart = async (id) => {
+  const deleteFromCart = async (id, cartProdId) => {
     dispatch({
       type: DELETE_ITEM_FROM_CART,
       payload: { productId: [id] },
       cb: getCartItems,
       setIsLoading: setDeletFromCartLoading,
+      cartProducts,
+      cartProdId,
     });
   };
   const calculateCost = () => {
@@ -85,7 +87,7 @@ const CartProductCont = ({
           <CircularProgress sx={{ color: "black" }} size={25} />
         ) : (
           <img
-            onClick={() => deleteFromCart(item.productId._id)}
+            onClick={() => deleteFromCart(item.productId._id, item._id)}
             src={Delete}
             alt="cart_item"
           />

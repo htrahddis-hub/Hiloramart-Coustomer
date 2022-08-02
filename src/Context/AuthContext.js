@@ -216,7 +216,13 @@ const AuthContextComponent = ({ children }) => {
         getCartItems(action.setIsLoading, action.upDateState);
         break;
       case DELETE_ITEM_FROM_CART:
-        deleteItemFromCart(action.payload, action.cb, action.setIsLoading);
+        deleteItemFromCart(
+          action.payload,
+          action.cb,
+          action.setIsLoading,
+          action.cartProducts,
+          action.cartProdId
+        );
         break;
       case GET_MY_ORDERS:
         getMyOrder(action.setIsLoading, action.upDateState);
