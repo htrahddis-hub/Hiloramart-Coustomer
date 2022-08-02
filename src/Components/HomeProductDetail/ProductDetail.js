@@ -103,14 +103,22 @@ const ProductDetail = ({ item, id }) => {
               <img src={isWishlist ? active_wishlist_icon : wishlist_icon} />
             )}
           </div>
-          {selectedImage ? (
-            <img src={selectedImage} alt="" className="active-preview" />
+          {productDetails[0].productVideos[0] ? (
+            selectedImage ? (
+              <img src={selectedImage} alt="" className="active-preview" />
+            ) : (
+              <ReactPlayer
+                url={productDetails[0].productVideos[0]}
+                light
+                playsinline
+                controls
+                className="active-preview"
+              />
+            )
           ) : (
-            <ReactPlayer
-              url={productDetails[0].productVideos[0]}
-              light
-              playsinline
-              controls
+            <img
+              src={productDetails[0].productImage[0]}
+              alt=""
               className="active-preview"
             />
           )}

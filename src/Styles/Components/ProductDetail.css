@@ -101,6 +101,7 @@
 .active-preview {
   height: 360px !important;
   aspect-ratio: 16/9;
+  object-fit: contain;
 }
 .wishlist-cont {
   background-color: white;
