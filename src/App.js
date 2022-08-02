@@ -129,12 +129,6 @@ function App() {
               <Route exact path="/profile" element={<VProfile />}></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
             </Route>
-
-            {/* <Route exact path="/VLogin" element={<VLogin />}></Route>
-            <Route exact path="/VSignup" element={<VSignup />}></Route>
-            <Route exact path="/validation" element={<Validation />}></Route>
-            <Route exact path="/VForgot" element={<VForgot />}></Route>
-            <Route exact path="/Votp" element={<Votp />}></Route> */}
           </Routes>
         </Router>
       </AuthContextComponent>

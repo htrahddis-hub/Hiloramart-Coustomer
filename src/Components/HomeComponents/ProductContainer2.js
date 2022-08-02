@@ -16,7 +16,7 @@ const ProductContainer2 = (props) => {
     <div className="ProductMainContainer">
       <div className="ProCont1">
         <Link
-          to="/AffiliateProgram"
+          to="/affiliate"
           style={{ color: "inherit", textDecoration: "none" }}
         >
           <div className="ProHead">Arihant ERP</div>
