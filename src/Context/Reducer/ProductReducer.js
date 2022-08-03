@@ -199,7 +199,12 @@ export const getWishlistItems = async (upDateState) => {
   }
 };
 
-export const addItemToCart = async (values, upDateState, setIsLoading) => {
+export const addItemToCart = async (
+  values,
+  upDateState,
+  setIsLoading,
+  navigate
+) => {
   setIsLoading(true);
   try {
     const res = await addItemToCartRequest({
@@ -207,6 +212,9 @@ export const addItemToCart = async (values, upDateState, setIsLoading) => {
     });
     if (res.data.message === "Added Successfully") {
       upDateState(true);
+      if (navigate) {
+        navigate("/my-cart");
+      }
     }
   } catch (err) {
     console.log(err);

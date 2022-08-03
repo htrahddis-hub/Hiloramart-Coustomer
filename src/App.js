@@ -51,6 +51,7 @@ import Sales from "./Components/Sales";
 import Advertisement from "./Components/Advertisement";
 import MyOrders from "./Pages/MyOrders";
 import ProductSuccess from "./Pages/ProductSuccess";
+import Checkout from "./Pages/Checkout";
 
 function App() {
   return (
@@ -85,7 +86,12 @@ function App() {
                 element={<MyWishList2 />}
               ></Route>
 
-              <Route exact path="/cart" element={<Cart />}></Route>
+              <Route exact path="/checkout" element={<Checkout />}></Route>
+              <Route
+                exact
+                path="/checkout-successfull"
+                element={<Cart />}
+              ></Route>
               <Route exact path="/my-sales" element={<Sales />}></Route>
               <Route
                 exact

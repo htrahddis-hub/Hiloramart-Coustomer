@@ -30,6 +30,7 @@ import {
   GET_VENDOR_PROFILE,
   GET_WISHLIST_ITEMS,
   JOIN_AFFILIATE,
+  ONLINE_PAYMENT,
   REMOVE_ITEM_TO_WISHLIST,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
@@ -68,6 +69,7 @@ import {
   joinAffliate,
 } from "./Reducer/AffiliateReducer";
 import { denyAffiliateRequest } from "./API";
+import { onlinePayment } from "./Reducer/PaymentReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -214,7 +216,12 @@ const AuthContextComponent = ({ children }) => {
         getWishlistItems(action.upDateState);
         break;
       case ADD_ITEM_CART:
-        addItemToCart(action.payload, action.upDateState, action.setIsLoading);
+        addItemToCart(
+          action.payload,
+          action.upDateState,
+          action.setIsLoading,
+          action.cb
+        );
         break;
       case CHECK_ITEM_IN_CART:
         checkItemInCart(
@@ -249,6 +256,15 @@ const AuthContextComponent = ({ children }) => {
         break;
       case DENY_REQUEST:
         denytAffiliate(action.payload, action.setIsLoading, action.cb);
+        break;
+      case ONLINE_PAYMENT:
+        onlinePayment(
+          action.product,
+          action.payload,
+          action.quantity,
+          action.setIsLoading,
+          action.navigate
+        );
         break;
     }
   };

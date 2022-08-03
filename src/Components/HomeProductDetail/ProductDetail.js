@@ -5,7 +5,7 @@ import Image from "../../Assets/Images/ProductDetail/Image.png";
 import { Rating } from "react-simple-star-rating";
 import Cart from "../../Assets/Images/ProductDetail/Cart.png";
 import "../../Styles/Components/ProductDetail.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
 import {
@@ -21,6 +21,7 @@ import active_wishlist_icon from "../../Assets/Images/active-wishlist.svg";
 import { CircularProgress } from "@mui/material";
 const ProductDetail = ({ item, id }) => {
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [rating, setRating] = useState(0); // initial rating value
   const [productDetails, setProductDEtails] = useState();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -40,7 +41,7 @@ const ProductDetail = ({ item, id }) => {
     if (counter >= 2) setCounter((prev) => prev - 1);
   };
 
-  const addToCart = async (e) => {
+  const addToCart = async (e, cb) => {
     const values = [
       {
         productId: id,
@@ -52,10 +53,11 @@ const ProductDetail = ({ item, id }) => {
       payload: values,
       upDateState: setIsAddedToCart,
       setIsLoading: setIsAddedToCartLoading,
+      cb,
     });
   };
 
-  const addToWishlist = async (e) => {
+  const addToWishlist = (e) => {
     dispatch({
       type: ADD_ITEM_TO_WISHLIST,
       payload: id,
@@ -69,6 +71,14 @@ const ProductDetail = ({ item, id }) => {
       payload: id,
       upDateState: setIsWishlist,
       setIsLoading: setIsWishlistLoading,
+    });
+  };
+  const handleBuy = () => {
+    navigate("/checkout", {
+      state: {
+        productDetails,
+        quantity: counter,
+      },
     });
   };
   useEffect(() => {
@@ -154,7 +164,7 @@ const ProductDetail = ({ item, id }) => {
           </div>
         </div>
         <div id="PriceCont">
-          <div id="ProdPrice">RS {productDetails[0].price}</div>
+          <div id="ProdPrice">RS {productDetails[0].price * counter}</div>
 
           <div id="counter">
             <ButtonIncrement onClickFunc={incrementCounter} />
@@ -175,19 +185,10 @@ const ProductDetail = ({ item, id }) => {
               )}
             </button>
           </div>
-          {/* <div>
-            <button id="AddToCart" onClick={addToWishlist}>
-              <img src={Cart} alt="" />
-              Add to Wishlist
-            </button>
-          </div> */}
           <div>
-            <Link
-              to="/Cart2"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <button id="BuyNow">Buy Now</button>
-            </Link>
+            <button id="BuyNow" onClick={handleBuy}>
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

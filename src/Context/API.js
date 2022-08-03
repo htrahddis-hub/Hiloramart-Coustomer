@@ -135,3 +135,37 @@ export const denyAffiliateRequest = (id) => {
     status: "Rejected",
   });
 };
+
+//payment
+export const getOrderID = (cost) => {
+  return API.post("orders/createOrderId", {
+    price: cost,
+  });
+};
+
+export const placeOrder = (response, product, amount) => {
+  const formValues = {
+    razorpayPaymentId: response.razorpay_payment_id,
+    orderCreationId: response.razorpay_order_id,
+    razorpaySignature: response.razorpay_signature,
+    products: [
+      {
+        productId: product._id,
+        quantity: "2",
+        price: amount,
+      },
+    ],
+    totalPrice: amount,
+    isCOD: false, //if true, payment id, signature, order id will not come
+    address: {
+      line1: "Fl no. 203, F wing, Shefalika Heights",
+      line2: "Shivtirthnagar, Paud Road, Kothrud",
+      city: "Pune",
+      state: "Maharashtra",
+      pincode: "411038",
+      country: "India",
+    },
+    // "affiliateKey": "dfrgthe56htgar" //optional
+  };
+  return API.post("orders/placeOrder", formValues);
+};
