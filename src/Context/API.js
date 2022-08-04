@@ -144,17 +144,13 @@ export const getOrderID = (cost) => {
 };
 
 export const placeOrder = (response, product, amount) => {
+  console.log(product);
+  console.log(amount);
   const formValues = {
     razorpayPaymentId: response.razorpay_payment_id,
     orderCreationId: response.razorpay_order_id,
     razorpaySignature: response.razorpay_signature,
-    products: [
-      {
-        productId: product._id,
-        quantity: "2",
-        price: amount,
-      },
-    ],
+    products: product,
     totalPrice: amount,
     isCOD: false, //if true, payment id, signature, order id will not come
     address: {

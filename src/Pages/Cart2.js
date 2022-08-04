@@ -7,14 +7,20 @@ import upi from "../Assets/Images/cart/upi.png";
 import cod from "../Assets/Images/cart/cod.png";
 import Ppay from "../Assets/Images/cart/Ppay.png";
 import gPay from "../Assets/Images/cart/gPay.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
-import { DELETE_ITEM_FROM_CART, GET_CART_ITEMS } from "../Context/Types";
+import {
+  DELETE_ITEM_FROM_CART,
+  GET_CART_ITEMS,
+  ONLINE_PAYMENT,
+} from "../Context/Types";
+import { CircularProgress } from "@mui/material";
 
 const Cart2 = () => {
   const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [cartItems, setCartitems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,9 +38,11 @@ const Cart2 = () => {
   //todo -> DELTE FROM CART function will be passed with each item as a prop
 
   const cost = () => {
+    console.log(cartItems);
     let price = 0;
     cartItems.map((item) => {
-      price += Number(item.productId.price);
+      price +=
+        Number(cartProducts.get(item._id)) || Number(item.productId.price);
       cartProducts.set(item._id, item.productId.price);
     });
     setTotalCost(price);
@@ -54,8 +62,26 @@ const Cart2 = () => {
 
   useEffect(() => {
     cost();
-    console.log(cartProducts);
-  }, [cartItems]);
+  }, [cartItems.length]);
+
+  const handlePay = () => {
+    let product = [];
+    cartItems.map((item, index) => {
+      product.push({
+        productId: item.productId._id,
+        quantity: Number(cartProducts.get(item._id) / item.productId.price),
+        price: cartProducts.get(item._id),
+      });
+    });
+    dispatch({
+      type: ONLINE_PAYMENT,
+      product: product,
+      payload: totalCost,
+      quantity: 1,
+      setIsLoading,
+      navigate,
+    });
+  };
 
   return (
     <>
@@ -188,12 +214,13 @@ const Cart2 = () => {
                 <div>RS. {totalCost}</div>
               </div>
               <div style={{ textAlign: "center" }}>
-                <Link
-                  to="/cart"
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  <button id="PAyNOw">Pay now</button>
-                </Link>
+                <button id="PAyNOw" onClick={handlePay}>
+                  {isLoading ? (
+                    <CircularProgress sx={{ color: "white" }} size={20} />
+                  ) : (
+                    "Pay now"
+                  )}
+                </button>
               </div>
             </div>
           </div>

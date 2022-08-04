@@ -21,9 +21,15 @@ const Checkout = () => {
   const [counter, setCounter] = useState(location.state?.quantity);
 
   const handlePay = () => {
+    let finalProduct = [];
+    finalProduct.push({
+      productId: product._id,
+      price: totalCost,
+      quanity: counter,
+    });
     dispatch({
       type: ONLINE_PAYMENT,
-      product,
+      product: finalProduct,
       payload: totalCost,
       quantity: counter,
       setIsLoading,

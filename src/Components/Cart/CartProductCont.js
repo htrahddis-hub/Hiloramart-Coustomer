@@ -68,6 +68,7 @@ const CartProductCont = ({
   useEffect(() => {
     calculateCost();
   }, [counter]);
+
   return (
     <div className="cart-prod-cont">
       <div className="cart-prod-image">
