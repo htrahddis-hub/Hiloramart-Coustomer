@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import OrderTable from "../../Components/OrderTable";
-import AssignedAndStausFormVhome2 from "../../VendorsComponents/AssignedAndStausFormVhome2";
-import BuyersDetailCont from "../../VendorsComponents/BuyersDetailCont";
-import VNavBar from "../../VendorsComponents/VNavBar";
+import { AuthContext } from "../../Context/AuthContext";
+import { GET_CURRENT_ORDERS } from "../../Context/Types";
 
 const VHome2 = () => {
+  const { dispatch } = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getCurrentOrders = () => {
+    dispatch({ type: GET_CURRENT_ORDERS, upDateState: setData, setIsLoading });
+  };
+  useEffect(() => {
+    getCurrentOrders();
+  }, []);
   return (
     <>
       <div style={{ marginBottom: "100px" }}>
@@ -44,7 +52,7 @@ const VHome2 = () => {
         </div>
         <div>
           {/* <BuyersDetailCont /> */}
-          <OrderTable />
+          <OrderTable data={data} />
         </div>
         {/* <AssignedAndStausFormVhome2 /> */}
       </div>

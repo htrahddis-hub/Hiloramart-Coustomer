@@ -23,6 +23,7 @@ import {
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
+  GET_CURRENT_ORDERS,
   GET_MY_ORDERS,
   GET_PRODUCT_DETAILS,
   GET_USER_PROFILE,
@@ -32,6 +33,7 @@ import {
   JOIN_AFFILIATE,
   ONLINE_PAYMENT,
   REMOVE_ITEM_TO_WISHLIST,
+  RETURN_ITEM,
   USER_ACCOUNT_ACTIVATE,
   USER_LOGIN,
   USER_RESEND_OTP,
@@ -61,7 +63,11 @@ import {
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
-import { getMyOrder } from "./Reducer/OrderReducer";
+import {
+  getCurrentOrders,
+  getMyOrder,
+  returnITem,
+} from "./Reducer/OrderReducer";
 import {
   acceptAffiliate,
   denytAffiliate,
@@ -265,6 +271,12 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.navigate
         );
+        break;
+      case GET_CURRENT_ORDERS:
+        getCurrentOrders(action.upDateState, action.setIsLoading);
+        break;
+      case RETURN_ITEM:
+        returnITem(action.payload, action.upDateState, action.setIsLoading);
         break;
     }
   };

@@ -165,3 +165,12 @@ export const placeOrder = (response, product, amount) => {
   };
   return API.post("orders/placeOrder", formValues);
 };
+
+//orders
+export const getCurrentOrdersRequest = () => {
+  return API.get("/ord/getNewOrders");
+};
+
+export const returnItemRequest = (values) => {
+  return API.post("/orders/return", values);
+};

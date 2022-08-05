@@ -1,9 +1,7 @@
 .table-container {
-  display: flex;
-  flex-direction: column;
 }
 .columns-cont {
-  display: flex;
+  width: 100%;
   padding: 0 1rem;
   margin: 1rem 0;
 }
@@ -15,12 +13,9 @@
   flex-direction: column;
 }
 .column-title {
-  width: 100%;
+  text-align: center;
   height: 60px;
   background-color: #fcfcfc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1rem;
   flex: 1;
   white-space: nowrap;
@@ -32,9 +27,8 @@
   border-top-right-radius: 5px;
 }
 .column-details {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  display: table-cell;
   align-items: center;
   padding-top: 0.2rem;
   border-right: 1px solid #ececec;

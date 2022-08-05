@@ -36,6 +36,7 @@ const Checkout = () => {
       navigate,
     });
   };
+  console.log(product);
   if (!product) return <Navigate to={-1} />;
   return (
     <>
