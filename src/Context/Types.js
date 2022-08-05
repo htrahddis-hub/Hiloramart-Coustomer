@@ -30,3 +30,5 @@ export const DENY_REQUEST = "deny affiliate request";
 export const ONLINE_PAYMENT = "online payment";
 export const GET_CURRENT_ORDERS = "get current orders";
 export const RETURN_ITEM = "return item";
+export const GET_RETURN_ORDERS = "return orders";
+export const GET_COMPLETED_ORDERS = "completed order";

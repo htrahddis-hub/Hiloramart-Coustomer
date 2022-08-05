@@ -1,7 +1,9 @@
 import { Store } from "react-notifications-component";
 import {
+  getCompletedOrdersRequest,
   getCurrentOrdersRequest,
   getMyOrderRequest,
+  getReturnOrdersRequest,
   returnItemRequest,
 } from "../API";
 import { notification } from "../AuthContext";
@@ -38,6 +40,29 @@ export const getCurrentOrders = async (upDateState, setIsLoading) => {
   setIsLoading(true);
   try {
     const res = await getCurrentOrdersRequest();
+    upDateState(res.data.data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+export const getReturnOrders = async (upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await getReturnOrdersRequest();
+    upDateState(res.data.data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const getCompletedOrders = async (upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await getCompletedOrdersRequest();
     upDateState(res.data.data);
   } catch (err) {
     console.log(err);

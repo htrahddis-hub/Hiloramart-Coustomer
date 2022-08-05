@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import VNavBar from "../../VendorsComponents/VNavBar";
 // import BuyersDetailCont from "../../VendorsComponents/BuyersDetailCont";
 
@@ -6,7 +6,18 @@ import Image from "../../Assets/Images/MyWishList/Image.svg";
 import Footer from "../../Components/Footer";
 import { Link } from "react-router-dom";
 import OrderTable from "../../Components/OrderTable";
+import { GET_RETURN_ORDERS } from "../../Context/Types";
+import { AuthContext } from "../../Context/AuthContext";
 const VReturn = () => {
+  const { dispatch } = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getReturnOrders = () => {
+    dispatch({ type: GET_RETURN_ORDERS, upDateState: setData, setIsLoading });
+  };
+  useEffect(() => {
+    getReturnOrders();
+  }, []);
   return (
     <>
       <div
@@ -92,7 +103,7 @@ const VReturn = () => {
         </div>
       </div> */}
       <div>
-        <OrderTable />
+        <OrderTable data={data} />
       </div>
 
       <Footer />

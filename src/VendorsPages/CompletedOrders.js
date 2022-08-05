@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
 import OrderTable from "../Components/OrderTable";
+import { AuthContext } from "../Context/AuthContext";
+import { GET_COMPLETED_ORDERS } from "../Context/Types";
 
 function CompletedOrders() {
+  const { dispatch } = useContext(AuthContext);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const getCompletedOrders = () => {
+    dispatch({
+      type: GET_COMPLETED_ORDERS,
+      upDateState: setData,
+      setIsLoading,
+    });
+  };
+  useEffect(() => {
+    getCompletedOrders();
+  }, []);
   return (
     <>
       <div
@@ -89,7 +104,7 @@ function CompletedOrders() {
     </div>
   </div> */}
       <div>
-        <OrderTable />
+        <OrderTable data={data} />
       </div>
 
       <Footer />

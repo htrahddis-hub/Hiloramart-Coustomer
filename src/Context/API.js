@@ -170,7 +170,12 @@ export const placeOrder = (response, product, amount) => {
 export const getCurrentOrdersRequest = () => {
   return API.get("/ord/getNewOrders");
 };
-
+export const getReturnOrdersRequest = () => {
+  return API.get("/ord/myRequests");
+};
+export const getCompletedOrdersRequest = () => {
+  return API.get("/ord/getPreviousOrders");
+};
 export const returnItemRequest = (values) => {
   return API.post("/orders/return", values);
 };

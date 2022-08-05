@@ -23,9 +23,11 @@ import {
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
+  GET_COMPLETED_ORDERS,
   GET_CURRENT_ORDERS,
   GET_MY_ORDERS,
   GET_PRODUCT_DETAILS,
+  GET_RETURN_ORDERS,
   GET_USER_PROFILE,
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
@@ -64,8 +66,10 @@ import {
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
 import {
+  getCompletedOrders,
   getCurrentOrders,
   getMyOrder,
+  getReturnOrders,
   returnITem,
 } from "./Reducer/OrderReducer";
 import {
@@ -274,6 +278,12 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_CURRENT_ORDERS:
         getCurrentOrders(action.upDateState, action.setIsLoading);
+        break;
+      case GET_RETURN_ORDERS:
+        getReturnOrders(action.upDateState, action.setIsLoading);
+        break;
+      case GET_COMPLETED_ORDERS:
+        getCompletedOrders(action.upDateState, action.setIsLoading);
         break;
       case RETURN_ITEM:
         returnITem(action.payload, action.upDateState, action.setIsLoading);
