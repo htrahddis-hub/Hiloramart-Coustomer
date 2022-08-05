@@ -19,9 +19,9 @@ const Home = () => {
           <SearchInput />
         </div>
         <LandingPageBanner />
-        <CategorySection />
         {AuthRole === "user" ? (
           <>
+            <CategorySection />
             <DealOfDayContainer />
             {/* <MostSellingProductContainer /> */}
             <Detectors />

@@ -52,6 +52,7 @@ import Advertisement from "./Components/Advertisement";
 import MyOrders from "./Pages/MyOrders";
 import ProductSuccess from "./Pages/ProductSuccess";
 import Checkout from "./Pages/Checkout";
+import MyPlans from "./Pages/MyPlans";
 
 function App() {
   return (
@@ -134,6 +135,7 @@ function App() {
               ></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
+              <Route exact path="/my-plans" element={<MyPlans />}></Route>
             </Route>
           </Routes>
         </Router>

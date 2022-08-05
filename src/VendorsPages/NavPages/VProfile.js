@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Img from "../../Assets/Images/NoPath.png";
-
+import arrow from "../../Assets/Images/arrow.svg";
 import Profile from "../../VendorsAssets/AffliateReqProfile.png";
 import "../../VendorsStyle/VProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GET_USER_PROFILE, GET_VENDOR_PROFILE } from "../../Context/Types";
 import ProfileSkeleton from "../../Components/Skeleton-loading/Profile.skeleton";
 
@@ -63,6 +63,14 @@ const VProfile = () => {
                 <p> location</p>
                 <p>{profileData?.address[0]?.line1} </p>
               </div>
+              {AuthRole === "vendor" && (
+                <div className="details">
+                  <p> My Plans</p>
+                  <Link to={"/my-plans"}>
+                    <img src={arrow} />
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
           {/* vendor's side */}
