@@ -56,7 +56,9 @@ export const getAllCategoryRequest = () => {
 export const addProductRequest = (values) => {
   return API.post("/product/addProduct", values);
 };
-
+export const updateVendorProduct = (values, id) => {
+  return API.post(`product/updateProduct?id=${id}`, values)
+}
 export const getVendorProductsRequest = (id) => {
   return API.get(`/product/allproducts/${id}`);
 };
@@ -112,6 +114,11 @@ export const getMyOrderRequest = () => {
   return API.get("/orders/myOrders");
 };
 
+//ads
+export const getAds = () => {
+  return API.get("/ads/getMyAds");
+}
+
 //affliate
 export const joinAffliateRequest = (id) => {
   return API.post("/profile/sendAffiliateRequest", {
@@ -136,6 +143,13 @@ export const denyAffiliateRequest = (id) => {
   });
 };
 
+export const getPaidToAffiliate = () => {
+  return API.get('/ord/paidToAffiliate');
+}
+
+export const getAmountToAffiliate = () => {
+  return API.get('/ord/amountToAffiliate');
+}
 //payment
 export const getOrderID = (cost) => {
   return API.post("orders/createOrderId", {

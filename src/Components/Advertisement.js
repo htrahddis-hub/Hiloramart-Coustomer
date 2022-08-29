@@ -31,10 +31,10 @@ function Advertisement() {
       <div>
         <AdContainer image={Hiloramart} />
       </div>
-      <div className="divider">or</div>
+      {/* <div className="divider">or</div>
       <div>
         <AdContainer image={google} />
-      </div>
+      </div> */}
     </div>
   );
 }

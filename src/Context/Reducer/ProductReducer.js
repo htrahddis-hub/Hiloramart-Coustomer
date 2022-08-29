@@ -13,6 +13,8 @@ import {
   getVendorProductsRequest,
   getWishlistItemsRequest,
   removeItemFromWishlistRequest,
+  updateVendorProduct,
+  getAds
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -28,46 +30,6 @@ export const getALlCategory = async (upDateState) => {
   }
 };
 
-export const addProduct = async (
-  inputData,
-  urlResponse,
-  videoUrlResponse,
-  catId,
-  setIsLoading,
-  resetform,
-  navigate
-) => {
-  try {
-    const values = {
-      name: inputData.productName,
-      description: inputData.prodcutDescription,
-      price: inputData.price,
-      productImage: urlResponse,
-      productVideos: videoUrlResponse,
-      owner: inputData.id,
-      category: catId,
-    };
-    const res = await addProductRequest(values);
-    if (res.data.success) {
-      resetform();
-      navigate("/product-success", {
-        state: {
-          id: res.data.data._id,
-        },
-        replace: true,
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    Store.addNotification({
-      ...notification,
-      type: "danger",
-      message: "somee error occured",
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
 export const deleteProduct = async (
   id,
   setIsLoading,
@@ -116,14 +78,103 @@ export const deleteProduct = async (
     setIsLoading(false);
   }
 };
-export const getVendorProducts = async (id, upDateState) => {
+
+export const addProduct = async (
+  inputData,
+  urlResponse,
+  videoUrlResponse,
+  catId,
+  setIsLoading,
+  resetform,
+  navigate
+) => {
+  try {
+    const values = {
+      name: inputData.productName,
+      description: inputData.prodcutDescription,
+      price: inputData.price,
+      productImage: urlResponse,
+      productVideos: videoUrlResponse,
+      owner: inputData.id,
+      category: catId,
+    };
+    const res = await addProductRequest(values);
+    if (res.data.success) {
+      resetform();
+      navigate("/product-success", {
+        state: {
+          id: res.data.data._id,
+        },
+        replace: true,
+      });
+    }
+  } catch (err) {
+    console.log(err);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: "somee error occured",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+
+export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, videoUrlResponse) => {
+  try {
+    const values = {
+      name: inputData.name,
+      description: inputData.description,
+      price: inputData.price,
+      stock: inputData.stock,
+      productImage: urls,
+      productVideos: videoUrlResponse,
+    };
+    console.log(values, 'hi there')
+    const res = await updateVendorProduct(values, id);
+    if(res.data.success) {
+      navigate("/product-updated", {
+        state: {
+          id: res.data.data._id,
+        },
+        replace: true,
+      })
+    }
+    console.log(res, "product updated");
+  } catch (error) {
+    console.log(error);
+    Store.addNotification({
+      ...notification,
+      type: "danger",
+      message: "somee error occured",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+export const getVendorProducts = async (id, upDateState, setIsLoading) => {
+  setIsLoading(true);
   try {
     const res = await getVendorProductsRequest(id);
     upDateState(res.data.data);
   } catch (err) {
     console.log(err);
+  } finally {
+    setIsLoading(false);
   }
 };
+
+export const getAllAds = async(setAds) => {
+  try {
+    const res = await getAds();
+    // console.log(res, "datadata");
+    setAds(res.data.data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const getALLproducts = async (upDateState) => {
   try {

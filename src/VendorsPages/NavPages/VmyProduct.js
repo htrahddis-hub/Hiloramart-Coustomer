@@ -10,19 +10,21 @@ import ProductsLoading from "../../Components/Skeleton-loading/Products-loading"
 const VmyProduct = () => {
   const { dispatch } = useContext(AuthContext);
   const [allProducts, setAllProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const getProducts = () => {
-    dispatch({ type: GET_VENDOR_PRODUCTS, upDateState: setAllProducts });
+    dispatch({ type: GET_VENDOR_PRODUCTS, upDateState: setAllProducts, setIsLoading });
   };
   useEffect(() => {
     getProducts();
   }, []);
+  
 
   return (
     <>
       <div style={{ margin: "3%" }}>
         <div className="RowContainer">
-          {allProducts.length !== 0 ? (
-            allProducts.map((item, index) => {
+          {allProducts?.length !== 0 ? (
+            allProducts?.map((item, index) => {
               return (
                 <MyProductCont key={item._id} cb={getProducts} {...item} />
               );

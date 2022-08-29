@@ -2,8 +2,11 @@
   background: #fcfcfc;
   border-radius: 54px;
   padding: 1%;
-  width: 600px;
-  height: 400px;
+  width: 50%;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+  /* height: 400px; */
 }
 .ADrow {
   display: flex;
@@ -27,7 +30,7 @@
 #LastTcont1 {
   width: 100%;
   padding: 2%;
-  margin: 4%;
+  /* margin: 4%; */
   background: #fcfcfc;
   border-radius: 30px;
 }

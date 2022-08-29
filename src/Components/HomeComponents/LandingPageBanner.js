@@ -1,5 +1,5 @@
 // src/reusable/image-gallery.component.js
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import Banner from "../../Assets/Images/Home/Banner.png";
@@ -7,9 +7,38 @@ import machine from "../../Assets/Images/Home/machine.png";
 import "../../Styles/Components/LandingPageBanner.css";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
+import { useEffect } from "react";
+
+import {GET_VENDOR_PRODUCTS, GET_ALL_PRODUCTS} from '../../Context/Types';
+import { useLocation } from "react-router-dom";
+import nodata from '../../VendorsAssets/nodata.svg';
+import { CircularProgress } from "@mui/material";
 
 const ImageGallaryComponent = () => {
-  const { AuthRole } = useContext(AuthContext);
+  const { AuthRole, dispatch } = useContext(AuthContext);
+  const [allProducts, setAllProducts] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const lastProduct = allProducts[0]
+  const secondLastProduct = allProducts[1]
+
+  console.log(lastProduct, secondLastProduct)
+
+  useEffect(() => {
+    if(AuthRole === "user") {
+
+    }else {
+      dispatch({
+        type: GET_VENDOR_PRODUCTS, 
+        upDateState: setAllProducts,
+        setIsLoading
+      })
+    }
+  }, [setAllProducts])
+
+
+
   if (AuthRole === "user")
     return (
       <div className="landing-top-section">
@@ -82,44 +111,87 @@ const ImageGallaryComponent = () => {
     );
   else
     return (
-      <>
-        <div
-          id="LPmainCont"
-          style={{ background: "#FFC577", borderRadius: "30px", margin: "2%" }}
-        >
-          <div id="LPtextCont">
-            <div id="LPtext1">
-              LOOP SCANO -200 ( 6550 ) X-RAY BAGGAGE SCANNER
-            </div>
-            <div id="LPtext2">
-              Installation. Service. Engineering. Global Support
-            </div>
-            <div id="LPtext3" style={{ paddingTop: "0%", marginTop: "0px" }}>
-              From RS 95,000
-            </div>
-          </div>
-          <div>
-            <img src={machine} alt="img" style={{ height: "16rem" }} />
-          </div>
+      isLoading ? (
+        <div style={{minHeight: '100vh', display: 'grid', placeItems: 'center'}}>          
+        <CircularProgress style={{color: '#FF8D22'}} />
         </div>
-        <div
-          id="LPmainCont"
-          style={{ background: "#B0E7F1", borderRadius: "30px", margin: "2%" }}
-        >
-          <div id="LPtextCont">
-            <div id="LPtext1">
-              LOOP SCANO -200 ( 6550 ) X-RAY BAGGAGE SCANNER
+      ) : (
+        allProducts.length === 0 ? (
+          <>
+            <div className="empty-container">
+              <div className="left">
+                <div className="imgContainer">
+                  <img src={nodata} alt="nothing" />
+                </div>
+              </div>
+              <div className="right">
+                <h5>No data found!!</h5>
+              </div>
             </div>
-            <div id="LPtext2">
-              Installation. Service. Engineering. Global Support
+          </>
+        ) : (
+            allProducts.length === 1 ? (
+              <div
+              id="LPmainCont"
+              style={{ background: "#FFC577", borderRadius: "30px", margin: "2%" }}
+            >
+              <div id="LPtextCont">
+                <div id="LPtext1">
+                  {lastProduct?.name}
+                </div>
+                <div id="LPtext2">
+                  Installation. Service. Engineering. Global Support
+                </div>
+                <div id="LPtext3" style={{ paddingTop: "0%", marginTop: "0px" }}>
+                  From RS {lastProduct?.price}
+                </div>
+              </div>
+              <div>
+                <img src={lastProduct?.productImage[0]} alt="img" style={{ height: "16rem" }} />
+              </div>
             </div>
-            <div id="LPtext3">From RS 95,000</div>
-          </div>
-          <div>
-            <img src={machine} alt="img" style={{ height: "16rem" }} />
-          </div>
-        </div>
-      </>
+            ) : (
+              <>
+                <div
+                  id="LPmainCont"
+                  style={{ background: "#FFC577", borderRadius: "30px", margin: "2%" }}
+                >
+                  <div id="LPtextCont">
+                    <div id="LPtext1">
+                      {lastProduct?.name}
+                    </div>
+                    <div id="LPtext2">
+                      Installation. Service. Engineering. Global Support
+                    </div>
+                    <div id="LPtext3" style={{ paddingTop: "0%", marginTop: "0px" }}>
+                      From RS {lastProduct?.price}
+                    </div>
+                  </div>
+                  <div>
+                    <img src={lastProduct?.productImage[0]} alt="img" style={{ height: "16rem" }} />
+                  </div>
+                </div>
+                <div
+                  id="LPmainCont"
+                  style={{ background: "#B0E7F1", borderRadius: "30px", margin: "2%" }}
+                >
+                  <div id="LPtextCont">
+                    <div id="LPtext1">
+                      {secondLastProduct?.name}
+                    </div>
+                    <div id="LPtext2">
+                      Installation. Service. Engineering. Global Support
+                    </div>
+                    <div id="LPtext3">From RS {secondLastProduct?.price}</div>
+                  </div>
+                  <div>
+                    <img src={secondLastProduct?.productImage[0]} alt="img" style={{ height: "16rem" }} />
+                  </div>
+                </div>
+              </>
+            )
+        )
+      )
     );
 };
 

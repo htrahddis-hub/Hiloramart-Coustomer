@@ -1,12 +1,44 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import wallet from "../../Assets/Images/wallet.png";
 import "../../VendorsStyle/VmyWallet.css";
 import DownIcon from "../../Assets/Images/DownIcon.png";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import AccordionAffiliate from "../../Components/AccordionAffiliate";
+import { AuthContext } from "../../Context/AuthContext";
+import { AMOUNT_TO_AFFILIATE, PAID_TO_AFFILIATE } from "../../Context/Types";
+import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 const VmyWallet = () => {
+
+  const { dispatch } = useContext(AuthContext);
+  const [paidToAffiliates, setPaidToAffiliates] = useState();
+  const [amountToAffiliates, setAmountToAffiliates] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getPaidAffiliate = () => {
+    dispatch({
+      type: PAID_TO_AFFILIATE,
+      setPaidToAffiliates,
+      setIsLoading
+    })
+  }
+
+  const getAmountToAffiliate = () => {
+    dispatch({
+      type: AMOUNT_TO_AFFILIATE,
+      setAmountToAffiliates,
+      setIsLoading
+    })
+  }
+
+  console.log(amountToAffiliates, "thus")
+
+  useEffect(() => {
+    getPaidAffiliate();
+    getAmountToAffiliate();
+  }, [])
   return (
     <>
       <div>
@@ -154,9 +186,40 @@ const VmyWallet = () => {
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
-              {[1, 2, 3, 4, 5, 6].map((item, index) => {
+              {
+                isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
+                paidToAffiliates?.length === 0 ? (
+                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Paid To Affiliates Found!</p>
+                ) : (
+                  paidToAffiliates?.map((item) => (
+                    <AccordionAffiliate />
+                  ))
+                )
+              }
+              {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
                 return <AccordionAffiliate />;
-              })}
+              })} */}
+            </div>
+          </div>
+        </div>
+
+        <div id="MWcont2">Amount to Paid</div>
+        <div id="MWcont3">
+          <div id="AdmainCont">
+            <div id="LastTcont1">
+              {
+                isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress  style={{color: '#FF8D22'}}/></div> ) :
+                amountToAffiliates?.length === 0 ? (
+                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Amount To Paid Found!</p>
+                ) : (
+                  amountToAffiliates?.map((item) => (
+                    <AccordionAffiliate />
+                  ))
+                )
+              }
+              {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
+                return <AccordionAffiliate />;
+              })} */}
             </div>
           </div>
         </div>

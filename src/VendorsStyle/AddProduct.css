@@ -129,6 +129,8 @@ textarea.VsmallInputBox::placeholder {
   box-shadow: 2px 2px 7px 2px #e7e7e7;
   overflow-y: scroll;
   min-width: 250px;
+  width: 100%;
+  top: 80px;
 }
 .cat-li {
   margin: 0.5rem;

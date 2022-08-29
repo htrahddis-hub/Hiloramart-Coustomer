@@ -4,6 +4,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
 import { GET_AFFILIATE_REQUEST } from "../../Context/Types";
+import { CircularProgress } from "@mui/material";
 
 const VaffiliateRequest = () => {
   const { dispatch } = useContext(AuthContext);
@@ -16,6 +17,8 @@ const VaffiliateRequest = () => {
       setIsLoading,
     });
   };
+
+  console.log(allRequest);
   useEffect(() => {
     getAllAffiliateRequest();
   }, []);
@@ -34,7 +37,12 @@ const VaffiliateRequest = () => {
           Affiliate Request
         </h1>
         <div style={{ display: "flex", justifyContent: "space-around" }}>
-          {allRequest?.map((item) => {
+          { 
+            isLoading ? (<div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress  style={{color: '#FF8D22'}}/></div>) : 
+            allRequest.length === 0 ? (
+                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Affiliate Request Found!</p>
+            ) :
+            allRequest?.map((item) => {
             return (
               <AffiliateRequestCont {...item} cb={getAllAffiliateRequest} />
             );

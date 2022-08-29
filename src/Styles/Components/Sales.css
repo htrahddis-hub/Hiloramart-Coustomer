@@ -3,8 +3,8 @@
   flex-direction: column;
 }
 .topbar {
-  display: flex;
-  flex: 1;
+  /* display: flex; */
+  /* flex: 1; */
   padding: 1rem 2rem;
 }
 .topbar :nth-child(1) {
@@ -15,11 +15,13 @@
   font-family: "Poppins";
 }
 .filter {
-  display: flex;
-  flex: 1;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* flex: 1; */
+  /* gap: 1rem; */
+  /* justify-content: center;
+  align-items: center; */
+  width: 290px;
+  margin-left: auto;
 }
 .sale-product-parent {
   padding: 0 2rem;

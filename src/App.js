@@ -53,6 +53,7 @@ import MyOrders from "./Pages/MyOrders";
 import ProductSuccess from "./Pages/ProductSuccess";
 import Checkout from "./Pages/Checkout";
 import MyPlans from "./Pages/MyPlans";
+import ProductUpdated from "./Pages/ProductUpdated";
 
 function App() {
   return (
@@ -117,6 +118,11 @@ function App() {
                 exact
                 path="/product-success"
                 element={<ProductSuccess />}
+              ></Route>
+              <Route
+                exact
+                path="/product-updated"
+                element={<ProductUpdated />}
               ></Route>
               <Route exact path="/my-revenue" element={<VmyRevenue />}></Route>
               <Route

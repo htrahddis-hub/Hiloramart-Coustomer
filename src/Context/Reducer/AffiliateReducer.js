@@ -4,6 +4,8 @@ import {
   denyAffiliateRequest,
   getAffiliateRequest,
   getAffiliateReuest,
+  getAmountToAffiliate,
+  getPaidToAffiliate,
   joinAffliateRequest,
 } from "../API";
 import { notification } from "../AuthContext";
@@ -84,3 +86,31 @@ export const denytAffiliate = async (id, setIsLoading, cb) => {
     setIsLoading(false);
   }
 };
+
+
+export const getPaidTOAffiliates = async(setPaidToAffiliates, setIsLoading) => {
+  
+  try {
+    setIsLoading(true);
+    const res = await getPaidToAffiliate();
+    setPaidToAffiliates(res.data.data);
+    // console.log(res, "paid to affiliates");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsLoading(false)
+  }
+}
+export const getAmountToAffiliates = async(setAmountToAffiliates, setIsLoading) => {
+  try {
+    setIsLoading(true);
+    const res = await getAmountToAffiliate();
+    setAmountToAffiliates(res.data.data);
+    // debugger
+    console.log(res, "amount to affiliates");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsLoading(false)
+  }
+}

@@ -4,47 +4,27 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-const SignUp = () => {
+const VBank = () => {
   const navigate = useNavigate();
-  // const alert = useAlert();
-  const [formData, setformData] = useState({
-    mobile: "",
-    email: "",
-    password: "",
-    confirmPassword: " ",
-    name: " ",
-  });
-  const { mobile, email, password, confirmPassword, name } = formData;
+
+  const [bankDetails, setBankDetails] = useState({
+    account_no: "",
+    ifsc_code: "", 
+    bank_name: "",
+    branch_name: "",
+    account_holder_name: ""
+  })
+
   const onChangeHandler = (e) => {
-    setformData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    if (confirmPassword !== password) {
-      window.alert("Password dosent match");
-    }
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-    const body = JSON.stringify({ name, email, mobile, password });
-    console.log(body);
-    try {
-      const res = await axios.post(
-        "https://hiloramart-user.herokuapp.com/auth/register",
-        body,
-        config
-      );
-      // console.log(res);
-      window.alert("Mail Sent");
-      navigate("/");
-      // alert.success(res);
-    } catch (err) {
-      // alert.error('Request Failed');
-      // console.log(err);
-    }
-  };
+    setBankDetails((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  }
+
+  const onSubmitHandler = () => {
+    
+  }
+
   return (
     <>
       <div className="LoginMainContainer">
@@ -57,7 +37,7 @@ const SignUp = () => {
             <form id="loginDiv3" onSubmit={(e) => onSubmitHandler(e)}>
               <input
                 onChange={(e) => onChangeHandler(e)}
-                name="name"
+                name="account_no"
                 className="inputBox"
                 placeholder="Account Number"
                 type="number"
@@ -66,7 +46,7 @@ const SignUp = () => {
 
               <input
                 onChange={(e) => onChangeHandler(e)}
-                name="Account Holder Name"
+                name="account_holder_name"
                 className="inputBox"
                 placeholder="Account Holder Name"
                 required
@@ -76,7 +56,7 @@ const SignUp = () => {
               />
               <input
                 onChange={(e) => onChangeHandler(e)}
-                name="IFSC"
+                name="ifsc_code"
                 className="inputBox"
                 placeholder="IFSC code"
                 required
@@ -86,9 +66,19 @@ const SignUp = () => {
               />
               <input
                 onChange={(e) => onChangeHandler(e)}
-                name="Phone"
+                name="bank_name"
                 className="inputBox"
-                placeholder="Phone Number"
+                placeholder="Bank Name"
+                required
+                // type="password"
+                // value={this.state.password}
+                // onChange={this.handleInputChange}
+              />
+              <input
+                onChange={(e) => onChangeHandler(e)}
+                name="branch_name"
+                className="inputBox"
+                placeholder="Branch Name"
                 required
                 // type="password"
                 // value={this.state.password}
@@ -107,4 +97,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default VBank;

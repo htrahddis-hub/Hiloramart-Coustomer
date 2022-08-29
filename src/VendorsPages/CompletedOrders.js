@@ -16,6 +16,8 @@ function CompletedOrders() {
       setIsLoading,
     });
   };
+
+  console.log(data);
   useEffect(() => {
     getCompletedOrders();
   }, []);

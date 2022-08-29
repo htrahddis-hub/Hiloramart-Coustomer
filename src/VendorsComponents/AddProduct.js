@@ -17,7 +17,7 @@ const AddProduct = () => {
     id: "",
   });
   const [inputData, setInputData] = useState({
-    brandName: "",
+    stock: "",
     productName: "",
     price: "",
     prodcutDescription: "",
@@ -163,7 +163,7 @@ const AddProduct = () => {
               /> */}
               <div
                 className="VinputBox cat-div"
-                onClick={() => setIsDropDown(true)}
+                onClick={() => setIsDropDown(!isDropdown)}
               >
                 {category.name ? category.name : "Category"}
               </div>
@@ -186,20 +186,20 @@ const AddProduct = () => {
             <div>
               <input
                 type="text"
-                placeholder="Brand Name"
+                placeholder="Product Name"
                 className="VinputBox"
-                name="brandName"
-                value={inputData.brandName}
+                name="productName"
+                value={inputData.productName}
                 onChange={handleInputChange}
               />
             </div>
             <div>
               <input
                 type="text"
-                placeholder="Product Name"
+                placeholder="Stock"
                 className="VinputBox"
-                name="productName"
-                value={inputData.productName}
+                name="stock"
+                value={inputData.stock}
                 onChange={handleInputChange}
               />
             </div>

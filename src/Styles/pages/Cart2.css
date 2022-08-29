@@ -144,6 +144,7 @@
   margin: 1rem;
   padding: 1rem;
   gap: 1rem;
+  align-items: center;
 }
 .CPCin1 {
   font-size: 1rem;
@@ -169,6 +170,12 @@
   justify-content: center;
   text-align: center;
   display: flex;
+  width: 130px;
+  height: 130px;
+}
+.CPC1 img {
+  width: 100%;
+  height: 100%;
 }
 .product-detail {
   display: flex;
@@ -179,6 +186,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 .remove-icon {
   padding: 0.5rem;
@@ -246,4 +254,84 @@
   width: 200px;
   height: 200px;
   object-fit: contain;
+}
+
+.css-hdw1oc {
+  display: none;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  margin-bottom: 5px;
+}
+
+.MuiOutlinedInput-notchedOutline  {
+  border-color: #ff8d22 !important;
+}
+
+.top {
+  display: flex;
+
+  /* justify-content: space-between; */
+  margin-bottom: 20px;
+}
+.top .img-container {
+  margin-right: 30px;
+}
+.img-container {
+  width: 80px;
+  height: 80px;
+}
+.img-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.mid1, .mid2 {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+
+.mid1 .midinner1, .mid1 .midinner2, .mid1 .midinner3 {
+  display: flex;
+  justify-content: space-between;
+
+} 
+
+.mid1 .midinner1 span, .mid1 .midinner2 span, .mid1 .midinner3 span {
+  width: 50%;
+}
+
+.middetails {
+  text-align: right;
+}
+
+.img-wrapper {
+  display: flex;
+}
+
+.img-wrapper .img-container {
+  margin-right: 10px;
+}
+
+.video-container {
+  width: 100%;
+  height: 100px;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+}
+
+.video-preview {
+  height: 100px;
 }

@@ -44,6 +44,10 @@ import {
   VENDOR_LOGIN,
   VENDOR_RESEND_OTP,
   VENDOR_SIGNUP,
+  UPDATE_PRODUCT,
+  GET_ADS,
+  PAID_TO_AFFILIATE,
+  AMOUNT_TO_AFFILIATE
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -55,6 +59,7 @@ import {
   checkProductWishlistStatus,
   deleteItemFromCart,
   deleteProduct,
+  updateProduct,
   getALlCategory,
   getALLproducts,
   getCartItems,
@@ -62,6 +67,7 @@ import {
   getVendorProducts,
   getWishlistItems,
   removeItemFromWishlist,
+  getAllAds,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
@@ -76,9 +82,11 @@ import {
   acceptAffiliate,
   denytAffiliate,
   getAffiliate,
+  getAmountToAffiliates,
+  getPaidTOAffiliates,
   joinAffliate,
 } from "./Reducer/AffiliateReducer";
-import { denyAffiliateRequest } from "./API";
+import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
 export const AuthContext = createContext();
 export const notification = {
@@ -104,7 +112,9 @@ const AuthContextComponent = ({ children }) => {
     });
   }, [auth]);
 
+
   const reducer = (state, action) => {
+    // eslint-disable-next-line default-case
     switch (action.type) {
       case USER_SIGNUP:
         userSignup(
@@ -154,8 +164,23 @@ const AuthContextComponent = ({ children }) => {
           action.navigate
         );
         break;
+        case UPDATE_PRODUCT: 
+        updateProduct(
+          action.payload,
+          action.setIsLoading,
+          action.navigate,
+          action.id,
+          action.setIsLoading,
+          action.navigate,
+          action.urls,
+          action.videoUrlResponse,
+        );
+        break;
       case GET_VENDOR_PRODUCTS:
-        getVendorProducts(currentUser.id, action.upDateState);
+        getVendorProducts(currentUser.id, action.upDateState, action.setIsLoading);
+        break;
+      case GET_ADS:
+        getAllAds(action.setAds);
         break;
       case DELETE_PRODUCT:
         deleteProduct(
@@ -166,6 +191,7 @@ const AuthContextComponent = ({ children }) => {
           action.productVideos
         );
         break;
+
       case USER_ACCOUNT_ACTIVATE:
         userAccActivate(
           action.payload,
@@ -193,6 +219,12 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_VENDOR_PROFILE:
         vendorProfile(action.payload, action.upDateState);
+        break;
+      case PAID_TO_AFFILIATE: 
+        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
+        break;
+      case AMOUNT_TO_AFFILIATE:
+        getAmountToAffiliates(action.setAmountToAffiliates, action.setIsLoading);
         break;
       case GET_ALL_PRODUCTS:
         getALLproducts(action.upDateState);
