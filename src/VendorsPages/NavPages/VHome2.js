@@ -17,7 +17,7 @@ const VHome2 = () => {
   }, []);
   return (
     <>
-      <div style={{ marginBottom: "100px" }}>
+      <div>
         <div
           style={{
             fontSize: "24px",
@@ -50,9 +50,9 @@ const VHome2 = () => {
             Completed Orders
           </Link>
         </div>
-        <div>
+        <div style={{height: '70vh'}}>
           {/* <BuyersDetailCont /> */}
-          <OrderTable data={data} />
+          <OrderTable data={data} isLoading={isLoading}/>
         </div>
         {/* <AssignedAndStausFormVhome2 /> */}
       </div>

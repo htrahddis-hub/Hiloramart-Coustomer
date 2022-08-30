@@ -11,6 +11,7 @@ import {
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 export const userSignup = async (values, resetForm, setIsLoading, navigate) => {
   setIsLoading(true);
@@ -83,6 +84,13 @@ export const vendorLogin = async (
   setIsLoading(true);
   try {
     const res = await vendorLoginRequest(values);
+    const res2 = await axios.post("https://apiv2.shiprocket.in/v1/external/auth/login", 
+    {
+      email: "amitsharma199938@gmail.com",
+      password: "Qwerty@199938"
+    }
+  )
+  localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
       Cookies.set("auth_token", res.data.data.token);
       Cookies.set("role", "vendor");

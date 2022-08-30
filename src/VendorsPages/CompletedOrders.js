@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
 import OrderTable from "../Components/OrderTable";
 import { AuthContext } from "../Context/AuthContext";
-import { GET_COMPLETED_ORDERS } from "../Context/Types";
+import { GET_COMPLETED_ORDERS, GET_CURRENT_ORDERS, GET_RETURN_ORDERS } from "../Context/Types";
 
 function CompletedOrders() {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
+
+  const [currentOrdersData, setCurrentOrdersData] = useState([]);
+  const [returnOrdersData, setReturnOrdersData] = useState([]);
+
+
   const [isLoading, setIsLoading] = useState(false);
   const getCompletedOrders = () => {
     dispatch({
@@ -16,8 +21,6 @@ function CompletedOrders() {
       setIsLoading,
     });
   };
-
-  console.log(data);
   useEffect(() => {
     getCompletedOrders();
   }, []);
@@ -105,8 +108,8 @@ function CompletedOrders() {
       </div>
     </div>
   </div> */}
-      <div>
-        <OrderTable data={data} />
+      <div style={{height: '70vh'}}>
+        <OrderTable data={data} isLoading={isLoading}/>
       </div>
 
       <Footer />

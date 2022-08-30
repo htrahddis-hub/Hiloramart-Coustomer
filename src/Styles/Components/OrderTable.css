@@ -33,3 +33,19 @@
   padding-top: 0.2rem;
   border-right: 1px solid #ececec;
 }
+
+
+.product-info-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.product-info-container .heading {
+  color: gray;
+  width: 100%;
+}
+
+.product-info-container .heading-data {
+  width: 100%;
+}

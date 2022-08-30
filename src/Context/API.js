@@ -48,6 +48,9 @@ export const userProfileRequest = () => {
 export const vendorProfileRequest = (id) => {
   return API.get(`/vendor/getVendorProfile/${id}`);
 };
+export const getVendorAddresss = () => {
+  return API.get('/vendor/getMyaddress');
+}
 //products
 export const getAllCategoryRequest = () => {
   return API.get("/product/getProductCategory");
@@ -193,3 +196,7 @@ export const getCompletedOrdersRequest = () => {
 export const returnItemRequest = (values) => {
   return API.post("/orders/return", values);
 };
+
+
+
+//shiprocket 

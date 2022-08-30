@@ -185,6 +185,7 @@ const MyProductCont = (props) => {
       <div className="product-detail">
         <div className="CPCin1">{name}</div>
         <div className="CPCin2">RS. {price}</div>
+        <p style={!stock ? {color: 'red'} : {color: 'green'}}>Stock: {stock ? stock : '0'}</p>
       </div>
       </div>
       <div className="product-options">

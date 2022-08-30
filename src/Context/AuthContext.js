@@ -47,7 +47,11 @@ import {
   UPDATE_PRODUCT,
   GET_ADS,
   PAID_TO_AFFILIATE,
-  AMOUNT_TO_AFFILIATE
+  AMOUNT_TO_AFFILIATE,
+  GET_VENDOR_ADDRESS,
+  SHIPROCKET_CREATE_ORDER_VENDOR,
+  ADD_SHIPROCKET_PICKUP_LOCATION,
+  GET_SHIPROCKET_ADDRESS
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -70,7 +74,7 @@ import {
   getAllAds,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
-import { userProfile, vendorProfile } from "./Reducer/ProfileReducer";
+import { getVendorAddress, userProfile, vendorProfile } from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
   getCurrentOrders,
@@ -88,6 +92,7 @@ import {
 } from "./Reducer/AffiliateReducer";
 import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
+import { createShiprocketLocation, createShiprocketVendorOrder, getAllShiprocketAddress } from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -149,6 +154,9 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.navigate
         );
+        break;
+      case GET_VENDOR_ADDRESS: 
+        getVendorAddress(action.setVendorAddress);
         break;
       case GET_ALL_CATEGORY:
         getALlCategory(action.upDateState);
@@ -320,6 +328,20 @@ const AuthContextComponent = ({ children }) => {
       case RETURN_ITEM:
         returnITem(action.payload, action.upDateState, action.setIsLoading);
         break;
+
+
+
+      case SHIPROCKET_CREATE_ORDER_VENDOR: 
+        createShiprocketVendorOrder(action.orderData, action.item)
+        break;
+
+      case ADD_SHIPROCKET_PICKUP_LOCATION:
+        createShiprocketLocation(action.data, action.setShiprocketAddress, action.item);
+        break;
+
+      case GET_SHIPROCKET_ADDRESS:
+        getAllShiprocketAddress(action.setAllShiprocketAddress);
+        break
     }
   };
   const initialValues = {};

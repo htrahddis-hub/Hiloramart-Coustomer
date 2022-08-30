@@ -102,8 +102,8 @@ const VReturn = () => {
           </div>
         </div>
       </div> */}
-      <div>
-        <OrderTable data={data} />
+      <div style={{height: '70vh'}}>
+        <OrderTable data={data} isLoading={isLoading}/>
       </div>
 
       <Footer />

@@ -37,6 +37,14 @@ const Login = () => {
         body,
         config
       );
+      const res2 = await axios.post("https://apiv2.shiprocket.in/v1/external/auth/login", 
+        {
+          email: "amitsharma199938@gmail.com",
+          password: "Qwerty@199938"
+        },
+        config
+      )
+      console.log(res2, "shiprocket auth")
       console.log(body);
       window.alert("Logged in sucessfully");
 
