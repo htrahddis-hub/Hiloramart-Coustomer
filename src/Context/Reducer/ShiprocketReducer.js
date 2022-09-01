@@ -4,10 +4,10 @@ import axios from "axios";
 
 export const createShiprocketLocation = async(data, setShiprocketAddress, item) => {
 
-    console.log(data, item, "dta is tatsklnskd");
+    console.log(data, item, "location created in shiprocket");
 
     const myData = {
-        pickup_location: data?.city +  "," + data?.state + "," + data?.country,
+        pickup_location: data?.address,
         name: item?.user?.name,
         email: item?.user?.email,
         phone: Number(item?.user?.mobile),
@@ -18,7 +18,7 @@ export const createShiprocketLocation = async(data, setShiprocketAddress, item) 
         country: data?.country,
         pin_code: Number(data?.pin_code)
     }
-
+    console.log(myData, "this is important")
     try {
         const res = await createAddress(myData);
         console.log(res, "address crated");
@@ -39,11 +39,13 @@ export const getAllShiprocketAddress = async(setAllShiprocketAddress) => {
 }
 
 
-export const createShiprocketVendorOrder = async(orderData, item) => {
+export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder) => {
+    console.log(item);
+    console.log(orderData);
     const myData = {
         order_id: item?._id,
         order_date: item?.createdAt.slice(0,10),
-        pickup_location: item?.address?.line1 + item?.address?.line2,
+        pickup_location: pickupAddressToCreateOrder,
         comment: "Thank You",
         company_name: "Hiloramart",
         billing_customer_name: item?.user?.name,
@@ -74,9 +76,10 @@ export const createShiprocketVendorOrder = async(orderData, item) => {
         weight: Number(orderData?.weight)
     }
 
-    // console.log(myData);
+    console.log(myData);
     try {
         const res = await createOrder(myData);
+        setShiprocketCreatedOrder(res.data)
         console.log(res, "shiprocket create order");
     } catch (error) {
         console.log(error);

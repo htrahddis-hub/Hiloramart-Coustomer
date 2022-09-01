@@ -14,5 +14,7 @@ API.interceptors.request.use((req) => {
 
 
 export const createAddress = (data) => API.post('/external/settings/company/addpickup', data);
+
+
 export const getAllAddress = () => API.get("/external/settings/company/pickup");
 export const createOrder = (data) => API.post("/external/orders/create/adhoc",data);

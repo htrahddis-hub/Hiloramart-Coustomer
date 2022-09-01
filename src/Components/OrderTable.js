@@ -52,7 +52,11 @@ function OrderTable({ data, isLoading }) {
     pin_code: 0
   });
 
+  const [pickupAddressToCreateOrder, setPickupAddressToCreateOrder] = useState("");
+
   const [shiprocketAddress, setShiprocketAddress] = useState();
+
+  const [shiprocketCreatedOrder, setShiprocketCreatedOrder] = useState({});
 
   const [allShiprocketAddress, setAllShiprocketAddress] = useState();
 
@@ -73,7 +77,9 @@ const createOrder = (item) => {
   dispatch({
     type: SHIPROCKET_CREATE_ORDER_VENDOR,
     orderData,
-    item
+    item,
+    pickupAddressToCreateOrder,
+    setShiprocketCreatedOrder
   })
 }
 
@@ -106,7 +112,9 @@ const getShipRocketAddress = () => {
   })
 }
 
-console.log(allShiprocketAddress, "all address")
+const shiprocketHandler = (e) => {
+  setPickupAddressToCreateOrder(e.target.value)
+}
 
   useEffect(() => {
     getAddress();
@@ -297,10 +305,10 @@ console.log(allShiprocketAddress, "all address")
                                   <>
                                   <div style={{display: 'flex', flexDirection: 'column'}}>
                                     <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
-                                    <select name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
+                                    <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
                                       <option value="">None</option>
                                       {allShiprocketAddress?.shipping_address.map((item) => (
-                                        <option value={item}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
+                                        <option value={item?.address}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
                                       ))}
                                     </select>
                                   </div>

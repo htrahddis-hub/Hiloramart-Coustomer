@@ -332,7 +332,7 @@ const AuthContextComponent = ({ children }) => {
 
 
       case SHIPROCKET_CREATE_ORDER_VENDOR: 
-        createShiprocketVendorOrder(action.orderData, action.item)
+        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
