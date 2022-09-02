@@ -1,4 +1,4 @@
-import { createAddress, createOrder, getAllAddress } from "../shiprocketApi";
+import { createAddress, createOrder, getAllAddress, getCountry, getLocalities } from "../shiprocketApi";
 import axios from "axios";
 
 
@@ -81,6 +81,24 @@ export const createShiprocketVendorOrder = async(orderData, item, pickupAddressT
         const res = await createOrder(myData);
         setShiprocketCreatedOrder(res.data)
         console.log(res, "shiprocket create order");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+export const getShipRocketCountry = async(setAllCountries) => {
+    try {
+        const {data} = await getCountry();
+        setAllCountries(data?.data)
+    } catch (error) {
+        console.log(error);
+    }
+}
+export const getShipRocketLocality = async(setAllLocalities, id) => {
+    try {
+        const {data} = await getLocalities(id);
+        setAllLocalities(data?.data)
     } catch (error) {
         console.log(error);
     }

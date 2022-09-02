@@ -51,7 +51,13 @@ import {
   GET_VENDOR_ADDRESS,
   SHIPROCKET_CREATE_ORDER_VENDOR,
   ADD_SHIPROCKET_PICKUP_LOCATION,
-  GET_SHIPROCKET_ADDRESS
+  GET_SHIPROCKET_ADDRESS,
+  GET_SHIPROCKET_COUNTRY,
+  GET_SHIPROCKET_LOCALITY,
+  ADD_VENDOR_ADDRESS,
+  CHANGE_CURRENT_ADDRESS,
+  DELETE_SAVED_ADDRESS,
+  UPDATE_PROFILE
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -74,7 +80,7 @@ import {
   getAllAds,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
-import { getVendorAddress, userProfile, vendorProfile } from "./Reducer/ProfileReducer";
+import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, updateProfileFun, userProfile, vendorProfile } from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
   getCurrentOrders,
@@ -92,7 +98,7 @@ import {
 } from "./Reducer/AffiliateReducer";
 import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
-import { createShiprocketLocation, createShiprocketVendorOrder, getAllShiprocketAddress } from "./Reducer/ShiprocketReducer";
+import { createShiprocketLocation, createShiprocketVendorOrder, getAllShiprocketAddress, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -187,6 +193,21 @@ const AuthContextComponent = ({ children }) => {
       case GET_VENDOR_PRODUCTS:
         getVendorProducts(currentUser.id, action.upDateState, action.setIsLoading);
         break;
+      case ADD_VENDOR_ADDRESS:
+        addVendorAddressData(action.address, action.setIsLoading2, action.handleClose, action.setVendorAddress)
+        break;
+
+      case CHANGE_CURRENT_ADDRESS:
+        changeCurrentAdd(action.id);
+        break;
+
+      case DELETE_SAVED_ADDRESS: 
+        deleteSavedAdd(action.id, action.setVendorAddress);
+        break;
+
+      case UPDATE_PROFILE: 
+        updateProfileFun(action.data, action.id, action.setIsLoading, action.navigate);
+        break;
       case GET_ADS:
         getAllAds(action.setAds);
         break;
@@ -226,7 +247,7 @@ const AuthContextComponent = ({ children }) => {
         userProfile(action.upDateState);
         break;
       case GET_VENDOR_PROFILE:
-        vendorProfile(action.payload, action.upDateState);
+        vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
         break;
       case PAID_TO_AFFILIATE: 
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
@@ -330,7 +351,7 @@ const AuthContextComponent = ({ children }) => {
         break;
 
 
-
+      //shiprocket
       case SHIPROCKET_CREATE_ORDER_VENDOR: 
         createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
         break;
@@ -341,6 +362,14 @@ const AuthContextComponent = ({ children }) => {
 
       case GET_SHIPROCKET_ADDRESS:
         getAllShiprocketAddress(action.setAllShiprocketAddress);
+        break;
+
+      case GET_SHIPROCKET_COUNTRY:
+        getShipRocketCountry(action.setAllCountries);
+        break;      
+
+      case GET_SHIPROCKET_LOCALITY:
+        getShipRocketLocality(action.setAllLocalities, action.id)
         break
     }
   };

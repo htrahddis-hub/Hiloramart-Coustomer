@@ -35,6 +35,9 @@ const VProfile = () => {
     navigate("/choose-role-login", { replace: true });
   };
 
+
+  console.log(profileData);
+
   return !profileData ? (
     <ProfileSkeleton />
   ) : (
@@ -49,15 +52,15 @@ const VProfile = () => {
             <div>
               <div className="details">
                 <p>Name</p>
-                <p className="details-value">{profileData.name}</p>
+                <p className="details-value">{profileData?.name}</p>
               </div>
               <div className="details">
                 <p>Number</p>
-                <p>{profileData.number || profileData.mobile}</p>
+                <p>{profileData?.number || profileData?.mobile}</p>
               </div>
               <div className="details">
                 <p>Email</p>
-                <p>{profileData.email}</p>
+                <p>{profileData?.email}</p>
               </div>
               <div className="details">
                 <p> location</p>
@@ -67,7 +70,7 @@ const VProfile = () => {
                 <div className="details">
                   <p> My Plans</p>
                   <Link to={"/my-plans"}>
-                    <img src={arrow} />
+                    <img src={arrow} alt="plan"/>
                   </Link>
                 </div>
               )}
@@ -81,15 +84,15 @@ const VProfile = () => {
                 {" "}
                 <div className="details">
                   <p>Account Number</p>
-                  <p className="details-value">872222612741</p>
+                  <p className="details-value">{profileData?.bankDetails?.account_no}</p>
                 </div>
                 <div className="details">
                   <p>Account Holder Name</p>
-                  <p>Rohit</p>
+                  <p>{profileData?.bankDetails?.account_holder_name}</p>
                 </div>
                 <div className="details">
                   <p>IFSC Code</p>
-                  <p>RBI002343</p>
+                  <p>{profileData?.bankDetails?.ifsc_code}</p>
                 </div>
               </div>
             </div>
@@ -102,10 +105,11 @@ const VProfile = () => {
           </div>
         </div>
         <div className="img">
-          <img width={100} height={100} src={Profile} alt="/" />
+          <img style={{borderRadius: '50%'}} width={100} height={100} src={profileData?.profilePic} alt="/" />
           <div style={{ textAlign: "center" }}>
             <p style={{ fontSize: "20px" }}>Hello {profileData.name}</p>
             <button
+              onClick={()=>navigate("/edit-profile", { replace: true })}
               style={{
                 border: "none",
                 background: "white",

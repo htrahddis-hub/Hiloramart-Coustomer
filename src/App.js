@@ -40,6 +40,7 @@ import "../src/Main.css";
 import VReturn from "./VendorsPages/NavPages/VReturn";
 import Validation from "./VendorsPages/NavPages/Validation";
 import VProfile from "./VendorsPages/NavPages/VProfile";
+import VEditProfile from "./VendorsPages/NavPages/VEditProfile";
 import VForgot from "./VendorsPages/NavPages/VForgot";
 import Votp from "./VendorsPages/NavPages/Votp";
 import ProtectedRoutes from "./Context/ProtectedRoutes";
@@ -140,6 +141,7 @@ function App() {
                 element={<CompletedOrders />}
               ></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
+              <Route exact path="/edit-profile" element={<VEditProfile />}></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
               <Route exact path="/my-plans" element={<MyPlans />}></Route>
             </Route>

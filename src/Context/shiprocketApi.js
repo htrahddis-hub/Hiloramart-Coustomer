@@ -18,3 +18,7 @@ export const createAddress = (data) => API.post('/external/settings/company/addp
 
 export const getAllAddress = () => API.get("/external/settings/company/pickup");
 export const createOrder = (data) => API.post("/external/orders/create/adhoc",data);
+
+export const getCountry = () => API.get("/external/countries");
+
+export const getLocalities = (id) => API.get(`/external/countries/show/${id}`);

@@ -36,7 +36,18 @@ export const GET_COMPLETED_ORDERS = "completed order";
 export const GET_ADS="get ads";
 export const PAID_TO_AFFILIATE="paid to affiliate";
 export const AMOUNT_TO_AFFILIATE="amount to affiliate";
+
+export const ADD_VENDOR_ADDRESS="add vendor address";
 export const GET_VENDOR_ADDRESS="get vendor address";
+export const CHANGE_CURRENT_ADDRESS="change current address";
+export const DELETE_SAVED_ADDRESS="delete saved address";
+export const UPDATE_PROFILE="update profile";
+
+
+
+
 export const SHIPROCKET_CREATE_ORDER_VENDOR="shiprocket create order vendor";
 export const ADD_SHIPROCKET_PICKUP_LOCATION="add shiprocket pickup location";
 export const GET_SHIPROCKET_ADDRESS="get shiprocket address";
+export const GET_SHIPROCKET_COUNTRY="get shiprocket country";
+export const GET_SHIPROCKET_LOCALITY="get shiprocket locality";

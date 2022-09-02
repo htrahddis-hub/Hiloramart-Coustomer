@@ -51,6 +51,22 @@ export const vendorProfileRequest = (id) => {
 export const getVendorAddresss = () => {
   return API.get('/vendor/getMyaddress');
 }
+
+export const addVendorAddress = (data) => {
+  return API.post("/vendor/addAddress", data);
+}
+
+export const changeCurrentAddress = (id) => {
+  return API.get(`/vendor/changeCurrentAddress?addressId=${id}`);
+}
+
+export const deleteSavedAddress = (id) => {
+  return API.get(`/vendor/removeAddress?addressId=${id}`);
+}
+
+export const updateProfile = (data,id) => {
+  return API.post(`/vendor/updateVendorProfile/${id}`, data)
+}
 //products
 export const getAllCategoryRequest = () => {
   return API.get("/product/getProductCategory");
