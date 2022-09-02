@@ -20,6 +20,23 @@ export const userSignUpRequest = (values) => {
 export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
 };
+
+export const vendorForgotpasswordRequest = (values)=>{
+
+
+  const data={
+
+    email:values
+  }
+
+  /// object of body
+  return API.post("api/vendor/verify-code",data);
+}
+export const vendorVerifyCode = (values)=>{
+
+  /// object of body
+  return API.post("api/vendor/forgot-password",values);
+}
 export const vendorLoginRequest = (values) => {
   return API.post("/api/vendor/login", values);
 };

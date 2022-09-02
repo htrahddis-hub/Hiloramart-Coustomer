@@ -7,11 +7,15 @@ import {
   vendorLoginRequest,
   vendorResendOtpRequest,
   vendorSignupRequest,
+  vendorForgotpasswordRequest,
+  vendorVerifyCode,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
 import Cookies from "js-cookie";
 import axios from "axios";
+
+
 
 export const userSignup = async (values, resetForm, setIsLoading, navigate) => {
   setIsLoading(true);
@@ -115,6 +119,51 @@ export const vendorLogin = async (
   }
 };
 
+export const vendorForgotPass = async( values,navigate)=>{
+  
+   console.log(values)
+
+  try{
+    /// api .js function
+    const res = await vendorForgotpasswordRequest(values);
+    console.log(res);
+    
+  debugger
+    
+
+    if(res.data.success)
+    {
+      alert("Otp sent Successfully")
+      navigate('/verifyotp',{ state: values });
+    }else{
+
+      alert("Something Went Wrong")
+    }
+
+    
+
+
+  }catch(err)
+  {
+    console.log(err);
+  }
+
+
+
+}
+
+export const vendorVerifyOtp = async(values,navigate)=>{
+
+  try{
+
+    const res = await vendorVerifyCode(values);
+    console.log(res);
+    
+  }catch(err)
+  {
+    console.log(err);
+  }
+}
 export const vendorSignup = async (
   values,
   resetForm,

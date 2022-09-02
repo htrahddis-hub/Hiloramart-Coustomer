@@ -5,9 +5,11 @@ import {
   userResendOtp,
   userSignup,
   vendorAccActivate,
+  vendorForgotPass,
   vendorLogin,
   vendorResendOtp,
   vendorSignup,
+  vendorVerifyOtp,
 } from "./Reducer/AuthReducer";
 import {
   ACCEPT_REQUEST,
@@ -57,7 +59,9 @@ import {
   ADD_VENDOR_ADDRESS,
   CHANGE_CURRENT_ADDRESS,
   DELETE_SAVED_ADDRESS,
-  UPDATE_PROFILE
+  UPDATE_PROFILE,
+  VENDOR_FORGOTPASSWORD,
+  VENDOR_VERIFYCODE
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -153,6 +157,19 @@ const AuthContextComponent = ({ children }) => {
           setAuth
         );
         break;
+      case VENDOR_FORGOTPASSWORD:
+        vendorForgotPass(
+
+          action.values,
+          action.navigate,
+        )
+        break;
+      case VENDOR_VERIFYCODE:
+        vendorVerifyOtp(
+          action.values,
+          action.navigate,
+        )
+        break;
       case VENDOR_SIGNUP:
         vendorSignup(
           action.payload,
@@ -161,7 +178,7 @@ const AuthContextComponent = ({ children }) => {
           action.navigate
         );
         break;
-      case GET_VENDOR_ADDRESS: 
+      case GET_VENDOR_ADDRESS:
         getVendorAddress(action.setVendorAddress);
         break;
       case GET_ALL_CATEGORY:
@@ -178,7 +195,7 @@ const AuthContextComponent = ({ children }) => {
           action.navigate
         );
         break;
-        case UPDATE_PRODUCT: 
+      case UPDATE_PRODUCT:
         updateProduct(
           action.payload,
           action.setIsLoading,
@@ -201,11 +218,11 @@ const AuthContextComponent = ({ children }) => {
         changeCurrentAdd(action.id);
         break;
 
-      case DELETE_SAVED_ADDRESS: 
+      case DELETE_SAVED_ADDRESS:
         deleteSavedAdd(action.id, action.setVendorAddress);
         break;
 
-      case UPDATE_PROFILE: 
+      case UPDATE_PROFILE:
         updateProfileFun(action.data, action.id, action.setIsLoading, action.navigate);
         break;
       case GET_ADS:
@@ -249,7 +266,7 @@ const AuthContextComponent = ({ children }) => {
       case GET_VENDOR_PROFILE:
         vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
         break;
-      case PAID_TO_AFFILIATE: 
+      case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
         break;
       case AMOUNT_TO_AFFILIATE:
@@ -352,7 +369,7 @@ const AuthContextComponent = ({ children }) => {
 
 
       //shiprocket
-      case SHIPROCKET_CREATE_ORDER_VENDOR: 
+      case SHIPROCKET_CREATE_ORDER_VENDOR:
         createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
         break;
 
@@ -366,7 +383,7 @@ const AuthContextComponent = ({ children }) => {
 
       case GET_SHIPROCKET_COUNTRY:
         getShipRocketCountry(action.setAllCountries);
-        break;      
+        break;
 
       case GET_SHIPROCKET_LOCALITY:
         getShipRocketLocality(action.setAllLocalities, action.id)
