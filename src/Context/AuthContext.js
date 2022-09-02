@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import {
+  resetPassword,
   userAccActivate,
   userLogin,
   userResendOtp,
@@ -61,7 +62,8 @@ import {
   DELETE_SAVED_ADDRESS,
   UPDATE_PROFILE,
   VENDOR_FORGOTPASSWORD,
-  VENDOR_VERIFYCODE
+  VENDOR_VERIFYCODE,
+  RESET_VENDOR_PASSWORD
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -159,8 +161,7 @@ const AuthContextComponent = ({ children }) => {
         break;
       case VENDOR_FORGOTPASSWORD:
         vendorForgotPass(
-
-          action.values,
+          action.email,
           action.navigate,
         )
         break;
@@ -169,6 +170,9 @@ const AuthContextComponent = ({ children }) => {
           action.values,
           action.navigate,
         )
+        break;
+      case RESET_VENDOR_PASSWORD:
+        resetPassword(action.data, action.navigate);
         break;
       case VENDOR_SIGNUP:
         vendorSignup(

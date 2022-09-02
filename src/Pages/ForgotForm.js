@@ -1,77 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState} from 'react'
 import { useLocation,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
+import { RESET_VENDOR_PASSWORD } from '../Context/Types';
 
 const ForgotForm = () => {
-
+    const { dispatch } = useContext(AuthContext);
     const navigate = useNavigate()
 
-    const {state}=useLocation();
-    console.log(state);
+    const { state } = useLocation();
 
+    const [email, setEmail] = useState(state);
     const[pass, setPass]=useState("")
     const[confirmpass, setConfirmPass]=useState("")
 
-    const onChangeHandler = (e)=>{
-
-        setPass(e.target.value)
-
-    }
-
-    const onChangeHandler1 = (e)=>{
-
-        setConfirmPass(e.target.value)
-
-
-    }
-
-    const onSubmitHandler = async(e)=>{
-
-        // if(pass===confirmpass)
-        // {
-
-        //     e.preventDefault();
-
-        //     const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     };
-    
-        //     const body={
-    
-        //         email:String(state.email),
-        //         password :String(pass)
-    
-        //     }
-        //     try {
-        //         const res = await axios.post(
-        //         "https://hiloramart0.herokuapp.com/api/vendor/reset-password",
-        //           body , 
-        //           config,
-        //         );
-                
-        //         window.alert('🥳 Password Change Successfully');
-        //         navigate('/login');
-        //         // alert.success(res);
-        //       } catch (err) {
-        //         // alert.error('Request Failed');
-        //         console.log("Error hai bhai")
-        //         console.log(err);
-        //       }
-
-
-
-        // }else{
-
-
-        //     alert("Password not match")
-        // }
-
-        
-
-
+    const onSubmitHandler = (e) => {
+        e.preventDefault();
+        if(pass === confirmpass) {
+            dispatch({
+                type: RESET_VENDOR_PASSWORD,
+                data: {
+                    email,
+                    password: pass,
+                },
+                navigate
+            })
+        }else {
+            alert("Password mismatch");
+        }
     }
 
 
@@ -84,24 +41,27 @@ const ForgotForm = () => {
                         Please type the New Password Carefully.
                     </div>
                     <div>
-                        <form id='loginDiv3'onSubmit={(e) => onSubmitHandler(e)} >
+                        <form id='loginDiv3'onSubmit={onSubmitHandler} >
                             <input
                                 name='email'
                                 className='inputBox'
-                                value={state.email}
+                                value={state}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 placeholder='Email or Phone'
+                                disabled={state.length === 0 ? false : true}
                             />{' '}
                             <input
                                 name='password'
                                 className='inputBox'
-                                onChange={(e) => onChangeHandler(e)}
-                                placeholder='password'
+                                onChange={(e) => setPass(e.target.value)}
+                                placeholder='Password'
                             />{' '}
                             <input
                                 name='confirmpassword'
                                 className='inputBox'
-                                onChange={(e) => onChangeHandler1(e)}
-                                placeholder='   Confirm Password'
+                                onChange={(e) => setConfirmPass(e.target.value)}
+                                placeholder='Confirm Password'
+
                             />{' '}
                             {/* <Link
                 to='/otp'

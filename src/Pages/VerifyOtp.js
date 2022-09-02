@@ -5,67 +5,28 @@ import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { useContext } from 'react';
 import { VENDOR_VERIFYCODE } from '../Context/Types';
-const VerifyOtp = () => {
-
-
-
-   
+const VerifyOtp = () => {   
     const { dispatch } = useContext(AuthContext);
 
-    const {state} = useLocation();
-
-    console.log(state)
-    const email1  = state.email;
-    
+    const { state } = useLocation();
 
     const navigate = useNavigate();
-    const[email,setEmail] = useState(state.email)
-    const [otpD,setOtpD] = useState();
-
-    
-
+    const [otpD, setOtpD] = useState();
+    const [email, setEmail] = useState(state);
 
     const onChangeHandler = (e)=>{
-
         setOtpD(e.target.value);
     }
-
-    const body = String(email)
-
-    const onSubmitHandler = async(e)=>{
-        e.preventDefault();
-
-  
-        console.log(body.email)
-        console.log(body.code)
-        try {
-            const res = await axios.post(
-             "https://hiloramart0.herokuapp.com/api/vendor/verify-code",
-              body , 
-              
-            );
-            
-            window.alert('Otp verify sucessfull');
-            navigate('/passwordchange',{state:{email:JSON.parse(email)}});
-            // alert.success(res);
-          } catch (err) {
-            // alert.error('Request Failed');
-            console.log("Error hai bhai")
-            console.log(err);
-          }
-
-
-        // const body={
-        //     email: state.email,
-        //     code:otpD,
-        // }
-
-        
-    // dispatch({
-    //     type: VENDOR_VERIFYCODE,/// type.js se function
-    //     values:body,
-    //     navigate
-    //   })
+    const onSubmitHandler = (e)=>{
+        e.preventDefault(); 
+        dispatch({
+            type: VENDOR_VERIFYCODE,/// type.js se function
+            values: {
+              email: email,
+              code: Number(otpD)
+            },
+            navigate
+          })
 
 
     }
@@ -79,20 +40,21 @@ const VerifyOtp = () => {
             Please Enter the Code for verification.
           </div>
           <div>
-            <form id='loginDiv3'  onSubmit={(e) => onSubmitHandler(e)}>
+            <form id='loginDiv3'  onSubmit={onSubmitHandler}>
             <input
                 name='email'
                 className='inputBox'
-                value={email}
+                value={state}
                 placeholder='Email or Phone'
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={state.length === 0 ? false : true}
                 
               />{' '}
               <input
                 name='code'
                 className='inputBox'
-                onChange={(e) => onChangeHandler(e)}
-              
-                placeholder='Code'
+                onChange={onChangeHandler}              
+                placeholder='OTPs'
               />{' '}
               {/* <Link
                 to='/otp'

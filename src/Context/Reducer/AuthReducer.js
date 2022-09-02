@@ -9,6 +9,7 @@ import {
   vendorSignupRequest,
   vendorForgotpasswordRequest,
   vendorVerifyCode,
+  resetVendorPassword,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -119,32 +120,18 @@ export const vendorLogin = async (
   }
 };
 
-export const vendorForgotPass = async( values,navigate)=>{
-  
-   console.log(values)
-
+export const vendorForgotPass = async(email, navigate)=>{
   try{
     /// api .js function
-    const res = await vendorForgotpasswordRequest(values);
+    const res = await vendorForgotpasswordRequest(email);
     console.log(res);
-    
-  debugger
-    
-
-    if(res.data.success)
-    {
+    if(res.data.success) {
       alert("Otp sent Successfully")
-      navigate('/verifyotp',{ state: values });
+      navigate('/verifyotp', { state: email });
     }else{
-
       alert("Something Went Wrong")
     }
-
-    
-
-
-  }catch(err)
-  {
+  }catch(err) {
     console.log(err);
   }
 
@@ -155,13 +142,28 @@ export const vendorForgotPass = async( values,navigate)=>{
 export const vendorVerifyOtp = async(values,navigate)=>{
 
   try{
-
     const res = await vendorVerifyCode(values);
     console.log(res);
-    
-  }catch(err)
-  {
+    if(res.data.message === "Verification Successful") {
+      alert("Verified Successfully");
+      navigate("/passwordchange", {state: values.email});
+    }else {
+      alert("Verification Failed");
+    }
+  }catch(err){
     console.log(err);
+  }
+}
+
+export const resetPassword = async(data, navigate) => {
+  try {
+    const res = await resetVendorPassword(data);
+    console.log(res);
+    if(res.data.message === "Password Reset Successful") {
+      navigate("/login", {state : {role: 'vendor'}})
+    }
+  } catch (error) {
+    alert("Something went wrong");
   }
 }
 export const vendorSignup = async (

@@ -77,7 +77,7 @@ function App() {
               <Route
                 exact
                 path="/forgotpassword"
-                element={<ForgotPassword />}
+                element={<VForgot />}
               ></Route>
               <Route
                 exact

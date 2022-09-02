@@ -21,21 +21,16 @@ export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
 };
 
-export const vendorForgotpasswordRequest = (values)=>{
-
-
-  const data={
-
-    email:values
-  }
-
-  /// object of body
-  return API.post("api/vendor/verify-code",data);
+export const vendorForgotpasswordRequest = (value)=>{
+  return API.post("api/vendor/forgot-password", {email: value});
 }
 export const vendorVerifyCode = (values)=>{
-
   /// object of body
-  return API.post("api/vendor/forgot-password",values);
+  return API.post("api/vendor/verify-code",values);
+}
+
+export const resetVendorPassword = (data) => {
+  return API.post("/api/vendor/reset-password", data)
 }
 export const vendorLoginRequest = (values) => {
   return API.post("/api/vendor/login", values);

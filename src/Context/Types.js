@@ -1,8 +1,9 @@
 export const USER_LOGIN = "user login";
 export const USER_SIGNUP = "user signup";
 export const VENDOR_LOGIN = "vendor login";
-export const VENDOR_FORGOTPASSWORD = "vendor forgotpassword" 
-export const VENDOR_VERIFYCODE = "vendor verifycode"
+export const VENDOR_FORGOTPASSWORD = "vendor forgotpassword"; 
+export const VENDOR_VERIFYCODE = "vendor verifycode";
+export const RESET_VENDOR_PASSWORD="reset vendor password";
 export const VENDOR_SIGNUP = "vendor signup"; 
 export const GET_ALL_CATEGORY = "get all catergory";
 export const ADD_PRODUCT = "add product";
