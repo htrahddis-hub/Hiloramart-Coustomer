@@ -12,6 +12,7 @@ export const VENDOR_ACCOUNT_ACTIVATE = "vendor account activate";
 export const USER_RESEND_OTP = "user resend_otp";
 export const VENDOR_RESEND_OTP = "vendor resend_otp";
 export const GET_VENDOR_PROFILE = "vendor profile";
+export const GET_VENDOR_PROFILE2 = "vendor profile2";
 export const GET_USER_PROFILE = "user profile";
 export const GET_ALL_PRODUCTS = "get all products";
 export const GET_PRODUCT_DETAILS = "get product details";
@@ -48,6 +49,7 @@ export const UPDATE_PROFILE="update profile";
 
 export const SHIPROCKET_CREATE_ORDER_VENDOR="shiprocket create order vendor";
 export const ADD_SHIPROCKET_PICKUP_LOCATION="add shiprocket pickup location";
+export const ADD_SHIPROCKET_PICKUP_LOCATION2="add shiprocket pickup location2";
 export const GET_SHIPROCKET_ADDRESS="get shiprocket address";
 export const GET_SHIPROCKET_COUNTRY="get shiprocket country";
 export const GET_SHIPROCKET_LOCALITY="get shiprocket locality";

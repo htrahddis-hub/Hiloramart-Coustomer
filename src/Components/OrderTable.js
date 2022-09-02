@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import { useEffect } from "react";
-import { ADD_SHIPROCKET_PICKUP_LOCATION, GET_SHIPROCKET_ADDRESS, GET_VENDOR_ADDRESS, SHIPROCKET_CREATE_ORDER_VENDOR } from "../Context/Types";
+import { ADD_SHIPROCKET_PICKUP_LOCATION, ADD_SHIPROCKET_PICKUP_LOCATION2, GET_SHIPROCKET_ADDRESS, GET_VENDOR_ADDRESS, GET_VENDOR_PROFILE, GET_VENDOR_PROFILE2, SHIPROCKET_CREATE_ORDER_VENDOR } from "../Context/Types";
 import { AuthContext } from "../Context/AuthContext";
 import { useState } from "react";
 
@@ -24,7 +24,7 @@ const style = {
 };
 
 function OrderTable({ data, isLoading }) {
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, AuthRole, currentUser } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,7 +58,11 @@ function OrderTable({ data, isLoading }) {
 
   const [shiprocketCreatedOrder, setShiprocketCreatedOrder] = useState({});
 
-  const [allShiprocketAddress, setAllShiprocketAddress] = useState();
+  const [allShiprocketAddress, setAllShiprocketAddress] = useState([]);
+
+  const [vendorAddress, setVendorAddress] = useState();
+
+  const [profileData, setProfileData] = useState();
 
 
 const orderInputHandler = (e) => {
@@ -69,7 +73,8 @@ const orderInputHandler = (e) => {
 
 const getAddress = () => {
   dispatch({
-    type: GET_VENDOR_ADDRESS
+    type: GET_VENDOR_ADDRESS, 
+    setVendorAddress
   })
 }
 
@@ -83,13 +88,12 @@ const createOrder = (item) => {
   })
 }
 
-const addAddressShiprocket = (item) => {
-  setIsAddAddress(true)
+const addAddressShiprocket = () => {
   dispatch({
-    type: ADD_SHIPROCKET_PICKUP_LOCATION,
-    data: pickupAddress,
-    item,
-    setShiprocketAddress
+    type: ADD_SHIPROCKET_PICKUP_LOCATION2,
+    pickupAddress,
+    profileData,
+    // setShiprocketAddress
   })
 }
 
@@ -108,7 +112,7 @@ const orderAddressHandler = (e) => {
 const getShipRocketAddress = () => {
   dispatch({
     type: GET_SHIPROCKET_ADDRESS,
-    setAllShiprocketAddress
+    setAllShiprocketAddress,
   })
 }
 
@@ -116,7 +120,20 @@ const shiprocketHandler = (e) => {
   setPickupAddressToCreateOrder(e.target.value)
 }
 
+const getProfileData = () => {
+  dispatch({
+    type: GET_VENDOR_PROFILE2,
+    payload: currentUser.id,
+    upDateState: setProfileData,
+  });
+}
+
   useEffect(() => {
+    if (AuthRole === "user") {
+
+    } else {
+      getProfileData();
+    }
     getAddress();
     getShipRocketAddress();
   }, [])
@@ -144,7 +161,7 @@ const shiprocketHandler = (e) => {
       name: "Status",
     },
   ];
-  console.log(data, "my data");
+  console.log(allShiprocketAddress, "my data");
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -158,7 +175,7 @@ const shiprocketHandler = (e) => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => {
+              {data?.map((item) => {
                 return (
                   <>
                   <tr onClick={()=>openModal(item)} className="pointer">
@@ -264,7 +281,7 @@ const shiprocketHandler = (e) => {
                               </div>
 
                               {
-                                allShiprocketAddress?.shipping_address.length === 0 ? (
+                                allShiprocketAddress?.length === 0 ? (
                                   <>
                                   <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px'}}>
                                 <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
@@ -307,7 +324,7 @@ const shiprocketHandler = (e) => {
                                     <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
                                     <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
                                       <option value="">None</option>
-                                      {allShiprocketAddress?.shipping_address.map((item) => (
+                                      {allShiprocketAddress?.map((item) => (
                                         <option value={item?.address}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
                                       ))}
                                     </select>

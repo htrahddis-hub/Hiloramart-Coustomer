@@ -1,28 +1,69 @@
-import { createAddress, createOrder, getAllAddress, getCountry, getLocalities } from "../shiprocketApi";
+import { createAddress, createAddress2, createOrder, getAllAddress, getCountry, getLocalities } from "../shiprocketApi";
 import axios from "axios";
+import { addVendorAddress, getVendorAddresss } from "../API";
 
 
-export const createShiprocketLocation = async(data, setShiprocketAddress, item) => {
+export const createShiprocketLocation2 = async(pickupAddress, profileData) => {
+    const data = {
+        line1: pickupAddress?.address,
+        line2: pickupAddress?.address_2,
+        city: pickupAddress?.city,
+        state: pickupAddress?.state,
+        pincode: pickupAddress?.pin_code,
+        country: pickupAddress?.country,
+        isCurrent: false
+    }
 
-    console.log(data, item, "location created in shiprocket");
+    try {
+        const res = await addVendorAddress(data);
+        if(res.data.success) {
+            const revData = res.data.data.address.reverse();
+            const myData2 = {
+                pickup_location: revData[0]._id,
+                name: profileData?.name,
+                email: profileData?.email,
+                phone: Number(profileData?.number),
+                address: revData[0]?.line1,
+                address_2: revData[0]?.line2,
+                city: revData[0]?.city,
+                state: revData[0]?.state,
+                country: revData[0]?.country,
+                pin_code: Number(revData[0]?.pincode)
+            }
+            try {
+                const res = await createAddress(myData2);
+                console.log(res);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        console.log(res.data.data.address);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const createShiprocketLocation = async(data, profileData) => {
+
+    let reverseData = data.reverse()
+
+    console.log(data, profileData, "location created in shiprocket");
 
     const myData = {
-        pickup_location: data?.address,
-        name: item?.user?.name,
-        email: item?.user?.email,
-        phone: Number(item?.user?.mobile),
-        address: data?.address,
-        address_2: data?.address_2,
-        city: data?.city,
-        state: data?.state,
-        country: data?.country,
-        pin_code: Number(data?.pin_code)
+        pickup_location: reverseData[0]._id,
+        name: profileData?.name,
+        email: profileData?.email,
+        phone: Number(profileData?.number),
+        address: reverseData[0]?.line1,
+        address_2: reverseData[0]?.line2,
+        city: reverseData[0]?.city,
+        state: reverseData[0]?.state,
+        country: reverseData[0]?.country,
+        pin_code: Number(reverseData[0]?.pincode)
     }
-    console.log(myData, "this is important")
     try {
         const res = await createAddress(myData);
         console.log(res, "address crated");
-        setShiprocketAddress(res.data);
     } catch (error) {
         console.log(error);
     }
@@ -31,8 +72,16 @@ export const createShiprocketLocation = async(data, setShiprocketAddress, item) 
 export const getAllShiprocketAddress = async(setAllShiprocketAddress) => {
     try {
         const res = await getAllAddress();
-        // console.log(res);
-        setAllShiprocketAddress(res?.data?.data);
+        console.log(res);
+        const getAdd = await getVendorAddresss();
+
+        let dataPass = [];
+        res.data.data.shipping_address.forEach((item) => (
+            getAdd.data.data.address.forEach((item2) => (
+                (item2._id === item.pickup_location) ? dataPass.push(item) : dataPass
+            ))
+        ))
+        setAllShiprocketAddress(dataPass);
     } catch (error) {
         console.log(error);
     }

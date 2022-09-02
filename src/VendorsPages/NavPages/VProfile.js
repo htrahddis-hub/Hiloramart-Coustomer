@@ -17,10 +17,8 @@ const VProfile = () => {
   const [profileData, setProfileData] = useState();
   useEffect(() => {
     if (AuthRole === "user") {
-      console.log("ssss");
       dispatch({ type: GET_USER_PROFILE, upDateState: setProfileData });
     } else {
-      console.log("ssssaaaa");
       dispatch({
         type: GET_VENDOR_PROFILE,
         payload: currentUser.id,
@@ -36,7 +34,6 @@ const VProfile = () => {
   };
 
 
-  console.log(profileData);
 
   return !profileData ? (
     <ProfileSkeleton />

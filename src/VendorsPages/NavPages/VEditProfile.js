@@ -41,6 +41,8 @@ const VEditProfile = () => {
 
     const [vendorAddress, setVendorAddress] = useState([])
 
+    const [shiprocketAddressResponse, setShiprocketAddressResponse] = useState();
+
     const [address, setAddress] = useState({
         line1: "",
         line2: "",
@@ -139,7 +141,9 @@ const VEditProfile = () => {
             address,
             setIsLoading2,
             handleClose, 
-            setVendorAddress
+            setVendorAddress,
+            profileData,
+            setShiprocketAddressResponse
         })
     }
 
@@ -185,12 +189,14 @@ const VEditProfile = () => {
     }, []);
 
     // console.log(profileData);
-    console.log(vendorAddress);
+    // console.log(vendorAddress);
     // console.log(allCountries, "all Countries")
     // console.log(address, "my address")
 
     // console.log(bankDetails, "bank detail");
     // console.log(updatedProfileData, "vendor detail");
+
+    console.log(shiprocketAddressResponse);
 
 
   return (

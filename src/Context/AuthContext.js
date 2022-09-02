@@ -57,7 +57,9 @@ import {
   ADD_VENDOR_ADDRESS,
   CHANGE_CURRENT_ADDRESS,
   DELETE_SAVED_ADDRESS,
-  UPDATE_PROFILE
+  UPDATE_PROFILE,
+  ADD_SHIPROCKET_PICKUP_LOCATION2,
+  GET_VENDOR_PROFILE2
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -80,7 +82,7 @@ import {
   getAllAds,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
-import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, updateProfileFun, userProfile, vendorProfile } from "./Reducer/ProfileReducer";
+import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, updateProfileFun, userProfile, vendorProfile, vendorProfile2 } from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
   getCurrentOrders,
@@ -98,7 +100,7 @@ import {
 } from "./Reducer/AffiliateReducer";
 import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
-import { createShiprocketLocation, createShiprocketVendorOrder, getAllShiprocketAddress, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
+import { createShiprocketLocation, createShiprocketLocation2, createShiprocketVendorOrder, getAllShiprocketAddress, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -194,7 +196,7 @@ const AuthContextComponent = ({ children }) => {
         getVendorProducts(currentUser.id, action.upDateState, action.setIsLoading);
         break;
       case ADD_VENDOR_ADDRESS:
-        addVendorAddressData(action.address, action.setIsLoading2, action.handleClose, action.setVendorAddress)
+        addVendorAddressData(action.address, action.setIsLoading2, action.handleClose, action.setVendorAddress, action.profileData)
         break;
 
       case CHANGE_CURRENT_ADDRESS:
@@ -247,7 +249,10 @@ const AuthContextComponent = ({ children }) => {
         userProfile(action.upDateState);
         break;
       case GET_VENDOR_PROFILE:
-        vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
+        vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails, action.setShiprocketAddressResponse);
+        break;
+      case GET_VENDOR_PROFILE2: 
+        vendorProfile2(action.payload, action.upDateState);
         break;
       case PAID_TO_AFFILIATE: 
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
@@ -357,7 +362,10 @@ const AuthContextComponent = ({ children }) => {
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
-        createShiprocketLocation(action.data, action.setShiprocketAddress, action.item);
+        createShiprocketLocation(action.profileData, action.data, action.setShiprocketAddress, action.pickupAddress);
+        break;
+      case ADD_SHIPROCKET_PICKUP_LOCATION2:
+        createShiprocketLocation2(action.pickupAddress, action.profileData);
         break;
 
       case GET_SHIPROCKET_ADDRESS:

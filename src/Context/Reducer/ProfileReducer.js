@@ -1,4 +1,5 @@
 import { addVendorAddress, changeCurrentAddress, deleteSavedAddress, getVendorAddresss, updateProfile, userProfileRequest, vendorProfileRequest } from "../API";
+import { createShiprocketLocation } from "./ShiprocketReducer";
 
 export const userProfile = async (upDateState) => {
   try {
@@ -10,6 +11,17 @@ export const userProfile = async (upDateState) => {
     console.log(Err);
   }
 };
+
+export const vendorProfile2 = async(id, upDateState) => {
+  try {
+    const res = await vendorProfileRequest(id);
+    if(res.data) {
+      upDateState(res.data.data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const vendorProfile = async (id, upDateState, setUpdatedProfileData, setBankDetails) => {
   try {
@@ -44,12 +56,13 @@ export const getVendorAddress = async(setVendorAddress) => {
   }
 }
 
-export const addVendorAddressData = async(data, setIsLoading2, handleClose, setVendorAddress) => {
+export const addVendorAddressData = async(data, setIsLoading2, handleClose, setVendorAddress, profileData, setShiprocketAddressResponse) => {
   try {
     setIsLoading2(true);
     const res = await addVendorAddress(data);
     console.log(res?.data?.data, "vendor address added");
-    setVendorAddress(res?.data?.data?.address)
+    setVendorAddress(res?.data?.data?.address);
+    createShiprocketLocation(res?.data?.data?.address, profileData, setShiprocketAddressResponse);
     handleClose();
   } catch (error) {
     console.log(error);
