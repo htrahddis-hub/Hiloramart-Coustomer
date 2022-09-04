@@ -4,7 +4,7 @@ import { useNavigate ,useLocation} from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../Context/AuthContext';
 import { useContext } from 'react';
-import { VENDOR_VERIFYCODE } from '../Context/Types';
+import { VENDOR_FORGOTPASSWORD, VENDOR_VERIFYCODE } from '../Context/Types';
 const VerifyOtp = () => {   
     const { dispatch } = useContext(AuthContext);
 
@@ -17,6 +17,13 @@ const VerifyOtp = () => {
     const onChangeHandler = (e)=>{
         setOtpD(e.target.value);
     }
+
+    const resendOtpHandler = () => {
+      dispatch({
+        type: VENDOR_FORGOTPASSWORD,
+        email,
+      })
+    }
     const onSubmitHandler = (e)=>{
         e.preventDefault(); 
         dispatch({
@@ -27,8 +34,6 @@ const VerifyOtp = () => {
             },
             navigate
           })
-
-
     }
 
   return (
@@ -56,6 +61,7 @@ const VerifyOtp = () => {
                 onChange={onChangeHandler}              
                 placeholder='OTPs'
               />{' '}
+              <span onClick={resendOtpHandler} style={{marginLeft: 'auto', marginTop: '-14px', color: '#fd7e14', cursor: 'pointer'}}>Resend OTP</span>
               {/* <Link
                 to='/otp'
                 style={{color: 'inherit', textDecoration: 'none'}}

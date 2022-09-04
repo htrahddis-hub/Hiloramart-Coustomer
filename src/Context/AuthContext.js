@@ -268,7 +268,7 @@ const AuthContextComponent = ({ children }) => {
         userProfile(action.upDateState);
         break;
       case GET_VENDOR_PROFILE:
-        vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
+        vendorProfile(action.id, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
         break;
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
