@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import VNavBar from "../../VendorsComponents/VNavBar";
 import Img from "../../Assets/Images/NoPath.png";
 import arrow from "../../Assets/Images/arrow.svg";
-import Profile from "../../VendorsAssets/AffliateReqProfile.png";
 import "../../VendorsStyle/VProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../Context/AuthContext";
