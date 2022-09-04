@@ -24,6 +24,7 @@ const VProfile = () => {
       dispatch({
         type: GET_VENDOR_PROFILE,
         payload: currentUser.id,
+        
         upDateState: setProfileData,
       });
     }

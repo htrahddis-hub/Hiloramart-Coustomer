@@ -26,6 +26,7 @@ const VmyRevenue = () => {
       upDateState: setProfileData,
     })
   }
+  console.log(currentUser)
 
   console.log(ads);
   console.log(profileData, "vendor");
@@ -33,6 +34,8 @@ const VmyRevenue = () => {
     getAds();
     getVendorProfile();
   }, [])
+
+//  console.log("profiledata:",profileData)
   return (
     <>
       <div>
@@ -42,7 +45,8 @@ const VmyRevenue = () => {
           MY REVENUE
         </div>
         <div>
-          <AccountDetail />
+          <AccountDetail data={profileData}
+           />
           <LastTransections ads={ads}/>
         </div>
       </div>
