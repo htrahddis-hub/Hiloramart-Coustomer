@@ -1,4 +1,4 @@
-import { createAddress, createAddress2, createOrder, getAllAddress, getCountry, getLocalities } from "../shiprocketApi";
+import { createAddress, createAddress2, createOrder, generateAWB, getAllAddress, getCountry, getCourierService, getLocalities, pickupRequest } from "../shiprocketApi";
 import axios from "axios";
 import { addVendorAddress, getVendorAddresss } from "../API";
 
@@ -88,7 +88,7 @@ export const getAllShiprocketAddress = async(setAllShiprocketAddress) => {
 }
 
 
-export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder) => {
+export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder, setCourierServiceAvail, pickupCode) => {
     console.log(item);
     console.log(orderData);
     const myData = {
@@ -129,6 +129,15 @@ export const createShiprocketVendorOrder = async(orderData, item, pickupAddressT
     try {
         const res = await createOrder(myData);
         setShiprocketCreatedOrder(res.data)
+        if(res?.status === 200) {
+            try {
+                const res2 = await getCourierService(pickupCode, item?.address?.pincode, res?.data?.order_id)
+                console.log(res2);
+                setCourierServiceAvail(res2?.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
         console.log(res, "shiprocket create order");
     } catch (error) {
         console.log(error);
@@ -152,3 +161,32 @@ export const getShipRocketLocality = async(setAllLocalities, id) => {
         console.log(error);
     }
 }
+
+export const generateAWBNow = async(shipmentId, setIsLoading3, courierId) => {
+    setIsLoading3(true);
+    try {
+        const res = await generateAWB(shipmentId, courierId);
+        if(res.data) {
+            try {
+                const res2 = await pickupRequest(shipmentId);
+                console.log(res2);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    } finally {
+        setIsLoading3(false);
+    }
+}
+
+
+// export const getCourierServices = async(pickupCode, deliveryCode, setCourierServiceAvail) => {
+//     try {
+//         const res = await getCourierService(pickupCode, deliveryCode);
+//         console.log(res);
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }

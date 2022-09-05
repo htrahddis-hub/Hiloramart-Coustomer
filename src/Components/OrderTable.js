@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Box from "@mui/material/Box";
 import { useEffect } from "react";
-import { ADD_SHIPROCKET_PICKUP_LOCATION, ADD_SHIPROCKET_PICKUP_LOCATION2, GET_SHIPROCKET_ADDRESS, GET_VENDOR_ADDRESS, GET_VENDOR_PROFILE, GET_VENDOR_PROFILE2, SHIPROCKET_CREATE_ORDER_VENDOR } from "../Context/Types";
+import { ADD_SHIPROCKET_PICKUP_LOCATION, ADD_SHIPROCKET_PICKUP_LOCATION2, GENERATE_SHIPROCKET_AWB, GET_SHIPROCKET_ADDRESS, GET_SHIPROCKET_COURIER_SERVICE, GET_VENDOR_ADDRESS, GET_VENDOR_PROFILE, GET_VENDOR_PROFILE2, SHIPROCKET_CREATE_ORDER_VENDOR } from "../Context/Types";
 import { AuthContext } from "../Context/AuthContext";
 import { useState } from "react";
 
@@ -64,6 +64,18 @@ function OrderTable({ data, isLoading }) {
 
   const [profileData, setProfileData] = useState();
 
+  const [pickupCode, setPickupCode] = useState();
+  const [deliveryCode, setDeliveryCode] = useState();
+
+  const [courierServiceAvail, setCourierServiceAvail] = useState();
+
+  const [isLocationSelected, setIsLocationSelected] = useState(false);
+
+  const [isLoading3, setIsLoading3] = useState(false);
+
+  const [courierId, setCourierId] = useState();
+
+
 
 const orderInputHandler = (e) => {
   setOrderData((prev) => {
@@ -84,7 +96,10 @@ const createOrder = (item) => {
     orderData,
     item,
     pickupAddressToCreateOrder,
-    setShiprocketCreatedOrder
+    setShiprocketCreatedOrder,
+
+    setCourierServiceAvail,
+    pickupCode
   })
 }
 
@@ -98,8 +113,10 @@ const addAddressShiprocket = () => {
 }
 
 const openModal = (itemData) => {
+
   setItem({...itemData});
   handleOpen();
+  setDeliveryCode(Number(itemData?.address?.pincode));
 }
 
 
@@ -117,15 +134,43 @@ const getShipRocketAddress = () => {
 }
 
 const shiprocketHandler = (e) => {
-  setPickupAddressToCreateOrder(e.target.value)
+  console.log(e.target.value)
+  if(e.target.value.length === 0) {
+    setIsLocationSelected(false);
+  }else {
+    setIsLocationSelected(true);
+    const {pickup_location, pin_code} = JSON.parse(e.target.value);
+    setPickupAddressToCreateOrder(pickup_location);
+    setPickupCode(pin_code);
+  }
 }
 
 const getProfileData = () => {
   dispatch({
     type: GET_VENDOR_PROFILE2,
-    payload: currentUser.id,
+    id: currentUser.id,
     upDateState: setProfileData,
   });
+}
+
+
+const assignCourierHandler = () => {
+  dispatch({
+    type: GENERATE_SHIPROCKET_AWB,
+    shipmentId: shiprocketCreatedOrder?.shipment_id,
+    courierId,
+    setIsLoading3
+  })
+}
+
+const courierServiceSelector = (e) => {
+  if(e.target.value.length === 0) {
+    setCourierId("");
+  }else {
+      const data = JSON.parse(e.target.value);
+      console.log(data, "courier item");
+      setCourierId(data?.courier_company_id);
+  }
 }
 
   useEffect(() => {
@@ -161,7 +206,7 @@ const getProfileData = () => {
       name: "Status",
     },
   ];
-  console.log(allShiprocketAddress, "my data");
+  console.log(courierServiceAvail, "my data");
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -325,53 +370,82 @@ const getProfileData = () => {
                                     <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
                                       <option value="">None</option>
                                       {allShiprocketAddress?.map((item) => (
-                                        <option value={item?.address}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
+                                        <option value={JSON.stringify(item)}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
                                       ))}
                                     </select>
                                   </div>
                                   <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px'}}>
-                                
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="address">Address Line 1</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="address" id="address" />
-                                  </div>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="address_2">Address Line 2</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="address_2" id="address_2" />
-                                  </div>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="city">City</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="city" id="city" />
-                                  </div>
-                                </div>
-                                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="state">State</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="state" id="state" />
-                                  </div>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="country">Country</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="country" id="country" />
-                                  </div>
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>                                    
-                                    <label style={{color: 'gray'}} htmlFor="pin_code">Zipcode</label>
-                                    <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="pin_code" id="pin_code" />
-                                  </div>
-                                </div>
-                                  </div>
+
+                                  {
+                                    isLocationSelected && courierServiceAvail !== undefined ? (
+                                      <>
+                                      <label htmlFor="courier" style={{marginBottom: '10px'}}>Select Courier Service:</label>
+                                      <select onChange={courierServiceSelector} style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} name="courier" id="courier">
+                                        <option value="">Select</option>
+                                        {
+                                          courierServiceAvail?.data?.available_courier_companies.map((item) => (
+                                            <option value={JSON.stringify(item)}>{item?.courier_name}</option>
+                                          ))
+                                        }
+                                      </select>
+                                      <div className="button-container">
+                                        <Button onClick={assignCourierHandler} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Assign Courier</Button>
+                                        <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
+                                      </div>
+                                      </>
+                                    ) : (
+                                      <>
+                                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="address">Address Line 1</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="address" id="address" />
+                                        </div>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="address_2">Address Line 2</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="address_2" id="address_2" />
+                                        </div>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="city">City</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="city" id="city" />
+                                        </div>
+                                      </div>
+                                      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="state">State</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="state" id="state" />
+                                        </div>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="country">Country</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="country" id="country" />
+                                        </div>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>                                    
+                                          <label style={{color: 'gray'}} htmlFor="pin_code">Zipcode</label>
+                                          <input onChange={orderAddressHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="text" name="pin_code" id="pin_code" />
+                                        </div>
+                                      </div>
                                   <div>
                                     <Button onClick={()=>addAddressShiprocket(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Add Address</Button>
+                                  </div>
+                                    </>
+                                    )
+                                  }
+                                
                                   </div>
                                   </>
                                 )
                               }
                             </div>
                           </div>
-                        <div className="button-container">
-                            <Button onClick={()=>createOrder(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Submit</Button>
-                            <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
-                        </div>
+                        {
+                          courierServiceAvail !== undefined ? (
+                            <span></span>
+                          ) : (
+                            <div className="button-container">
+                                <Button onClick={()=>createOrder(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Submit</Button>
+                                <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
+                            </div>
+                          )
+                        }  
                       </Box>
           </Modal>
         </div>

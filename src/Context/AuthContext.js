@@ -59,7 +59,9 @@ import {
   DELETE_SAVED_ADDRESS,
   UPDATE_PROFILE,
   ADD_SHIPROCKET_PICKUP_LOCATION2,
-  GET_VENDOR_PROFILE2
+  GET_VENDOR_PROFILE2,
+  GET_SHIPROCKET_COURIER_SERVICE,
+  GENERATE_SHIPROCKET_AWB
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -100,7 +102,7 @@ import {
 } from "./Reducer/AffiliateReducer";
 import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
-import { createShiprocketLocation, createShiprocketLocation2, createShiprocketVendorOrder, getAllShiprocketAddress, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
+import { createShiprocketLocation, createShiprocketLocation2, createShiprocketVendorOrder, generateAWBNow, getAllShiprocketAddress, getCourierServices, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -358,7 +360,7 @@ const AuthContextComponent = ({ children }) => {
 
       //shiprocket
       case SHIPROCKET_CREATE_ORDER_VENDOR: 
-        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
+        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode)
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
@@ -378,7 +380,14 @@ const AuthContextComponent = ({ children }) => {
 
       case GET_SHIPROCKET_LOCALITY:
         getShipRocketLocality(action.setAllLocalities, action.id)
-        break
+        break;
+      
+      // case GET_SHIPROCKET_COURIER_SERVICE:
+      //   getCourierServices(action.pickupCode, action.deliveryCode, action.setCourierServiceAvail);
+      //   break;
+      case GENERATE_SHIPROCKET_AWB: 
+        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId);
+        break;
     }
   };
   const initialValues = {};

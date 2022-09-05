@@ -22,3 +22,11 @@ export const createOrder = (data) => API.post("/external/orders/create/adhoc",da
 export const getCountry = () => API.get("/external/countries");
 
 export const getLocalities = (id) => API.get(`/external/countries/show/${id}`);
+
+export const getCourierService = (pickupCode, deliveryCode, orderId) => API.get(`/external/courier/serviceability?pickup_postcode=${pickupCode}&delivery_postcode=${deliveryCode}&order_id=${orderId}`);
+
+export const generateAWB = (shipmentId, courierId) => API.post("/external/courier/assign/awb", {shipment_id: shipmentId, courier_id: courierId});
+
+export const pickupRequest = (shipmentId) => API.post("/external/courier/generate/pickup", {
+    shipment_id: [shipmentId]
+})

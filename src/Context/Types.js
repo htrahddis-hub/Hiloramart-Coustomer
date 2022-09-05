@@ -53,3 +53,6 @@ export const ADD_SHIPROCKET_PICKUP_LOCATION2="add shiprocket pickup location2";
 export const GET_SHIPROCKET_ADDRESS="get shiprocket address";
 export const GET_SHIPROCKET_COUNTRY="get shiprocket country";
 export const GET_SHIPROCKET_LOCALITY="get shiprocket locality";
+export const GET_SHIPROCKET_COURIER_SERVICE="get shiprocket courier service";
+export const GENERATE_SHIPROCKET_AWB="generate shiprocket awb";
+export const REQUEST_SHIPROCKET_SHIPMENT="request shiprocket shipment";
