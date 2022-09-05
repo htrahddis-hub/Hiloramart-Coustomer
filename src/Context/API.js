@@ -26,7 +26,7 @@ export const vendorForgotpasswordRequest = (value)=>{
 }
 export const vendorVerifyCode = (values)=>{
   /// object of body
-  return API.post("api/vendor/verify-code",values);
+  return API.post("api/vendor/verify-code",values)
 }
 
 export const resetVendorPassword = (data) => {
@@ -64,6 +64,10 @@ export const getVendorAddresss = () => {
   return API.get('/vendor/getMyaddress');
 }
 
+export const getVendorSale=(startDate,endDate)=>{
+
+  return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`)
+}
 export const addVendorAddress = (data) => {
   return API.post("/vendor/addAddress", data);
 }

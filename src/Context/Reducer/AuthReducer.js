@@ -10,6 +10,7 @@ import {
   vendorForgotpasswordRequest,
   vendorVerifyCode,
   resetVendorPassword,
+  getVendorSale,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -137,6 +138,18 @@ export const vendorForgotPass = async(email, navigate)=>{
 
 
 
+}
+
+export const getVSale= async(startDate,endDate)=>{
+
+  try{
+
+    const res = await getVendorSale(startDate,endDate)
+    console.log("res,",res)
+  }catch(err)
+  {
+
+  }
 }
 
 export const vendorVerifyOtp = async(values,navigate)=>{

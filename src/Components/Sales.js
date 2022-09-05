@@ -25,7 +25,6 @@ function Sales() {
     }
   }
 
-
   const getCategoryData = async (data) => {
     const body = {
       category: [data?._id]
@@ -40,13 +39,11 @@ function Sales() {
 
   const handleCategory = (item) => {
     if(item.target.value.length === 0) {
-
     }else {
       const data = JSON.parse(item.target.value)
       getCategoryData(data);
     }
   };
-
 
   useEffect(() => {
     getAllCategories();
@@ -66,6 +63,8 @@ function Sales() {
               ))
             }
           </select>
+        </div>
+        <div >
           <div className="filter">
             <input onChange={dateChanger} style={{ width: '100%' }} type="date" name="sale-date" id="sale-date" />
           </div>
