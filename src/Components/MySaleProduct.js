@@ -1,18 +1,35 @@
 import React from "react";
 import "../Styles/Components/Sales.css";
 import product_image from "../Assets/Images/MyWishList/Image.svg";
-function MySaleProduct() {
+function MySaleProduct({ data }) {
   return (
-    <div className="sale-product-container">
-      <div>
-        <img src={product_image} alt="product image" />
-      </div>
-      <div>
-        <p>From</p>
-        <p>LOOP SCANO 1100 HAND HELD METAL DETECTOR</p>
-      </div>
-      <div>RS.5,000</div>
-    </div>
+    <>
+
+
+      {data.map((e) => {
+
+        return <div className="sale-product-container">
+          <div>
+            <img src={e.productImage} alt="product image" />
+          </div>
+          <div>
+            <p>From</p>
+            <p>{e.name}</p>
+
+            <p>{e.description}</p>
+          </div>
+          <div>{e.price}</div>
+        </div>
+
+
+
+
+
+
+      })}
+
+
+    </>
   );
 }
 

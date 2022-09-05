@@ -13,6 +13,7 @@ function Sales() {
   const [isDropdown, setIsDropDown] = useState(false);
 
   const [allCategory, setAllCategory] = useState([]);
+  const[sale,setSale] = useState([]);
 
 
   const getAllCategories = async () => {
@@ -32,10 +33,13 @@ function Sales() {
     try {
       const res = await axios.post(`https://hiloramart0.herokuapp.com/product/getProductsbyCategoryId`, body)
       console.log(res);
+      setSale(res.data.data);
     } catch (error) {
       console.log(error)
     }
   }
+
+  console.log("Sale",sale)
 
   const handleCategory = (item) => {
     if(item.target.value.length === 0) {
@@ -54,26 +58,26 @@ function Sales() {
       <div className="topbar">
         <div style={{ textAlign: 'center' }}>MY SALE</div>
 
-        <div className="category-div-cont" style={{ float: "left", width: "20%" }} >
+        <div className="category-div-cont " style={{ float: "right" }} >
           <select onChange={handleCategory} name="cateogory" id="category">
-            <option value="">Select</option>
+            <option value="" style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%"}}>Select</option>
             {
-              allCategory?.map((item) => (
-                <option value={JSON.stringify(item)}>{item?.name}</option>
+              allCategory?.map((item,ind) => (
+                <option value={JSON.stringify(item)}  key={ind}>{item?.name }</option>
               ))
             }
           </select>
         </div>
         <div >
           <div className="filter">
-            <input onChange={dateChanger} style={{ width: '100%' }} type="date" name="sale-date" id="sale-date" />
+            {/* <input onChange={dateChanger} style={{ width: '100%' }} type="date" name="sale-date" id="sale-date" /> */}
           </div>
         </div>
       </div>
       <div className="sale-product-parent">
-        <MySaleProduct />
-        <MySaleProduct />
-        <MySaleProduct />
+        <MySaleProduct data={sale}/>
+      
+        
       </div>
     </div>
   );
