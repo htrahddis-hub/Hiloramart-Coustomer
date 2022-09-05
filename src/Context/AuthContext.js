@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import {
+  getVSale,
   resetPassword,
   userAccActivate,
   userLogin,
@@ -63,7 +64,8 @@ import {
   UPDATE_PROFILE,
   VENDOR_FORGOTPASSWORD,
   VENDOR_VERIFYCODE,
-  RESET_VENDOR_PASSWORD
+  RESET_VENDOR_PASSWORD,
+  VENDOR_SALE
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -269,6 +271,10 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_VENDOR_PROFILE:
         vendorProfile(action.id, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
+        break;
+      case  VENDOR_SALE:
+      
+        getVSale(action.startDate,action.endDate);
         break;
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)

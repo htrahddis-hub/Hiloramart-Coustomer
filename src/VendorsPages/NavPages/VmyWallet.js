@@ -6,14 +6,18 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import AccordionAffiliate from "../../Components/AccordionAffiliate";
 import { AuthContext } from "../../Context/AuthContext";
-import { AMOUNT_TO_AFFILIATE, PAID_TO_AFFILIATE } from "../../Context/Types";
+import { AMOUNT_TO_AFFILIATE, PAID_TO_AFFILIATE, VENDOR_SALE } from "../../Context/Types";
 import { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 
+
 import axios from "axios";
 import { async } from "@firebase/util";
+
+
+
 const VmyWallet = () => {
 
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -102,16 +106,25 @@ const VmyWallet = () => {
   const getSales=async()=>{
 
 
-    try {
-      const res = await axios.get(`https://hiloramart0.herokuapp.com/ord/salesCount?startDate=2010-07-25T06:53:32.643Z&endDate=2022-07-29T06:53:32.643Z`)
+    // try {
+    //   const res = await axios.get(`https://hiloramart0.herokuapp.com/ord/salesCount?startDate=2010-07-25T06:53:32.643Z&endDate=2022-07-29T06:53:32.643Z`)
 
-      // console.log("res",res);
-    } catch (error) {
+    //   // console.log("res",res);
+    // } catch (error) {
 
-      console.log(error)
+    //   console.log(error)
       
-    }
+    // }
 
+    dispatch({
+
+      type: VENDOR_SALE,
+      startDate: firsttDate,
+      endDate: lastmonthDate
+    })
+
+
+    
     
 
    

@@ -26,6 +26,7 @@ function Sales() {
     try {
 
 
+
       const res = await axios.get(`https://hiloramart0.herokuapp.com/product/getProductCategory`)
 
 
@@ -39,8 +40,15 @@ function Sales() {
 
   const getCategoryData = async () => {
 
-    const catid = String(category.id)
-    const arr = [catid]
+    
+  const catid = String(category.id)
+  // const arr = [catid]
+  // console.log("Arr",arr)
+
+  console.log("catid:",catid)
+
+
+ 
 
     const body = {
 
@@ -62,11 +70,12 @@ function Sales() {
 
   }
 
-  const handleCategory = (e) => {
-    console.log(e)
+  const handleCategory = (item) => {
+    console.log(item)
+  
     setCategory({
-      name: e.target.innerText,
-      id: e.target.id,
+      name: item.name,
+      id: item._id,
     });
     setIsDropDown(false);
 
@@ -74,6 +83,8 @@ function Sales() {
 
     // console.log(e);
   };
+
+
 
   console.log(category.name)
   console.log(category.id)
@@ -106,7 +117,7 @@ function Sales() {
                   <div
                     id={item._id}
                     className="cat-li"
-                    onClick={handleCategory}
+                    onClick={(item)=>handleCategory(item)}
                   >
                     {item.name}
                   </div>
