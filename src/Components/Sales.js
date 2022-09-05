@@ -15,74 +15,41 @@ function Sales() {
   const [allCategory, setAllCategory] = useState([]);
 
 
-  const [category, setCategory] = useState({
-    name: "",
-    id: "",
-  });
-
-
-  const fetchdata = async () => {
-
+  const getAllCategories = async () => {
     try {
-
-
-      const res = await axios.get(`https://hiloramart0.herokuapp.com/product/getProductCategory`)
-
-
-      setAllCategory(res.data.data)
-
+      const res = await axios.get(`https://hiloramart0.herokuapp.com/product/getProductCategory`);
+      setAllCategory(res.data.data);
+      console.log(res, "all category");
     } catch (err) {
       console.log(err);
     }
   }
 
 
-  const getCategoryData = async () => {
-
-    const catid = String(category.id)
-    const arr = [catid]
-
+  const getCategoryData = async (data) => {
     const body = {
-
-      category: [`${category.id}`]
+      category: [data?._id]
     }
-
-
     try {
       const res = await axios.post(`https://hiloramart0.herokuapp.com/product/getProductsbyCategoryId`, body)
-
       console.log(res);
-
     } catch (error) {
-
       console.log(error)
-
     }
-
-
   }
 
-  const handleCategory = (e) => {
-    console.log(e)
-    setCategory({
-      name: e.target.innerText,
-      id: e.target.id,
-    });
-    setIsDropDown(false);
+  const handleCategory = (item) => {
+    if(item.target.value.length === 0) {
 
-    getCategoryData();
-
-    // console.log(e);
+    }else {
+      const data = JSON.parse(item.target.value)
+      getCategoryData(data);
+    }
   };
 
-  console.log(category.name)
-  console.log(category.id)
 
   useEffect(() => {
-
-
-    fetchdata();
-
+    getAllCategories();
   }, [])
 
   return (
@@ -91,41 +58,15 @@ function Sales() {
         <div style={{ textAlign: 'center' }}>MY SALE</div>
 
         <div className="category-div-cont" style={{ float: "left", width: "20%" }} >
-
-          <div
-            className="VinputBox cat-div " style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            onClick={() => setIsDropDown(!isDropdown)}
-          >
-            {category.name ? category.name : "Category"}
-          </div>
-
-          {isDropdown && (
-            <div className="category-list">
-              {allCategory?.map((item, index) => {
-                return (
-                  <div
-                    id={item._id}
-                    className="cat-li"
-                    onClick={handleCategory}
-                  >
-                    {item.name}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-
-
-
-        </div>
-        <div >
-
+          <select onChange={handleCategory} name="cateogory" id="category">
+            <option value="">Select</option>
+            {
+              allCategory?.map((item) => (
+                <option value={JSON.stringify(item)}>{item?.name}</option>
+              ))
+            }
+          </select>
           <div className="filter">
-
-
-
-
             <input onChange={dateChanger} style={{ width: '100%' }} type="date" name="sale-date" id="sale-date" />
           </div>
         </div>
