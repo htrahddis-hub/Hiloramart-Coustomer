@@ -56,13 +56,7 @@ import {
 
 
 
-const AccountDetail = ({data}) => {
-
- 
-
-
-
-
+const AccountDetail = ({profileData}) => {
     return (
         <>
 
@@ -71,23 +65,23 @@ const AccountDetail = ({data}) => {
             <div id='ADcont1'>
                 <div className='ADrow'>
                     <div >Account Number</div>
-                    <div>{data?.bankDetails?.account_no}</div>
+                    <div>{profileData?.bankDetails?.account_no}</div>
                 </div>
                 <div className='ADrow'>
                     <div >Account Holder Name</div>
-                    <div>{data?.bankDetails?.account_holder_name}</div>
+                    <div>{profileData?.bankDetails?.account_holder_name}</div>
                 </div>
                 <div className='ADrow'>
                     <div>IFSC Code</div>
-                    <div></div>
+                    <div>{profileData?.bankDetails?.ifsc_code}</div>
                 </div>
                 <div className='ADrow'>
                     <div>Bank Name</div>
-                    <div></div>
+                    <div>{profileData?.bankDetails?.bank_name}</div>
                 </div>
             </div>
             <div style={{width: '50%'}} id='ADcont2'>
-                 {/* <Line style={{width: '100%'}} options={options} data={data} /> */}
+                 <Line style={{width: '100%'}} options={options} data={data} />
             </div>
         </div>
         </>

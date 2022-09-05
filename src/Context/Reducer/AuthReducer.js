@@ -98,6 +98,7 @@ export const vendorLogin = async (
   )
   localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
+      localStorage.setItem("vendorUserId", res?.data?.data?.user_id);
       Cookies.set("auth_token", res.data.data.token);
       Cookies.set("role", "vendor");
       setAuth((prev) => true);

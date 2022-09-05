@@ -1,6 +1,8 @@
 import React from 'react'
 
 const LastTransections = ({ads}) => {
+
+    console.log(ads);
     return (
         <>
 

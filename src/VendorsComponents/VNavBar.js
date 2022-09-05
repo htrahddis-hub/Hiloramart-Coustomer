@@ -5,6 +5,7 @@ import Profile from "../Assets/Images/Navbar/Profile.png";
 import Hiloramart from "../VendorsAssets/LOGO.png";
 import "../Styles/Components/Navbar.css";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const VNavBar = () => {
   return (
@@ -43,6 +44,7 @@ const VNavBar = () => {
           <Link to="/VLogin" className="linkT NavICon">
             <img src={Profile} alt="Profile" />
           </Link>
+          <Button>Logout</Button>
           <div></div>
         </div>
       </div>

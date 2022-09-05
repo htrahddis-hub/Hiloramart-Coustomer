@@ -13,13 +13,14 @@ const VProfile = () => {
   console.log(AuthRole);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
+  const userId = localStorage.getItem("vendorUserId");
   useEffect(() => {
     if (AuthRole === "user") {
       dispatch({ type: GET_USER_PROFILE, upDateState: setProfileData });
     } else {
       dispatch({
         type: GET_VENDOR_PROFILE,
-        id: currentUser.id,
+        id: userId,
         upDateState: setProfileData,
       });
     }

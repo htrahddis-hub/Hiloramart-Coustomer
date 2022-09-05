@@ -4,13 +4,16 @@ import Profile from "../Assets/Images/Navbar/Profile.png";
 import notification_icon from "../Assets/Images/notification.svg";
 import Hiloramart from "../Assets/Images/Navbar/Hiloramart.png";
 import "../Styles/Components/Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import Profileimg from "../VendorsAssets/AffliateReqProfile.png";
+import { Button } from "@mui/material";
+import Cookies from "js-cookie";
 
 const NavBar = () => {
-  const { AuthRole } = useContext(AuthContext);
+  const { AuthRole, setAuth } = useContext(AuthContext);
   const [isNotifi, setIsNotifi] = useState(false);
+  const navigate = useNavigate();
   const user_nav_data = [
     {
       id: '001',
@@ -100,6 +103,13 @@ const NavBar = () => {
   const handleNotification = () => {
     setIsNotifi(!isNotifi);
   };
+
+  const handleLogout = () => {
+    Cookies.remove("auth_token");
+    Cookies.remove("role");
+    setAuth(false);
+    navigate("/choose-role-login", { replace: true });
+  }
   return (
     <>
       <div className="NavMain">
@@ -156,6 +166,7 @@ const NavBar = () => {
           <NavLink to="/profile" className="linkT NavICon">
             <img src={Profile} alt="Profile" />
           </NavLink>
+          <Button variant="contained"  onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     </>
