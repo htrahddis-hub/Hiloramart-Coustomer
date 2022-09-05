@@ -9,8 +9,63 @@ import { AuthContext } from "../../Context/AuthContext";
 import { AMOUNT_TO_AFFILIATE, PAID_TO_AFFILIATE } from "../../Context/Types";
 import { useState } from "react";
 import { CircularProgress } from "@mui/material";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 
+import axios from "axios";
+import { async } from "@firebase/util";
 const VmyWallet = () => {
+
+  const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+
+
+  const [date, setDate] = useState(new Date());
+  const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+  let month = date.getMonth() + 1;
+  const year = date.getFullYear()
+  const tDate = date.getDate();
+
+
+  //// Last Date ////
+  let lmonth = lastDate.getMonth() + 1;
+  const lyear = lastDate.getFullYear()
+  const lDate = lastDate.getDate();
+
+  if(Number(month)<=9)
+  {
+    month = "0"+month
+  }
+  if(Number(lmonth)<=9)
+  {
+    lmonth = "0"+lmonth
+  }
+
+  const firsttDate = year + "-" + month + "-" + tDate
+  const lastmonthDate = year + "-" + month + "-" + lDate
+
+  
+
+
+  const monthname = monthNames[month - 1];
+
+
+
+
+
+  const handledate = (date) => {
+
+    setDate(date)
+
+    
+  }
+
+
+
+  const [show, setShow] = useState(false)
 
   const { dispatch } = useContext(AuthContext);
   const [paidToAffiliates, setPaidToAffiliates] = useState();
@@ -25,6 +80,8 @@ const VmyWallet = () => {
     })
   }
 
+
+
   const getAmountToAffiliate = () => {
     dispatch({
       type: AMOUNT_TO_AFFILIATE,
@@ -33,19 +90,58 @@ const VmyWallet = () => {
     })
   }
 
-  console.log(amountToAffiliates, "thus")
+  // console.log(amountToAffiliates, "thus")
 
   useEffect(() => {
     getPaidAffiliate();
     getAmountToAffiliate();
   }, [])
+
+
+
+  const getSales=async()=>{
+
+
+    try {
+      const res = await axios.get(`https://hiloramart0.herokuapp.com/ord/salesCount?startDate=2010-07-25T06:53:32.643Z&endDate=2022-07-29T06:53:32.643Z`)
+
+      // console.log("res",res);
+    } catch (error) {
+
+      console.log(error)
+      
+    }
+
+    
+
+   
+  }
+
+
+  useEffect(()=>{
+
+    getSales();
+
+
+
+  },[date])
   return (
     <>
       <div>
         <div id="MWcont4">
-          <img src={DownIcon} alt="" />
-          April 2022
+          <img src={DownIcon} alt="" onClick={() => setShow(!show)} />
+          {monthname}{"   "}{year}
+
+
+
+
         </div>
+        {show && (
+          <>
+            <Calendar onChange={handledate} value={date} />
+          </>
+        )}
+
         <div id="MWcont1">
           <div className="WalletCont1">
             <div>
@@ -187,14 +283,14 @@ const VmyWallet = () => {
           <div id="AdmainCont">
             <div id="LastTcont1">
               {
-                isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
-                paidToAffiliates?.length === 0 ? (
-                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Paid To Affiliates Found!</p>
-                ) : (
-                  paidToAffiliates?.map((item) => (
-                    <AccordionAffiliate />
-                  ))
-                )
+                isLoading ? (<div style={{ width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0' }}><CircularProgress style={{ color: '#FF8D22' }} /></div>) :
+                  paidToAffiliates?.length === 0 ? (
+                    <p style={{ textAlign: 'center', margin: '40px 0' }}>No Paid To Affiliates Found!</p>
+                  ) : (
+                    paidToAffiliates?.map((item) => (
+                      <AccordionAffiliate />
+                    ))
+                  )
               }
               {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
                 return <AccordionAffiliate />;
@@ -208,14 +304,14 @@ const VmyWallet = () => {
           <div id="AdmainCont">
             <div id="LastTcont1">
               {
-                isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress  style={{color: '#FF8D22'}}/></div> ) :
-                amountToAffiliates?.length === 0 ? (
-                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Amount To Paid Found!</p>
-                ) : (
-                  amountToAffiliates?.map((item) => (
-                    <AccordionAffiliate />
-                  ))
-                )
+                isLoading ? (<div style={{ width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0' }}><CircularProgress style={{ color: '#FF8D22' }} /></div>) :
+                  amountToAffiliates?.length === 0 ? (
+                    <p style={{ textAlign: 'center', margin: '40px 0' }}>No Amount To Paid Found!</p>
+                  ) : (
+                    amountToAffiliates?.map((item) => (
+                      <AccordionAffiliate />
+                    ))
+                  )
               }
               {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
                 return <AccordionAffiliate />;

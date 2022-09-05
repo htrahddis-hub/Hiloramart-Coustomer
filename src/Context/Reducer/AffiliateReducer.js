@@ -107,7 +107,7 @@ export const getAmountToAffiliates = async(setAmountToAffiliates, setIsLoading) 
     const res = await getAmountToAffiliate();
     setAmountToAffiliates(res.data.data);
     // debugger
-    console.log(res, "amount to affiliates");
+    // console.log(res, "amount to affiliates");
   } catch (error) {
     console.log(error);
   } finally {

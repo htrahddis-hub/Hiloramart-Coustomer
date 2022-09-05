@@ -5,8 +5,12 @@ import DownIcon from '../Assets/Images/DownIcon.png';
 import rightIcon from '../Assets/Images/rightIcon.png';
 import NavBar from '../Components/NavBar';
 import Footer from '../Components/Footer';
+import DatePicker from "react-datepicker";
+import { useState } from 'react';
 
+import "react-datepicker/dist/react-datepicker.css";
 const MyWallet = () => {
+  const [startDate, setStartDate] = useState(new Date());
   return (
     <div>
       <NavBar />
@@ -22,7 +26,9 @@ const MyWallet = () => {
       <div id='WalletCont5'>
         <div>From Your Affiliates</div>
         <div>
-          <img src={DownIcon} alt='' /> April 2022
+          {/* <img src={DownIcon} alt='' />
+           April 2022 */}
+           <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
         </div>
       </div>
       <div id='WalletCont3'>

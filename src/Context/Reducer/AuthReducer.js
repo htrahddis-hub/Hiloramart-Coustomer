@@ -139,6 +139,14 @@ export const vendorForgotPass = async(email, navigate)=>{
 
 }
 
+// export const getVendorSale= async()=>{
+
+//   try{
+
+//     const res = await getVendorSale()
+//   }
+// }
+
 export const vendorVerifyOtp = async(values,navigate)=>{
 
   try{
