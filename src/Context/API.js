@@ -133,6 +133,10 @@ export const getMyOrderRequest = () => {
   return API.get("/orders/myOrders");
 };
 
+export const updateOrderRequest = (data) => {
+  return API.get("/ord/updateOrder", data);
+}
+
 //ads
 export const getAds = () => {
   return API.get("/ads/getMyAds");

@@ -61,7 +61,8 @@ import {
   ADD_SHIPROCKET_PICKUP_LOCATION2,
   GET_VENDOR_PROFILE2,
   GET_SHIPROCKET_COURIER_SERVICE,
-  GENERATE_SHIPROCKET_AWB
+  GENERATE_SHIPROCKET_AWB,
+  UPDATE_VENDOR_ORDER
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -100,7 +101,7 @@ import {
   getPaidTOAffiliates,
   joinAffliate,
 } from "./Reducer/AffiliateReducer";
-import { denyAffiliateRequest, getAmountToAffiliate } from "./API";
+import { denyAffiliateRequest, getAmountToAffiliate, updateOrderRequest } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
 import { createShiprocketLocation, createShiprocketLocation2, createShiprocketVendorOrder, generateAWBNow, getAllShiprocketAddress, getCourierServices, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
@@ -360,7 +361,7 @@ const AuthContextComponent = ({ children }) => {
 
       //shiprocket
       case SHIPROCKET_CREATE_ORDER_VENDOR: 
-        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode)
+        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode, action.setIsLoading2)
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
@@ -386,7 +387,7 @@ const AuthContextComponent = ({ children }) => {
       //   getCourierServices(action.pickupCode, action.deliveryCode, action.setCourierServiceAvail);
       //   break;
       case GENERATE_SHIPROCKET_AWB: 
-        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId);
+        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2);
         break;
     }
   };

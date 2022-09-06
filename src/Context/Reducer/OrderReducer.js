@@ -5,8 +5,10 @@ import {
   getMyOrderRequest,
   getReturnOrdersRequest,
   returnItemRequest,
+  updateOrderRequest,
 } from "../API";
 import { notification } from "../AuthContext";
+import { getDetailsOfSpecificShipment } from "../shiprocketApi";
 
 export const getMyOrder = async (setIsLoading, upDateState) => {
   // setIsLoading(true)
@@ -38,9 +40,35 @@ export const returnITem = async (values, upDateState, setIsLoading) => {
 //vendor
 export const getCurrentOrders = async (upDateState, setIsLoading) => {
   setIsLoading(true);
+  let shiprocketData = [];
   try {
     const res = await getCurrentOrdersRequest();
     upDateState(res.data.data);
+    console.log(res, "all order here");
+    if(res.status === 200) {
+      res?.data?.data.forEach(async(order) => {
+        try {
+          const res2 = await getDetailsOfSpecificShipment(order?.SKUshipmentId);
+          console.log(res2);
+          if(res.status === 200) {
+            res2.data.data.forEach(async(item) => {
+              if(item.order_id === order.SKUorderId) {
+                const res3 = await updateOrderRequest({order_id: order._id, status: item.status});
+                console.log(res3);
+              }
+            })
+          }
+          try {
+            const res4 = await getCurrentOrdersRequest();
+            upDateState(res4.data.data);
+          } catch (error) {
+            console.log(error);
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      })
+    }
   } catch (err) {
     console.log(err);
   } finally {
@@ -70,3 +98,5 @@ export const getCompletedOrders = async (upDateState, setIsLoading) => {
     setIsLoading(false);
   }
 };
+
+

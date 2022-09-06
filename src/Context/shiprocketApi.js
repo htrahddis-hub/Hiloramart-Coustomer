@@ -30,3 +30,5 @@ export const generateAWB = (shipmentId, courierId) => API.post("/external/courie
 export const pickupRequest = (shipmentId) => API.post("/external/courier/generate/pickup", {
     shipment_id: [shipmentId]
 })
+
+export const getDetailsOfSpecificShipment = (shipmentId) => API.get(`/external/shipments/${shipmentId}`);

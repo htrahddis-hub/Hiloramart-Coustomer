@@ -1,7 +1,8 @@
 import { createAddress, createAddress2, createOrder, generateAWB, getAllAddress, getCountry, getCourierService, getLocalities, pickupRequest } from "../shiprocketApi";
 import axios from "axios";
-import { addVendorAddress, getVendorAddresss } from "../API";
-
+import { addVendorAddress, getVendorAddresss, updateOrderRequest } from "../API";
+import { Store } from "react-notifications-component";
+import { notification } from "../AuthContext";
 
 export const createShiprocketLocation2 = async(pickupAddress, profileData) => {
     const data = {
@@ -88,7 +89,7 @@ export const getAllShiprocketAddress = async(setAllShiprocketAddress) => {
 }
 
 
-export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder, setCourierServiceAvail, pickupCode) => {
+export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder, setCourierServiceAvail, pickupCode, setIsLoading2) => {
     console.log(item);
     console.log(orderData);
     const myData = {
@@ -127,20 +128,40 @@ export const createShiprocketVendorOrder = async(orderData, item, pickupAddressT
 
     console.log(myData);
     try {
+        setIsLoading2(true);
         const res = await createOrder(myData);
         setShiprocketCreatedOrder(res.data)
+        console.log(res); //res.data.order_id
+        
         if(res?.status === 200) {
+            Store.addNotification({
+                ...notification,
+                type: "success",
+                message: "Order Created! Please Assign Courier",
+              });
             try {
                 const res2 = await getCourierService(pickupCode, item?.address?.pincode, res?.data?.order_id)
                 console.log(res2);
                 setCourierServiceAvail(res2?.data);
             } catch (error) {
                 console.log(error);
+                Store.addNotification({
+                    ...notification,
+                    type: "warning",
+                    message: "No courier service found!",
+                  });
             }
         }
         console.log(res, "shiprocket create order");
     } catch (error) {
         console.log(error);
+        Store.addNotification({
+            ...notification,
+            type: "danger",
+            message: "Order is not created!",
+          });
+    }finally {
+        setIsLoading2(false);
     }
 }
 
@@ -162,20 +183,46 @@ export const getShipRocketLocality = async(setAllLocalities, id) => {
     }
 }
 
-export const generateAWBNow = async(shipmentId, setIsLoading3, courierId) => {
+export const generateAWBNow = async(shipmentId, setIsLoading3, courierId, handleClose, orderId, orderId2) => {
     setIsLoading3(true);
     try {
-        const res = await generateAWB(shipmentId, courierId);
+        console.log(orderId, "data");
+        const res = await generateAWB(shipmentId, courierId, orderId2);
+        console.log(res, "res1");
         if(res.data) {
             try {
-                const res2 = await pickupRequest(shipmentId);
-                console.log(res2);
+                const res2 = await pickupRequest(String(shipmentId));
+                console.log(res2, "res2");
+                if(res2.status === 200) {
+                    try {
+                        const res3 = await updateOrderRequest({order_id: orderId, SKUorderId: orderId2, SKUshipmentId: shipmentId, status: "Pickup Scheduled"});
+                        console.log(res3);
+                        Store.addNotification({
+                            ...notification,
+                            type: "success",
+                            message: "Courier Assigned",
+                          });
+                          //   handleClose();
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
             } catch (error) {
                 console.log(error);
+                Store.addNotification({
+                    ...notification,
+                    type: "danger",
+                    message: "Courier Assign Failed",
+                });
             }
         }
     } catch (error) {
         console.log(error);
+        Store.addNotification({
+            ...notification,
+            type: "danger",
+            message: "Courier Assign Failed",
+          });
     } finally {
         setIsLoading3(false);
     }
