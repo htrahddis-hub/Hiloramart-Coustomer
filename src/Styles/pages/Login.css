@@ -80,13 +80,13 @@
 #loginDiv1 {
   font-size: 32px;
   font-weight: bold;
-  padding-bottom: 5%;
+  /* padding-bottom: 5%; */
 }
 #loginDiv2 {
   font-size: 16px;
   opacity: 50%;
   font-weight: 500;
-  padding-bottom: 10%;
+  /* padding-bottom: 10%; */
 }
 .inputBox::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */

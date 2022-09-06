@@ -40,7 +40,6 @@ export const returnITem = async (values, upDateState, setIsLoading) => {
 //vendor
 export const getCurrentOrders = async (upDateState, setIsLoading) => {
   setIsLoading(true);
-  let shiprocketData = [];
   try {
     const res = await getCurrentOrdersRequest();
     upDateState(res.data.data);
@@ -87,6 +86,8 @@ export const getReturnOrders = async (upDateState, setIsLoading) => {
     setIsLoading(false);
   }
 };
+
+
 export const getCompletedOrders = async (upDateState, setIsLoading) => {
   setIsLoading(true);
   try {

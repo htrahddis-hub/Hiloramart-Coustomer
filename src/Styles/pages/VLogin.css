@@ -8,7 +8,7 @@
 .LoginContainer1 {
   border: 1px solid #707070;
   border-radius: 14px;
-  padding: 4% 10%;
+  padding: 1% 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +30,7 @@
   width: 424px;
   border-radius: 8px;
   height: 50px;
-  margin: 1rem 0;
+  margin: .4rem 0;
   outline-width: 1px;
   outline-color: #707070;
   font-weight: 600;

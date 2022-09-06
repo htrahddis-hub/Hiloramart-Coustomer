@@ -109,7 +109,6 @@ const Login = () => {
                       placeholder="Password"
                       ref={passRef}
                     />
-                    <img src={eye} className="eye-icon" onClick={handleView} />
                     <div className="error-container">
                       <div className="error">
                         {errors.password && touched.password && errors.password}

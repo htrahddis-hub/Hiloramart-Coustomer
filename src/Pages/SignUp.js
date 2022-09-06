@@ -63,9 +63,9 @@ const SignUp = () => {
   if (location.state == null) return <Navigate to={-1} />; // to have role defined is user or vendor
   return (
     <>
-      <div className="LoginMainContainer">
-        <div className="LoginContainer1" style={{ padding: "2% 10%" }}>
-          <div id="loginDiv1" style={{ fontSize: "22px" }}>
+      <div style={{height: '100vh'}} className="LoginMainContainer">
+        <div className="LoginContainer1" >
+          <div id="loginDiv1" style={{ fontSize: "22px", margin: 0 }}>
             Create Account
           </div>
           <div id="loginDiv2">Sign up to Your Account</div>
