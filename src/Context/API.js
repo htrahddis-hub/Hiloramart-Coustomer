@@ -68,6 +68,12 @@ export const getVendorSale=(startDate,endDate)=>{
 
   return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`)
 }
+
+export const getVendorAllSale=(startDate,endDate,page,limit)=>{
+
+  return API.get(`/ord/mySales?startDate=${startDate}&endDate=${endDate}&pageno=${page}&limit=${limit}`)
+}
+
 export const addVendorAddress = (data) => {
   return API.post("/vendor/addAddress", data);
 }

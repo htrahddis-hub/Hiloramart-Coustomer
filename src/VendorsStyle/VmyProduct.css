@@ -3,3 +3,46 @@
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.VinputBox {
+  width: 20%;
+  height: 60px;
+  background: #ffffff;
+  border: none;
+  color: black;
+  border-radius: 10px;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  min-width: 270px;
+}
+.end{
+  margin-right: 20%;
+}
+
+.cat-div {
+  display: flex;
+  align-items: center;
+}
+.category-list {
+  position: absolute;
+  background-color: white;
+  padding: 1rem;
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 7px 2px #e7e7e7;
+  overflow-y: scroll;
+  min-width: 250px;
+  width: 20%;
+  top: 34%;
+}
+.cat-li {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #cec9c9;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.cat-li:hover {
+  box-shadow: 2px 2px 7px 2px #e7e7e7;
+}
+

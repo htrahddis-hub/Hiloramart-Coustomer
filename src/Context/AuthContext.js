@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import {
   getVSale,
+  getVAllSale,
   resetPassword,
   userAccActivate,
   userLogin,
@@ -65,7 +66,8 @@ import {
   VENDOR_FORGOTPASSWORD,
   VENDOR_VERIFYCODE,
   RESET_VENDOR_PASSWORD,
-  VENDOR_SALE
+  VENDOR_SALE,
+  VENDOR_ALL_SALE
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -274,8 +276,10 @@ const AuthContextComponent = ({ children }) => {
         break;
       case  VENDOR_SALE:
       
-        getVSale(action.startDate,action.endDate);
+        getVSale(action.startDate,action.endDate,action.upDateState);
         break;
+      case VENDOR_ALL_SALE:
+        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState);
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
         break;
