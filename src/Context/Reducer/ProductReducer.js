@@ -92,6 +92,8 @@ export const addProduct = async (
     const values = {
       name: inputData.productName,
       description: inputData.prodcutDescription,
+      stock: inputData.stock,
+      size: inputData.size,
       price: inputData.price,
       productImage: urlResponse,
       productVideos: videoUrlResponse,

@@ -134,7 +134,7 @@ export const getMyOrderRequest = () => {
 };
 
 export const updateOrderRequest = (data) => {
-  return API.get("/ord/updateOrder", data);
+  return API.post("/ord/updateOrder", data);
 }
 
 //ads

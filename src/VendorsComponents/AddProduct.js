@@ -20,6 +20,7 @@ const AddProduct = () => {
     stock: "",
     productName: "",
     price: "",
+    size: "",
     prodcutDescription: "",
   });
   const [allCategory, setAllCategory] = useState([]);
@@ -101,6 +102,7 @@ const AddProduct = () => {
       brandName: "",
       productName: "",
       price: "",
+      size: "",
       prodcutDescription: "",
     });
     setFile("");
@@ -148,6 +150,8 @@ const AddProduct = () => {
     setIsDropDown(false);
     // console.log(e);
   };
+
+  console.log(inputData)
 
   return (
     <Container>
@@ -210,6 +214,16 @@ const AddProduct = () => {
                 className="VinputBox"
                 name="price"
                 value={inputData.price}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Size"
+                className="VinputBox"
+                name="size"
+                value={inputData.size}
                 onChange={handleInputChange}
               />
             </div>

@@ -15,7 +15,7 @@ function MyOrders() {
       <div className="my-order-container-title">ORDER HISTORY</div>
       <div className="my-order-card-conatiner">
         {allOrders.map((item) => {
-          return <MyOrderCard data={item} />;
+          return <MyOrderCard data={item}/>;
         })}
       </div>
     </div>

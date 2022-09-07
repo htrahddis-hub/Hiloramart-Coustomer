@@ -28,13 +28,8 @@ function OrderTable({ data, isLoading }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const [item, setItem] = useState();
-
   const [isAddAddress, setIsAddAddress] = useState(false);
-
-
-
   const [orderData, setOrderData] = useState({
     length: 0,
     breadth: 0,
@@ -42,7 +37,6 @@ function OrderTable({ data, isLoading }) {
     weight: 0,
     // address: "",
   })
-
   const [pickupAddress, setPickupAddress] = useState({
     address: "",
     address_2: "",
@@ -51,34 +45,21 @@ function OrderTable({ data, isLoading }) {
     country: "",
     pin_code: 0
   });
-
   const [pickupAddressToCreateOrder, setPickupAddressToCreateOrder] = useState("");
-
   const [shiprocketAddress, setShiprocketAddress] = useState();
-
   const [shiprocketCreatedOrder, setShiprocketCreatedOrder] = useState({});
-
   const [allShiprocketAddress, setAllShiprocketAddress] = useState([]);
-
   const [vendorAddress, setVendorAddress] = useState();
-
   const [profileData, setProfileData] = useState();
-
   const [pickupCode, setPickupCode] = useState();
   const [deliveryCode, setDeliveryCode] = useState();
-
   const [courierServiceAvail, setCourierServiceAvail] = useState();
-
   const [isLocationSelected, setIsLocationSelected] = useState(false);
-
   const [isLoading3, setIsLoading3] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
-
   const [courierId, setCourierId] = useState();
-
   const [orderId, setOrderId] = useState("");
-
-
+  const [isOrderCreated, setIsOrderCreated] = useState(false);
 
 const orderInputHandler = (e) => {
   setOrderData((prev) => {
@@ -102,7 +83,8 @@ const createOrder = (item) => {
     setShiprocketCreatedOrder,
     setCourierServiceAvail,
     pickupCode,
-    setIsLoading2
+    setIsLoading2,
+    setIsOrderCreated
   })
 }
 
@@ -165,7 +147,7 @@ const assignCourierHandler = () => {
     setIsLoading3,
     handleClose,
     orderId,
-    orderId2: shiprocketCreatedOrder?.order_id
+    orderId2: shiprocketCreatedOrder?.order_id,
   })
 }
 
@@ -206,13 +188,10 @@ const courierServiceSelector = (e) => {
       name: "Amount",
     },
     {
-      name: "Reason",
-    },
-    {
       name: "Status",
     },
   ];
-  console.log(courierServiceAvail, "my data");
+  console.log(shiprocketCreatedOrder, "my data");
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -230,21 +209,21 @@ const courierServiceSelector = (e) => {
                 return (
                   <>
                   <tr onClick={()=>openModal(item)} className="pointer">
-                    <div className="column-details">{item._id}</div>
-                    <div className="column-details">{item.productId.name}</div>
-                    <div className="column-details">{item.quantity}</div>
+                    <div className="column-details">{item?._id}</div>
+                    <div className="column-details">{item?.productId?.name}</div>
+                    <div className="column-details">{item?.quantity}</div>
                     <div className="column-details">
-                      {item.user.name +
+                      {item?.user?.name +
                         " " +
-                        item.user.address[0].line1 +
+                        item?.user?.address[0]?.line1 +
                         ", " +
-                        item.user.address[0].city +
+                        item?.user?.address[0]?.city +
                         ", " +
-                        item.user.address[0].state}
+                        item?.user?.address[0]?.state}
                     </div>
-                    <div className="column-details">Rs. {item.totalPrice}</div>
-                    <div className="column-details">{item.price}</div>
-                    <div className="column-details">{item.status}</div>
+                    <div className="column-details">Rs. {item?.totalPrice}</div>
+                    {/* <div className="column-details">{item?.price}</div> */}
+                    <div className="column-details">{item?.status}</div>
                   </tr>
                   </>
                 );
@@ -266,7 +245,8 @@ const courierServiceSelector = (e) => {
                         ) : (
                           <>
                             <div style={{display: 'flex'}}>
-                              <div style={{width: '40%'}}>
+                              <div style={{width: '40%', backgroundColor: '#39b7ff21', padding: '20px 10px', borderRadius: '8px'}}>
+                              <h6 style={{fontSize: '20px', textAlign: 'center'}}>Order Details :</h6>
                                 <div className="product-info-container">
                                   <span className="heading">Order Id</span>
                                   <span className="heading-data">{item?._id}</span>
@@ -317,30 +297,63 @@ const courierServiceSelector = (e) => {
                                 </div>
                               </div>
                               <div style={{width: '60%', padding: '0 30px'}}>
-                                  <h1 style={{fontSize: '30px'}}>Order Details :</h1>
-                                  <div style={{display: 'flex'}} className="items">
-                                    <div style={{display: 'flex', flexDirection: 'column', marginRight: '5px'}}>
-                                      <label style={{color: 'gray'}} htmlFor="length">Length (cm)</label>
-                                      <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="length" id="length" />
-                                    </div>
-                                    <div style={{display: 'flex', flexDirection: 'column', marginRight: '5px'}}>
-                                      <label style={{color: 'gray'}} htmlFor="breadth">Breadth (cm)</label>
-                                      <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="breadth" id="breadth" />
-                                    </div>
-                                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                                      <label style={{color: 'gray'}} htmlFor="height">Heigth (cm)</label>
-                                      <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="height" id="height" />
-                                    </div>
-                                  </div>
+                                  
+                                    {isOrderCreated ? (
+                                      <div style={{backgroundColor: '#39b7ff21', padding: '20px 10px', borderRadius: '8px'}}>
+                                      <h6 style={{fontSize: '20px', textAlign: 'center'}}>Shipment Details</h6>
+                                        <div className="product-info-container">
+                                          <span className="heading">Courier Assigned</span>
+                                          <span className="heading-data">No Courier Assigned</span>
+                                        </div>
+                                        <div className="product-info-container">
+                                          <span className="heading">Dimension</span>
+                                          <span className="heading-data">{`${orderData?.length}x${orderData?.breadth}x${orderData?.height} cm`}</span>
+                                        </div>
+                                        <div className="product-info-container">
+                                          <span className="heading">Weight</span>
+                                          <span className="heading-data">{`${orderData?.weight} kg`}</span>
+                                        </div>
+                                        {/* <div className="product-info-container">
+                                          <span className="heading">Created At</span>
+                                          <span className="heading-data">{item?.isCOD ? "COD" : "UPI"}</span>
+                                        </div> */}
+                                      </div>
+                                    ) : (
+                                      <>
+                                        <div style={{display: 'flex'}} className="items">
+                                          <div style={{display: 'flex', flexDirection: 'column', marginRight: '5px'}}>
+                                            <label style={{color: 'gray'}} htmlFor="length">Length (cm)</label>
+                                            <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="length" id="length" />
+                                          </div>
+                                          <div style={{display: 'flex', flexDirection: 'column', marginRight: '5px'}}>
+                                            <label style={{color: 'gray'}} htmlFor="breadth">Breadth (cm)</label>
+                                            <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="breadth" id="breadth" />
+                                          </div>
+                                          <div style={{display: 'flex', flexDirection: 'column'}}>
+                                            <label style={{color: 'gray'}} htmlFor="height">Heigth (cm)</label>
+                                            <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="height" id="height" />
+                                          </div>
+                                        </div>
 
-                                  <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <label style={{color: 'gray'}} htmlFor="weight">Weight (kg)</label>
-                                    <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="weight" id="weight" />
-                                  </div>
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                                          <label style={{color: 'gray'}} htmlFor="weight">Weight (kg)</label>
+                                          <input onChange={orderInputHandler} style={{border: '1px solid #FF8D22', height: '40px', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} type="number" name="weight" id="weight" />
+                                        </div>
 
+                                      </>
+                                    )}
                                   {
                                     allShiprocketAddress?.length === 0 ? (
                                       <>
+                                      <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
+                                        <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
+                                          <option value="">None</option>
+                                          {allShiprocketAddress?.map((item) => (
+                                            <option value={JSON.stringify(item)}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
+                                          ))}
+                                        </select>
+                                      </div>
                                       <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px'}}>
                                     <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
                                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -378,15 +391,6 @@ const courierServiceSelector = (e) => {
                                       </>
                                     ) : (
                                       <>
-                                      <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
-                                        <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
-                                          <option value="">None</option>
-                                          {allShiprocketAddress?.map((item) => (
-                                            <option value={JSON.stringify(item)}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
-                                          ))}
-                                        </select>
-                                      </div>
                                       <div style={{display: 'flex', flexDirection: 'column', marginTop: '20px'}}>
 
                                       {
@@ -408,6 +412,15 @@ const courierServiceSelector = (e) => {
                                           </>
                                         ) : (
                                           <>
+                                          <div style={{display: 'flex', flexDirection: 'column'}}>
+                                            <label htmlFor="address" style={{marginBottom: '10px'}}>Pickup Address:</label>
+                                            <select onChange={shiprocketHandler} name="add" id="add" style={{border: '1px solid #FF8D22', height: '40px',width: '100%', borderRadius: '8px', marginBottom: '10px', outline: 'none', paddingLeft: '10px'}} >
+                                              <option value="">None</option>
+                                              {allShiprocketAddress?.map((item) => (
+                                                <option value={JSON.stringify(item)}>{`${item?.address}, ${item?.address_2}, ${item?.city}-${item?.pin_code}, ${item?.state}, ${item?.country}`}</option>
+                                              ))}
+                                            </select>
+                                          </div>
                                           <div style={{display: 'flex', justifyContent: 'space-between'}}>
                                             <div style={{display: 'flex', flexDirection: 'column'}}>                                    
                                               <label style={{color: 'gray'}} htmlFor="address">Address Line 1</label>
@@ -439,6 +452,16 @@ const courierServiceSelector = (e) => {
                                       <div>
                                         <Button onClick={()=>addAddressShiprocket(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Add Address</Button>
                                       </div>
+                                      {
+                                        courierServiceAvail !== undefined ? (
+                                          <span></span>
+                                        ) : (
+                                          <div style={{marginTop: '20px', marginLeft: 'auto'}} className="button-container">
+                                              <Button onClick={()=>createOrder(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Submit</Button>
+                                              <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
+                                          </div>
+                                        )
+                                      }  
                                         </>
                                         )
                                       }
@@ -449,16 +472,6 @@ const courierServiceSelector = (e) => {
                                   }
                                 </div>
                               </div>
-                            {
-                              courierServiceAvail !== undefined ? (
-                                <span></span>
-                              ) : (
-                                <div className="button-container">
-                                    <Button onClick={()=>createOrder(item)} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">Submit</Button>
-                                    <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
-                                </div>
-                              )
-                            }  
                           </>
                         ) 
                       }

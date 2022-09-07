@@ -361,7 +361,7 @@ const AuthContextComponent = ({ children }) => {
 
       //shiprocket
       case SHIPROCKET_CREATE_ORDER_VENDOR: 
-        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode, action.setIsLoading2)
+        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode, action.setIsLoading2, action.setIsOrderCreated)
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
@@ -387,7 +387,7 @@ const AuthContextComponent = ({ children }) => {
       //   getCourierServices(action.pickupCode, action.deliveryCode, action.setCourierServiceAvail);
       //   break;
       case GENERATE_SHIPROCKET_AWB: 
-        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2);
+        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2, action.setAllOrders);
         break;
     }
   };

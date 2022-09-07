@@ -1,6 +1,6 @@
 import { createAddress, createAddress2, createOrder, generateAWB, getAllAddress, getCountry, getCourierService, getLocalities, pickupRequest } from "../shiprocketApi";
 import axios from "axios";
-import { addVendorAddress, getVendorAddresss, updateOrderRequest } from "../API";
+import { addVendorAddress, getCurrentOrdersRequest, getVendorAddresss, updateOrderRequest } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
 
@@ -89,7 +89,7 @@ export const getAllShiprocketAddress = async(setAllShiprocketAddress) => {
 }
 
 
-export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder, setCourierServiceAvail, pickupCode, setIsLoading2) => {
+export const createShiprocketVendorOrder = async(orderData, item, pickupAddressToCreateOrder, setShiprocketCreatedOrder, setCourierServiceAvail, pickupCode, setIsLoading2, setIsOrderCreated) => {
     console.log(item);
     console.log(orderData);
     const myData = {
@@ -139,6 +139,7 @@ export const createShiprocketVendorOrder = async(orderData, item, pickupAddressT
                 type: "success",
                 message: "Order Created! Please Assign Courier",
               });
+            setIsOrderCreated(true);
             try {
                 const res2 = await getCourierService(pickupCode, item?.address?.pincode, res?.data?.order_id)
                 console.log(res2);
@@ -160,6 +161,7 @@ export const createShiprocketVendorOrder = async(orderData, item, pickupAddressT
             type: "danger",
             message: "Order is not created!",
           });
+        setIsOrderCreated(false);
     }finally {
         setIsLoading2(false);
     }
@@ -183,7 +185,7 @@ export const getShipRocketLocality = async(setAllLocalities, id) => {
     }
 }
 
-export const generateAWBNow = async(shipmentId, setIsLoading3, courierId, handleClose, orderId, orderId2) => {
+export const generateAWBNow = async(shipmentId, setIsLoading3, courierId, handleClose, orderId, orderId2, setAllOrders) => {
     setIsLoading3(true);
     try {
         console.log(orderId, "data");
@@ -202,7 +204,14 @@ export const generateAWBNow = async(shipmentId, setIsLoading3, courierId, handle
                             type: "success",
                             message: "Courier Assigned",
                           });
-                          //   handleClose();
+                        handleClose();
+                        try {
+                            const res4 = await getCurrentOrdersRequest();
+                            setAllOrders(res4?.data?.data);
+                        } catch (error) {
+                            console.log(error);
+                        }
+
                     } catch (error) {
                         console.log(error);
                     }
@@ -227,13 +236,3 @@ export const generateAWBNow = async(shipmentId, setIsLoading3, courierId, handle
         setIsLoading3(false);
     }
 }
-
-
-// export const getCourierServices = async(pickupCode, deliveryCode, setCourierServiceAvail) => {
-//     try {
-//         const res = await getCourierService(pickupCode, deliveryCode);
-//         console.log(res);
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
