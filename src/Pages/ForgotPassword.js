@@ -4,42 +4,67 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAlert } from 'react-alert';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
+import { VENDOR_FORGOTPASSWORD } from '../Context/Types';
+
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const { dispatch } = useContext(AuthContext);
 
-  const [formData, setformData] = useState({
-    email: '',
-  });
-  const { email } = formData;
+  const [email, setEmail] = useState("");
+
+
+
+
   const onChangeHandler = (e) => {
-    setformData({ ...formData, [e.target.name]: e.target.value });
+    setEmail(e.target.value);
   };
-  const onSubmitHandler = async (e) => {
+
+
+
+  const onSubmitHandler =  (e) => {
     e.preventDefault();
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-    const body = JSON.stringify({ email });
-    console.log(body);
-    try {
-      const res = await axios.post(
-        'https://hiloramart-user.herokuapp.com/auth/forgotPassword',
-        body,
-        config
-      );
-      console.log(res);
-      window.alert('forgot password api sucessfull');
-      navigate('/otp');
-      // alert.success(res);
-    } catch (err) {
-      // alert.error('Request Failed');
+    
+    const body={
 
-      console.log(err);
+      email
     }
+    console.log(body)
+
+    dispatch({
+      type: VENDOR_FORGOTPASSWORD,/// type.js se function
+      values:body.email,
+      navigate
+    })
+
+    
+   
+
+     /////  Ayush 
+    // try {
+    //   const res = await axios.post(
+    //     'https://hiloramart0.herokuapp.com/api/vendor/forgot-password',
+    //     body , 
+    //     config,
+    //   );
+    //   console.log(res);
+    //   window.alert('Otp Sent sucessfull');
+    //   navigate('/verifyotp',{ state: { email: JSON.parse(body)} });
+    //   // alert.success(res);
+    // } catch (err) {
+    //   // alert.error('Request Failed');
+    //   console.log("Error hai bhai")
+    //   console.log(err);
+    // }
+
+    
+
+
   };
+
+
   return (
     <>
       <div className='LoginMainContainer'>

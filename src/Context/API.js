@@ -20,6 +20,18 @@ export const userSignUpRequest = (values) => {
 export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
 };
+
+export const vendorForgotpasswordRequest = (value)=>{
+  return API.post("api/vendor/forgot-password", {email: value});
+}
+export const vendorVerifyCode = (values)=>{
+  /// object of body
+  return API.post("api/vendor/verify-code",values)
+}
+
+export const resetVendorPassword = (data) => {
+  return API.post("/api/vendor/reset-password", data)
+}
 export const vendorLoginRequest = (values) => {
   return API.post("/api/vendor/login", values);
 };
@@ -52,6 +64,10 @@ export const getVendorAddresss = () => {
   return API.get('/vendor/getMyaddress');
 }
 
+export const getVendorSale=(startDate,endDate)=>{
+
+  return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`)
+}
 export const addVendorAddress = (data) => {
   return API.post("/vendor/addAddress", data);
 }

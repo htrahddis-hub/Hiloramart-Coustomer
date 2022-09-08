@@ -56,7 +56,8 @@ import Checkout from "./Pages/Checkout";
 import MyPlans from "./Pages/MyPlans";
 import ProductUpdated from "./Pages/ProductUpdated";
 import MyProductsForAds from "./VendorsPages/NavPages/MyProductsForAds";
-
+import VerifyOtp from "./Pages/VerifyOtp";
+import ForgotForm from "./Pages/ForgotForm";
 function App() {
   return (
     <>
@@ -77,7 +78,17 @@ function App() {
               <Route
                 exact
                 path="/forgotpassword"
-                element={<ForgotPassword />}
+                element={<VForgot />}
+              ></Route>
+              <Route
+                exact
+                path="/verifyotp"
+                element={<VerifyOtp />}
+              ></Route>
+              <Route
+                exact
+                path="/passwordchange"
+                element={<ForgotForm />}
               ></Route>
             </Route>
             {/* private routes */}

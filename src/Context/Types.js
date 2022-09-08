@@ -1,7 +1,10 @@
 export const USER_LOGIN = "user login";
 export const USER_SIGNUP = "user signup";
 export const VENDOR_LOGIN = "vendor login";
-export const VENDOR_SIGNUP = "vendor signup";
+export const VENDOR_FORGOTPASSWORD = "vendor forgotpassword"; 
+export const VENDOR_VERIFYCODE = "vendor verifycode";
+export const RESET_VENDOR_PASSWORD="reset vendor password";
+export const VENDOR_SIGNUP = "vendor signup"; 
 export const GET_ALL_CATEGORY = "get all catergory";
 export const ADD_PRODUCT = "add product";
 export const GET_VENDOR_PRODUCTS = "get vendor products";
@@ -45,7 +48,7 @@ export const CHANGE_CURRENT_ADDRESS="change current address";
 export const DELETE_SAVED_ADDRESS="delete saved address";
 export const UPDATE_PROFILE="update profile";
 
-
+export const VENDOR_SALE = "my sale"
 
 
 export const SHIPROCKET_CREATE_ORDER_VENDOR="shiprocket create order vendor";

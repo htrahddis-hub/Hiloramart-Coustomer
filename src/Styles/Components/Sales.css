@@ -8,12 +8,22 @@
   padding: 1rem 2rem;
 }
 .topbar :nth-child(1) {
-  flex: 1;
+  /* flex: 1;
   text-align: right;
   font-weight: 600;
   font-size: 2rem;
-  font-family: "Poppins";
+  font-family: "Poppins"; */
+  flex: 1 1;
+    /* text-align: right; */
+    font-weight: 600;
+    font-size: 2rem;
+    font-family: "Poppins";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 59px; */
 }
+
 .filter {
   /* display: flex; */
   /* flex: 1; */
@@ -37,6 +47,8 @@
   margin-bottom: 2rem;
 }
 .sale-product-container :nth-child(1) {
+
+  height: 30vh;
   flex: 1;
 }
 .sale-product-container :nth-child(2) {
@@ -44,6 +56,10 @@
   text-align: center;
   font-weight: 500;
   font-family: "Poppins";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .sale-product-container :nth-child(3) {
   flex: 1;

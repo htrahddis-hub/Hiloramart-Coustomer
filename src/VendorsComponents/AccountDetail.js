@@ -56,9 +56,7 @@ import {
 
 
 
-const AccountDetail = () => {
-
-
+const AccountDetail = ({profileData}) => {
     return (
         <>
 
@@ -67,19 +65,19 @@ const AccountDetail = () => {
             <div id='ADcont1'>
                 <div className='ADrow'>
                     <div >Account Number</div>
-                    <div>1564 8746 **** *376</div>
+                    <div>{profileData?.bankDetails?.account_no}</div>
                 </div>
                 <div className='ADrow'>
                     <div >Account Holder Name</div>
-                    <div>Mr Rohit</div>
+                    <div>{profileData?.bankDetails?.account_holder_name}</div>
                 </div>
                 <div className='ADrow'>
                     <div>IFSC Code</div>
-                    <div>SBI765T8U</div>
+                    <div>{profileData?.bankDetails?.ifsc_code}</div>
                 </div>
                 <div className='ADrow'>
                     <div>Bank Name</div>
-                    <div>State Bank Of India</div>
+                    <div>{profileData?.bankDetails?.bank_name}</div>
                 </div>
             </div>
             <div style={{width: '50%'}} id='ADcont2'>

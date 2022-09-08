@@ -4,13 +4,26 @@ import Profile from "../Assets/Images/Navbar/Profile.png";
 import notification_icon from "../Assets/Images/notification.svg";
 import Hiloramart from "../Assets/Images/Navbar/Hiloramart.png";
 import "../Styles/Components/Navbar.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import Profileimg from "../VendorsAssets/AffliateReqProfile.png";
+import { Button } from "@mui/material";
+import Cookies from "js-cookie";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const NavBar = () => {
-  const { AuthRole } = useContext(AuthContext);
+  const { AuthRole, setAuth } = useContext(AuthContext);
   const [isNotifi, setIsNotifi] = useState(false);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   const user_nav_data = [
     {
       id: '001',
@@ -100,6 +113,13 @@ const NavBar = () => {
   const handleNotification = () => {
     setIsNotifi(!isNotifi);
   };
+
+  const handleLogout = () => {
+    Cookies.remove("auth_token");
+    Cookies.remove("role");
+    setAuth(false);
+    navigate("/choose-role-login", { replace: true });
+  }
   return (
     <>
       <div className="NavMain">
@@ -153,9 +173,33 @@ const NavBar = () => {
               </div>
             </div>
           )}
-          <NavLink to="/profile" className="linkT NavICon">
+          {/* <NavLink to="/profile" className="linkT NavICon">
             <img src={Profile} alt="Profile" />
           </NavLink>
+          <Button variant="contained"  onClick={handleLogout}>Logout</Button> */}
+
+          <Button
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            className="linkT NavICon"
+          >
+            <img src={Profile} alt="Profile" />
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={() => {navigate("/profile"); handleClose()}}>Profile</MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
         </div>
       </div>
     </>

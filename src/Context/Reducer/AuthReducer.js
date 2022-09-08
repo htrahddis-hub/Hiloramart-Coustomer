@@ -7,11 +7,17 @@ import {
   vendorLoginRequest,
   vendorResendOtpRequest,
   vendorSignupRequest,
+  vendorForgotpasswordRequest,
+  vendorVerifyCode,
+  resetVendorPassword,
+  getVendorSale,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
 import Cookies from "js-cookie";
 import axios from "axios";
+
+
 
 export const userSignup = async (values, resetForm, setIsLoading, navigate) => {
   setIsLoading(true);
@@ -92,6 +98,7 @@ export const vendorLogin = async (
   )
   localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
+      localStorage.setItem("vendorUserId", res?.data?.data?.user_id);
       Cookies.set("auth_token", res.data.data.token);
       Cookies.set("role", "vendor");
       setAuth((prev) => true);
@@ -115,6 +122,64 @@ export const vendorLogin = async (
   }
 };
 
+export const vendorForgotPass = async(email, navigate)=>{
+  try{
+    /// api .js function
+    const res = await vendorForgotpasswordRequest(email);
+    console.log(res);
+    if(res.data.success) {
+      alert("Otp sent Successfully")
+      navigate('/verifyotp', { state: email });
+    }else{
+      alert("Something Went Wrong")
+    }
+  }catch(err) {
+    console.log(err);
+  }
+
+
+
+}
+
+export const getVSale= async(startDate,endDate)=>{
+
+  try{
+
+    const res = await getVendorSale(startDate,endDate)
+    console.log("res,",res)
+  }catch(err)
+  {
+
+  }
+}
+
+export const vendorVerifyOtp = async(values,navigate)=>{
+
+  try{
+    const res = await vendorVerifyCode(values);
+    console.log(res);
+    if(res.data.message === "Verification Successful") {
+      alert("Verified Successfully");
+      navigate("/passwordchange", {state: values.email});
+    }else {
+      alert("Verification Failed");
+    }
+  }catch(err){
+    console.log(err);
+  }
+}
+
+export const resetPassword = async(data, navigate) => {
+  try {
+    const res = await resetVendorPassword(data);
+    console.log(res);
+    if(res.data.message === "Password Reset Successful") {
+      navigate("/login", {state : {role: 'vendor'}})
+    }
+  } catch (error) {
+    alert("Something went wrong");
+  }
+}
 export const vendorSignup = async (
   values,
   resetForm,

@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import VNavBar from "../../VendorsComponents/VNavBar";
 import Img from "../../Assets/Images/NoPath.png";
 import arrow from "../../Assets/Images/arrow.svg";
-import Profile from "../../VendorsAssets/AffliateReqProfile.png";
 import "../../VendorsStyle/VProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../../Context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import { GET_USER_PROFILE, GET_VENDOR_PROFILE } from "../../Context/Types";
+import { GET_USER_PROFILE, GET_VENDOR_PROFILE, GET_VENDOR_PROFILE2 } from "../../Context/Types";
 import ProfileSkeleton from "../../Components/Skeleton-loading/Profile.skeleton";
 
 const VProfile = () => {
@@ -15,13 +13,14 @@ const VProfile = () => {
   console.log(AuthRole);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
+  const userId = localStorage.getItem("vendorUserId");
   useEffect(() => {
     if (AuthRole === "user") {
       dispatch({ type: GET_USER_PROFILE, upDateState: setProfileData });
     } else {
       dispatch({
-        type: GET_VENDOR_PROFILE,
-        payload: currentUser.id,
+        type: GET_VENDOR_PROFILE2,
+        id: currentUser.id,
         upDateState: setProfileData,
       });
     }

@@ -24,6 +24,7 @@ export const vendorProfile2 = async(id, upDateState) => {
 }
 
 export const vendorProfile = async (id, upDateState, setUpdatedProfileData, setBankDetails) => {
+  console.log(id)
   try {
     const res = await vendorProfileRequest(id);
     if (res.data) {

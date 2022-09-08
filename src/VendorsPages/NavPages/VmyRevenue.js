@@ -9,8 +9,11 @@ import { GET_ADS, GET_VENDOR_PROFILE } from "../../Context/Types";
 
 const VmyRevenue = () => {
   const { dispatch, currentUser } = useContext(AuthContext);
+
   const [ads, setAds] = useState();
   const [profileData, setProfileData] = useState();
+
+  const userId = localStorage.getItem("vendorUserId");
 
 
   const getAds = () => {
@@ -22,10 +25,11 @@ const VmyRevenue = () => {
   const getVendorProfile = () => {
     dispatch({
       type: GET_VENDOR_PROFILE,
-      payload: currentUser.id,
+      id: userId,
       upDateState: setProfileData,
     })
   }
+  console.log(currentUser)
 
   console.log(ads);
   console.log(profileData, "vendor");
@@ -33,6 +37,8 @@ const VmyRevenue = () => {
     getAds();
     getVendorProfile();
   }, [])
+
+//  console.log("profiledata:",profileData)
   return (
     <>
       <div>
@@ -42,7 +48,8 @@ const VmyRevenue = () => {
           MY REVENUE
         </div>
         <div>
-          <AccountDetail />
+          <AccountDetail profileData={profileData}
+           />
           <LastTransections ads={ads}/>
         </div>
       </div>
