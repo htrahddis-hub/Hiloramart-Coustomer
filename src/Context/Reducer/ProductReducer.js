@@ -14,7 +14,8 @@ import {
   getWishlistItemsRequest,
   removeItemFromWishlistRequest,
   updateVendorProduct,
-  getAds
+  getAds,
+  getProductByCategory
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -336,6 +337,18 @@ export const deleteItemFromCart = async (
     setIsLoading(false);
   }
 };
+
+export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
+  try {
+    setIsLoading(true);
+    const res = await getProductByCategory(catId);
+    setAllProducts(res?.data?.data);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsLoading(false);
+  }
+}
 
 
 export const addProductForAds = (item, setSelectedProducts) => {

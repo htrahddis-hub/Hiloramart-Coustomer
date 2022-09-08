@@ -1,4 +1,4 @@
-import { addVendorAddress, changeCurrentAddress, deleteSavedAddress, getVendorAddresss, updateProfile, userProfileRequest, vendorProfileRequest } from "../API";
+import { addVendorAddress, changeCurrentAddress, deleteSavedAddress, getVendorAddresss, getVendorAllAds, updateProfile, userProfileRequest, vendorProfileRequest } from "../API";
 import { createShiprocketLocation } from "./ShiprocketReducer";
 
 export const userProfile = async (upDateState) => {
@@ -102,6 +102,18 @@ export const updateProfileFun = async (data, id, setIsLoading, navigate) => {
     const res = await updateProfile(data, id);
     console.log(res);
     navigate("/profile");
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsLoading(false);
+  }
+}
+
+export const getVendorAds = async(setAllAds, setIsLoading) => {
+  try {
+    setIsLoading(true);
+    const res = await getVendorAllAds();
+    setAllAds(res.data.data);
   } catch (error) {
     console.log(error);
   } finally {

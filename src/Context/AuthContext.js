@@ -74,7 +74,10 @@ import {
   VENDOR_SALE,
   VENDOR_ALL_SALE,
   PRODUCT_ADD_FOR_ADS,
-  PRODUCT_REMOVE_FOR_ADS
+  PRODUCT_REMOVE_FOR_ADS,
+  GET_PRODUCT_BY_CATEGORY,
+  GET_VENDOR_PLAN,
+  GET_VENDOR_ADS
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -97,9 +100,10 @@ import {
   getAllAds,
   addProductForAds,
   removeProductForAds,
+  getProductByCatId,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
-import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, updateProfileFun, userProfile, vendorProfile, vendorProfile2 } from "./Reducer/ProfileReducer";
+import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, getVendorAds, updateProfileFun, userProfile, vendorProfile, vendorProfile2 } from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
   getCurrentOrders,
@@ -294,7 +298,7 @@ const AuthContextComponent = ({ children }) => {
         getVSale(action.startDate,action.endDate,action.upDateState);
         break;
       case VENDOR_ALL_SALE:
-        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState);
+        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState, action.setIsLoading);
         break;
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
@@ -437,6 +441,14 @@ const AuthContextComponent = ({ children }) => {
         break;
       case PRODUCT_REMOVE_FOR_ADS:
         removeProductForAds(action.item, action.setSelectedProducts, action.selectedProducts);
+        break;
+
+      case GET_PRODUCT_BY_CATEGORY:
+        getProductByCatId(action.catId, action.setAllProducts, action.setIsLoading)
+        break;
+
+      case GET_VENDOR_ADS:
+        getVendorAds(action.setAllAds, action.setIsLoading);
         break;
     }
   };

@@ -240,5 +240,12 @@ export const returnItemRequest = (values) => {
 };
 
 
+export const getProductByCategory = (catId) => {
+  return API.post(`/product/getProductsbyCategoryId`, {category: [catId]});
+}
+
+export const getVendorAllAds = () => {
+  return API.get("/ads/getMyAds");
+}
 
 //shiprocket 

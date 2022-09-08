@@ -36,6 +36,14 @@ export const options = {
       display: false,
     },
   },
+  scales: {
+    x: {
+      grid: {
+        display: false
+      }
+    }
+  },
+  circular: true
 };
 
 const labels = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
@@ -44,10 +52,12 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "Revenue",
       data: ["20", "40", "3", "4", "60", "44", "30"],
-      borderColor: "#0066FF",
-      backgroundColor: "#0066FF",
+      borderColor: "#FF8D22",
+      fill: true,
+      backgroundColor: '#FF8D22'
+
     },
   ],
 };

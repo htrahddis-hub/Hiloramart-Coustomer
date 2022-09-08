@@ -51,7 +51,7 @@ function OrderTable2({ data, isLoading }) {
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
-        <div className="table-container">
+        <div style={{height: '100vh', overflow: 'auto'}} className="table-container">
           <table className="columns-cont">
             <thead>
               <tr>
@@ -65,7 +65,7 @@ function OrderTable2({ data, isLoading }) {
                 return (
                   <>
                   {/* <tr onClick={()=>openModal(item)} className="pointer"> */}
-                  <tr className="pointer">
+                  <tr style={{height: '70px', overflow: 'auto'}} className="pointer">
                     <div className="column-details">{item?._id}</div>
                     <div className="column-details">{item?.productId?.name}</div>
                     <div className="column-details">{item?.quantity}</div>

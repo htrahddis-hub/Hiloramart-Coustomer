@@ -151,12 +151,18 @@ export const getVAllSale = async (
   endDate,
   page,
   limit,
-  upDateState
+  upDateState,
+  setIsLoading
 ) => {
   try {
+    setIsLoading(true);
     const res = await getVendorAllSale(startDate, endDate, page, limit);
     upDateState(res.data.data);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
 };
 
 export const vendorVerifyOtp = async (values, navigate) => {

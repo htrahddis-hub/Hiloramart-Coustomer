@@ -4,7 +4,7 @@ import "../../VendorsStyle/VmyProduct.css";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_VENDOR_PRODUCTS, GET_ALL_CATEGORY } from "../../Context/Types";
+import { GET_VENDOR_PRODUCTS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY } from "../../Context/Types";
 import ProductsLoading from "../../Components/Skeleton-loading/Products-loading";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 
@@ -14,10 +14,7 @@ const VmyProduct = () => {
   const [allCategory, setAllCategory] = useState([]);
 
   const [isDropdown, setIsDropDown] = useState(false);
-  const [category, setCategory] = useState({
-    name: "",
-    id: "",
-  });
+  const [categoryName, setCategoryName] = useState("All");
   const [isLoading, setIsLoading] = useState(false);
   const getProducts = () => {
     dispatch({
@@ -25,6 +22,7 @@ const VmyProduct = () => {
       upDateState: setAllProducts,
       setIsLoading,
     });
+    setIsDropDown(false);
   };
 
   useEffect(() => {
@@ -41,33 +39,19 @@ const VmyProduct = () => {
   }, []);
 
   const handleCat = (id, name) => {
-    setCategory({
-      name: name,
-      id: id,
-    });
+    setCategoryName(name);
+    dispatch({
+      type: GET_PRODUCT_BY_CATEGORY,
+      catId: id,
+      setAllProducts, 
+      setIsLoading
+    })
     setIsDropDown(false);
-    console.log(filter);
   };
 
-  const filter = allProducts.filter((item) => {
-    console.log(item);
-    console.log(category.id);
-    if (category.id === 0) return true;
-    if (!category.id) return true;
-    else {
-      if (item?.category?._id === category.id) return true;
-    }
-    return false;
-  });
 
   const handleDropdown = () => {
     setIsDropDown((old) => !old);
-    if (!category.name) {
-      setAllCategory((old) => {
-        old.unshift({ name: "All", _id: 0 });
-        return [...old];
-      });
-    }
   };
 
   return (
@@ -77,11 +61,17 @@ const VmyProduct = () => {
           <div style={{width: '33.33%'}}></div>
           <div style={{width: '33.33%', marginRight: 0, textAlign: 'center'}} className="h1 end">My Product</div>
           <div style={{width: '33.33%', display: 'flex', justifyContent: 'end', position: 'relative'}} className="cat-div" onClick={handleDropdown}>
-            {category.name ? category.name : "All"}
+            {categoryName ? categoryName : "All"}
             <KeyboardArrowDownOutlinedIcon />
           </div>
           {isDropdown && (
             <div style={{position: 'absolute', top: '30%', right: '3%'}} className="category-list">
+              <div
+                    className="cat-li"
+                    onClick={getProducts}
+                  >
+                    All
+              </div>
               {allCategory?.map((item, index) => {
                 return (
                   <div
@@ -106,8 +96,8 @@ const VmyProduct = () => {
               <ProductsLoading />
             </>
           ) : (
-            filter?.length !== 0 ? (
-              filter?.map((item, index) => {
+            allProducts?.length !== 0 ? (
+              allProducts?.map((item, index) => {
                 return (
                   <MyProductCont key={item._id} cb={getProducts} {...item} />
                 );

@@ -6,6 +6,9 @@ import { VENDOR_ALL_SALE } from "../Context/Types";
 import Calendar from "react-calendar";
 import { useEffect } from "react";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import SaleLoading from "./Skeleton-loading/SaleLoading";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const getFirstDayofMonth = () => {
   var dt = new Date();
@@ -19,13 +22,57 @@ const getISODate = (date) => {
 };
 
 export const getFormatedDate = (date, separator = "") => {
+  let m;
   let day = date.getDate();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
-  return `${day < 10 ? `0${day}` : `${day}`}${separator}${
-    month < 10 ? `0${month}` : `${month}`
-  }${separator}${year}`;
+  switch (month) {
+    case 1:
+      m = 'January'      
+      break;
+    case 2:
+      m = 'Febuary'      
+      break;
+    case 3:
+      m = 'March'      
+      break;
+    case 4:
+      m = 'April'      
+      break;
+    case 5:
+      m = 'May'      
+      break;
+    case 6:
+      m = 'June'      
+      break;
+    case 7:
+      m = 'July'      
+      break;
+    case 8:
+      m = 'August'      
+      break;
+    case 9:
+      m = 'September'      
+      break;
+    case 10:
+      m = 'October'      
+      break;
+    case 11:
+      m = 'November'      
+      break;
+    case 12:
+      m = 'December'      
+      break;  
+    default:
+      break;
+  }
+  
+
+  return `${m}, ${year}`;
+  // return `${day < 10 ? `0${day}` : `${day}`}${separator}${
+  //   month < 10 ? `0${month}` : `${month}`
+  // }${separator}${year}`;
 };
 
 function Sales() {
@@ -36,15 +83,19 @@ function Sales() {
   ]);
   const [sales, setSales] = useState([]);
   const [dropdown, setDropdown] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [page, setPage] = useState(1);
 
   const getSales = async () => {
     dispatch({
       type: VENDOR_ALL_SALE,
       startDate: getISODate(dateRange[0]).substring(0, 10),
       endDate: getISODate(dateRange[1]).substring(0, 10),
-      page: 1,
+      page: page,
       limit: 8,
       upDateState: setSales,
+      setIsLoading
     });
   };
 
@@ -61,19 +112,29 @@ function Sales() {
     setDropdown((old) => !old);
   };
 
+  const pageChangeHandler = (pageNo) => {
+    setPage(pageNo);
+    console.log(pageNo)
+  }
+
+  useEffect(() => {
+    getSales();
+  }, [page])
+
   return (
     <div className="sales-cont">
-      <div className="topbar">
-        <div style={{ textAlign: "center" }}>MY SALE</div>
+      <div style={{display: 'flex', justifyContent: 'space-between',textAlign: 'center', alignItems : 'center'}} className="topbar">
+        <div style={{width: '33.33%'}}></div>
+        <div style={{ textAlign: "center", width: '33.33%' }}>MY SALE</div>
+        <div style={{width: '33.33%', display:'flex', justifyContent: 'end'}} className="h5 bold" onClick={handleDropdown}>
+            {getFormatedDate(dateRange[0], "/")}
+            {/* {" -- "}
+            {getFormatedDate(dateRange[1], "/")} */}
+            <KeyboardArrowDownOutlinedIcon fontSize="large" />
+        </div>
       </div>
       <div className="d-flex justify-content-end me-5 mb-3">
         <div>
-          <div className="h5 bold" onClick={handleDropdown}>
-            <KeyboardArrowDownOutlinedIcon fontSize="large" />
-            {getFormatedDate(dateRange[0], "/")}
-            {" -- "}
-            {getFormatedDate(dateRange[1], "/")}
-          </div>
           {dropdown && (
             <Calendar
               className="calendar"
@@ -86,7 +147,22 @@ function Sales() {
         </div>
       </div>
       <div className="sale-product-parent">
-        <MySaleProduct data={sales} />
+        {
+          isLoading ? (
+            <>
+            <SaleLoading />
+            <SaleLoading />
+            <SaleLoading />
+            </>
+          ) : (
+            <MySaleProduct data={sales} />
+          )
+        }
+      </div>
+      <div style={{display: 'grid', placeItems: 'center', margin: '20px 0 50px 0'}}>
+        <Stack spacing={2}>
+          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={10} size="large" />
+        </Stack>
       </div>
     </div>
   );

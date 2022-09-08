@@ -25,7 +25,7 @@ const VmyRevenue = () => {
   const getVendorProfile = () => {
     dispatch({
       type: GET_VENDOR_PROFILE2,
-      id: userId,
+      id: currentUser.id,
       upDateState: setProfileData,
     })
   }

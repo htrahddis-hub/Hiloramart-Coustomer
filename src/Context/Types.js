@@ -65,3 +65,7 @@ export const REQUEST_SHIPROCKET_SHIPMENT="request shiprocket shipment";
 
 export const PRODUCT_ADD_FOR_ADS="product add for ads";
 export const PRODUCT_REMOVE_FOR_ADS="remove product for ads";
+
+export const GET_PRODUCT_BY_CATEGORY="get product by category";
+
+export const GET_VENDOR_ADS="get vendor plan";

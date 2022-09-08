@@ -51,7 +51,7 @@ function CompletedOrders() {
           Completed Orders
         </span>
       </div>
-      <div style={{height: '70vh'}}>
+      <div  style={{margin: '10px 10px 100px 10px'}}>
         <OrderTable3 data={data} isLoading={isLoading}/>
       </div>
 

@@ -27,13 +27,58 @@ const getISODate = (date) => {
 };
 
 export const getFormatedDate = (date, separator = "") => {
+  let m;
   let day = date.getDate();
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
-  return `${day < 10 ? `0${day}` : `${day}`}${separator}${
-    month < 10 ? `0${month}` : `${month}`
-  }${separator}${year}`;
+  switch (month) {
+    case 1:
+      m = 'January'      
+      break;
+    case 2:
+      m = 'Febuary'      
+      break;
+    case 3:
+      m = 'March'      
+      break;
+    case 4:
+      m = 'April'      
+      break;
+    case 5:
+      m = 'May'      
+      break;
+    case 6:
+      m = 'June'      
+      break;
+    case 7:
+      m = 'July'      
+      break;
+    case 8:
+      m = 'August'      
+      break;
+    case 9:
+      m = 'September'      
+      break;
+    case 10:
+      m = 'October'      
+      break;
+    case 11:
+      m = 'November'      
+      break;
+    case 12:
+      m = 'December'      
+      break;  
+    default:
+      break;
+  }
+  
+
+  return `${m}, ${year}`;
+
+  // return `${day < 10 ? `0${day}` : `${day}`}${separator}${
+  //   month < 10 ? `0${month}` : `${month}`
+  // }${separator}${year}`;
 };
 
 const VmyWallet = () => {
@@ -96,10 +141,10 @@ const VmyWallet = () => {
         <div className="d-flex justify-content-end me-5 mb-3">
           <div>
             <div className="h5 bold" onClick={handleDropdown}>
-              <KeyboardArrowDownOutlinedIcon fontSize="large" />
               {getFormatedDate(dateRange[0], "/")}
-              {" -- "}
-              {getFormatedDate(dateRange[1], "/")}
+              <KeyboardArrowDownOutlinedIcon fontSize="large" />
+              {/* {" -- "}
+              {getFormatedDate(dateRange[1], "/")} */}
             </div>
             {dropdown && (
               <Calendar

@@ -21,7 +21,7 @@ const AddProduct = () => {
     productName: "",
     price: "",
     size: "",
-    prodcutDescription: "",
+    productDescription: "",
   });
   const [allCategory, setAllCategory] = useState([]);
   const [file, setFile] = useState([]);
@@ -103,7 +103,7 @@ const AddProduct = () => {
       productName: "",
       price: "",
       size: "",
-      prodcutDescription: "",
+      productDescription: "",
     });
     setFile("");
     setVideoFile("");
@@ -232,8 +232,8 @@ const AddProduct = () => {
                 type="text"
                 placeholder="Product Description"
                 className="VinputBox"
-                name="prodcutDescription"
-                value={inputData.prodcutDescription}
+                name="productDescription"
+                value={inputData.productDescription}
                 onChange={handleInputChange}
               />
             </div>
