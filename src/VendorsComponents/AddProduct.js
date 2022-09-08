@@ -172,12 +172,12 @@ const AddProduct = () => {
                 {category.name ? category.name : "Category"}
               </div>
               {isDropdown && (
-                <div className="category-list">
+                <div className="category-list-imp">
                   {allCategory?.map((item, index) => {
                     return (
                       <div
                         data-cat-id={item._id}
-                        className="cat-li"
+                        className="cat-li-imp"
                         onClick={handleCat}
                       >
                         {item.name}

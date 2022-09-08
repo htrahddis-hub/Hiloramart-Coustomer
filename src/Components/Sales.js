@@ -7,8 +7,8 @@ import Calendar from "react-calendar";
 import { useEffect } from "react";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import SaleLoading from "./Skeleton-loading/SaleLoading";
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const getFirstDayofMonth = () => {
   var dt = new Date();
@@ -29,45 +29,44 @@ export const getFormatedDate = (date, separator = "") => {
 
   switch (month) {
     case 1:
-      m = 'January'      
+      m = "January";
       break;
     case 2:
-      m = 'Febuary'      
+      m = "Febuary";
       break;
     case 3:
-      m = 'March'      
+      m = "March";
       break;
     case 4:
-      m = 'April'      
+      m = "April";
       break;
     case 5:
-      m = 'May'      
+      m = "May";
       break;
     case 6:
-      m = 'June'      
+      m = "June";
       break;
     case 7:
-      m = 'July'      
+      m = "July";
       break;
     case 8:
-      m = 'August'      
+      m = "August";
       break;
     case 9:
-      m = 'September'      
+      m = "September";
       break;
     case 10:
-      m = 'October'      
+      m = "October";
       break;
     case 11:
-      m = 'November'      
+      m = "November";
       break;
     case 12:
-      m = 'December'      
-      break;  
+      m = "December";
+      break;
     default:
       break;
   }
-  
 
   return `${m}, ${year}`;
   // return `${day < 10 ? `0${day}` : `${day}`}${separator}${
@@ -81,7 +80,7 @@ function Sales() {
     getFirstDayofMonth(),
     new Date(),
   ]);
-  const [sales, setSales] = useState([]);
+  const [sales, setSales] = useState({ totalPages: 0, detail: [] });
   const [dropdown, setDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,7 +94,7 @@ function Sales() {
       page: page,
       limit: 8,
       upDateState: setSales,
-      setIsLoading
+      setIsLoading,
     });
   };
 
@@ -114,23 +113,35 @@ function Sales() {
 
   const pageChangeHandler = (pageNo) => {
     setPage(pageNo);
-    console.log(pageNo)
-  }
+    console.log(pageNo);
+  };
 
   useEffect(() => {
     getSales();
-  }, [page])
+  }, [page]);
 
   return (
     <div className="sales-cont">
-      <div style={{display: 'flex', justifyContent: 'space-between',textAlign: 'center', alignItems : 'center'}} className="topbar">
-        <div style={{width: '33.33%'}}></div>
-        <div style={{ textAlign: "center", width: '33.33%' }}>MY SALE</div>
-        <div style={{width: '33.33%', display:'flex', justifyContent: 'end'}} className="h5 bold" onClick={handleDropdown}>
-            {getFormatedDate(dateRange[0], "/")}
-            {/* {" -- "}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          textAlign: "center",
+          alignItems: "center",
+        }}
+        className="topbar"
+      >
+        <div style={{ width: "33.33%" }}></div>
+        <div style={{ textAlign: "center", width: "33.33%" }}>MY SALE</div>
+        <div
+          style={{ width: "33.33%", display: "flex", justifyContent: "end" }}
+          className="h5 bold"
+          onClick={handleDropdown}
+        >
+          {getFormatedDate(dateRange[0], "/")}
+          {/* {" -- "}
             {getFormatedDate(dateRange[1], "/")} */}
-            <KeyboardArrowDownOutlinedIcon fontSize="large" />
+          <KeyboardArrowDownOutlinedIcon fontSize="large" />
         </div>
       </div>
       <div className="d-flex justify-content-end me-5 mb-3">
@@ -147,22 +158,32 @@ function Sales() {
         </div>
       </div>
       <div className="sale-product-parent">
-        {
-          isLoading ? (
-            <>
+        {isLoading ? (
+          <>
             <SaleLoading />
             <SaleLoading />
             <SaleLoading />
-            </>
-          ) : (
-            <MySaleProduct data={sales} />
-          )
-        }
+          </>
+        ) : (
+          <MySaleProduct data={sales.detail} />
+        )}
       </div>
-      <div style={{display: 'grid', placeItems: 'center', margin: '20px 0 50px 0'}}>
+      <div
+        style={{
+          display: "grid",
+          placeItems: "center",
+          margin: "20px 0 50px 0",
+        }}
+      >
         <Stack spacing={2}>
-          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={10} size="large" />
+          <Pagination
+            onChange={(event, val) => pageChangeHandler(val)}
+            page={page}
+            count={sales.totalPages}
+            size="large"
+          />
         </Stack>
+        {console.log(sales)}
       </div>
     </div>
   );
