@@ -49,6 +49,7 @@ export const DELETE_SAVED_ADDRESS="delete saved address";
 export const UPDATE_PROFILE="update profile";
 
 export const VENDOR_SALE = "my sale"
+export const VENDOR_ALL_SALE = "my all"
 
 
 export const SHIPROCKET_CREATE_ORDER_VENDOR="shiprocket create order vendor";

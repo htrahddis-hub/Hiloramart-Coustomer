@@ -1,83 +1,93 @@
-import React, { useState } from "react";
-import DownIcon from "../Assets/Images/DownIcon.png";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 import "../Styles/Components/Sales.css";
 import MySaleProduct from "./MySaleProduct";
-import axios from "axios";
+import { VENDOR_ALL_SALE } from "../Context/Types";
 import { useEffect } from "react";
+
+const getCurrentDate = (separator = "") => {
+  let newDate = new Date();
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
+
+  return `${year}${separator}${
+    month < 10 ? `0${month}` : `${month}`
+  }${separator}${date < 10 ? `0${date}` : `${date}`}`;
+};
+
+const getISODate = (date) => {
+  const darr = date.split("-");
+  const dobj = new Date(
+    parseInt(darr[0]),
+    parseInt(darr[1]) - 1,
+    parseInt(darr[2]) + 1
+  );
+  return dobj.toISOString();
+};
+
 function Sales() {
+  const { dispatch } = useContext(AuthContext);
+  const [date, setDate] = useState({
+    firstDate: getCurrentDate("-"),
+    lastDate: getCurrentDate("-"),
+  });
+  const [sales, setSales] = useState([]);
 
-  const dateChanger = (e) => {
-    console.log(e.target.value);
-  }
+  const handleChange = (e) => {
+    setDate((old) => {
+      return { ...old, [e.target.name]: e.target.value };
+    });
+  };
 
-  const [isDropdown, setIsDropDown] = useState(false);
-
-  const [allCategory, setAllCategory] = useState([]);
-  const[sale,setSale] = useState([]);
-
-
-  const getAllCategories = async () => {
-    try {
-      const res = await axios.get(`https://hiloramart0.herokuapp.com/product/getProductCategory`);
-      setAllCategory(res.data.data);
-      console.log(res, "all category");
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  const getCategoryData = async (data) => {
-    const body = {
-      category: [data?._id]
-    }
-    try {
-      const res = await axios.post(`https://hiloramart0.herokuapp.com/product/getProductsbyCategoryId`, body)
-      console.log(res);
-      setSale(res.data.data);
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  console.log("Sale",sale)
-
-  const handleCategory = (item) => {
-    if(item.target.value.length === 0) {
-    }else {
-      const data = JSON.parse(item.target.value)
-      getCategoryData(data);
-    }
+  const getSales = async () => {
+    dispatch({
+      type: VENDOR_ALL_SALE,
+      startDate: getISODate(date.firstDate).substring(0, 10),
+      endDate: getISODate(date.lastDate).substring(0, 10),
+      page: 1,
+      limit: 8,
+      upDateState: setSales,
+    });
   };
 
   useEffect(() => {
-    getAllCategories();
-  }, [])
+    getSales();
+  }, [date]);
 
   return (
     <div className="sales-cont">
       <div className="topbar">
-        <div style={{ textAlign: 'center' }}>MY SALE</div>
-
-        <div className="category-div-cont " style={{ float: "right" }} >
-          <select onChange={handleCategory} name="cateogory" id="category">
-            <option value="" style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%"}}>Select</option>
-            {
-              allCategory?.map((item,ind) => (
-                <option value={JSON.stringify(item)}  key={ind}>{item?.name }</option>
-              ))
-            }
-          </select>
+        <div style={{ textAlign: "center" }}>MY SALE</div>
+      </div>
+      <div className="d-flex justify-content-end me-5 mb-3">
+        <div className="d-flex align-items-center">
+          <label className="h5 me-2" htmlFor="start">
+            Start Date
+          </label>
+          <input
+            type="date"
+            id="start"
+            name="firstDate"
+            value={date.firstDate}
+            onChange={handleChange}
+          />
         </div>
-        <div >
-          <div className="filter">
-            {/* <input onChange={dateChanger} style={{ width: '100%' }} type="date" name="sale-date" id="sale-date" /> */}
-          </div>
+        <div className="d-flex align-items-center">
+          <label className="ms-3 me-2 h5" htmlFor="end">
+            End Date
+          </label>
+          <input
+            type="date"
+            id="end"
+            name="lastDate"
+            value={date.lastDate}
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div className="sale-product-parent">
-        <MySaleProduct data={sale}/>
-      
-        
+        <MySaleProduct data={sales} />
       </div>
     </div>
   );
