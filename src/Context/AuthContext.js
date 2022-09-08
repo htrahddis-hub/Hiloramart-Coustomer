@@ -287,12 +287,12 @@ const AuthContextComponent = ({ children }) => {
         vendorProfile2(action.id, action.upDateState);
         // vendorProfile(action.id, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
         break;
-      case  VENDOR_SALE:      
-        getVSale(action.startDate,action.endDate);
-        break;
       // case  VENDOR_SALE:      
-      //   getVSale(action.startDate,action.endDate,action.upDateState);
+      //   getVSale(action.startDate,action.endDate);
       //   break;
+      case  VENDOR_SALE:      
+        getVSale(action.startDate,action.endDate,action.upDateState);
+        break;
       case VENDOR_ALL_SALE:
         getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState);
         break;

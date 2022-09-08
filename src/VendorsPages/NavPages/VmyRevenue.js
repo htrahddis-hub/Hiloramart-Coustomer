@@ -5,7 +5,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_ADS, GET_VENDOR_PROFILE } from "../../Context/Types";
+import { GET_ADS, GET_VENDOR_PROFILE2 } from "../../Context/Types";
 
 const VmyRevenue = () => {
   const { dispatch, currentUser } = useContext(AuthContext);
@@ -24,15 +24,12 @@ const VmyRevenue = () => {
   }
   const getVendorProfile = () => {
     dispatch({
-      type: GET_VENDOR_PROFILE,
+      type: GET_VENDOR_PROFILE2,
       id: userId,
       upDateState: setProfileData,
     })
   }
-  console.log(currentUser)
 
-  console.log(ads);
-  console.log(profileData, "vendor");
   useEffect(() => {
     getAds();
     getVendorProfile();

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import DownIcon from "../Assets/Images/DownIcon.png";
 import "../VendorsStyle/VmyWallet.css";
-function AccordionAffiliate(props) {
+
+const options = { day: "numeric", month: "short", year: "numeric" };
+
+function AccordionAffiliate({ data }) {
   const [isActive, setIsActive] = useState(false);
   return (
     <div className="accordion-item">
@@ -9,8 +12,10 @@ function AccordionAffiliate(props) {
         <div>
           {" "}
           <div className="ADrow">
-            <div>Arihant ERP</div>
-            <div>Total Profit RS. 1,000</div>
+            <div>{data?.affiliateUser.name}</div>
+            <div>Total Profit RS. {new Intl.NumberFormat("en-IN", {
+                    maximumFractionDigits: 0,
+                  }).format(data?.orderPrice-data?.vendorPrice)} </div>
             <div>
               <img
                 src={DownIcon}
@@ -25,15 +30,19 @@ function AccordionAffiliate(props) {
         <div className="accordion-content">
           <div>
             <div className="amount-text">VK PVT Affiliate</div>
-            <div className="amount-text">VK PVT Affiliate</div>
           </div>
           <div>
-            <div className="amount-text">10-apr-2022</div>
-            <div className="amount-text">10-apr-2022</div>
+            <div className="amount-text">
+              {new Date(data?.deliveryDate).toLocaleDateString(
+                "en-IN",
+                options
+              )}
+            </div>
           </div>
           <div>
-            <div className="f-500 color-green"> Rs.1000 </div>
-            <div className="f-500 color-green"> Rs.1000 </div>
+            <div className="f-500 color-green">Rs. {new Intl.NumberFormat("en-IN", {
+                    maximumFractionDigits: 0,
+                  }).format(data?.orderPrice)} </div>
           </div>
         </div>
       )}

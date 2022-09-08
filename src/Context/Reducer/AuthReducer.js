@@ -138,9 +138,10 @@ export const vendorForgotPass = async (email, navigate) => {
   }
 };
 
-export const getVSale = async (startDate, endDate) => {
+export const getVSale = async (startDate, endDate, upDateState) => {
   try {
     const res = await getVendorSale(startDate, endDate);
+    upDateState(res.data.data);
     console.log("res,", res);
   } catch (err) {}
 };
