@@ -30,3 +30,9 @@
   float: right;
   margin-right: 4%;
 }
+
+.calendar{
+  position: absolute;
+  top: 20%;
+  left: 72%;
+}

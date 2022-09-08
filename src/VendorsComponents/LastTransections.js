@@ -1,47 +1,46 @@
-import React from 'react'
+import React from "react";
 
-const LastTransections = ({ads}) => {
+const options = { day: "numeric", month: "short", year: "numeric" };
 
-    console.log(ads);
-    return (
-        <>
-
-            <div className='TopHead'>Last Transactions</div>
-            <div id='AdmainCont'>
-                <div id='LastTcont1' >
-                    {
-                        ads?.length > 0 ? (
-                            ads?.map((item) => (
-                                <div className='ADrow'>
-                                    <div >1 Apr 2022 - 10:15 Am</div>
-                                    <div>UPI</div>
-                                    <div>RS 30,000</div>
-                                </div>
-                            ))
-                        ) : (
-                            <p style={{textAlign: 'center', margin: '40px 0'}}>No Transaction Found!</p>
-                        )
-                    }
-                    {/* <div className='ADrow'>
-                        <div >1 Apr 2022 - 10:15 Am</div>
-                        <div>UPI</div>
-                        <div>RS 30,000</div>
-                    </div>
-                    <div className='ADrow'>
-                        <div >1 Apr 2022 - 10:15 Am</div>
-                        <div>UPI</div>
-                        <div>RS 30,000</div>
-                    </div>
-                    <div className='ADrow'>
-                        <div >1 Apr 2022 - 10:15 Am</div>
-                        <div>UPI</div>
-                        <div>RS 30,000</div>
-                    </div> */}
+const LastTransections = ({ ads }) => {
+  console.log(ads);
+  return (
+    <>
+      <div className="TopHead">Last Transactions</div>
+      <div id="AdmainCont">
+        <div id="LastTcont1">
+          {ads?.length > 0 ? (
+            ads?.map((item) => (
+              <div className="ADrow" key={item._id}>
+                <div>
+                  {new Date(item.createdAt).toLocaleDateString(
+                    "en-IN",
+                    options
+                  ) +
+                    " - " +
+                    new Date(item.createdAt).toLocaleTimeString("en-IN", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                 </div>
+                <div>{item?.transactionId}</div>
+                <div>
+                  RS{" "}
+                  {new Intl.NumberFormat("en-IN", {
+                    maximumFractionDigits: 0,
+                  }).format(item?.price)}
+                </div>
+              </div>
+            ))
+          ) : (
+            <p style={{ textAlign: "center", margin: "40px 0" }}>
+              No Transaction Found!
+            </p>
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
-            </div>
-        </>
-    )
-}
-
-export default LastTransections
+export default LastTransections;
