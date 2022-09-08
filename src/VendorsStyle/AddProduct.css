@@ -3,16 +3,16 @@
   padding: 2rem 8rem;
 }
 .VinputBox {
-  width: 100%;
-  height: 80px;
-  background: #fcfcfc;
-  border: 1px solid #ff8d22;
-  color: #ff8d22;
-  background-color: rgba(255, 141, 34, 0.1);
-  border-radius: 10px;
-  outline-color: #ff8d22;
-  padding: 0 1rem;
-  margin: 1rem 0;
+  width: 100% !important;
+  height: 80px !important;
+  background: #fcfcfc !important;
+  border: 1px solid #ff8d22 !important;
+  color: #ff8d22 !important;
+  background-color: rgba(255, 141, 34, 0.1) !important;
+  border-radius: 10px !important;
+  outline-color: #ff8d22 !important;
+  padding: 0 1rem !important;
+  margin: 1rem 0 !important;
 }
 .VContainer1 {
   display: flex;

@@ -72,7 +72,9 @@ import {
   VENDOR_VERIFYCODE,
   RESET_VENDOR_PASSWORD,
   VENDOR_SALE,
-  VENDOR_ALL_SALE
+  VENDOR_ALL_SALE,
+  PRODUCT_ADD_FOR_ADS,
+  PRODUCT_REMOVE_FOR_ADS
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -93,6 +95,8 @@ import {
   getWishlistItems,
   removeItemFromWishlist,
   getAllAds,
+  addProductForAds,
+  removeProductForAds,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, updateProfileFun, userProfile, vendorProfile, vendorProfile2 } from "./Reducer/ProfileReducer";
@@ -427,6 +431,12 @@ const AuthContextComponent = ({ children }) => {
       //   break;
       case GENERATE_SHIPROCKET_AWB: 
         generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2, action.setAllOrders);
+        break;
+      case PRODUCT_ADD_FOR_ADS:
+        addProductForAds(action.item, action.setSelectedProducts);
+        break;
+      case PRODUCT_REMOVE_FOR_ADS:
+        removeProductForAds(action.item, action.setSelectedProducts, action.selectedProducts);
         break;
     }
   };

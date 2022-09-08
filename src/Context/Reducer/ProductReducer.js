@@ -336,3 +336,12 @@ export const deleteItemFromCart = async (
     setIsLoading(false);
   }
 };
+
+
+export const addProductForAds = (item, setSelectedProducts) => {
+  console.log(item)
+  setSelectedProducts((prev) => [...prev, item]);
+}
+export const removeProductForAds = (item, setSelectedProducts, selectedProducts) => {
+  setSelectedProducts(() => selectedProducts.filter((product) => product._id !== item._id ));
+}

@@ -73,14 +73,15 @@ const VmyProduct = () => {
   return (
     <>
       <div style={{ margin: "3%" }}>
-        <div className="d-flex justify-content-end align-items-center">
-          <div className="h1 end">My Product</div>
-          <div className="VinputBox cat-div" onClick={handleDropdown}>
+        <div style={{display: 'flex', justifyContent: 'space-between'}} className="d-flex justify-content-space-between align-items-center">
+          <div style={{width: '33.33%'}}></div>
+          <div style={{width: '33.33%', marginRight: 0, textAlign: 'center'}} className="h1 end">My Product</div>
+          <div style={{width: '33.33%', display: 'flex', justifyContent: 'end', position: 'relative'}} className="cat-div" onClick={handleDropdown}>
             {category.name ? category.name : "All"}
             <KeyboardArrowDownOutlinedIcon />
           </div>
           {isDropdown && (
-            <div className="category-list">
+            <div style={{position: 'absolute', top: '30%', right: '3%'}} className="category-list">
               {allCategory?.map((item, index) => {
                 return (
                   <div
@@ -96,20 +97,27 @@ const VmyProduct = () => {
           )}
         </div>
         <div className="d-flex justify-content-between flex-wrap">
-          {filter?.length !== 0 ? (
-            filter?.map((item, index) => {
-              return (
-                <MyProductCont key={item._id} cb={getProducts} {...item} />
-              );
-            })
-          ) : (
+        {
+          isLoading ? (
             <>
               <ProductsLoading />
               <ProductsLoading />
               <ProductsLoading />
               <ProductsLoading />
             </>
-          )}
+          ) : (
+            filter?.length !== 0 ? (
+              filter?.map((item, index) => {
+                return (
+                  <MyProductCont key={item._id} cb={getProducts} {...item} />
+                );
+              })
+            ) : (
+              <div >No Product Found</div>
+            )
+
+          )
+        }
         </div>
       </div>
       <Footer />

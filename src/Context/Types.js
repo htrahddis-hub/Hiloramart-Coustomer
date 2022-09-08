@@ -61,3 +61,7 @@ export const GET_SHIPROCKET_LOCALITY="get shiprocket locality";
 export const GET_SHIPROCKET_COURIER_SERVICE="get shiprocket courier service";
 export const GENERATE_SHIPROCKET_AWB="generate shiprocket awb";
 export const REQUEST_SHIPROCKET_SHIPMENT="request shiprocket shipment";
+
+
+export const PRODUCT_ADD_FOR_ADS="product add for ads";
+export const PRODUCT_REMOVE_FOR_ADS="remove product for ads";
