@@ -3,7 +3,12 @@ import "../Styles/Components/Advertisement.css";
 import Hiloramart from "../VendorsAssets/LOGO.png";
 import arrow from "../Assets/Images/arrow.svg";
 import google from "../Assets/Images/google.svg";
+import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 const AdContainer = ({ image }) => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="adver-box">
       <div>
@@ -15,10 +20,10 @@ const AdContainer = ({ image }) => {
         Get More customers in your products with business ads that help people
         find your company on the Top.
       </div>
-      <div>
+      <div onClick={() => navigate("/select-product-for-ads")}>
         <div>Let's Boost My Ad</div>{" "}
         <div>
-          <img src={arrow} />
+          <img src={arrow} alt="arrow"/>
         </div>
       </div>
     </div>
@@ -26,16 +31,15 @@ const AdContainer = ({ image }) => {
 };
 function Advertisement() {
   return (
-    <div className="adver-container">
+    <>
+    <div style={{marginBottom: '100px'}} className="adver-container">
       <div className="adver-title">Advertisement</div>
       <div>
         <AdContainer image={Hiloramart} />
       </div>
-      {/* <div className="divider">or</div>
-      <div>
-        <AdContainer image={google} />
-      </div> */}
     </div>
+    <Footer />
+    </>
   );
 }
 

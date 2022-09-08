@@ -55,6 +55,7 @@ import ProductSuccess from "./Pages/ProductSuccess";
 import Checkout from "./Pages/Checkout";
 import MyPlans from "./Pages/MyPlans";
 import ProductUpdated from "./Pages/ProductUpdated";
+import MyProductsForAds from "./VendorsPages/NavPages/MyProductsForAds";
 
 function App() {
   return (
@@ -100,6 +101,11 @@ function App() {
                 exact
                 path="/advertisement"
                 element={<Advertisement />}
+              ></Route>
+              <Route
+                exact
+                path="/select-product-for-ads"
+                element={<MyProductsForAds />}
               ></Route>
               <Route
                 exact

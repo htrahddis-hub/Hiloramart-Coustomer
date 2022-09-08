@@ -15,9 +15,9 @@ const Home = () => {
   return (
     <>
       <div className="">
-        <div className="search-cont">
+        {/* <div className="search-cont">
           <SearchInput />
-        </div>
+        </div> */}
         <LandingPageBanner />
         {AuthRole === "user" ? (
           <>
