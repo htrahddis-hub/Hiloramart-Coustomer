@@ -87,23 +87,23 @@ export const vendorLogin = async (
   setAuth
 ) => {
   setIsLoading(true);
-  let config = {
-    withCredentials: true,
-    headers: {
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': '*',
-    }
-  }
   try {
     const res = await vendorLoginRequest(values);
+
+    // fetch("v1/external/auth/login", {
+    //   method: 'POST',
+    //   body:  {
+    //     email: "amitsharma199938@gmail.com",
+    //     password: "Qwerty@199938"
+    //   }
+    // }).then((res) => console.log(res));
+
     const res2 = await axios.post(
       "https://apiv2.shiprocket.in/v1/external/auth/login",
       {
         email: "amitsharma199938@gmail.com",
         password: "Qwerty@199938"
-      },
-      config
+      }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
