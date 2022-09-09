@@ -90,43 +90,42 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
-    const headers = {
-      "Access-Control-Allow-Methods": "*",
-      "Access-Control-Allow-Credentials": 'true',
-      "Access-Control-Expose-Headers": "*",
-      "Accept": "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "en-US,en;q=0.9,no;q=0.8",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Headers": "*",
-      "Access-Control-Max-Age": "1728000",
-      "Content-Length": "0",
-      "Origin": "https://hiloramart-2.vercel.app",
-      "Referer": "https://hiloramart-2.vercel.app/"
-    }
+    // const headers = {
+    //   "Access-Control-Allow-Methods": "*",
+    //   "Access-Control-Allow-Credentials": 'true',
+    //   "Access-Control-Expose-Headers": "*",
+    //   "Accept": "*/*",
+    //   "Accept-Encoding": "gzip, deflate, br",
+    //   "Accept-Language": "en-US,en;q=0.9,no;q=0.8",
+    //   "Content-Type": "application/json",
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Headers": "*",
+    //   "Access-Control-Max-Age": "1728000",
+    //   "Content-Length": "0",
+    //   "Origin": "https://hiloramart-2.vercel.app",
+    //   "Referer": "https://hiloramart-2.vercel.app/"
+    // }
 
-    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
-      method: 'POST',
-      body:  JSON.stringify({
-        email: "iamaditityagi@gmail.com",
-        password: "Qwerty@199938"
-      }),
-      headers: headers
-    }).then((res) => {
-      const resp = res.json()
-      localStorage.setItem("shiprocketToken", resp?.data?.token);
-    });
-
-    // const res2 = await axios.post(
-    //   "https://apiv2.shiprocket.in/v1/external/auth/login",
-    //   {
+    // fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
+    //   method: 'POST',
+    //   body:  JSON.stringify({
     //     email: "iamaditityagi@gmail.com",
     //     password: "Qwerty@199938"
-    //   }
-    // );
-    // localStorage.setItem("shiprocketToken", res?.data?.token);
-    // localStorage.setItem("shiprocketToken", res2?.data?.token);
+    //   }),
+    //   headers: headers
+    // }).then((res) => {
+    //   const resp = res.json()
+    //   localStorage.setItem("shiprocketToken", resp?.data?.token);
+    // });
+
+    const res2 = await axios.post(
+      "https://apiv2.shiprocket.in/v1/external/auth/login",
+      {
+        email: "iamaditityagi@gmail.com",
+        password: "Qwerty@199938"
+      }
+    );
+    localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
       localStorage.setItem("vendorUserId", res?.data?.data?.user_id);
       Cookies.set("auth_token", res.data.data.token);

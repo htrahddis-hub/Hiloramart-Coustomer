@@ -42,9 +42,14 @@ function OrderTable3({ data, isLoading }) {
       name: "Amount",
     },
     {
+      name: 'Date'
+    },
+    {
       name: "Status",
     },
   ];
+
+  console.log(data);
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -63,21 +68,29 @@ function OrderTable3({ data, isLoading }) {
                   <>
                   {/* <tr onClick={()=>openModal(item)} className="pointer"> */}
                   <tr style={{height: '70px', overflow: 'auto'}} className="pointer">
-                    <div className="column-details">{item?._id}</div>
-                    <div className="column-details">{item?.productId?.name}</div>
-                    <div className="column-details">{item?.quantity}</div>
-                    <div className="column-details">
+                    <div style={{width: '15%'}} className="column-details">{item?._id}</div>
+                    <div style={{width: '20%', padding: '10px 5px'}} className="column-details">
+                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
+                        <div style={{width: '40px', height: '40px', marginRight: '5px'}}>
+                          <img style={{width: '100%', height: '100%'}} src={item?.productId?.productImage[0]} alt="" />
+                        </div>
+                        <h6 style={{textAlign: 'left'}}>{item?.productId?.name}</h6>
+                      </div>
+                      <p style={{textAlign: 'left'}}>#{item?.productId?._id}</p>
+                    </div>
+                    <div style={{width: '5%'}} className="column-details">{item?.quantity}</div>
+                    <div style={{width: '25%'}} className="column-details">
                       {item?.user?.name +
                         " " +
-                        item?.user?.address[0]?.line1 +
+                        item?.address?.line1 +
                         ", " +
-                        item?.user?.address[0]?.city +
+                        item?.address?.city +
                         ", " +
-                        item?.user?.address[0]?.state}
+                        item?.address?.state}
                     </div>
-                    <div className="column-details">Rs. {item?.totalPrice}</div>
-                    {/* <div className="column-details">{item?.price}</div> */}
-                    <div className="column-details">{item?.status}</div>
+                    <div style={{width: '5%'}} className="column-details">Rs. {item?.totalPrice}</div>
+                    <div style={{width: '15%'}}  className="column-details">{item?.updatedAt.slice(0,10)}</div>
+                    <div style={{width: '10%'}} className="column-details">{item?.status}</div>
                   </tr>
                   </>
                 );
