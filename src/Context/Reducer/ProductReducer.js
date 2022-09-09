@@ -351,10 +351,11 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
 }
 
 
-export const addProductForAds = (item, setSelectedProducts) => {
-  console.log(item)
-  setSelectedProducts((prev) => [...prev, item]);
+export const addProductForAds = (item, setSelectedProducts, selectedProducts) => {
+  setSelectedProducts((selectedProducts) => [...selectedProducts, item]);
+  console.log(selectedProducts)
 }
 export const removeProductForAds = (item, setSelectedProducts, selectedProducts) => {
   setSelectedProducts(() => selectedProducts.filter((product) => product._id !== item._id ));
+  // console.log(selectedProducts)
 }

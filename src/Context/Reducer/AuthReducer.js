@@ -161,12 +161,15 @@ export const getVAllSale = async (
   page,
   limit,
   upDateState,
-  setIsLoading
+  setIsLoading,
+  setTotalPage
 ) => {
   try {
     setIsLoading(true);
     const res = await getVendorAllSale(startDate, endDate, page, limit);
-    upDateState(res.data.data);
+    console.log(res);
+    upDateState(res.data.data.detail);
+    setTotalPage(res.data.data.totalPages)
   } catch (err) {
     console.log(err);
   } finally {

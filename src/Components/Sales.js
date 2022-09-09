@@ -84,7 +84,7 @@ function Sales() {
   const [sales, setSales] = useState([]);
   const [dropdown, setDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
 
   const getSales = async () => {
@@ -95,7 +95,8 @@ function Sales() {
       page: page,
       limit: 8,
       upDateState: setSales,
-      setIsLoading
+      setIsLoading,
+      setTotalPage
     });
   };
 
@@ -161,7 +162,7 @@ function Sales() {
       </div>
       <div style={{display: 'grid', placeItems: 'center', margin: '20px 0 50px 0'}}>
         <Stack spacing={2}>
-          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={10} size="large" />
+          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={totalPage} size="large" />
         </Stack>
       </div>
     </div>
