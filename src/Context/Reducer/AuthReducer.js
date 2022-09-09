@@ -90,12 +90,17 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
+    const headers = {
+      "Content-Type": "application/json"
+    }
+
     fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
       method: 'POST',
       body:  JSON.stringify({
         email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
-      })
+      }),
+      headers: headers
     }).then((res) => {
       const resp = res.json()
       localStorage.setItem("shiprocketToken", resp?.data?.token);
