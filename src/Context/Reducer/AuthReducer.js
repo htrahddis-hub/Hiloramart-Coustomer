@@ -97,8 +97,8 @@ export const vendorLogin = async (
       "Access-Control-Allow-Headers": "*",
       "Access-Control-Max-Age": "1728000",
       "Content-Length": "0",
-      "origin": "https://hiloramart-2.vercel.app",
-      "referer": "https://hiloramart-2.vercel.app/"
+      "Origin": "https://hiloramart-2.vercel.app",
+      "Referer": "https://hiloramart-2.vercel.app/"
     }
 
     fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
