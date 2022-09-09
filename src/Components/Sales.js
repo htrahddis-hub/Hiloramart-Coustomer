@@ -121,6 +121,8 @@ function Sales() {
     getSales();
   }, [page]);
 
+  console.log(sales);
+
   return (
     <div className="sales-cont">
       <div
@@ -166,12 +168,12 @@ function Sales() {
             <SaleLoading />
           </>
         ) : (
-          sales?.detail?.length === 0 ? (
+          sales?.length === 0 ? (
             <div style={{minHeight: '400px'}}>
               <h5>No Sales found!</h5>
             </div>
           ) : (
-          <MySaleProduct data={sales.detail} />
+          <MySaleProduct data={sales} />
           )
         )}
       </div>

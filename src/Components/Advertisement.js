@@ -14,7 +14,7 @@ const AdContainer = ({ image }) => {
       <div>
         <img src={image} />
       </div>
-      <div>Rs.1000</div>
+      <div>Rs. 1</div>
       <div>Grow your business within Our web</div>
       <div>
         Get More customers in your products with business ads that help people

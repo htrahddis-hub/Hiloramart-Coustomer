@@ -191,7 +191,7 @@ const courierServiceSelector = (e) => {
       name: "Status",
     },
   ];
-  console.log(shiprocketCreatedOrder, "my data");
+  console.log(data, "my data");
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -204,13 +204,21 @@ const courierServiceSelector = (e) => {
                 })}
               </tr>
             </thead>
-            <tbody >
+            <tbody>
               {data?.map((item) => {
                 return (
                   <>
                   <tr style={{height: '70px', overflow: 'auto'}} onClick={()=>openModal(item)} className="pointer">
                     <div className="column-details">{item?._id}</div>
-                    <div className="column-details">{item?.productId?.name}</div>
+                    <div style={{width: '300px', padding: '10px 5px'}} className="column-details">
+                      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
+                        <div style={{width: '40px', height: '40px', marginRight: '5px'}}>
+                          <img style={{width: '100%', height: '100%'}} src={item?.productId?.productImage[0]} alt="" />
+                        </div>
+                        <h6 style={{textAlign: 'left'}}>{item?.productId?.name}</h6>
+                      </div>
+                      <p style={{textAlign: 'left'}}>#{item?.productId?._id}</p>
+                    </div>
                     <div className="column-details">{item?.quantity}</div>
                     <div className="column-details">
                       {item?.user?.name +

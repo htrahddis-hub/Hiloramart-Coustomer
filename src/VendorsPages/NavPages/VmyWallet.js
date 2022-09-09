@@ -159,7 +159,7 @@ const VmyWallet = () => {
         </div>
 
         <div id="MWcont1">
-          <div className="WalletCont1">
+          {/* <div className="WalletCont1">
             <div>
               <img
                 style={{ width: "72px", height: "70px" }}
@@ -171,8 +171,8 @@ const VmyWallet = () => {
               <div className="wallet-text">Total Profit</div>
               <div className="wallet-text">RS. 10,000</div>
             </div>
-          </div>
-          <div className="total-sale-cont">
+          </div> */}
+          <div style={{width: '70%'}} className="total-sale-cont">
             <div className="total-sale">
               <div>
                 <svg
@@ -270,7 +270,7 @@ const VmyWallet = () => {
               </div>
             </div>
           </div>
-          <div className="WalletCont1">
+          {/* <div className="WalletCont1">
             <div>
               <svg
                 className="svg"
@@ -296,7 +296,7 @@ const VmyWallet = () => {
               <div className="wallet-text">Total Profit</div>
               <div className="wallet-text">RS. 20,000</div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div id="MWcont2">Paid to Affiliates</div>

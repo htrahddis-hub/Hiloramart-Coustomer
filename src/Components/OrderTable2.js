@@ -48,6 +48,8 @@ function OrderTable2({ data, isLoading }) {
       name: "Status",
     },
   ];
+
+  console.log(data);
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
@@ -66,21 +68,35 @@ function OrderTable2({ data, isLoading }) {
                   <>
                   {/* <tr onClick={()=>openModal(item)} className="pointer"> */}
                   <tr style={{height: '70px', overflow: 'auto'}} className="pointer">
-                    <div className="column-details">{item?._id}</div>
-                    <div className="column-details">{item?.productId?.name}</div>
-                    <div className="column-details">{item?.quantity}</div>
-                    <div className="column-details">
+                    <div style={{width: '15%'}} className="column-details">{item?.orderId?._id}</div>
+                    {/* <div className="column-details">{item?.orderId.productId?.name}</div> */}
+                    <div style={{width: '20%', padding: '10px 5px'}} className="column-details">
+                      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'start'}}>
+                        <div style={{width: '40px', height: '40px', marginRight: '5px'}}>
+                          <img style={{width: '100%', height: '100%'}} src={item?.orderId.productId?.productImage[0]} alt="" />
+                        </div>
+                        <h6 style={{textAlign: 'left'}}>{item?.orderId?.productId?.name}</h6>
+                      </div>
+                      <p style={{textAlign: 'left'}}>#{item?.orderId?.productId?._id}</p>
+                    </div>
+                    <div style={{width: '5%'}} className="column-details">{item?.orderId?.quantity}</div>
+                    <div style={{width: '25%'}} className="column-details">
                       {item?.user?.name +
-                        " " +
+                        " "}
+                        <br />
+                        {
                         item?.user?.address[0]?.line1 +
                         ", " +
                         item?.user?.address[0]?.city +
                         ", " +
                         item?.user?.address[0]?.state}
                     </div>
-                    <div className="column-details">Rs. {item?.totalPrice}</div>
-                    <div className="column-details">{item?.price}</div>
-                    <div className="column-details">{item?.status}</div>
+                    <div style={{width: '10%'}} className="column-details">Rs. {item?.orderId?.totalPrice}</div>
+                    <div style={{width: '15%'}} className="column-details">{item?.reason}</div>
+                    <div style={{padding: '0 5px', width: '10%'}} className="column-details">
+                      <span style={{color: 'red', marginRight: '10px'}}>Reject</span>
+                      <span style={{color: 'green'}}>Approve</span>
+                    </div>
                   </tr>
                   </>
                 );
