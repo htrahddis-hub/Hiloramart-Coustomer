@@ -13,11 +13,9 @@ function MySaleProduct({ data }) {
               <img src={e?.productId?.productImage} alt="product image" />
             </div>
             <div>
-
               <p className="h6" >From</p>
               <p className="mb-0 h6" >{e?.productId?.name}</p>
               <p className="mb-0 h6" >{e?.productId?.description}</p>
-
             </div>
             <div>Rs. {e?.productId?.price}</div>
           </div>

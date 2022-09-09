@@ -138,19 +138,39 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
-    // fetch("v1/external/auth/login", {
+    // const headers = {
+    //   "Access-Control-Allow-Methods": "*",
+    //   "Access-Control-Allow-Credentials": 'true',
+    //   "Access-Control-Expose-Headers": "*",
+    //   "Accept": "*/*",
+    //   "Accept-Encoding": "gzip, deflate, br",
+    //   "Accept-Language": "en-US,en;q=0.9,no;q=0.8",
+    //   "Content-Type": "application/json",
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Headers": "*",
+    //   "Access-Control-Max-Age": "1728000",
+    //   "Content-Length": "0",
+    //   "Origin": "https://hiloramart-2.vercel.app",
+    //   "Referer": "https://hiloramart-2.vercel.app/"
+    // }
+
+    // fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
     //   method: 'POST',
-    //   body:  {
-    //     email: "amitsharma199938@gmail.com",
+    //   body:  JSON.stringify({
+    //     email: "iamaditityagi@gmail.com",
     //     password: "Qwerty@199938"
-    //   }
-    // }).then((res) => console.log(res));
+    //   }),
+    //   headers: headers
+    // }).then((res) => {
+    //   const resp = res.json()
+    //   localStorage.setItem("shiprocketToken", resp?.data?.token);
+    // });
 
     const res2 = await axios.post(
       "https://apiv2.shiprocket.in/v1/external/auth/login",
       {
-        email: "iamaditityagi@gmail.com",
-        password: "Qwerty@199938",
+        email: "amitsharma199938@gmail.com",
+        password: "Qwerty@199938"
       }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);
@@ -164,7 +184,7 @@ export const vendorLogin = async (
     if (!res.data.success) {
       Store.addNotification({
         ...notification,
-        message: res.data.console.error,
+        message: "Failed to login",
       });
     }
   } catch (err) {
@@ -172,7 +192,7 @@ export const vendorLogin = async (
     Store.addNotification({
       ...notification,
       type: "danger",
-      message: err?.response?.data?.error,
+      message: "Failed to login",
     });
   } finally {
     setIsLoading(false);
@@ -232,7 +252,7 @@ export const vendorVerifyOtp = async (values, navigate) => {
     if (res.data.message === "Verification Successful") {
       alert("Verified Successfully");
       navigate("/passwordchange", {
-        state: { email: values.email, tole: "vendor" },
+        state: { email: values.email, role: "vendor" },
       });
     } else {
       alert("Verification Failed");

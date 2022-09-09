@@ -352,15 +352,32 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
 }
 
 
-
 let products = [];
+let productId = [];
+export const addProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
+  let total = totalPrice
+  console.log(total);
+  setSelectedProducts(products.push(item));
+  console.log(products);
+  setSelectedProducts(products);
+  setTotalPrice(Number(total) + Number(item?.price))
+  // debugger
+  // setProductIds(productId.push(item?._id));
+  setProductIds((prev) => [...prev, item?._id])
+  // debugger
+  // console.log(productId)
 
-export const addProductForAds = (item, setSelectedProducts, selectedProducts) => {
-  setSelectedProducts((selectedProducts) => [...selectedProducts, item]);
-  console.log(selectedProducts)
+  // debugger
 }
-export const removeProductForAds = (item, setSelectedProducts, selectedProducts) => {
-  setSelectedProducts(() => selectedProducts.filter((product) => product._id !== item._id ));
-  // console.log(selectedProducts)
+export const removeProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
+  let total = totalPrice
+  console.log(total);
+  const filteredData = products.filter((data) => data._id !== item._id);
+  setSelectedProducts(filteredData);
+  setTotalPrice(Number(total) - Number(item?.price));
 
+  // const filteredProductId = productId.filter((id) => id !== item._id);
+  // setProductIds(filteredProductId);
+  setProductIds((prev) => prev.filter((item1) => item1 !== item._id))
+  console.log(productId)
 }

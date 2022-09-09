@@ -121,6 +121,8 @@ function Sales() {
     getSales();
   }, [page]);
 
+  console.log(sales);
+
   return (
     <div className="sales-cont">
       <div
@@ -183,12 +185,15 @@ function Sales() {
         }}
       >
         <Stack spacing={2}>
-
-
-          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={totalPage} size="large" />
-
+          {/* <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={totalPage} size="large" /> */}
+          <Pagination
+            onChange={(event, val) => pageChangeHandler(val)}
+            page={page}
+            count={sales.totalPages}
+            size="large"
+          />
         </Stack>
-        {console.log(sales)}
+        {/* {console.log(sales)} */}
       </div>
     </div>
   );
