@@ -3,11 +3,11 @@ import { getOrderID, placeOrder } from "../API";
 import { notification } from "../AuthContext";
 
 export const onlinePayment = async (
-  product,
+  productIds,
   cost,
-  quantity,
   setIsLoading,
-  navigate
+  navigate,
+  handleClose
 ) => {
   setIsLoading(true);
   const script = document.createElement("script");
@@ -20,27 +20,30 @@ export const onlinePayment = async (
       const result = await getOrderID(cost);
       const { amount, id: order_id, currency } = result.data.response;
 
+      console.log(result);
+
       const options = {
         key: process.env.REACT_APP_RAZIRPAY_KEY,
         amount: amount.toString(),
         currency: currency,
-        name: "example name",
-        description: "example transaction",
+        name: "Hiloramart",
+        description: "Hiloramart is e-commerce Platform",
         order_id: order_id,
         handler: async function (response) {
-          const result = await placeOrder(response, product, amount);
+          const result = await placeOrder(response, productIds, amount);
           Store.addNotification({
             ...notification,
             type: "success",
             message: result.data.message,
           });
-          setTimeout(() => {
-            navigate("/checkout-successfull", {
-              replace: true,
-              state: { isSuccess: true },
-            });
-          }, 2000);
-          // console.log(result);
+          console.log(result);
+          handleClose();
+          // setTimeout(() => {
+          //   navigate("/checkout-successfull", {
+          //     replace: true,
+          //     state: { isSuccess: true },
+          //   });
+          // }, 2000);
         },
         // prefill: {
         //   name: "example name",

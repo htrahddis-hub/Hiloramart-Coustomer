@@ -381,11 +381,11 @@ const AuthContextComponent = ({ children }) => {
         break;
       case ONLINE_PAYMENT:
         onlinePayment(
-          action.product,
-          action.payload,
-          action.quantity,
+          action.productIds,
+          action.cost,
           action.setIsLoading,
-          action.navigate
+          action.navigate,
+          action.handleClose
         );
         break;
       case GET_CURRENT_ORDERS:
@@ -437,10 +437,10 @@ const AuthContextComponent = ({ children }) => {
         generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2, action.setAllOrders);
         break;
       case PRODUCT_ADD_FOR_ADS:
-        addProductForAds(action.item, action.setSelectedProducts, action.selectedProductss);
+        addProductForAds(action.item, action.setSelectedProducts, action.setTotalPrice, action.totalPrice, action.setProductIds);
         break;
       case PRODUCT_REMOVE_FOR_ADS:
-        removeProductForAds(action.item, action.setSelectedProducts);
+        removeProductForAds(action.item, action.setSelectedProducts, action.setTotalPrice, action.totalPrice, action.setProductIds);
         break;
 
       case GET_PRODUCT_BY_CATEGORY:

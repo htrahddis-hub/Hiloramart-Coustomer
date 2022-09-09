@@ -202,27 +202,29 @@ export const getOrderID = (cost) => {
   });
 };
 
-export const placeOrder = (response, product, amount) => {
-  console.log(product);
+export const placeOrder = (response, productIds, amount) => {
+
+  console.log(productIds);
   console.log(amount);
+  console.log(response);
   const formValues = {
     razorpayPaymentId: response.razorpay_payment_id,
     orderCreationId: response.razorpay_order_id,
     razorpaySignature: response.razorpay_signature,
-    products: product,
-    totalPrice: amount,
-    isCOD: false, //if true, payment id, signature, order id will not come
-    address: {
-      line1: "Fl no. 203, F wing, Shefalika Heights",
-      line2: "Shivtirthnagar, Paud Road, Kothrud",
-      city: "Pune",
-      state: "Maharashtra",
-      pincode: "411038",
-      country: "India",
-    },
+    products: productIds,
+    price: amount,
+    // isCOD: false, //if true, payment id, signature, order id will not come
+    // address: {
+    //   line1: "Fl no. 203, F wing, Shefalika Heights",
+    //   line2: "Shivtirthnagar, Paud Road, Kothrud",
+    //   city: "Pune",
+    //   state: "Maharashtra",
+    //   pincode: "411038",
+    //   country: "India",
+    // },
     // "affiliateKey": "dfrgthe56htgar" //optional
   };
-  return API.post("orders/placeOrder", formValues);
+  return API.post("/ads/payForAd", formValues);
 };
 
 //orders
@@ -246,6 +248,11 @@ export const getProductByCategory = (catId) => {
 
 export const getVendorAllAds = () => {
   return API.get("/ads/getMyAds");
+}
+
+
+export const createVendorOrderRazor = (totalPrice) => {
+  return API.post("/ads/createOrderId", {price: String(totalPrice)});
 }
 
 //shiprocket 

@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { PRODUCT_ADD_FOR_ADS, PRODUCT_REMOVE_FOR_ADS } from '../Context/Types';
 
-const MyProductItem = ({item}) => {
+const MyProductItem = ({item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds}) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const { dispatch } = useContext(AuthContext);
 
-    let [selectedProducts, setSelectedProducts] = useState([]);
+    
 
     const itemSelectorHandler = (e) => {
         const item = JSON.parse(e.target.value);
@@ -19,7 +19,9 @@ const MyProductItem = ({item}) => {
                 type: PRODUCT_ADD_FOR_ADS,
                 item,
                 setSelectedProducts,
-                selectedProducts
+                setTotalPrice,
+                totalPrice,
+                setProductIds
             })
           }else {
             setIsChecked(false);
@@ -27,14 +29,16 @@ const MyProductItem = ({item}) => {
                 type: PRODUCT_REMOVE_FOR_ADS,
                 item,
                 setSelectedProducts,
-                selectedProducts
+                setTotalPrice,
+                totalPrice,
+                setProductIds
             })
           }
         }
       }
 
 
-    console.log(selectedProducts)
+    
 
 
   return (

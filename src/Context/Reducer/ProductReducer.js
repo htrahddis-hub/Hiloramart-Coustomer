@@ -353,13 +353,31 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
 
 
 let products = [];
-export const addProductForAds = (item, setSelectedProducts) => {
+let productId = [];
+export const addProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
+  let total = totalPrice
+  console.log(total);
   setSelectedProducts(products.push(item));
   console.log(products);
   setSelectedProducts(products);
+  setTotalPrice(Number(total) + Number(item?.price))
+  // debugger
+  // setProductIds(productId.push(item?._id));
+  setProductIds((prev) => [...prev, item?._id])
+  // debugger
+  // console.log(productId)
+
   // debugger
 }
-export const removeProductForAds = (item, setSelectedProducts) => {
-  let filterData = products.pop();
-  setSelectedProducts(filterData);
+export const removeProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
+  let total = totalPrice
+  console.log(total);
+  const filteredData = products.filter((data) => data._id !== item._id);
+  setSelectedProducts(filteredData);
+  setTotalPrice(Number(total) - Number(item?.price));
+
+  // const filteredProductId = productId.filter((id) => id !== item._id);
+  // setProductIds(filteredProductId);
+  setProductIds((prev) => prev.filter((item1) => item1 !== item._id))
+  console.log(productId)
 }

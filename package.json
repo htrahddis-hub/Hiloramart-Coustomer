@@ -2,7 +2,6 @@
   "name": "hiloramart",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://apiv2.shiprocket.in",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
