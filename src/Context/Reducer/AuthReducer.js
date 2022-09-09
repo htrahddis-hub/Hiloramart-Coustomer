@@ -101,7 +101,7 @@ export const vendorLogin = async (
     // });
 
     const res2 = await axios.post(
-      "v1/external/auth/login",
+      "/v1/external/auth/login",
       {
         email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
