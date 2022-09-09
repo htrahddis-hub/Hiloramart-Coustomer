@@ -83,7 +83,7 @@ function Sales() {
   const [sales, setSales] = useState({ totalPages: 0, detail: [] });
   const [dropdown, setDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [totalPage, setTotalPage] = useState(0);
   const [page, setPage] = useState(1);
 
   const getSales = async () => {
@@ -95,6 +95,10 @@ function Sales() {
       limit: 8,
       upDateState: setSales,
       setIsLoading,
+<<<<<<< HEAD
+=======
+      setTotalPage
+>>>>>>> 04101b4698203c74bdf572d6517e673ce1cd4d37
     });
   };
 
@@ -182,12 +186,16 @@ function Sales() {
         }}
       >
         <Stack spacing={2}>
+<<<<<<< HEAD
           <Pagination
             onChange={(event, val) => pageChangeHandler(val)}
             page={page}
             count={sales.totalPages}
             size="large"
           />
+=======
+          <Pagination onChange={(event,val)=> pageChangeHandler(val)} page={page} count={totalPage} size="large" />
+>>>>>>> 04101b4698203c74bdf572d6517e673ce1cd4d37
         </Stack>
         {console.log(sales)}
       </div>

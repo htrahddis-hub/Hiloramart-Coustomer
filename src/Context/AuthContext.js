@@ -298,7 +298,7 @@ const AuthContextComponent = ({ children }) => {
         getVSale(action.startDate,action.endDate,action.upDateState);
         break;
       case VENDOR_ALL_SALE:
-        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState, action.setIsLoading);
+        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState, action.setIsLoading, action.setTotalPage);
         break;
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
@@ -437,7 +437,7 @@ const AuthContextComponent = ({ children }) => {
         generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2, action.setAllOrders);
         break;
       case PRODUCT_ADD_FOR_ADS:
-        addProductForAds(action.item, action.setSelectedProducts);
+        addProductForAds(action.item, action.setSelectedProducts, action.selectedProductss);
         break;
       case PRODUCT_REMOVE_FOR_ADS:
         removeProductForAds(action.item, action.setSelectedProducts);
