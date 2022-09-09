@@ -13,15 +13,11 @@ function MySaleProduct({ data }) {
               <img src={e?.productId?.productImage} alt="product image" />
             </div>
             <div>
-<<<<<<< HEAD
-              <p className="h6">From</p>
-              <p className="mb-0 h6">{e.productId.name}</p>
-              <p className="mb-0 h6">{e.productId.description}</p>
-=======
+
               <p className="h6" >From</p>
               <p className="mb-0 h6" >{e?.productId?.name}</p>
               <p className="mb-0 h6" >{e?.productId?.description}</p>
->>>>>>> 04101b4698203c74bdf572d6517e673ce1cd4d37
+
             </div>
             <div>Rs. {e?.productId?.price}</div>
           </div>

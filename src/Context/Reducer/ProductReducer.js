@@ -352,18 +352,9 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
 }
 
 
-<<<<<<< HEAD
+
 let products = [];
-export const addProductForAds = (item, setSelectedProducts) => {
-  setSelectedProducts(products.push(item));
-  console.log(products);
-  setSelectedProducts(products);
-  // debugger
-}
-export const removeProductForAds = (item, setSelectedProducts) => {
-  let filterData = products.pop();
-  setSelectedProducts(filterData);
-=======
+
 export const addProductForAds = (item, setSelectedProducts, selectedProducts) => {
   setSelectedProducts((selectedProducts) => [...selectedProducts, item]);
   console.log(selectedProducts)
@@ -371,5 +362,5 @@ export const addProductForAds = (item, setSelectedProducts, selectedProducts) =>
 export const removeProductForAds = (item, setSelectedProducts, selectedProducts) => {
   setSelectedProducts(() => selectedProducts.filter((product) => product._id !== item._id ));
   // console.log(selectedProducts)
->>>>>>> 04101b4698203c74bdf572d6517e673ce1cd4d37
+
 }
