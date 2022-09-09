@@ -91,7 +91,12 @@ export const vendorLogin = async (
     const res = await vendorLoginRequest(values);
 
     const headers = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+      "Access-Control-Allow-Headers": "*",
+      "Access-Control-Max-Age": "1728000",
+      "Content-Length": "0"
     }
 
     fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
