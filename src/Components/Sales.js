@@ -165,7 +165,13 @@ function Sales() {
             <SaleLoading />
           </>
         ) : (
+          sales?.detail?.length === 0 ? (
+            <div style={{minHeight: '400px'}}>
+              <h5>No Sales found!</h5>
+            </div>
+          ) : (
           <MySaleProduct data={sales.detail} />
+          )
         )}
       </div>
       <div

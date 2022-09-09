@@ -22,6 +22,7 @@ import { notification } from "../AuthContext";
 import { Navigate } from "react-router-dom";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../utils/firebase";
+import { useState } from "react";
 export const getALlCategory = async (upDateState) => {
   try {
     const res = await getAllCategoryRequest();
@@ -351,10 +352,14 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
 }
 
 
+let products = [];
 export const addProductForAds = (item, setSelectedProducts) => {
-  console.log(item)
-  setSelectedProducts((prev) => [...prev, item]);
+  setSelectedProducts(products.push(item));
+  console.log(products);
+  setSelectedProducts(products);
+  // debugger
 }
-export const removeProductForAds = (item, setSelectedProducts, selectedProducts) => {
-  setSelectedProducts(() => selectedProducts.filter((product) => product._id !== item._id ));
+export const removeProductForAds = (item, setSelectedProducts) => {
+  let filterData = products.pop();
+  setSelectedProducts(filterData);
 }

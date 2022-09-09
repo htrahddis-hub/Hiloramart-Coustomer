@@ -4,7 +4,6 @@ import "../Styles/Components/Sales.css";
 function MySaleProduct({ data }) {
   return (
     <>
-    {console.log(data)}
       {data.map((e) => {
         return (
           <div className="sale-product-container">

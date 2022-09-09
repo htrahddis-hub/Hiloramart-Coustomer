@@ -19,7 +19,8 @@ const MyProductItem = ({item}) => {
             dispatch({
                 type: PRODUCT_ADD_FOR_ADS,
                 item,
-                setSelectedProducts
+                setSelectedProducts,
+                selectedProducts
             })
           }else {
             setIsChecked(false);
