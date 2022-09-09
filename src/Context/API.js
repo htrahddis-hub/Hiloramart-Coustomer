@@ -17,13 +17,27 @@ API.interceptors.request.use((req) => {
 export const userSignUpRequest = (values) => {
   return API.post("/auth/register", values);
 };
+
 export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
 };
 
+export const userForgotpasswordRequest = (value)=>{
+  return API.post("/auth/forgotPassword", {email: value});
+}
+
+export const userVerifyCode = (values)=>{
+  return API.post("/auth/verifyCode",values)
+}
+
+export const resetUserPasswordRequest = (data) => {
+  return API.post("/auth/resetPassword", data)
+}
+
 export const vendorForgotpasswordRequest = (value)=>{
   return API.post("api/vendor/forgot-password", {email: value});
 }
+
 export const vendorVerifyCode = (values)=>{
   /// object of body
   return API.post("api/vendor/verify-code",values)

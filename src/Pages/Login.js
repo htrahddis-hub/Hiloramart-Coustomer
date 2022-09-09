@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "../Styles/pages/Login.css";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import axios from "axios";
 import { useAlert } from "react-alert";
 import { useNavigate } from "react-router-dom";
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-
-import eye from "../Assets/Images/eye.svg";
 import { AuthContext } from "../Context/AuthContext";
 import { USER_LOGIN, VENDOR_LOGIN } from "../Context/Types";
 import { CircularProgress } from "@mui/material";
@@ -118,6 +114,7 @@ const Login = () => {
                   <div>
                     <Link
                       to="/forgotpassword"
+                      state={{ role: AuthRole }}
                       style={{ color: "inherit", textDecoration: "none" }}
                     >
                       <div id="forgotPas">Forgot Password?</div>

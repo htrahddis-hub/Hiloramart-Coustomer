@@ -3,6 +3,9 @@ import {
   userLoginRequest,
   userResendOtpRequest,
   userSignUpRequest,
+  userForgotpasswordRequest,
+  userVerifyCode,
+  resetUserPasswordRequest,
   vendorAccActivateRequest,
   vendorLoginRequest,
   vendorResendOtpRequest,
@@ -79,6 +82,51 @@ export const userLogin = async (
   }
 };
 
+export const userForgotPass = async (email, navigate) => {
+  try {
+    /// api .js function
+    const res = await userForgotpasswordRequest(email);
+    console.log(res);
+    if (res.data.message==="Email Sent") {
+      alert("Otp sent Successfully");
+      navigate("/verifyotp", { state: { email: email, role: "user" } });
+    } else {
+      alert("Something Went Wrong");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const userVerifyOtp = async (values, navigate) => {
+  try {
+    const res = await userVerifyCode(values);
+    console.log(res);
+    if (res.data.message === "Verification Successful") {
+      alert("Verified Successfully");
+      navigate("/passwordchange", {
+        state: { email: values.email, role: "user" },
+      });
+    } else {
+      alert("Verification Failed");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const resetUserPassword = async (data, navigate) => {
+  try {
+    const res = await resetUserPasswordRequest(data);
+    console.log(res);
+    if (res.data.message === "Password Reset Successful") {
+      navigate("/login", { state: { role: "user" } });
+    }
+  } catch (error) {
+    alert("Something went wrong");
+  }
+};
+
 export const vendorLogin = async (
   values,
   resetForm,
@@ -102,7 +150,7 @@ export const vendorLogin = async (
       "https://apiv2.shiprocket.in/v1/external/auth/login",
       {
         email: "iamaditityagi@gmail.com",
-        password: "Qwerty@199938"
+        password: "Qwerty@199938",
       }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);
@@ -138,7 +186,7 @@ export const vendorForgotPass = async (email, navigate) => {
     console.log(res);
     if (res.data.success) {
       alert("Otp sent Successfully");
-      navigate("/verifyotp", { state: email });
+      navigate("/verifyotp", { state: { email: email, role: "vendor" } });
     } else {
       alert("Something Went Wrong");
     }
@@ -169,7 +217,7 @@ export const getVAllSale = async (
     const res = await getVendorAllSale(startDate, endDate, page, limit);
     console.log(res);
     upDateState(res.data.data.detail);
-    setTotalPage(res.data.data.totalPages)
+    setTotalPage(res.data.data.totalPages);
   } catch (err) {
     console.log(err);
   } finally {
@@ -183,7 +231,9 @@ export const vendorVerifyOtp = async (values, navigate) => {
     console.log(res);
     if (res.data.message === "Verification Successful") {
       alert("Verified Successfully");
-      navigate("/passwordchange", { state: values.email });
+      navigate("/passwordchange", {
+        state: { email: values.email, tole: "vendor" },
+      });
     } else {
       alert("Verification Failed");
     }
@@ -203,6 +253,7 @@ export const resetPassword = async (data, navigate) => {
     alert("Something went wrong");
   }
 };
+
 export const vendorSignup = async (
   values,
   resetForm,

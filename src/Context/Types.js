@@ -1,10 +1,13 @@
 export const USER_LOGIN = "user login";
 export const USER_SIGNUP = "user signup";
+export const USER_FORGOTPASSWORD = "user forgotpassword";
+export const USER_VERIFYCODE = "user verifycode";
+export const RESET_USER_PASSWORD = "reset user password";
 export const VENDOR_LOGIN = "vendor login";
-export const VENDOR_FORGOTPASSWORD = "vendor forgotpassword"; 
+export const VENDOR_FORGOTPASSWORD = "vendor forgotpassword";
 export const VENDOR_VERIFYCODE = "vendor verifycode";
-export const RESET_VENDOR_PASSWORD="reset vendor password";
-export const VENDOR_SIGNUP = "vendor signup"; 
+export const RESET_VENDOR_PASSWORD = "reset vendor password";
+export const VENDOR_SIGNUP = "vendor signup";
 export const GET_ALL_CATEGORY = "get all catergory";
 export const ADD_PRODUCT = "add product";
 export const GET_VENDOR_PRODUCTS = "get vendor products";
@@ -28,7 +31,7 @@ export const CHECK_ITEM_IN_CART = "check is in cart";
 export const GET_CART_ITEMS = "get carts items";
 export const DELETE_ITEM_FROM_CART = "delete item from cart";
 export const GET_MY_ORDERS = "get my orders";
-export const UPDATE_VENDOR_ORDER="update vendor order";
+export const UPDATE_VENDOR_ORDER = "update vendor order";
 export const JOIN_AFFILIATE = "join Affiliate";
 export const GET_AFFILIATE_REQUEST = " get affiliate request";
 export const ACCEPT_REQUEST = "accept affiliate request";
@@ -38,34 +41,33 @@ export const GET_CURRENT_ORDERS = "get current orders";
 export const RETURN_ITEM = "return item";
 export const GET_RETURN_ORDERS = "return orders";
 export const GET_COMPLETED_ORDERS = "completed order";
-export const GET_ADS="get ads";
-export const PAID_TO_AFFILIATE="paid to affiliate";
-export const AMOUNT_TO_AFFILIATE="amount to affiliate";
+export const GET_ADS = "get ads";
+export const PAID_TO_AFFILIATE = "paid to affiliate";
+export const AMOUNT_TO_AFFILIATE = "amount to affiliate";
 
-export const ADD_VENDOR_ADDRESS="add vendor address";
-export const GET_VENDOR_ADDRESS="get vendor address";
-export const CHANGE_CURRENT_ADDRESS="change current address";
-export const DELETE_SAVED_ADDRESS="delete saved address";
-export const UPDATE_PROFILE="update profile";
+export const ADD_VENDOR_ADDRESS = "add vendor address";
+export const GET_VENDOR_ADDRESS = "get vendor address";
+export const CHANGE_CURRENT_ADDRESS = "change current address";
+export const DELETE_SAVED_ADDRESS = "delete saved address";
+export const UPDATE_PROFILE = "update profile";
 
-export const VENDOR_SALE = "my sale"
-export const VENDOR_ALL_SALE = "my all"
+export const VENDOR_SALE = "my sale";
+export const VENDOR_ALL_SALE = "my all";
 
+export const SHIPROCKET_CREATE_ORDER_VENDOR = "shiprocket create order vendor";
+export const ADD_SHIPROCKET_PICKUP_LOCATION = "add shiprocket pickup location";
+export const ADD_SHIPROCKET_PICKUP_LOCATION2 =
+  "add shiprocket pickup location2";
+export const GET_SHIPROCKET_ADDRESS = "get shiprocket address";
+export const GET_SHIPROCKET_COUNTRY = "get shiprocket country";
+export const GET_SHIPROCKET_LOCALITY = "get shiprocket locality";
+export const GET_SHIPROCKET_COURIER_SERVICE = "get shiprocket courier service";
+export const GENERATE_SHIPROCKET_AWB = "generate shiprocket awb";
+export const REQUEST_SHIPROCKET_SHIPMENT = "request shiprocket shipment";
 
-export const SHIPROCKET_CREATE_ORDER_VENDOR="shiprocket create order vendor";
-export const ADD_SHIPROCKET_PICKUP_LOCATION="add shiprocket pickup location";
-export const ADD_SHIPROCKET_PICKUP_LOCATION2="add shiprocket pickup location2";
-export const GET_SHIPROCKET_ADDRESS="get shiprocket address";
-export const GET_SHIPROCKET_COUNTRY="get shiprocket country";
-export const GET_SHIPROCKET_LOCALITY="get shiprocket locality";
-export const GET_SHIPROCKET_COURIER_SERVICE="get shiprocket courier service";
-export const GENERATE_SHIPROCKET_AWB="generate shiprocket awb";
-export const REQUEST_SHIPROCKET_SHIPMENT="request shiprocket shipment";
+export const PRODUCT_ADD_FOR_ADS = "product add for ads";
+export const PRODUCT_REMOVE_FOR_ADS = "remove product for ads";
 
+export const GET_PRODUCT_BY_CATEGORY = "get product by category";
 
-export const PRODUCT_ADD_FOR_ADS="product add for ads";
-export const PRODUCT_REMOVE_FOR_ADS="remove product for ads";
-
-export const GET_PRODUCT_BY_CATEGORY="get product by category";
-
-export const GET_VENDOR_ADS="get vendor plan";
+export const GET_VENDOR_ADS = "get vendor plan";

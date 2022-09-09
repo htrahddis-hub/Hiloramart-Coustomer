@@ -7,6 +7,9 @@ import {
   userLogin,
   userResendOtp,
   userSignup,
+  userForgotPass,
+  userVerifyOtp,
+  resetUserPassword,
   vendorAccActivate,
   vendorForgotPass,
   vendorLogin,
@@ -77,7 +80,10 @@ import {
   PRODUCT_REMOVE_FOR_ADS,
   GET_PRODUCT_BY_CATEGORY,
   GET_VENDOR_PLAN,
-  GET_VENDOR_ADS
+  GET_VENDOR_ADS,
+  USER_FORGOTPASSWORD,
+  USER_VERIFYCODE,
+  RESET_USER_PASSWORD,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -103,7 +109,17 @@ import {
   getProductByCatId,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
-import { addVendorAddressData, changeCurrentAdd, deleteSavedAdd, getVendorAddress, getVendorAds, updateProfileFun, userProfile, vendorProfile, vendorProfile2 } from "./Reducer/ProfileReducer";
+import {
+  addVendorAddressData,
+  changeCurrentAdd,
+  deleteSavedAdd,
+  getVendorAddress,
+  getVendorAds,
+  updateProfileFun,
+  userProfile,
+  vendorProfile,
+  vendorProfile2,
+} from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
   getCurrentOrders,
@@ -119,9 +135,22 @@ import {
   getPaidTOAffiliates,
   joinAffliate,
 } from "./Reducer/AffiliateReducer";
-import { denyAffiliateRequest, getAmountToAffiliate, updateOrderRequest } from "./API";
+import {
+  denyAffiliateRequest,
+  getAmountToAffiliate,
+  updateOrderRequest,
+} from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
-import { createShiprocketLocation, createShiprocketLocation2, createShiprocketVendorOrder, generateAWBNow, getAllShiprocketAddress, getCourierServices, getShipRocketCountry, getShipRocketLocality } from "./Reducer/ShiprocketReducer";
+import {
+  createShiprocketLocation,
+  createShiprocketLocation2,
+  createShiprocketVendorOrder,
+  generateAWBNow,
+  getAllShiprocketAddress,
+  getCourierServices,
+  getShipRocketCountry,
+  getShipRocketLocality,
+} from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -146,7 +175,6 @@ const AuthContextComponent = ({ children }) => {
     });
   }, [auth]);
 
-
   const reducer = (state, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
@@ -167,6 +195,15 @@ const AuthContextComponent = ({ children }) => {
           setAuth
         );
         break;
+      case USER_FORGOTPASSWORD:
+        userForgotPass(action.email, action.navigate);
+        break;
+      case USER_VERIFYCODE:
+        userVerifyOtp(action.values, action.navigate);
+        break;
+      case RESET_USER_PASSWORD:
+        resetUserPassword(action.data, action.navigate);
+        break;
       case VENDOR_LOGIN:
         vendorLogin(
           action.payload,
@@ -177,16 +214,10 @@ const AuthContextComponent = ({ children }) => {
         );
         break;
       case VENDOR_FORGOTPASSWORD:
-        vendorForgotPass(
-          action.email,
-          action.navigate,
-        )
+        vendorForgotPass(action.email, action.navigate);
         break;
       case VENDOR_VERIFYCODE:
-        vendorVerifyOtp(
-          action.values,
-          action.navigate,
-        )
+        vendorVerifyOtp(action.values, action.navigate);
         break;
       case RESET_VENDOR_PASSWORD:
         resetPassword(action.data, action.navigate);
@@ -225,14 +256,24 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.navigate,
           action.urls,
-          action.videoUrlResponse,
+          action.videoUrlResponse
         );
         break;
       case GET_VENDOR_PRODUCTS:
-        getVendorProducts(currentUser.id, action.upDateState, action.setIsLoading);
+        getVendorProducts(
+          currentUser.id,
+          action.upDateState,
+          action.setIsLoading
+        );
         break;
       case ADD_VENDOR_ADDRESS:
-        addVendorAddressData(action.address, action.setIsLoading2, action.handleClose, action.setVendorAddress, action.profileData)
+        addVendorAddressData(
+          action.address,
+          action.setIsLoading2,
+          action.handleClose,
+          action.setVendorAddress,
+          action.profileData
+        );
         break;
 
       case CHANGE_CURRENT_ADDRESS:
@@ -244,7 +285,12 @@ const AuthContextComponent = ({ children }) => {
         break;
 
       case UPDATE_PROFILE:
-        updateProfileFun(action.data, action.id, action.setIsLoading, action.navigate);
+        updateProfileFun(
+          action.data,
+          action.id,
+          action.setIsLoading,
+          action.navigate
+        );
         break;
       case GET_ADS:
         getAllAds(action.setAds);
@@ -285,26 +331,43 @@ const AuthContextComponent = ({ children }) => {
         userProfile(action.upDateState);
         break;
       case GET_VENDOR_PROFILE:
-        vendorProfile(action.payload, action.upDateState, action.setUpdatedProfileData, action.setBankDetails, action.setShiprocketAddressResponse);
+        vendorProfile(
+          action.payload,
+          action.upDateState,
+          action.setUpdatedProfileData,
+          action.setBankDetails,
+          action.setShiprocketAddressResponse
+        );
         break;
-      case GET_VENDOR_PROFILE2: 
+      case GET_VENDOR_PROFILE2:
         vendorProfile2(action.id, action.upDateState);
         // vendorProfile(action.id, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
         break;
-      // case  VENDOR_SALE:      
+      // case  VENDOR_SALE:
       //   getVSale(action.startDate,action.endDate);
       //   break;
-      case  VENDOR_SALE:      
-        getVSale(action.startDate,action.endDate,action.upDateState);
+      case VENDOR_SALE:
+        getVSale(action.startDate, action.endDate, action.upDateState);
         break;
       case VENDOR_ALL_SALE:
-        getVAllSale(action.startDate,action.endDate,action.page,action.limit,action.upDateState, action.setIsLoading, action.setTotalPage);
+        getVAllSale(
+          action.startDate,
+          action.endDate,
+          action.page,
+          action.limit,
+          action.upDateState,
+          action.setIsLoading,
+          action.setTotalPage
+        );
         break;
       case PAID_TO_AFFILIATE:
-        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading)
+        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading);
         break;
       case AMOUNT_TO_AFFILIATE:
-        getAmountToAffiliates(action.setAmountToAffiliates, action.setIsLoading);
+        getAmountToAffiliates(
+          action.setAmountToAffiliates,
+          action.setIsLoading
+        );
         break;
       case GET_ALL_PRODUCTS:
         getALLproducts(action.upDateState);
@@ -401,18 +464,31 @@ const AuthContextComponent = ({ children }) => {
         returnITem(action.payload, action.upDateState, action.setIsLoading);
         break;
 
-
       //shiprocket
 
-      case SHIPROCKET_CREATE_ORDER_VENDOR: 
-        createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrder, action.setCourierServiceAvail, action.pickupCode, action.setIsLoading2, action.setIsOrderCreated)
+      case SHIPROCKET_CREATE_ORDER_VENDOR:
+        createShiprocketVendorOrder(
+          action.orderData,
+          action.item,
+          action.pickupAddressToCreateOrder,
+          action.setShiprocketCreatedOrder,
+          action.setCourierServiceAvail,
+          action.pickupCode,
+          action.setIsLoading2,
+          action.setIsOrderCreated
+        );
 
-//       case SHIPROCKET_CREATE_ORDER_VENDOR:
-//         createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
+        //       case SHIPROCKET_CREATE_ORDER_VENDOR:
+        //         createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
         break;
 
       case ADD_SHIPROCKET_PICKUP_LOCATION:
-        createShiprocketLocation(action.profileData, action.data, action.setShiprocketAddress, action.pickupAddress);
+        createShiprocketLocation(
+          action.profileData,
+          action.data,
+          action.setShiprocketAddress,
+          action.pickupAddress
+        );
         break;
       case ADD_SHIPROCKET_PICKUP_LOCATION2:
         createShiprocketLocation2(action.pickupAddress, action.profileData);
@@ -427,24 +503,40 @@ const AuthContextComponent = ({ children }) => {
         break;
 
       case GET_SHIPROCKET_LOCALITY:
-        getShipRocketLocality(action.setAllLocalities, action.id)
+        getShipRocketLocality(action.setAllLocalities, action.id);
         break;
-      
+
       // case GET_SHIPROCKET_COURIER_SERVICE:
       //   getCourierServices(action.pickupCode, action.deliveryCode, action.setCourierServiceAvail);
       //   break;
-      case GENERATE_SHIPROCKET_AWB: 
-        generateAWBNow(action.shipmentId, action.setIsLoading3 ,action.courierId, action.handleClose, action.orderId, action.orderId2, action.setAllOrders);
+      case GENERATE_SHIPROCKET_AWB:
+        generateAWBNow(
+          action.shipmentId,
+          action.setIsLoading3,
+          action.courierId,
+          action.handleClose,
+          action.orderId,
+          action.orderId2,
+          action.setAllOrders
+        );
         break;
       case PRODUCT_ADD_FOR_ADS:
-        addProductForAds(action.item, action.setSelectedProducts, action.selectedProductss);
+        addProductForAds(
+          action.item,
+          action.setSelectedProducts,
+          action.selectedProductss
+        );
         break;
       case PRODUCT_REMOVE_FOR_ADS:
         removeProductForAds(action.item, action.setSelectedProducts);
         break;
 
       case GET_PRODUCT_BY_CATEGORY:
-        getProductByCatId(action.catId, action.setAllProducts, action.setIsLoading)
+        getProductByCatId(
+          action.catId,
+          action.setAllProducts,
+          action.setIsLoading
+        );
         break;
 
       case GET_VENDOR_ADS:
