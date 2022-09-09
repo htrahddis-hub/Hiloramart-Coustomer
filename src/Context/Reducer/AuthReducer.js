@@ -90,21 +90,26 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
-    const header = {
-      "application/json": "application/json"
-    }
-
-    const res2 = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/auth/login",
-      {
-        email: "iamaditityagi@gmail.com",
+    fetch("v1/external/auth/login", {
+      method: 'POST',
+      body:  JSON.stringify({
+        email: "amitsharma199938@gmail.com",
         password: "Qwerty@199938"
-      }, 
-      {
-        headers: header
-      }
-    );
-    localStorage.setItem("shiprocketToken", res2?.data?.token);
+      })
+    }).then((res) => {
+      const resp = res.json()
+      localStorage.setItem("shiprocketToken", resp?.data?.token);
+    });
+
+    // const res2 = await axios.post(
+    //   "https://apiv2.shiprocket.in/v1/external/auth/login",
+    //   {
+    //     email: "iamaditityagi@gmail.com",
+    //     password: "Qwerty@199938"
+    //   }
+    // );
+    // localStorage.setItem("shiprocketToken", res?.data?.token);
+    // localStorage.setItem("shiprocketToken", res2?.data?.token);
     if (res.data.success) {
       localStorage.setItem("vendorUserId", res?.data?.data?.user_id);
       Cookies.set("auth_token", res.data.data.token);
