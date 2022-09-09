@@ -90,21 +90,18 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
-    // fetch("v1/external/auth/login", {
-    //   method: 'POST',
-    //   body:  JSON.stringify({
-    //     email: "amitsharma199938@gmail.com",
-    //     password: "Qwerty@199938"
-    //   })
-    // }).then((res) => {
-    //   localStorage.setItem("shiprocketToken", res?.data?.token);
-    // });
+    const header = {
+      "application/json": "application/json"
+    }
 
     const res2 = await axios.post(
       "https://apiv2.shiprocket.in/v1/external/auth/login",
       {
         email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
+      }, 
+      {
+        headers: header
       }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);
@@ -118,7 +115,7 @@ export const vendorLogin = async (
     if (!res.data.success) {
       Store.addNotification({
         ...notification,
-        message: res.data.console.error,
+        message: "Failed to login",
       });
     }
   } catch (err) {
@@ -126,7 +123,7 @@ export const vendorLogin = async (
     Store.addNotification({
       ...notification,
       type: "danger",
-      message: err?.response?.data?.error,
+      message: "Failed to login",
     });
   } finally {
     setIsLoading(false);
