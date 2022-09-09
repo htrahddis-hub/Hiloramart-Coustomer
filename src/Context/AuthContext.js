@@ -440,7 +440,7 @@ const AuthContextComponent = ({ children }) => {
         addProductForAds(action.item, action.setSelectedProducts, action.selectedProductss);
         break;
       case PRODUCT_REMOVE_FOR_ADS:
-        removeProductForAds(action.item, action.setSelectedProducts, action.selectedProducts);
+        removeProductForAds(action.item, action.setSelectedProducts);
         break;
 
       case GET_PRODUCT_BY_CATEGORY:

@@ -120,7 +120,7 @@ textarea.VsmallInputBox::placeholder {
   display: flex;
   align-items: center;
 }
-.category-list {
+.category-list-imp {
   position: absolute;
   background-color: white;
   padding: 1rem;
@@ -132,13 +132,13 @@ textarea.VsmallInputBox::placeholder {
   width: 100%;
   top: 80px;
 }
-.cat-li {
+.cat-li-imp {
   margin: 0.5rem;
   padding: 0.5rem;
   border-bottom: 1px solid #cec9c9;
   cursor: pointer;
   border-radius: 8px;
 }
-.cat-li:hover {
+.cat-li-imp:hover {
   box-shadow: 2px 2px 7px 2px #e7e7e7;
 }

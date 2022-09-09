@@ -5,55 +5,63 @@ import Delete from "../Assets/Images/remove.svg";
 import { AuthContext } from "../Context/AuthContext";
 import { DELETE_PRODUCT, UPDATE_PRODUCT } from "../Context/Types";
 import "../Styles/pages/Cart2.css";
-import Modal from '@mui/material/Modal';
+import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import FormControl, { useFormControl } from '@mui/material/FormControl';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import Button from '@mui/material/Button';
+import FormControl, { useFormControl } from "@mui/material/FormControl";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 
 import { storage } from "../utils/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import AddProduct from "./AddProduct";
-import CloseIcon from '@mui/icons-material/Close';
-
-
+import CloseIcon from "@mui/icons-material/Close";
 
 const style2 = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "42%",
   // height: '70%',
-  bgcolor: 'background.paper',
+  bgcolor: "#F2F2F2",
   boxShadow: 24,
   p: 4,
   // padding: '0 10px 0 10px',
-  borderRadius: '8px',
-  border: 'none',
-  display: 'flex',
-  flexDirection: 'column'
-}
+  borderRadius: "8px",
+  border: "none",
+  display: "flex",
+  flexDirection: "column",
+};
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "70%",
   // height: '70%',
-  bgcolor: 'background.paper',
+  bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
-  borderRadius: '8px',
-  border: 'none'
+  borderRadius: "8px",
+  border: "none",
 };
 
 const MyProductCont = (props) => {
   const { dispatch } = useContext(AuthContext);
-  const { description, price, productImage, _id, cb, productVideos, name, createdAt, stock } = props;
+  const {
+    description,
+    price,
+    productImage,
+    _id,
+    cb,
+    productVideos,
+    name,
+    createdAt,
+    stock,
+  } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -71,8 +79,7 @@ const MyProductCont = (props) => {
   const [file, setFile] = useState([]);
   const [videoFile, setVideoFile] = useState();
   let urlResponse = [];
-  let videoUrlResponse = []; 
-
+  let videoUrlResponse = [];
 
   const fileHandle = (e) => {
     console.log(e);
@@ -132,7 +139,6 @@ const MyProductCont = (props) => {
     }
   };
 
-
   const deleteProduct = () => {
     dispatch({
       type: DELETE_PRODUCT,
@@ -148,20 +154,20 @@ const MyProductCont = (props) => {
     setInputData((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  }
+  };
 
   const editProduct = () => {
     setIsLoading(true);
     dispatch({
-      type: UPDATE_PRODUCT, 
+      type: UPDATE_PRODUCT,
       payload: inputData,
       id: _id,
       setIsLoading,
       navigate,
       urls: urlResponse,
       videoUrlResponse,
-    })
-  }
+    });
+  };
 
   const AddProductForm = (e) => {
     e.preventDefault();
@@ -173,20 +179,23 @@ const MyProductCont = (props) => {
     uploadFile();
   };
 
-
   console.log(props, "prosp");
   return (
-    <div className="CPCmain" style={{ background: "rgba(112,112,112,0.05)", cursor: 'pointer' }}>
+    <div
+      className="CPCmain"
+      style={{ background: "rgba(112,112,112,0.05)", cursor: "pointer" }}
+    >
       <div onClick={handleOpen2} className="CPCmain">
-
-      <div className="CPC1">
-        <img style={{borderRadius: '8px'}} src={productImage[0]} alt="" />
-      </div>
-      <div className="product-detail">
-        <div className="CPCin1">{name}</div>
-        <div className="CPCin2">RS. {price}</div>
-        <p style={!stock ? {color: 'red'} : {color: 'green'}}>Stock: {stock ? stock : '0'}</p>
-      </div>
+        <div className="CPC1">
+          <img style={{ borderRadius: "8px" }} src={productImage[0]} alt="" />
+        </div>
+        <div className="product-detail">
+          <div className="CPCin1">{name}</div>
+          <div className="CPCin2">RS. {price}</div>
+          <p style={!stock ? { color: "red" } : { color: "green" }}>
+            Stock: {stock ? stock : "0"}
+          </p>
+        </div>
       </div>
       <div className="product-options">
         <div className="remove-icon" onClick={deleteProduct}>
@@ -197,13 +206,17 @@ const MyProductCont = (props) => {
           )}
         </div>
         <div
-          style={{ color: "#FF8D22", fontWeight: "bold", marginBottom: "10px", cursor: 'pointer' }}
+          style={{
+            color: "#FF8D22",
+            fontWeight: "bold",
+            marginBottom: "10px",
+            cursor: "pointer",
+          }}
           onClick={handleOpen}
         >
           Edit
         </div>
       </div>
-
 
       <Modal
         open={open2}
@@ -212,10 +225,24 @@ const MyProductCont = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style2}>
-          <Button onClick={handleClose2} style={{width: '30px', marginLeft: 'auto', padding: 0, color: '#FF8D22'}}><CloseIcon style={{color: '#FF8D22'}}/></Button>
+          <Button
+            onClick={handleClose2}
+            style={{
+              width: "30px",
+              marginLeft: "auto",
+              padding: 0,
+              color: "#FF8D22",
+            }}
+          >
+            <CloseIcon style={{ color: "#FF8D22" }} />
+          </Button>
           <div className="top">
             <div className="img-container">
-              <img style={{borderRadius: '8px'}} src={productImage[0]} alt="" />
+              <img
+                style={{ borderRadius: "8px" }}
+                src={productImage[0]}
+                alt=""
+              />
             </div>
             <div className="product-details">
               <p>{name}</p>
@@ -229,7 +256,7 @@ const MyProductCont = (props) => {
             </div>
             <div className="midinner2">
               <span>Posted Date</span>
-              <span className="middetails">{createdAt.slice(0,10)}</span>
+              <span className="middetails">{createdAt.slice(0, 10)}</span>
             </div>
             <div className="midinner3">
               <span>Product Description</span>
@@ -239,14 +266,11 @@ const MyProductCont = (props) => {
           <div className="mid2">
             <span>Product Images</span>
             <div className="img-wrapper">
-              {
-                productImage?.map((img) => (
-                  <div className="img-container">
-                    <img style={{borderRadius: '8px'}} src={img} alt="" />
-                  </div>
-
-                ))
-              }
+              {productImage?.map((img) => (
+                <div className="img-container">
+                  <img style={{ borderRadius: "8px" }} src={img} alt="" />
+                </div>
+              ))}
               {/* <div className="img-container">
                 <img style={{borderRadius: '8px'}} src={productImage[1]} alt="" />
               </div>
@@ -258,16 +282,20 @@ const MyProductCont = (props) => {
           <div className="bottom">
             <span>Product Video</span>
             <div className="video-container">
-              <video style={{backgroundColor: '#80808038', borderRadius: '8px'}} src={productVideos[0]} autoPlay                    muted
-                    playsInline
-                    controls>
-                <source src={productVideos[0]} type="video/mp4"/>
+              <video
+                style={{ backgroundColor: "#80808038", borderRadius: "8px" }}
+                src={productVideos[0]}
+                autoPlay
+                muted
+                playsInline
+                controls
+              >
+                <source src={productVideos[0]} type="video/mp4" />
               </video>
             </div>
           </div>
         </Box>
       </Modal>
-
 
       <Modal
         open={open}
@@ -276,30 +304,51 @@ const MyProductCont = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-        <FormControl sx={{ width: '100%' }}>
-          <div style={{display: 'flex'}}>
-            <div style={{marginRight: '20px'}} className="input-container">
-              <label htmlFor="name2">Name:</label>
-              <OutlinedInput onChange={inputHandler} id="name2" placeholder={name} name="name"/>
+          <FormControl sx={{ width: "100%" }}>
+            <div style={{ display: "flex" }}>
+              <div style={{ marginRight: "20px" }} className="input-container">
+                <label htmlFor="name2">Name:</label>
+                <OutlinedInput
+                  onChange={inputHandler}
+                  id="name2"
+                  placeholder={name}
+                  name="name"
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="description">Product Description:</label>
+                <OutlinedInput
+                  onChange={inputHandler}
+                  id="description"
+                  type="text"
+                  placeholder={description}
+                  name="description"
+                />
+              </div>
             </div>
-            <div className="input-container">
-              <label htmlFor="description">Product Description:</label>
-              <OutlinedInput onChange={inputHandler} id="description" type="text" placeholder={description} name="description" />
-            </div>
-          </div>
 
-          <div style={{display: 'flex'}}>
-            <div style={{marginRight: '20px'}} className="input-container">
-              <label htmlFor="price">Price:</label>
-              <OutlinedInput onChange={inputHandler} id="price" placeholder={price} name="price" />
+            <div style={{ display: "flex" }}>
+              <div style={{ marginRight: "20px" }} className="input-container">
+                <label htmlFor="price">Price:</label>
+                <OutlinedInput
+                  onChange={inputHandler}
+                  id="price"
+                  placeholder={price}
+                  name="price"
+                />
+              </div>
+              <div className="input-container">
+                <label htmlFor="stock">Stock:</label>
+                <OutlinedInput
+                  onChange={inputHandler}
+                  id="stock"
+                  placeholder={stock}
+                  name="stock"
+                />
+              </div>
             </div>
-            <div className="input-container">
-              <label htmlFor="stock">Stock:</label>
-              <OutlinedInput onChange={inputHandler} id="stock" placeholder={stock} name="stock" />
-            </div>
-          </div>
 
-          <div id="hide">
+            <div id="hide">
               <div className="VsmallInputCon">
                 <label className="VsmallInputLabel">
                   <>
@@ -606,14 +655,24 @@ const MyProductCont = (props) => {
                 }}
               />
             </div>
-        </FormControl>
+          </FormControl>
 
-        <div className="button-container">
-        <Button onClick={AddProductForm} style={{backgroundColor: '#FF8D22', marginRight: '8px'}} variant="contained">{isLoading ? <CircularProgress /> : "Submit"}</Button>
-        <Button onClick={handleClose} style={{color: '#FF8D22', borderColor: '#FF8D22'}} variant="outlined">Cancel</Button>
-
-        </div>
-
+          <div className="button-container">
+            <Button
+              onClick={AddProductForm}
+              style={{ backgroundColor: "#FF8D22", marginRight: "8px" }}
+              variant="contained"
+            >
+              {isLoading ? <CircularProgress /> : "Submit"}
+            </Button>
+            <Button
+              onClick={handleClose}
+              style={{ color: "#FF8D22", borderColor: "#FF8D22" }}
+              variant="outlined"
+            >
+              Cancel
+            </Button>
+          </div>
         </Box>
       </Modal>
     </div>

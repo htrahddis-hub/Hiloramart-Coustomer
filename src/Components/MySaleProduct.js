@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/Components/Sales.css";
-import product_image from "../Assets/Images/MyWishList/Image.svg";
+
 function MySaleProduct({ data }) {
   console.log(data, "data")
   return (

@@ -92,16 +92,18 @@ export const vendorLogin = async (
 
     // fetch("v1/external/auth/login", {
     //   method: 'POST',
-    //   body:  {
+    //   body:  JSON.stringify({
     //     email: "amitsharma199938@gmail.com",
     //     password: "Qwerty@199938"
-    //   }
-    // }).then((res) => console.log(res));
+    //   })
+    // }).then((res) => {
+    //   localStorage.setItem("shiprocketToken", res?.data?.token);
+    // });
 
     const res2 = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/auth/login",
+      "v1/external/auth/login",
       {
-        email: "amitsharma199938@gmail.com",
+        email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
       }
     );
