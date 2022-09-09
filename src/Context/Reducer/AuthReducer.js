@@ -90,10 +90,10 @@ export const vendorLogin = async (
   try {
     const res = await vendorLoginRequest(values);
 
-    fetch("v1/external/auth/login", {
+    fetch("https://apiv2.shiprocket.in/v1/external/auth/login", {
       method: 'POST',
       body:  JSON.stringify({
-        email: "amitsharma199938@gmail.com",
+        email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
       })
     }).then((res) => {
