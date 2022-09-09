@@ -92,11 +92,11 @@ export const vendorLogin = async (
 
     const headers = {
       ":authority": "apiv2.shiprocket.in",
-":path": "/v1/external/auth/login",
-":scheme": "https",
-"accept": "*/*",
-"accept-encoding": "gzip, deflate, br",
-"accept-language": "en-US,en;q=0.9,no;q=0.8",
+      ":path": "/v1/external/auth/login",
+      ":scheme": "https",
+      "Accept": "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "en-US,en;q=0.9,no;q=0.8",
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
