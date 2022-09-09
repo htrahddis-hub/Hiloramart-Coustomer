@@ -91,15 +91,14 @@ export const vendorLogin = async (
     const res = await vendorLoginRequest(values);
 
     const headers = {
-      ":authority": "apiv2.shiprocket.in",
-      ":path": "/v1/external/auth/login",
-      ":scheme": "https",
+      "Access-Control-Allow-Methods": "*",
+      "Access-Control-Allow-Credentials": 'true',
+      "Access-Control-Expose-Headers": "*",
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
       "Accept-Language": "en-US,en;q=0.9,no;q=0.8",
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
       "Access-Control-Allow-Headers": "*",
       "Access-Control-Max-Age": "1728000",
       "Content-Length": "0",
