@@ -129,7 +129,6 @@ export const vendorLogin = async (
           "Access-Control-Allow-Origin": "https://hiloramart-2.vercel.app",
           'Content-Type': 'application/json',
           "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE",
-          "Access-Control-Allow-Headers": "Authorization, Lang",
           // "Origin": "https://hiloramart-2.vercel.app"
         }
       }
