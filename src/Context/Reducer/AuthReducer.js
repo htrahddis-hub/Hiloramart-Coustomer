@@ -123,6 +123,12 @@ export const vendorLogin = async (
       {
         email: "amitsharma199938@gmail.com",
         password: "Qwerty@199938"
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          'Content-Type': 'application/json'
+        }
       }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);
