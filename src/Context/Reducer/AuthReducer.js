@@ -127,7 +127,9 @@ export const vendorLogin = async (
       {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE",
+          "Access-Control-Allow-Headers": "Authorization, Lang"
         }
       }
     );
