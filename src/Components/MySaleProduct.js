@@ -5,8 +5,8 @@ function MySaleProduct({ data }) {
   console.log(data, "data")
   return (
     <>
-      { data?.length !== 0 ? (
-        data?.map((e) => {
+      { data?.detail?.length !== 0 ? (
+        data?.detail?.map((e) => {
         return (
           <div className="sale-product-container">
             <div>

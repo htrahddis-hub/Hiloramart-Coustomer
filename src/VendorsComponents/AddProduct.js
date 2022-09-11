@@ -151,7 +151,6 @@ const AddProduct = () => {
     // console.log(e);
   };
 
-  console.log(inputData)
 
   return (
     <Container>
@@ -200,20 +199,10 @@ const AddProduct = () => {
             <div>
               <input
                 type="text"
-                placeholder="Stock"
+                placeholder="Product Description"
                 className="VinputBox"
-                name="stock"
-                value={inputData.stock}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                placeholder="Price"
-                className="VinputBox"
-                name="price"
-                value={inputData.price}
+                name="productDescription"
+                value={inputData.productDescription}
                 onChange={handleInputChange}
               />
             </div>
@@ -230,10 +219,20 @@ const AddProduct = () => {
             <div>
               <input
                 type="text"
-                placeholder="Product Description"
+                placeholder="Stock"
                 className="VinputBox"
-                name="productDescription"
-                value={inputData.productDescription}
+                name="stock"
+                value={inputData.stock}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                placeholder="Price"
+                className="VinputBox"
+                name="price"
+                value={inputData.price}
                 onChange={handleInputChange}
               />
             </div>

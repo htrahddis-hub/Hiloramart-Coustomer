@@ -171,6 +171,14 @@ export const vendorLogin = async (
       {
         email: "amitsharma199938@gmail.com",
         password: "Qwerty@199938"
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "https://hiloramart-2.vercel.app",
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Methods": "POST,GET,PUT,DELETE",
+          // "Origin": "https://hiloramart-2.vercel.app"
+        }
       }
     );
     localStorage.setItem("shiprocketToken", res2?.data?.token);

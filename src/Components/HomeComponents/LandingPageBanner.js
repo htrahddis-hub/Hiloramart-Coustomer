@@ -37,6 +37,8 @@ const ImageGallaryComponent = () => {
     }
   }, [setAllProducts])
 
+  console.log(lastProduct, secondLastProduct)
+
 
 
   if (AuthRole === "user")
@@ -140,7 +142,7 @@ const ImageGallaryComponent = () => {
                   {lastProduct?.name}
                 </div>
                 <div id="LPtext2">
-                  Installation. Service. Engineering. Global Support
+                  {lastProduct?.description}
                 </div>
                 <div id="LPtext3" style={{ paddingTop: "0%", marginTop: "0px" }}>
                   From RS {lastProduct?.price}
@@ -161,7 +163,7 @@ const ImageGallaryComponent = () => {
                       {lastProduct?.name}
                     </div>
                     <div id="LPtext2">
-                      Installation. Service. Engineering. Global Support
+                      {lastProduct?.description}
                     </div>
                     <div id="LPtext3" style={{ paddingTop: "0%", marginTop: "0px" }}>
                       From RS {lastProduct?.price}
@@ -180,7 +182,7 @@ const ImageGallaryComponent = () => {
                       {secondLastProduct?.name}
                     </div>
                     <div id="LPtext2">
-                      Installation. Service. Engineering. Global Support
+                      {secondLastProduct?.description}
                     </div>
                     <div id="LPtext3">From RS {secondLastProduct?.price}</div>
                   </div>
