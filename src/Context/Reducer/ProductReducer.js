@@ -15,7 +15,8 @@ import {
   removeItemFromWishlistRequest,
   updateVendorProduct,
   getAds,
-  getProductByCategory
+  getProductByCategory,
+  getTopSellingProduct,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -124,8 +125,14 @@ export const addProduct = async (
   }
 };
 
-
-export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, videoUrlResponse) => {
+export const updateProduct = async (
+  inputData,
+  setIsLoading,
+  navigate,
+  id,
+  urls,
+  videoUrlResponse
+) => {
   try {
     const values = {
       name: inputData.name,
@@ -135,15 +142,15 @@ export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, 
       productImage: urls,
       productVideos: videoUrlResponse,
     };
-    console.log(values, 'hi there')
+    console.log(values, "hi there");
     const res = await updateVendorProduct(values, id);
-    if(res.data.success) {
+    if (res.data.success) {
       navigate("/product-updated", {
         state: {
           id: res.data.data._id,
         },
         replace: true,
-      })
+      });
     }
     console.log(res, "product updated");
   } catch (error) {
@@ -156,7 +163,7 @@ export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, 
   } finally {
     setIsLoading(false);
   }
-}
+};
 
 export const getVendorProducts = async (id, upDateState, setIsLoading) => {
   setIsLoading(true);
@@ -170,7 +177,7 @@ export const getVendorProducts = async (id, upDateState, setIsLoading) => {
   }
 };
 
-export const getAllAds = async(setAds) => {
+export const getAllAds = async (setAds) => {
   try {
     const res = await getAds();
     // console.log(res, "datadata");
@@ -178,11 +185,25 @@ export const getAllAds = async(setAds) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const getALLproducts = async (upDateState) => {
   try {
     const res = await getAllProductsRequest();
+    if (res.data) {
+      upDateState(res.data.data);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//the API doesn't take page limit although it is shown in decumentation 
+export const getTopProducts = async (
+  upDateState,
+) => {
+  try {
+    const res = await getTopSellingProduct();
     if (res.data) {
       upDateState(res.data.data);
     }
@@ -339,7 +360,11 @@ export const deleteItemFromCart = async (
   }
 };
 
-export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
+export const getProductByCatId = async (
+  catId,
+  setAllProducts,
+  setIsLoading
+) => {
   try {
     setIsLoading(true);
     const res = await getProductByCategory(catId);
@@ -349,28 +374,39 @@ export const getProductByCatId = async(catId, setAllProducts, setIsLoading) => {
   } finally {
     setIsLoading(false);
   }
-}
-
+};
 
 let products = [];
 let productId = [];
-export const addProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
-  let total = totalPrice
+export const addProductForAds = (
+  item,
+  setSelectedProducts,
+  setTotalPrice,
+  totalPrice,
+  setProductIds
+) => {
+  let total = totalPrice;
   console.log(total);
   setSelectedProducts(products.push(item));
   console.log(products);
   setSelectedProducts(products);
-  setTotalPrice(Number(total) + Number(item?.price))
+  setTotalPrice(Number(total) + Number(item?.price));
   // debugger
   // setProductIds(productId.push(item?._id));
-  setProductIds((prev) => [...prev, item?._id])
+  setProductIds((prev) => [...prev, item?._id]);
   // debugger
   // console.log(productId)
 
   // debugger
-}
-export const removeProductForAds = (item, setSelectedProducts, setTotalPrice, totalPrice, setProductIds) => {
-  let total = totalPrice
+};
+export const removeProductForAds = (
+  item,
+  setSelectedProducts,
+  setTotalPrice,
+  totalPrice,
+  setProductIds
+) => {
+  let total = totalPrice;
   console.log(total);
   const filteredData = products.filter((data) => data._id !== item._id);
   setSelectedProducts(filteredData);
@@ -378,6 +414,6 @@ export const removeProductForAds = (item, setSelectedProducts, setTotalPrice, to
 
   // const filteredProductId = productId.filter((id) => id !== item._id);
   // setProductIds(filteredProductId);
-  setProductIds((prev) => prev.filter((item1) => item1 !== item._id))
-  console.log(productId)
-}
+  setProductIds((prev) => prev.filter((item1) => item1 !== item._id));
+  console.log(productId);
+};

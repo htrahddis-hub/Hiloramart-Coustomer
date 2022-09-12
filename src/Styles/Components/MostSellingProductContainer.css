@@ -24,9 +24,7 @@
   display: none;
 }
 .arrow-scroll-cont {
-  display: flex;
   gap: 1rem;
-  justify-content: end;
   margin-bottom: 1rem;
 }
 .scroll-arrow {

@@ -40,6 +40,7 @@ import {
   GET_VENDOR_PRODUCTS,
   GET_VENDOR_PROFILE,
   GET_WISHLIST_ITEMS,
+  GET_TOP_PRODUCTS,
   JOIN_AFFILIATE,
   ONLINE_PAYMENT,
   REMOVE_ITEM_TO_WISHLIST,
@@ -98,6 +99,7 @@ import {
   updateProduct,
   getALlCategory,
   getALLproducts,
+  getTopProducts,
   getCartItems,
   getProductDetails,
   getVendorProducts,
@@ -372,6 +374,9 @@ const AuthContextComponent = ({ children }) => {
       case GET_ALL_PRODUCTS:
         getALLproducts(action.upDateState);
         break;
+      case GET_TOP_PRODUCTS:
+        getTopProducts(action.upDateState);
+        break;
       case GET_PRODUCT_DETAILS:
         getProductDetails(
           action.payload,
@@ -521,10 +526,22 @@ const AuthContextComponent = ({ children }) => {
         );
         break;
       case PRODUCT_ADD_FOR_ADS:
-        addProductForAds(action.item, action.setSelectedProducts, action.setTotalPrice, action.totalPrice, action.setProductIds);
+        addProductForAds(
+          action.item,
+          action.setSelectedProducts,
+          action.setTotalPrice,
+          action.totalPrice,
+          action.setProductIds
+        );
         break;
       case PRODUCT_REMOVE_FOR_ADS:
-        removeProductForAds(action.item, action.setSelectedProducts, action.setTotalPrice, action.totalPrice, action.setProductIds);
+        removeProductForAds(
+          action.item,
+          action.setSelectedProducts,
+          action.setTotalPrice,
+          action.totalPrice,
+          action.setProductIds
+        );
         break;
 
       case GET_PRODUCT_BY_CATEGORY:

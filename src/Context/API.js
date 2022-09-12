@@ -22,30 +22,30 @@ export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
 };
 
-export const userForgotpasswordRequest = (value)=>{
-  return API.post("/auth/forgotPassword", {email: value});
-}
+export const userForgotpasswordRequest = (value) => {
+  return API.post("/auth/forgotPassword", { email: value });
+};
 
-export const userVerifyCode = (values)=>{
-  return API.post("/auth/verifyCode",values)
-}
+export const userVerifyCode = (values) => {
+  return API.post("/auth/verifyCode", values);
+};
 
 export const resetUserPasswordRequest = (data) => {
-  return API.post("/auth/resetPassword", data)
-}
+  return API.post("/auth/resetPassword", data);
+};
 
-export const vendorForgotpasswordRequest = (value)=>{
-  return API.post("api/vendor/forgot-password", {email: value});
-}
+export const vendorForgotpasswordRequest = (value) => {
+  return API.post("api/vendor/forgot-password", { email: value });
+};
 
-export const vendorVerifyCode = (values)=>{
+export const vendorVerifyCode = (values) => {
   /// object of body
-  return API.post("api/vendor/verify-code",values)
-}
+  return API.post("api/vendor/verify-code", values);
+};
 
 export const resetVendorPassword = (data) => {
-  return API.post("/api/vendor/reset-password", data)
-}
+  return API.post("/api/vendor/reset-password", data);
+};
 export const vendorLoginRequest = (values) => {
   return API.post("/api/vendor/login", values);
 };
@@ -75,45 +75,49 @@ export const vendorProfileRequest = (id) => {
   return API.get(`/vendor/getVendorProfile/${id}`);
 };
 export const getVendorAddresss = () => {
-  return API.get('/vendor/getMyaddress');
-}
+  return API.get("/vendor/getMyaddress");
+};
 
-export const getVendorSale=(startDate,endDate)=>{
+export const getVendorSale = (startDate, endDate) => {
+  return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`);
+};
 
-  return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`)
-}
-
-export const getVendorAllSale=(startDate,endDate,page,limit)=>{
-
-  return API.get(`/ord/mySales?startDate=${startDate}&endDate=${endDate}&pageno=${page}&limit=${limit}`)
-}
+export const getVendorAllSale = (startDate, endDate, page, limit) => {
+  return API.get(
+    `/ord/mySales?startDate=${startDate}&endDate=${endDate}&pageno=${page}&limit=${limit}`
+  );
+};
 
 export const addVendorAddress = (data) => {
   return API.post("/vendor/addAddress", data);
-}
+};
 
 export const changeCurrentAddress = (id) => {
   return API.get(`/vendor/changeCurrentAddress?addressId=${id}`);
-}
+};
 
 export const deleteSavedAddress = (id) => {
   return API.get(`/vendor/removeAddress?addressId=${id}`);
-}
+};
 
-export const updateProfile = (data,id) => {
-  return API.post(`/vendor/updateVendorProfile/${id}`, data)
-}
+export const updateProfile = (data, id) => {
+  return API.post(`/vendor/updateVendorProfile/${id}`, data);
+};
 //products
 export const getAllCategoryRequest = () => {
   return API.get("/product/getProductCategory");
+};
+
+export const getTopSellingProduct = () => {
+  return API.get(`/product/getSellingProducts`);
 };
 
 export const addProductRequest = (values) => {
   return API.post("/product/addProduct", values);
 };
 export const updateVendorProduct = (values, id) => {
-  return API.post(`product/updateProduct?id=${id}`, values)
-}
+  return API.post(`product/updateProduct?id=${id}`, values);
+};
 export const getVendorProductsRequest = (id) => {
   return API.get(`/product/allproducts/${id}`);
 };
@@ -171,12 +175,12 @@ export const getMyOrderRequest = () => {
 
 export const updateOrderRequest = (data) => {
   return API.post("/ord/updateOrder", data);
-}
+};
 
 //ads
 export const getAds = () => {
   return API.get("/ads/getMyAds");
-}
+};
 
 //affliate
 export const joinAffliateRequest = (id) => {
@@ -203,12 +207,12 @@ export const denyAffiliateRequest = (id) => {
 };
 
 export const getPaidToAffiliate = () => {
-  return API.get('/ord/paidToAffiliate');
-}
+  return API.get("/ord/paidToAffiliate");
+};
 
 export const getAmountToAffiliate = () => {
-  return API.get('/ord/amountToAffiliate');
-}
+  return API.get("/ord/amountToAffiliate");
+};
 //payment
 export const getOrderID = (cost) => {
   return API.post("orders/createOrderId", {
@@ -217,7 +221,6 @@ export const getOrderID = (cost) => {
 };
 
 export const placeOrder = (response, productIds, amount) => {
-
   console.log(productIds);
   console.log(amount);
   console.log(response);
@@ -255,18 +258,16 @@ export const returnItemRequest = (values) => {
   return API.post("/orders/return", values);
 };
 
-
 export const getProductByCategory = (catId) => {
-  return API.post(`/product/getProductsbyCategoryId`, {category: [catId]});
-}
+  return API.post(`/product/getProductsbyCategoryId`, { category: [catId] });
+};
 
 export const getVendorAllAds = () => {
   return API.get("/ads/getMyAds");
-}
-
+};
 
 export const createVendorOrderRazor = (totalPrice) => {
-  return API.post("/ads/createOrderId", {price: String(totalPrice)});
-}
+  return API.post("/ads/createOrderId", { price: String(totalPrice) });
+};
 
-//shiprocket 
+//shiprocket

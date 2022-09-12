@@ -8,6 +8,7 @@
   scroll-behavior: smooth;
   margin-bottom: 1rem;
   gap: 1rem;
+  margin: 30px 0;
 }
 .cat-cont::-webkit-scrollbar {
   display: none;
@@ -26,5 +27,5 @@
   height: 60px;
   border-radius: 100px;
   background-color: white;
-  border: 1px solid orange;
+  /* border: 1px solid orange; */
 }

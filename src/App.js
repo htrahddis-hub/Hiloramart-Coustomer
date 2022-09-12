@@ -30,6 +30,7 @@ import VLogin from "./VendorsPages/NavPages/VLogin";
 import VSignup from "./VendorsPages/NavPages/VSignup";
 import VBank from "./VendorsPages/NavPages/VBank";
 import VHome2 from "./VendorsPages/NavPages/VHome2";
+import CategoryProduct from "./Components/HomeComponents/CategoryProduct";
 import {
   BrowserRouter as Router,
   Outlet,
@@ -80,11 +81,7 @@ function App() {
                 path="/forgotpassword"
                 element={<ForgotPassword />}
               ></Route>
-              <Route
-                exact
-                path="/verifyotp"
-                element={<VerifyOtp />}
-              ></Route>
+              <Route exact path="/verifyotp" element={<VerifyOtp />}></Route>
               <Route
                 exact
                 path="/passwordchange"
@@ -158,9 +155,18 @@ function App() {
                 element={<CompletedOrders />}
               ></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
-              <Route exact path="/edit-profile" element={<VEditProfile />}></Route>
+              <Route
+                exact
+                path="/edit-profile"
+                element={<VEditProfile />}
+              ></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
               <Route exact path="/my-plans" element={<MyPlans />}></Route>
+              <Route
+                exact
+                path="/categoryproducts"
+                element={<CategoryProduct />}
+              ></Route>
             </Route>
           </Routes>
         </Router>

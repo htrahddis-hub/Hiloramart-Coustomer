@@ -15,16 +15,17 @@ const Home = () => {
   return (
     <>
       <div className="">
-        {/* <div className="search-cont">
-          <SearchInput />
-        </div> */}
+        {AuthRole === "user" && (
+          <div className="search-cont">
+            <SearchInput />
+          </div>
+        )}
         <LandingPageBanner />
         {AuthRole === "user" ? (
           <>
             <CategorySection />
             <DealOfDayContainer />
             {/* <MostSellingProductContainer /> */}
-            <Detectors />
             <Detectors />
           </>
         ) : (
