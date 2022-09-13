@@ -255,17 +255,27 @@
   height: 200px;
   object-fit: contain;
 }
+.VsmallInputLabel, .VsmallInputBox {
+  height: 80px !important;
+}
 
 .css-hdw1oc {
   display: none;
 }
-
 .input-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 10px;
 }
+.input-container2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 30px;
+  width: 30%;
+}
+
 
 .input-container label {
   margin-bottom: 5px;
@@ -298,7 +308,10 @@
   margin-bottom: 20px;
 }
 
-
+.uploadedImage-preview {
+  height: 60px;
+  width: 60px;
+}
 
 .mid1 .midinner1, .mid1 .midinner2, .mid1 .midinner3 {
   display: flex;

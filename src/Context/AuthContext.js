@@ -213,7 +213,8 @@ const AuthContextComponent = ({ children }) => {
           action.catId,
           action.setIsLoading,
           action.resetform,
-          action.navigate
+          action.navigate,
+          action.productDetails2
         );
         break;
       case UPDATE_PRODUCT:
@@ -222,10 +223,9 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.navigate,
           action.id,
-          action.setIsLoading,
-          action.navigate,
           action.urls,
           action.videoUrlResponse,
+          action.productDetails2
         );
         break;
       case GET_VENDOR_PRODUCTS:

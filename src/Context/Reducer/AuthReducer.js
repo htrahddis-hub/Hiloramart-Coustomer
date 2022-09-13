@@ -119,9 +119,9 @@ export const vendorLogin = async (
     // });
 
     const res2 = await axios.post(
-      "https://apiv2.shiprocket.in/v1/external/auth/login",
+      "https://cors-anywhere.herokuapp.com/https://apiv2.shiprocket.in/v1/external/auth/login",
       {
-        email: "amitsharma199938@gmail.com",
+        email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
       },
       {
