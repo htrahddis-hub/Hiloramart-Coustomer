@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import MyProductCont from "../../VendorsComponents/MyProductCont";
+import MyProductCont from "./CategoryProductCont";
 import "../../VendorsStyle/VmyProduct.css";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
@@ -77,7 +77,7 @@ const VmyProduct = () => {
             style={{ width: "33.33%", marginRight: 0, textAlign: "center" }}
             className="h1 end"
           >
-            My Product
+            Product
           </div>
           <div
             style={{
@@ -94,7 +94,7 @@ const VmyProduct = () => {
           </div>
           {isDropdown && (
             <div
-              style={{ position: "absolute", top: "30%", right: "3%" }}
+              style={{ position: "absolute", top: "30%", right: "3%",zIndex:"10" }}
               className="category-list"
             >
               <div className="cat-li" onClick={getProducts}>
@@ -114,7 +114,7 @@ const VmyProduct = () => {
             </div>
           )}
         </div>
-        <div className="d-flex justify-content-between flex-wrap">
+        <div className="d-flex justify-content-center mt-3 flex-wrap mx-auto">
           {isLoading ? (
             <>
               <ProductsLoading />
@@ -125,7 +125,7 @@ const VmyProduct = () => {
           ) : allProducts?.length !== 0 ? (
             allProducts?.map((item, index) => {
               return (
-                <MyProductCont key={item._id} cb={getProducts} {...item} />
+                <MyProductCont key={item._id} data={item} cb={getProducts}/>
               );
             })
           ) : (

@@ -140,7 +140,9 @@ export const addItemToWishlistRequest = (id) => {
   });
 };
 export const removeItemFromWishlistRequest = (id) => {
-  return API.delete(`/wishlist/remove?product_id=${id}`);
+  console.log({ products: [id] });
+  const data = { products: [id] };
+  return API.delete(`/wishlist/remove`, { data: data });
 };
 
 export const checkItemWishlistStatus = (id) => {

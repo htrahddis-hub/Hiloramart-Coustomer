@@ -9,7 +9,7 @@ import active_wishlist_icon from "../../Assets/Images/active-wishlist.svg";
 import { AuthContext } from "../../Context/AuthContext";
 import { REMOVE_ITEM_TO_WISHLIST } from "../../Context/Types";
 
-const YourWishlistCont = ({ item, cb }) => {
+const YourWishlistCont = ({ cb,item }) => {
   const { dispatch } = useContext(AuthContext);
   const [rating, setRating] = useState(0); // initial rating value
   const [isWishlist, setIsWishlist] = useState(true);
@@ -32,22 +32,22 @@ const YourWishlistCont = ({ item, cb }) => {
   return (
     <div className="ProductMainContainer">
       <div className="ProCont1">
-        <div className="ProHead">Arihant ERP</div>
+        <div className="ProHead">{item?.owner?.name}</div>
         <div className="Stars">
-          <Rating onClick={handleRating} ratingValue={rating} size={20} />
+          <Rating onClick={handleRating} ratingValue={item?.ratings} size={20} />
         </div>
       </div>
 
       <div className="Images">
         <img
-          src={item.productImage[0]}
+          src={item?.productImage}
           alt=""
           style={{ height: "8rem", width: "8rem" }}
         />
       </div>
       <div className="product-title-cont">
-        <div className="discription">{item.name}</div>
-        <div onClick={() => removeFromWishlist(item._id)}>
+        <div className="discription">{item?.name}</div>
+        <div onClick={() => removeFromWishlist(item?._id)} style={{cursor:"pointer"}}>
           {isWishlistLoading ? (
             <CircularProgress sx={{ color: "black" }} size={25} />
           ) : (
@@ -55,13 +55,13 @@ const YourWishlistCont = ({ item, cb }) => {
           )}
         </div>
       </div>
-      <div className="price">RS. {item.price}</div>
+      <div className="price">RS. {item?.price}</div>
       <div id="WishListButtonCont">
         <div>
           <button id="BUYbutton1">BUY NOW</button>
         </div>
         <div>
-          <button id="BUYbutton2" onClick={() => removeFromWishlist(item)}>
+          <button id="BUYbutton2" onClick={() => removeFromWishlist(2)}>
             BUY NOW
           </button>
         </div>

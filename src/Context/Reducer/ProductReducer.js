@@ -246,7 +246,7 @@ export const removeItemFromWishlist = async (
   setIsLoading(true);
   try {
     const res = await removeItemFromWishlistRequest(id);
-    if (res.data === "Item removed") {
+    if (res.data.message === "Removed Successfully") {
       upDateState(false);
       if (cb) cb();
     }

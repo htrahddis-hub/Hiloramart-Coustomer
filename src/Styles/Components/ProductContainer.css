@@ -1,6 +1,6 @@
 .ProductMainContainer {
   background: #fafafa;
-  width: 220px;
+  width: 260px;
   padding: 0rem 0.5rem 1rem 0.5rem;
   border-radius: 8px;
   box-shadow: 1px 2px 7px #e4e1e1;
@@ -50,4 +50,59 @@
   font-size: 10px;
   opacity: 50%;
   font-weight: 400;
+}
+
+.taller{
+  height: 45px;
+  cursor: pointer;
+}
+
+.tall{
+  height: 45px;
+}
+
+#WishListButtonCont1 {
+  margin: 1rem 0;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+#BUYbutton11 {
+  background-color: #ff8d22;
+  color: white;
+  border: 0px;
+  height: 40px;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+#BUYbutton11:active {
+  background-color: #ff8d22;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(4px);
+}
+#BUYbutton21 {
+  background-color: white !important;
+  color: #ff8d22 !important;
+  border: 1px solid !important;
+  width: 50px !important;
+  border-radius: 5px !important;
+  margin: 1% !important;
+  cursor: pointer !important;
+  transition-duration: 0.4s !important;
+  height: auto !important;
+}
+#BUYbutton21:active {
+  background-color: #ff8d22 !important;
+  color: white !important;
+  /* box-shadow: 0 5px #666; */
+  transform: translateY(1px) !important;
+}
+.product-title-cont {
+  display: flex;
+  justify-content: space-between;
 }

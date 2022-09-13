@@ -35,7 +35,7 @@ const MyWishList2 = () => {
       <div className="wishlist-items-cont">
         {wishListItems ? (
           wishListItems.map((item, idx) => (
-            <YourWishlistCont item={item} key={item._id} cb={getWishlist} />
+            <YourWishlistCont item={item} key={item?._id} cb={getWishlist} />
           ))
         ) : (
           <div className="d-flex gap-5">
