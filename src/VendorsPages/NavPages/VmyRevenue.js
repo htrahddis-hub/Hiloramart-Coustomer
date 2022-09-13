@@ -5,7 +5,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_ADS, GET_VENDOR_PROFILE2 } from "../../Context/Types";
+import { GET_ADS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_VENDOR_PROFILE2 } from "../../Context/Types";
 import revenue1 from '../../Assets/revenue1.svg';
 import wallet from "../../Assets/Images/wallet.png";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -145,56 +145,62 @@ const VmyRevenue = () => {
   const [profileData, setProfileData] = useState();
 
   const userId = localStorage.getItem("vendorUserId");
-
+  const [categoryName, setCategoryName] = useState("All");
+  const [allCategory, setAllCategory] = useState([]);
   const [dateRange, setDateRange] = useState([
     getFirstDayofMonth(),
     new Date(),
   ]);
   const [dropdown, setDropdown] = useState(false);
-
-
-  const getAds = () => {
-    dispatch({
-      type: GET_ADS,
-      setAds
-    })
-  }
-  const getVendorProfile = () => {
-    dispatch({
-      type: GET_VENDOR_PROFILE2,
-      id: currentUser.id,
-      upDateState: setProfileData,
-    })
-  }
+  const [isLoading, setIsLoading] = useState(false);
+ 
 
   const handleDate = (e) => {
     setDateRange(e);
-    setDropdown(false);
+    // setDropdown(false);
   };
 
-  const handleDropdown = () => {
-    setDropdown((old) => !old);
+
+  // useEffect(() => {
+  //   getAds();
+  //   getVendorProfile();
+  // }, [])
+
+  const handleCat = (id, name) => {
+    setCategoryName(name);
   };
 
   useEffect(() => {
-    getAds();
-    getVendorProfile();
-  }, [])
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      upDateState: setAllCategory,
+      setIsLoading,
+    });
+  }, []);
 
-//  console.log("profiledata:",profileData)
+
+ console.log("profiledata:",allCategory)
   return (
     <>
-        <div
+        {/* <div
           style={{display: "flex", justifyContent: "end", marginRight: '30px' }}
           className="h5 bold"
           onClick={handleDropdown}
         >
           {getFormatedDate(dateRange[0], "/")}
-          {/* {" -- "}
-            {getFormatedDate(dateRange[1], "/")} */}
           <KeyboardArrowDownOutlinedIcon fontSize="large" />
+        </div> */}
+        <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
+          <select style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option onChange={handleCat} value="all">All</option>
+            {
+              allCategory?.map((item) => {
+                return <option value={item?._id}>{item?.name}</option>
+              })
+            }
+          </select>
         </div>
-        <div className="d-flex justify-content-end me-5 mb-3">
+        {/* <div className="d-flex justify-content-end me-5 mb-3">
         <div>
           {dropdown && (
             <Calendar
@@ -206,7 +212,7 @@ const VmyRevenue = () => {
             />
           )}
         </div>
-      </div>
+      </div> */}
       <div style={{display: 'flex', minHeight: '800px'}}>
         {/* <div
           style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center", margin: '55px 0' }}

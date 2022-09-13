@@ -57,15 +57,15 @@ const VmyProduct = () => {
   return (
     <>
       <div style={{ margin: "3%" }}>
-        <div style={{display: 'flex', justifyContent: 'space-between'}} className="d-flex justify-content-space-between align-items-center">
-          <div style={{width: '33.33%'}}></div>
-          <div style={{width: '33.33%', marginRight: 0, textAlign: 'center'}} className="h1 end">My Product</div>
-          <div style={{width: '33.33%', display: 'flex', justifyContent: 'end', position: 'relative'}} className="cat-div" onClick={handleDropdown}>
+        <div style={{display: 'flex', justifyContent: 'end'}} className="d-flex justify-content-space-between align-items-center">
+          {/* <div style={{width: '33.33%'}}></div> */}
+          {/* <div style={{width: '33.33%', marginRight: 0, textAlign: 'center'}} className="h1 end">My Product</div> */}
+          <div style={{display: 'flex', justifyContent: 'end', position: 'relative'}} className="cat-div" onClick={handleDropdown}>
             {categoryName ? categoryName : "All"}
             <KeyboardArrowDownOutlinedIcon />
           </div>
           {isDropdown && (
-            <div style={{position: 'absolute', top: '30%', right: '3%'}} className="category-list">
+            <div style={{position: 'absolute', top: '27%', right: '3%'}} className="category-list">
               <div
                     className="cat-li"
                     onClick={getProducts}

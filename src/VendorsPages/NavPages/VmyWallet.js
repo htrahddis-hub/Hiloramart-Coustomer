@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import {
   AMOUNT_TO_AFFILIATE,
+  GET_ALL_CATEGORY,
   PAID_TO_AFFILIATE,
   VENDOR_SALE,
 } from "../../Context/Types";
@@ -115,6 +116,14 @@ const VmyWallet = () => {
     new Date(),
   ]);
   const [dropdown, setDropdown] = useState(false);
+  const [categoryName, setCategoryName] = useState("All");
+  const [allCategory, setAllCategory] = useState([]);
+
+
+  const handleCat = (id, name) => {
+    setCategoryName(name);
+  };
+
 
   const getPaidAffiliate = () => {
     dispatch({
@@ -158,16 +167,22 @@ const VmyWallet = () => {
   const handleDropdown = () => {
     setDropdown((old) => !old);
   };
+
+  useEffect(() => {
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      upDateState: setAllCategory,
+      setIsLoading,
+    });
+  }, []);
   return (
     <>
       <div>
-        <div className="d-flex justify-content-end me-5 mb-3">
-          <div>
+        <div className="d-flex justify-content-end mb-3">
+          {/* <div>
             <div className="h5 bold" onClick={handleDropdown}>
               {getFormatedDate(dateRange[0], "/")}
               <KeyboardArrowDownOutlinedIcon fontSize="large" />
-              {/* {" -- "}
-              {getFormatedDate(dateRange[1], "/")} */}
             </div>
             {dropdown && (
               <Calendar
@@ -178,7 +193,17 @@ const VmyWallet = () => {
                 value={dateRange}
               />
             )}
-          </div>
+          </div> */}
+          <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
+          <select style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option onChange={handleCat} value="all">All</option>
+            {
+              allCategory?.map((item) => {
+                return <option value={item?._id}>{item?.name}</option>
+              })
+            }
+          </select>
+        </div>
         </div>
 
         {/* <div id="MWcont1">
@@ -380,7 +405,7 @@ const VmyWallet = () => {
           </div>
         </div>
 
-        <div style={{textAlign: 'center', fontWeight: 'bold'}} id="MWcont2">Amount to Paid</div>
+        <div style={{textAlign: 'center', fontWeight: 'bold'}} id="MWcont2">Affiliate Earning</div>
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
