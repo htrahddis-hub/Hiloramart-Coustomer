@@ -8,7 +8,7 @@ import VNavBar from '../../VendorsComponents/VNavBar';
 const VHome = () => {
   return (
     <div>
-      <VNavBar />
+      {/* <VNavBar /> */}
       <VLandingBanner1 />
       <VLandingBanner2 />
       <AddProduct />

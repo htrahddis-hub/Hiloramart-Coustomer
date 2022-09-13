@@ -20,6 +20,9 @@ const Login = () => {
   useEffect(() => {
     setAuthRole(location.state?.role);
   }, []);
+
+  const AuthRoleTemp = "vendor"
+
   const handleSubmit = (values, resetForm) => {
     if (AuthRole === "user") {
       dispatch({
@@ -62,7 +65,7 @@ const Login = () => {
       <div className="LoginMainContainer">
         <div className="LoginContainer1">
           <div id="loginDiv1">Welcome</div>
-          <div id="loginDiv2">Log In to Your Account</div>
+          <div id="loginDiv2">{AuthRoleTemp === "vendor" ? "Log In to Your Vendor Account" : 'Log In to Your Account'}</div>
           <Formik
             initialValues={initialValues}
             validationSchema={validate}
@@ -130,7 +133,7 @@ const Login = () => {
                     </button>
                   </div>
                   <div>
-                    <Link to="/signup" state={{ role: AuthRole }}>
+                    <Link to="/signup" state={{ role: AuthRoleTemp }}>
                       <button className="SignUpButton">Sign up</button>
                     </Link>
                   </div>

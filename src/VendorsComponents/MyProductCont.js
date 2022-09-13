@@ -11,6 +11,7 @@ import FormControl, { useFormControl } from "@mui/material/FormControl";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import AddIcon from '@mui/icons-material/Add';
 
 import { storage } from "../utils/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -41,7 +42,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "70%",
-  // height: '70%',
+  height: '95%',
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
@@ -53,14 +54,13 @@ const MyProductCont = (props) => {
   const { dispatch } = useContext(AuthContext);
   const {
     description,
-    price,
     productImage,
     _id,
+    detail,
     cb,
     productVideos,
     name,
     createdAt,
-    stock,
   } = props;
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = React.useState(false);
@@ -73,14 +73,18 @@ const MyProductCont = (props) => {
   const [inputData, setInputData] = useState({
     name: name,
     description: description,
-    price: price,
-    stock: stock,
   });
+  const [productDetails, setProductDetails] = useState({
+    size: '',
+    stock: '',
+    price: ''
+  })
+  const [productDetails2, setProductDetails2] = useState(detail);
   const [file, setFile] = useState([]);
   const [videoFile, setVideoFile] = useState();
-  let urlResponse = [];
+  let urlResponse = [...productImage];
   let videoUrlResponse = [];
-
+  const [pdetails, setPDetails] = useState({});
   const fileHandle = (e) => {
     console.log(e);
     setFile((prev) => {
@@ -139,6 +143,11 @@ const MyProductCont = (props) => {
     }
   };
 
+  const sizeChangeHandler = (e) => {
+    const detailsData = JSON.parse(e.target.value);
+    setPDetails(detailsData);
+  }
+
   const deleteProduct = () => {
     dispatch({
       type: DELETE_PRODUCT,
@@ -166,6 +175,7 @@ const MyProductCont = (props) => {
       navigate,
       urls: urlResponse,
       videoUrlResponse,
+      productDetails2
     });
   };
 
@@ -179,21 +189,40 @@ const MyProductCont = (props) => {
     uploadFile();
   };
 
+  const handleDetailHandler = (e) => {
+    setProductDetails((prev) => {
+      return {...prev, [e.target.name]: e.target.value}
+    })
+  }
+
+  const addDetailsHandler = () => {
+    setProductDetails2((prev) => [...prev, productDetails])
+  }
+
+  console.log(productDetails2, productDetails)
   console.log(props, "prosp");
   return (
     <div
       className="CPCmain"
       style={{ background: "rgba(112,112,112,0.05)", cursor: "pointer" }}
     >
-      <div onClick={handleOpen2} className="CPCmain">
-        <div className="CPC1">
+      <div className="CPCmain">
+        <div onClick={handleOpen2} className="CPC1">
           <img style={{ borderRadius: "8px" }} src={productImage[0]} alt="" />
         </div>
         <div className="product-detail">
           <div className="CPCin1">{name}</div>
-          <div className="CPCin2">RS. {price}</div>
-          <p style={!stock ? { color: "red" } : { color: "green" }}>
-            Stock: {stock ? stock : "0"}
+          <select onChange={sizeChangeHandler} name="size" id="size">
+            <option value="">Select Size</option>
+            {
+              detail?.map((item) => (
+                <option value={JSON.stringify(item)}>{item.size}</option>
+              ))
+            }
+          </select>
+          <div className="CPCin2">RS. {pdetails?.price}</div>
+          <p style={!pdetails?.stock ? { color: "red" } : { color: "green" }}>
+            Stock: {pdetails?.stock ? pdetails?.stock : "0"}
           </p>
         </div>
       </div>
@@ -252,7 +281,7 @@ const MyProductCont = (props) => {
           <div className="mid1">
             <div className="midinner1">
               <span>Price</span>
-              <span className="middetails">RS. {price}</span>
+              <span className="middetails">RS. {pdetails?.price}</span>
             </div>
             <div className="midinner2">
               <span>Posted Date</span>
@@ -305,14 +334,15 @@ const MyProductCont = (props) => {
       >
         <Box sx={style}>
           <FormControl sx={{ width: "100%" }}>
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "20px" }} className="input-container">
+            <div style={{ display: "flex", justifyContent: 'space-between' }}>
+              <div style={{ marginRight: "20px"}} className="input-container">
                 <label htmlFor="name2">Name:</label>
                 <OutlinedInput
                   onChange={inputHandler}
                   id="name2"
                   placeholder={name}
                   name="name"
+                  style={{height: '40px'}}
                 />
               </div>
               <div className="input-container">
@@ -323,29 +353,55 @@ const MyProductCont = (props) => {
                   type="text"
                   placeholder={description}
                   name="description"
+                  style={{height: '40px'}}
                 />
               </div>
             </div>
+            <h6 style={{marginTop: '20px'}}>Select Size</h6>
+            <select onChange={sizeChangeHandler} style={{height: '40px', margin: '0 0 20px 0', border: '2px solid #ff8d22', borderRadius: '8px', outline: 'none'}} name="data" id="data">
+              <option value="">Add New</option>
+              {
+                detail?.map((item) => (
+                  <option value={JSON.stringify(item)}>{item?.size}</option>
+                ))
+              }
+            </select>
 
-            <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "20px" }} className="input-container">
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+              <div className="input-container2">
+                <label htmlFor="stock">Size:</label>
+                <OutlinedInput
+                  onChange={handleDetailHandler}
+                  id="size"
+                  placeholder={pdetails?.size}
+                  name="size"
+                  style={{height: '40px'}}
+                />
+              </div>
+              <div style={{ display: "flex" }} className="input-container2">
                 <label htmlFor="price">Price:</label>
                 <OutlinedInput
-                  onChange={inputHandler}
+                  onChange={handleDetailHandler}
                   id="price"
-                  placeholder={price}
+                  placeholder={pdetails?.price}
                   name="price"
+                  style={{height: '40px'}}
                 />
               </div>
-              <div className="input-container">
+              <div className="input-container2">
                 <label htmlFor="stock">Stock:</label>
                 <OutlinedInput
-                  onChange={inputHandler}
+                  onChange={handleDetailHandler}
                   id="stock"
-                  placeholder={stock}
+                  placeholder={pdetails?.stock}
                   name="stock"
+                  style={{height: '40px'}}
                 />
               </div>
+              <Button onClick={addDetailsHandler} style={{color: '#ff8d22', width: '50px', height: '50px', position: 'relative'}}>
+                <AddIcon/>
+                <span>{productDetails2?.length}</span>
+              </Button>
             </div>
 
             <div id="hide">
@@ -355,7 +411,7 @@ const MyProductCont = (props) => {
                     <div placeholder="Add Image" className="VsmallInputBox">
                       {file.image1 ? (
                         <img
-                          src={URL.createObjectURL(file.image1)}
+                          src={URL.createObjectURL(file.image1) || productImage[0]}
                           className="uploadedImage-preview"
                         />
                       ) : (
@@ -403,7 +459,7 @@ const MyProductCont = (props) => {
                     <div placeholder="Add Image" className="VsmallInputBox">
                       {file.image2 ? (
                         <img
-                          src={URL.createObjectURL(file.image2)}
+                          src={URL.createObjectURL(file.image2) || productImage[1]}
                           className="uploadedImage-preview"
                         />
                       ) : (
@@ -451,7 +507,7 @@ const MyProductCont = (props) => {
                     <div placeholder="Add Image" className="VsmallInputBox">
                       {file.image3 ? (
                         <img
-                          src={URL.createObjectURL(file.image3)}
+                          src={URL.createObjectURL(file.image3) || productImage[2]}
                           className="uploadedImage-preview"
                         />
                       ) : (
@@ -499,7 +555,7 @@ const MyProductCont = (props) => {
                     <div placeholder="Add Image" className="VsmallInputBox">
                       {file.image4 ? (
                         <img
-                          src={URL.createObjectURL(file.image4)}
+                          src={URL.createObjectURL(file.image4) || productImage[3]}
                           className="uploadedImage-preview"
                         />
                       ) : (
@@ -547,7 +603,7 @@ const MyProductCont = (props) => {
                     <div placeholder="Add Image" className="VsmallInputBox">
                       {file.image5 ? (
                         <img
-                          src={URL.createObjectURL(file.image5)}
+                          src={URL.createObjectURL(file.image5) || productImage[4]}
                           className="uploadedImage-preview"
                         />
                       ) : (

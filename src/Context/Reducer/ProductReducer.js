@@ -89,20 +89,20 @@ export const addProduct = async (
   catId,
   setIsLoading,
   resetform,
-  navigate
+  navigate,
+  productDetails2
 ) => {
   try {
     const values = {
       name: inputData.productName,
       description: inputData.productDescription,
-      stock: inputData.stock,
-      size: inputData.size,
-      price: inputData.price,
+      detail: productDetails2,
       productImage: urlResponse,
       productVideos: videoUrlResponse,
       owner: inputData.id,
       category: catId,
     };
+    // console.log(values);
     const res = await addProductRequest(values);
     if (res.data.success) {
       resetform();
@@ -125,20 +125,13 @@ export const addProduct = async (
   }
 };
 
-export const updateProduct = async (
-  inputData,
-  setIsLoading,
-  navigate,
-  id,
-  urls,
-  videoUrlResponse
-) => {
+
+export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, videoUrlResponse, productDetails2) => {
   try {
     const values = {
       name: inputData.name,
       description: inputData.description,
-      price: inputData.price,
-      stock: inputData.stock,
+      detail: productDetails2,
       productImage: urls,
       productVideos: videoUrlResponse,
     };

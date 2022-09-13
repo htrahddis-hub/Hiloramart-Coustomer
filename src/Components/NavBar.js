@@ -68,11 +68,11 @@ const NavBar = () => {
       name: "My Revenue",
       navigation: "/my-revenue",
     },
-    {
-      id: '041',
-      name: "My Sale",
-      navigation: "/my-sales",
-    },
+    // {
+    //   id: '041',
+    //   name: "My Sale",
+    //   navigation: "/my-sales",
+    // },
     {
       id: '051',
       name: "My Wallet",

@@ -1,26 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../VendorsStyle/AddProduct.css";
 import { Link, useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { Container } from "react-bootstrap";
 import { storage } from "../utils/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { AuthContext } from "../Context/AuthContext";
 import { ADD_PRODUCT, GET_ALL_CATEGORY } from "../Context/Types";
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AddIcon from '@mui/icons-material/Add';
 
 const AddProduct = () => {
+  const [expanded, setExpanded] = React.useState(false);
+
   const { dispatch, currentUser } = useContext(AuthContext);
   const [isDropdown, setIsDropDown] = useState(false);
   const [category, setCategory] = useState({
     name: "",
     id: "",
   });
+
+  const [productDetails, setProductDetails] = useState({
+    size: '',
+    stock: '',
+    price: ''
+  })
+
+  const [productDetails2, setProductDetails2] = useState([]);
+
   const [inputData, setInputData] = useState({
-    stock: "",
     productName: "",
-    price: "",
-    size: "",
     productDescription: "",
   });
   const [allCategory, setAllCategory] = useState([]);
@@ -117,6 +131,7 @@ const AddProduct = () => {
       urls: urlResponse,
       videoUrlResponse,
       catId: category.id,
+      productDetails2,
       setIsLoading,
       resetform,
       navigate,
@@ -151,6 +166,22 @@ const AddProduct = () => {
     // console.log(e);
   };
 
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const handleDetailHandler = (e) => {
+    setProductDetails((prev) => {
+      return {...prev, [e.target.name]: e.target.value}
+    })
+  }
+
+  const addDetailsHandler = () => {
+    setProductDetails2((prev) => [...prev, productDetails])
+  }
+
+  console.log(productDetails2, productDetails);
 
   return (
     <Container>
@@ -206,36 +237,63 @@ const AddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Size"
-                className="VinputBox"
-                name="size"
-                value={inputData.size}
-                onChange={handleInputChange}
-              />
+                <h6 style={{marginBottom: '-10px'}}>Add Size with Stock and Price</h6>
+            <div className="cont-item">
+              {/* <div> */}
+                <input
+                  type="text"
+                  placeholder="Size"
+                  className="VinputBox2"
+                  name="size"
+                  value={productDetails.size}
+                  onChange={handleDetailHandler}
+                />
+              {/* </div> */}
+              {/* <div> */}
+                <input
+                  type="text"
+                  placeholder="Stock"
+                  className="VinputBox2"
+                  name="stock"
+                  value={productDetails.stock}
+                  onChange={handleDetailHandler}
+                />
+              {/* </div>
+              <div> */}
+                <input
+                  type="number"
+                  placeholder="Price"
+                  className="VinputBox2"
+                  name="price"
+                  value={productDetails.price}
+                  onChange={handleDetailHandler}
+                />
+                <Button onClick={addDetailsHandler} style={{color: '#ff8d22'}}><AddIcon/></Button>
+              {/* </div> */}
             </div>
-            <div>
-              <input
-                type="text"
-                placeholder="Stock"
-                className="VinputBox"
-                name="stock"
-                value={inputData.stock}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                placeholder="Price"
-                className="VinputBox"
-                name="price"
-                value={inputData.price}
-                onChange={handleInputChange}
-              />
-            </div>
+            <Accordion style={{margin: '10px 0 20px 0', border: '1px solid #ff8d22', borderRadius: '8px'}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                  Total Item Added
+                </Typography>
+                <Typography sx={{ color: 'text.secondary' }}>{productDetails2?.length}</Typography>
+              </AccordionSummary>
+              {
+                productDetails2?.map((item) => (
+              <AccordionDetails>
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <span style={{width: '30%'}}>Size: {item?.size}</span>
+                    <span style={{width: '30%'}}>Stock: {item?.stock}</span>
+                    <span style={{width: '30%'}}>Price: {item?.price}</span>
+                  </div>
+              </AccordionDetails>
+                ))
+              }
+            </Accordion>
             <div id="hide">
               <div className="VsmallInputCon">
                 <label className="VsmallInputLabel">
