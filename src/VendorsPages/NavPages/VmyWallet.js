@@ -4,6 +4,8 @@ import "../../VendorsStyle/VmyWallet.css";
 import Footer from "../../Components/Footer";
 import AccordionAffiliate from "../../Components/AccordionAffiliate";
 import { AuthContext } from "../../Context/AuthContext";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import {
   AMOUNT_TO_AFFILIATE,
   PAID_TO_AFFILIATE,
@@ -14,6 +16,27 @@ import { CircularProgress } from "@mui/material";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData('Cupcake', 305, 3.7, 67, 4.3),
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
+];
+
 
 const getFirstDayofMonth = () => {
   var dt = new Date();
@@ -158,8 +181,8 @@ const VmyWallet = () => {
           </div>
         </div>
 
-        <div id="MWcont1">
-          {/* <div className="WalletCont1">
+        {/* <div id="MWcont1">
+          <div className="WalletCont1">
             <div>
               <img
                 style={{ width: "72px", height: "70px" }}
@@ -171,7 +194,7 @@ const VmyWallet = () => {
               <div className="wallet-text">Total Profit</div>
               <div className="wallet-text">RS. 10,000</div>
             </div>
-          </div> */}
+          </div>
           <div style={{width: '70%'}} className="total-sale-cont">
             <div className="total-sale">
               <div>
@@ -270,7 +293,7 @@ const VmyWallet = () => {
               </div>
             </div>
           </div>
-          {/* <div className="WalletCont1">
+          <div className="WalletCont1">
             <div>
               <svg
                 className="svg"
@@ -296,10 +319,10 @@ const VmyWallet = () => {
               <div className="wallet-text">Total Profit</div>
               <div className="wallet-text">RS. 20,000</div>
             </div>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
 
-        <div id="MWcont2">Paid to Affiliates</div>
+        <div style={{textAlign:'center', fontWeight: 'bold'}} id="MWcont2">Product Sold</div>
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
@@ -314,21 +337,50 @@ const VmyWallet = () => {
                 >
                   <CircularProgress style={{ color: "#FF8D22" }} />
                 </div>
-              ) : paidToAffiliates?.length === 0 ? (
+              ) : paidToAffiliates?.length !== 0 ? (
                 <p style={{ textAlign: "center", margin: "40px 0" }}>
                   No Paid To Affiliates Found!
                 </p>
               ) : (
-                paidToAffiliates?.map((item) => <AccordionAffiliate data={item} />)
+                <>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
+                        <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row, index) => (
+                        <TableRow
+                        >
+                          <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
+                          <TableCell style={{width: '30%'}} align="center">{row.name}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row.calories}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row.fat}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row.carbs}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row.protein}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
+                  <Pagination count={1} />
+                </Stack>
+                </>
               )}
-              {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
-                return <AccordionAffiliate />;
-              })} */}
             </div>
           </div>
         </div>
 
-        <div id="MWcont2">Amount to Paid</div>
+        <div style={{textAlign: 'center', fontWeight: 'bold'}} id="MWcont2">Amount to Paid</div>
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
@@ -343,12 +395,45 @@ const VmyWallet = () => {
                 >
                   <CircularProgress style={{ color: "#FF8D22" }} />
                 </div>
-              ) : amountToAffiliates?.length === 0 ? (
+              ) : amountToAffiliates?.length !== 0 ? (
                 <p style={{ textAlign: "center", margin: "40px 0" }}>
                   No Amount To Paid Found!
                 </p>
               ) : (
-                amountToAffiliates?.map((item) => <AccordionAffiliate data={item}/>)
+                <>
+                {/* amountToAffiliates?.map((item) => <AccordionAffiliate data={item}/>) */}
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
+                        <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.map((row, index) => (
+                        <TableRow
+                        >
+                          <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
+                          <TableCell style={{width: '30%'}} align="center">{row.name}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row.calories}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row.fat}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row.carbs}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row.protein}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+                <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
+                  <Pagination count={1} />
+                </Stack>
+                </>
               )}
               {/* {[1, 2, 3, 4, 5, 6].map((item, index) => {
                 return <AccordionAffiliate />;

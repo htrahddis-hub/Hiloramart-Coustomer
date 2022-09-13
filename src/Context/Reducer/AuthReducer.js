@@ -118,6 +118,8 @@ export const vendorLogin = async (
     //   localStorage.setItem("shiprocketToken", resp?.data?.token);
     // });
 
+
+    // https://cors-fix-kylo.herokuapp.com/
     const res2 = await axios.post(
       "https://cors-fix-kylo.herokuapp.com/https://apiv2.shiprocket.in/v1/external/auth/login",
       {
