@@ -69,11 +69,11 @@ function App() {
             <Route element={<UnprotectedRoutes />}>
               <Route exact path="/welcome" element={<Welcome />}></Route>
               <Route exact path="/login" element={<Login />}></Route>
-              {/* <Route
+              <Route
                 exact
                 path="/choose-role-login"
                 element={<RoleLogin />}
-              ></Route> */}
+              ></Route>
               <Route exact path="/signup" element={<SignUp />}></Route>
               <Route exact path="/otp" element={<Otp />}></Route>
               <Route

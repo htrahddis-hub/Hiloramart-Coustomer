@@ -15,7 +15,7 @@ function ProtectedRoutes() {
       <Outlet />
     </>
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/choose-role-login" state={{ from: location }} replace />
   );
 }
 
