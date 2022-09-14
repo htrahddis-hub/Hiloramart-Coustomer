@@ -78,14 +78,28 @@ export const getVendorAddresss = () => {
   return API.get("/vendor/getMyaddress");
 };
 
-export const getVendorSale = (startDate, endDate) => {
-  return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`);
+export const getVendorSale = (
+  // startDate, endDate,
+   category) => {
+  if(category.id === "") {
+    // return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`);
+    return API.get(`/ord/salesCount`);
+  }else {
+    // return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}&category=${category}`);
+    return API.get(`/ord/salesCount?category=${category}`);
+  }
 };
 
-export const getVendorAllSale = (startDate, endDate, page, limit) => {
-  return API.get(
-    `/ord/mySales?startDate=${startDate}&endDate=${endDate}&pageno=${page}&limit=${limit}`
-  );
+export const getVendorAllSale = (page, limit, category) => {
+  if(category.id === "") {
+    return API.get(
+      `/ord/mySales?pageno=${page}&limit=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/mySales?pageno=${page}&limit=${limit}&category=${category}`
+    );
+  }
 };
 
 export const addVendorAddress = (data) => {
@@ -208,8 +222,18 @@ export const denyAffiliateRequest = (id) => {
   });
 };
 
-export const getPaidToAffiliate = () => {
-  return API.get("/ord/paidToAffiliate");
+export const getPaidToAffiliate = (page, limit, category) => {
+  // return API.get("/ord/paidToAffiliate");
+  console.log(category)
+  if(category.id === "") {
+    return API.get(
+      `/ord/paidToAffiliate?pg=${page}&lm=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/paidToAffiliate?pg=${page}&lm=${limit}&category=${category}`
+    );
+  }
 };
 
 export const getAmountToAffiliate = () => {
@@ -255,6 +279,9 @@ export const getReturnOrdersRequest = () => {
 };
 export const getCompletedOrdersRequest = () => {
   return API.get("/ord/getPreviousOrders");
+};
+export const getOngoingOrdersRequest = () => {
+  return API.get("/ord/getOngoingOrders");
 };
 export const returnItemRequest = (values) => {
   return API.post("/orders/return", values);

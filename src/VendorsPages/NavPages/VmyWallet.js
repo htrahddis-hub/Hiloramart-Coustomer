@@ -10,6 +10,7 @@ import {
   AMOUNT_TO_AFFILIATE,
   GET_ALL_CATEGORY,
   PAID_TO_AFFILIATE,
+  VENDOR_ALL_SALE,
   VENDOR_SALE,
 } from "../../Context/Types";
 import { useState } from "react";
@@ -116,12 +117,20 @@ const VmyWallet = () => {
     new Date(),
   ]);
   const [dropdown, setDropdown] = useState(false);
-  const [categoryName, setCategoryName] = useState("All");
+  const [categoryName, setCategoryName] = useState({id: "", name: "All"});
   const [allCategory, setAllCategory] = useState([]);
+  const [sales, setSales] = useState([]);
+  const [page, setPage] = useState("1");
+  const [page2, setPage2] = useState("1");
 
 
-  const handleCat = (id, name) => {
-    setCategoryName(name);
+  const handleCat = (e) => {
+    if(e.target.value === "") {
+      setCategoryName({id: "", name: ""});      
+    }else {      
+      const parsedData = JSON.parse(e.target.value);
+      setCategoryName({id: parsedData._id, name: parsedData.name});
+    }
   };
 
 
@@ -130,43 +139,71 @@ const VmyWallet = () => {
       type: PAID_TO_AFFILIATE,
       setPaidToAffiliates,
       setIsLoading,
+      page2,
+      limit: "6",
+      category: categoryName.id
     });
   };
 
-  const getAmountToAffiliate = () => {
+  // const getAmountToAffiliate = () => {
+  //   dispatch({
+  //     type: AMOUNT_TO_AFFILIATE,
+  //     setAmountToAffiliates,
+  //     setIsLoading,
+  //   });
+  // };
+
+  const getSaless = async () => {
     dispatch({
-      type: AMOUNT_TO_AFFILIATE,
-      setAmountToAffiliates,
+      type: VENDOR_ALL_SALE,
+      // startDate: getISODate(dateRange[0]).substring(0, 10),
+      // endDate: getISODate(dateRange[1]).substring(0, 10),
+      page: page,
+      limit: "6",
+      upDateState: setSales,
       setIsLoading,
+      category: categoryName.id
     });
   };
+
+  console.log(categoryName)
 
   useEffect(() => {
     getPaidAffiliate();
-    getAmountToAffiliate();
-  }, []);
+    getSaless();
+    // getAmountToAffiliate();
+  }, [categoryName, page]);
 
-  const getSales = async () => {
-    dispatch({
-      type: VENDOR_SALE,
-      startDate: getISODate(dateRange[0]).substring(0, 10),
-      endDate: getISODate(dateRange[1]).substring(0, 10),
-      upDateState: setSale,
-    });
-  };
+  // const getSales = async () => {
+  //   dispatch({
+  //     type: VENDOR_SALE,
+  //     startDate: getISODate(dateRange[0]).substring(0, 10),
+  //     endDate: getISODate(dateRange[1]).substring(0, 10),
+  //     upDateState: setSale,
+  //   });
+  // };
 
-  useEffect(() => {
-    getSales();
-  }, [dateRange]);
+  // useEffect(() => {
+  //   getSales();
+  // }, [dateRange]);
 
-  const handleDate = (e) => {
-    setDateRange(e);
-    setDropdown(false);
-  };
+  // const handleDate = (e) => {
+  //   setDateRange(e);
+  //   setDropdown(false);
+  // };
 
-  const handleDropdown = () => {
-    setDropdown((old) => !old);
-  };
+  // const handleDropdown = () => {
+  //   setDropdown((old) => !old);
+  // };
+
+  const pageChangeHandler1 = (e) => {
+    const pg = e.target.innerText;
+    setPage(String(pg))
+  }
+  const pageChangeHandler2 = (e) => {
+    const pg = e.target.innerText;
+    setPage2(String(pg))    
+  }
 
   useEffect(() => {
     dispatch({
@@ -175,6 +212,9 @@ const VmyWallet = () => {
       setIsLoading,
     });
   }, []);
+
+  console.log(paidToAffiliates)
+
   return (
     <>
       <div>
@@ -195,11 +235,11 @@ const VmyWallet = () => {
             )}
           </div> */}
           <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
-          <select style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
-            <option onChange={handleCat} value="all">All</option>
+          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option value="">All</option>
             {
               allCategory?.map((item) => {
-                return <option value={item?._id}>{item?.name}</option>
+                return <option value={JSON.stringify(item)}>{item?.name}</option>
               })
             }
           </select>
@@ -362,9 +402,9 @@ const VmyWallet = () => {
                 >
                   <CircularProgress style={{ color: "#FF8D22" }} />
                 </div>
-              ) : paidToAffiliates?.length !== 0 ? (
+              ) : sales?.detail?.length === 0 ? (
                 <p style={{ textAlign: "center", margin: "40px 0" }}>
-                  No Paid To Affiliates Found!
+                  No Sales Found!
                 </p>
               ) : (
                 <>
@@ -381,15 +421,15 @@ const VmyWallet = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row, index) => (
+                      {sales?.detail?.map((row, index) => (
                         <TableRow
                         >
                           <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
-                          <TableCell style={{width: '30%'}} align="center">{row.name}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row.calories}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row.fat}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row.carbs}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row.protein}</TableCell>
+                          <TableCell style={{width: '30%'}} align="center">{row?.productId?.name}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0,10)}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0,10)}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -397,7 +437,7 @@ const VmyWallet = () => {
                 </TableContainer>
 
                 <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
-                  <Pagination count={1} />
+                  <Pagination hideNextButton hidePrevButton onChange={pageChangeHandler1} count={sales?.totalPages} />
                 </Stack>
                 </>
               )}
@@ -420,9 +460,9 @@ const VmyWallet = () => {
                 >
                   <CircularProgress style={{ color: "#FF8D22" }} />
                 </div>
-              ) : amountToAffiliates?.length !== 0 ? (
+              ) : paidToAffiliates?.data?.length === 0 ? (
                 <p style={{ textAlign: "center", margin: "40px 0" }}>
-                  No Amount To Paid Found!
+                  No Affiliate Earining Found!
                 </p>
               ) : (
                 <>
@@ -440,15 +480,15 @@ const VmyWallet = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {rows.map((row, index) => (
+                      {paidToAffiliates?.data?.map((row, index) => (
                         <TableRow
                         >
                           <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
-                          <TableCell style={{width: '30%'}} align="center">{row.name}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row.calories}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row.fat}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row.carbs}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row.protein}</TableCell>
+                          <TableCell style={{width: '30%'}} align="center">{row?.productId?.name}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0, 10)}</TableCell>
+                          <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0, 10)}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -456,7 +496,7 @@ const VmyWallet = () => {
                 </TableContainer>
 
                 <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
-                  <Pagination count={1} />
+                  <Pagination hideNextButton hidePrevButton onChange={pageChangeHandler2} count={amountToAffiliates?.totalPages} />
                 </Stack>
                 </>
               )}

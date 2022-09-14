@@ -225,29 +225,33 @@ export const vendorForgotPass = async (email, navigate) => {
   }
 };
 
-export const getVSale = async (startDate, endDate, upDateState) => {
+export const getVSale = async (
+  // startDate, endDate,
+   upDateState, category) => {
   try {
-    const res = await getVendorSale(startDate, endDate);
+    const res = await getVendorSale(
+      // startDate, endDate,
+       category);
     upDateState(res.data.data);
     console.log("res,", res);
   } catch (err) {}
 };
 
 export const getVAllSale = async (
-  startDate,
-  endDate,
+  // startDate,
+  // endDate,
   page,
   limit,
   upDateState,
   setIsLoading,
-  setTotalPage
+  category
 ) => {
   try {
+    console.log(page, limit, category)
     setIsLoading(true);
-    const res = await getVendorAllSale(startDate, endDate, page, limit);
-    console.log(res);
-    upDateState(res.data.data.detail);
-    setTotalPage(res.data.data.totalPages);
+    const res = await getVendorAllSale(page, limit, category);
+    console.log(res, "all sales");
+    upDateState(res.data.data);
   } catch (err) {
     console.log(err);
   } finally {

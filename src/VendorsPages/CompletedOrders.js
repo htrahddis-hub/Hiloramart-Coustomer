@@ -36,20 +36,30 @@ function CompletedOrders() {
         }}
       >
         <Link
-          to="/orders-current"
+          to="/orders-new"
           style={{ color: "gray", textDecoration: "none" }}
         >
-          Current Orders
+          New Orders
         </Link>
         <Link
           to="/orders-return"
           style={{ marginLeft: "50px", color: "gray", textDecoration: "none" }}
         >
-          Return Requests
+          Return Orders
         </Link>
         <span style={{ marginLeft: "50px", borderBottom: "1px solid orange" }}>
           Completed Orders
         </span>
+        <Link
+            to="/ongoing-order"
+            style={{
+              marginLeft: "50px",
+              color: "gray",
+              textDecoration: "none",
+            }}
+          >
+            Ongoing Orders
+        </Link>
       </div>
       <div  style={{margin: '10px 10px 100px 10px'}}>
         <OrderTable3 data={data} isLoading={isLoading}/>

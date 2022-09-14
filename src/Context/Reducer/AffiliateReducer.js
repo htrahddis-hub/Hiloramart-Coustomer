@@ -88,13 +88,13 @@ export const denytAffiliate = async (id, setIsLoading, cb) => {
 };
 
 
-export const getPaidTOAffiliates = async(setPaidToAffiliates, setIsLoading) => {
+export const getPaidTOAffiliates = async(setPaidToAffiliates, setIsLoading, page2, limit, category) => {
   
   try {
     setIsLoading(true);
-    const res = await getPaidToAffiliate();
+    const res = await getPaidToAffiliate(page2, limit, category);
     setPaidToAffiliates(res.data.data);
-    // console.log(res, "paid to affiliates");
+    console.log(res, "paid to affiliates");
   } catch (error) {
     console.log(error);
   } finally {
@@ -107,7 +107,7 @@ export const getAmountToAffiliates = async(setAmountToAffiliates, setIsLoading) 
     const res = await getAmountToAffiliate();
     setAmountToAffiliates(res.data.data);
     // debugger
-    // console.log(res, "amount to affiliates");
+    console.log(res, "amount to affiliates");
   } catch (error) {
     console.log(error);
   } finally {

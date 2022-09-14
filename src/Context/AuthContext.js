@@ -85,6 +85,7 @@ import {
   USER_FORGOTPASSWORD,
   USER_VERIFYCODE,
   RESET_USER_PASSWORD,
+  ONGOING_ORDER,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -126,6 +127,7 @@ import {
   getCompletedOrders,
   getCurrentOrders,
   getMyOrder,
+  getOngoingOrders,
   getReturnOrders,
   returnITem,
 } from "./Reducer/OrderReducer";
@@ -349,21 +351,24 @@ const AuthContextComponent = ({ children }) => {
       //   getVSale(action.startDate,action.endDate);
       //   break;
       case VENDOR_SALE:
-        getVSale(action.startDate, action.endDate, action.upDateState);
+        getVSale(
+          // action.startDate,
+          // action.endDate,
+           action.upDateState, action.category);
         break;
       case VENDOR_ALL_SALE:
         getVAllSale(
-          action.startDate,
-          action.endDate,
+          // action.startDate,
+          // action.endDate,
           action.page,
           action.limit,
           action.upDateState,
           action.setIsLoading,
-          action.setTotalPage
+          action.category
         );
         break;
       case PAID_TO_AFFILIATE:
-        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading);
+        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading, action.page2, action.limit, action.category);
         break;
       case AMOUNT_TO_AFFILIATE:
         getAmountToAffiliates(
@@ -458,6 +463,9 @@ const AuthContextComponent = ({ children }) => {
         break;
       case GET_CURRENT_ORDERS:
         getCurrentOrders(action.upDateState, action.setIsLoading);
+        break;
+      case ONGOING_ORDER:
+        getOngoingOrders(action.upDateState, action.setIsLoading);
         break;
       case GET_RETURN_ORDERS:
         getReturnOrders(action.upDateState, action.setIsLoading);

@@ -2,18 +2,19 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer";
 import OrderTable from "../../Components/OrderTable";
+import OrderTable4 from "../../Components/OrderTable4";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_CURRENT_ORDERS } from "../../Context/Types";
+import { GET_CURRENT_ORDERS, ONGOING_ORDER } from "../../Context/Types";
 
 const VHome2 = () => {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const getCurrentOrders = () => {
-    dispatch({ type: GET_CURRENT_ORDERS, upDateState: setData, setIsLoading });
+  const getOngoingOrders = () => {
+    dispatch({ type: ONGOING_ORDER, upDateState: setData, setIsLoading });
   };
   useEffect(() => {
-    getCurrentOrders();
+    getOngoingOrders();
   }, []);
   return (
     <>
@@ -22,13 +23,20 @@ const VHome2 = () => {
           style={{
             fontSize: "24px",
             fontWeight: "600",
-            marginLeft: "60px",
+            marginLeft: "10px",
             marginTop: "50px",
           }}
         >
-          <span style={{ borderBottom: "1px solid orange" }}>
+          <Link
+            to="/orders-new"
+            style={{
+              marginLeft: "50px",
+              color: "gray",
+              textDecoration: "none",
+            }}
+          >
             New Orders
-          </span>
+          </Link>
           <Link
             to="/orders-return"
             style={{
@@ -49,20 +57,13 @@ const VHome2 = () => {
           >
             Completed Orders
           </Link>
-          <Link
-            to="/ongoing-order"
-            style={{
-              marginLeft: "50px",
-              color: "gray",
-              textDecoration: "none",
-            }}
-          >
-            Ongoing Orders
-          </Link>
+          <span style={{ marginLeft: "50px", borderBottom: "1px solid orange" }}>
+                Ongoing Orders
+            </span>
         </div>
         <div style={{margin: '10px 10px 100px 10px'}}>
           {/* <BuyersDetailCont /> */}
-          <OrderTable data={data} isLoading={isLoading}/>
+          <OrderTable4 data={data} isLoading={isLoading}/>
         </div>
         {/* <AssignedAndStausFormVhome2 /> */}
       </div>

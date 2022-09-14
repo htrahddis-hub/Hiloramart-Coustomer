@@ -30,13 +30,13 @@ const VReturn = () => {
         }}
       >
         <Link
-          to="/orders-current"
+          to="/orders-new"
           style={{ color: "gray", textDecoration: "none" }}
         >
-          Current Orders
+          New Orders
         </Link>
         <span style={{ marginLeft: "50px", borderBottom: "1px solid orange" }}>
-          Return Requests
+          Return Orders
         </span>
         <Link
           to="/orders-completed"
@@ -44,6 +44,16 @@ const VReturn = () => {
         >
           Completed Orders
         </Link>
+        <Link
+            to="/ongoing-order"
+            style={{
+              marginLeft: "50px",
+              color: "gray",
+              textDecoration: "none",
+            }}
+          >
+            Ongoing Orders
+          </Link>
       </div>
       <div style={{margin: '10px 10px 100px 10px'}}>
         <OrderTable2 data={data} isLoading={isLoading}/>

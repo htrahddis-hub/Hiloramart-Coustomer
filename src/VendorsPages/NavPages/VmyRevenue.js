@@ -5,7 +5,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_ADS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_VENDOR_PROFILE2 } from "../../Context/Types";
+import { GET_ADS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_VENDOR_PROFILE2, VENDOR_SALE } from "../../Context/Types";
 import revenue1 from '../../Assets/revenue1.svg';
 import wallet from "../../Assets/Images/wallet.png";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -145,7 +145,7 @@ const VmyRevenue = () => {
   const [profileData, setProfileData] = useState();
 
   const userId = localStorage.getItem("vendorUserId");
-  const [categoryName, setCategoryName] = useState("All");
+  const [categoryName, setCategoryName] = useState({id: "", name: "All"});
   const [allCategory, setAllCategory] = useState([]);
   const [dateRange, setDateRange] = useState([
     getFirstDayofMonth(),
@@ -153,6 +153,7 @@ const VmyRevenue = () => {
   ]);
   const [dropdown, setDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [countdata, setCountData] = useState({});
  
 
   const handleDate = (e) => {
@@ -160,15 +161,26 @@ const VmyRevenue = () => {
     // setDropdown(false);
   };
 
-
-  // useEffect(() => {
-  //   getAds();
-  //   getVendorProfile();
-  // }, [])
-
-  const handleCat = (id, name) => {
-    setCategoryName(name);
+  const handleCat = (e) => {
+    if(e.target.value === "") {
+      setCategoryName({id: "", name: ""});      
+    }else {      
+      const parsedData = JSON.parse(e.target.value);
+      setCategoryName({id: parsedData._id, name: parsedData.name});
+    }
   };
+
+  const getCountData = () => {
+    dispatch({
+      type: VENDOR_SALE,
+      upDateState: setCountData,
+      category: categoryName.id
+    })
+  }
+
+  useEffect(() => {
+    getCountData();
+  }, [categoryName])
 
   useEffect(() => {
     dispatch({
@@ -191,11 +203,11 @@ const VmyRevenue = () => {
           <KeyboardArrowDownOutlinedIcon fontSize="large" />
         </div> */}
         <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
-          <select style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
-            <option onChange={handleCat} value="all">All</option>
+        <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option value="">All</option>
             {
               allCategory?.map((item) => {
-                return <option value={item?._id}>{item?.name}</option>
+                return <option value={JSON.stringify(item)}>{item?.name}</option>
               })
             }
           </select>
@@ -231,7 +243,7 @@ const VmyRevenue = () => {
             </div>
             <div id="walletCont4">
               <div className="wallet-text">Total Product Sold</div>
-              <div className="wallet-text">1000</div>
+              <div className="wallet-text">{countdata?.sold}</div>
             </div>
           </div>
           <div style={{height: '200px'}} className="WalletCont1">
@@ -245,7 +257,7 @@ const VmyRevenue = () => {
                   RS.{" "}
                   {new Intl.NumberFormat("en-IN", {
                     maximumFractionDigits: 0,
-                  }).format("30")}
+                  }).format(countdata?.sale)}
                 </div>
               </div>
             </div>
@@ -290,7 +302,7 @@ const VmyRevenue = () => {
               </div>
               <div id="walletCont4">
                 <div className="wallet-text" style={{fontSize: '1rem'}}>Hiloramart Charges</div>
-                <div className="wallet-text">RS. 20,000</div>
+                <div className="wallet-text">RS. {countdata?.adminfee}</div>
               </div>
             </div>
             <div style={{display: 'flex', flexDirection: 'column', width: '30%'}} className="WalletCont1">
@@ -303,7 +315,7 @@ const VmyRevenue = () => {
               </div>
               <div id="walletCont4">
                 <div className="wallet-text" style={{fontSize: '1rem'}}>Affilitate Earning</div>
-                <div className="wallet-text">1000</div>
+                <div className="wallet-text">RS. {countdata?.affiliatefee}</div>
               </div>
             </div>
 
@@ -318,7 +330,7 @@ const VmyRevenue = () => {
                     RS.{" "}
                     {new Intl.NumberFormat("en-IN", {
                       maximumFractionDigits: 0,
-                    }).format("3000")}
+                    }).format(countdata?.sale - (countdata?.adminfee - countdata?.affiliatefee))}
                   </div>
                 </div>
               </div>

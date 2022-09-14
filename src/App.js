@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import "react-notifications-component/dist/theme.css";
 
 import AuthContextComponent, { AuthContext } from "./Context/AuthContext";
+import OngoingOrder from './VendorsPages/NavPages/OngoingOrder';
 
 import "./App.css";
 import Welcome from "./Pages/Welcome";
@@ -147,12 +148,17 @@ function App() {
               ></Route>
               <Route exact path="/VBank" element={<VBank />}></Route>
               <Route exact path="/my-orders" element={<MyOrders />}></Route>
-              <Route exact path="/orders-current" element={<VHome2 />}></Route>
+              <Route exact path="/orders-new" element={<VHome2 />}></Route>
               <Route exact path="/orders-return" element={<VReturn />}></Route>
               <Route
                 exact
                 path="/orders-completed"
                 element={<CompletedOrders />}
+              ></Route>
+              <Route
+                exact
+                path="/ongoing-order"
+                element={<OngoingOrder />}
               ></Route>
               <Route exact path="/profile" element={<VProfile />}></Route>
               <Route

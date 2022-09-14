@@ -39,12 +39,12 @@ function MyOrderCard({ data }) {
       <div className="my-order-card-product-details">
         <div className="my-order-card-image-cont">
           <img
-            src={data.productId.productImage[0]}
+            src={data?.productId?.productImage[0]}
             className="my-order-card-image"
           />
         </div>
         <div className="my-order-card-text">
-          <div>{data.productId.name}</div>
+          <div>{data?.productId?.name}</div>
           <div>Delivered 12-Mar-2022</div>
         </div>
       </div>
@@ -60,19 +60,19 @@ function MyOrderCard({ data }) {
           </div>
           <div>
             <div>Total Pay</div>
-            <div className="my-order-card-value-col">RS {data.totalPrice}</div>
+            <div className="my-order-card-value-col">RS {data?.totalPrice}</div>
           </div>
           <div>
             <div>Shipping Address</div>
             <div className="my-order-card-value-col">
               {" "}
-              {data.address.line1 +
+              {data?.address?.line1 +
                 "," +
                 " " +
-                data.address.city +
+                data?.address?.city +
                 "," +
                 " " +
-                data.address.state}
+                data?.address?.state}
             </div>
           </div>
         </div>
