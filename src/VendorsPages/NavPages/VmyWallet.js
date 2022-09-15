@@ -463,10 +463,11 @@ const VmyWallet = () => {
                       <TableRow>
                         <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
                         <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
+                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
                         <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
+                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Invoice</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -479,6 +480,7 @@ const VmyWallet = () => {
                           <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0, 10)}</TableCell>
                           <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0, 10)}</TableCell>
                           <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center"><a style={{color: '#ff8d22', textDecoration: 'none'}} href={row?.invoice}>Download</a></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>

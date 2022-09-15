@@ -35,7 +35,8 @@ function CompletedOrders() {
       upDateState: setData,
       setIsLoading,
       limit: '10',
-      page
+      page,
+      category: categoryName.id
     });
   };
 

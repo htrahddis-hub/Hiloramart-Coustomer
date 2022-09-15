@@ -82,6 +82,10 @@ const VProfile = () => {
                   <p>IFSC Code</p>
                   <p>{profileData?.bankDetails?.ifsc_code}</p>
                 </div>
+                <div className="details">
+                  <p>Swift Code</p>
+                  <p>{profileData?.bankDetails?.swift_code}</p>
+                </div>
               </div>
             </div>
           )}

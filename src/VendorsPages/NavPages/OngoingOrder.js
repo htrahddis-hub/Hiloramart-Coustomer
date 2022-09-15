@@ -25,7 +25,7 @@ const VHome2 = () => {
   };
 
   const getOngoingOrders = () => {
-    dispatch({ type: ONGOING_ORDER, upDateState: setData, setIsLoading, limit: '10', page });
+    dispatch({ type: ONGOING_ORDER, upDateState: setData, setIsLoading, limit: '10', page, category: categoryName.id });
   };
   const pageChangeHandler = (e, value) => {
     setPage(value);

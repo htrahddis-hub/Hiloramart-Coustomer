@@ -55,6 +55,7 @@ function OrderTable4({ data, isLoading, pageChangeHandler }) {
   return (
       isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0', height: '300px'}}>No Data Found!</p> : (
+        <>
         <div style={{height: '100vh', overflow: 'auto', padding: '10px'}} className="table-container">
           <table className="columns-cont">
             <thead>
@@ -99,13 +100,13 @@ function OrderTable4({ data, isLoading, pageChangeHandler }) {
               })}
             </tbody>
           </table>
+        </div>
           <div style={{display: 'grid', placeItems: 'center'}}>
             <Stack spacing={2}>
-              <Pagination count={10} onChange={pageChangeHandler} />
+              <Pagination count={data?.totalPages} onChange={pageChangeHandler} />
             </Stack>
           </div>
-        </div>
-
+      </>
       )
   );
 }
