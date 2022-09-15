@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { ADD_SHIPROCKET_PICKUP_LOCATION, ADD_SHIPROCKET_PICKUP_LOCATION2, GENERATE_SHIPROCKET_AWB, GET_SHIPROCKET_ADDRESS, GET_SHIPROCKET_COURIER_SERVICE, GET_VENDOR_ADDRESS, GET_VENDOR_PROFILE, GET_VENDOR_PROFILE2, SHIPROCKET_CREATE_ORDER_VENDOR } from "../Context/Types";
 import { AuthContext } from "../Context/AuthContext";
 import { useState } from "react";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const style = {
   position: 'absolute',
@@ -23,7 +25,7 @@ const style = {
   border: 'none'
 };
 
-function OrderTable({ data, isLoading }) {
+function OrderTable({ data, isLoading, pageChangeHandler }) {
   const { dispatch, AuthRole, currentUser } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -171,6 +173,8 @@ const courierServiceSelector = (e) => {
     }
   }, [])
 
+  console.log(courierServiceAvail)
+
   const columns = [
     {
       name: "Order ID",
@@ -191,21 +195,21 @@ const courierServiceSelector = (e) => {
       name: "Status",
     },
   ];
-  console.log(data, "my data");
   return (
-      isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
-      data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0'}}>No Data Found!</p> : (
-        <div style={{height: '100vh', overflow: 'auto'}} className="table-container">
+    isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
+      data?.data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0', height: '300px'}}>No Data Found!</p> : (
+        <>
+        <div style={{height: '100vh', overflow: 'auto', padding: '10px'}} className="table-container">
           <table className="columns-cont">
             <thead>
-              <tr>
+              <tr style={{borderLeft: '1px solid lightgray', borderTop: '1px solid lightgray'}}>
                 {columns.map((item, index) => {
                   return <th className="column-title">{item.name}</th>;
                 })}
               </tr>
             </thead>
-            <tbody>
-              {data?.map((item) => {
+            <tbody style={{borderLeft: '1px solid lightgray', borderRight: '1px solid lightgray', borderBottom: '1px solid lightgray'}}>
+              {data?.data?.map((item) => {
                 return (
                   <>
                   <tr style={{height: '70px', overflow: 'auto'}} onClick={()=>openModal(item)} className="pointer">
@@ -238,6 +242,12 @@ const courierServiceSelector = (e) => {
               })}
             </tbody>
           </table>
+        </div>
+          <div style={{display: 'grid', placeItems: 'center', marginTop: '20px'}}>
+            <Stack spacing={2}>
+              <Pagination count={data?.totalPages} onChange={pageChangeHandler} />
+            </Stack>
+          </div>
           <Modal
                       open={open}
                       onClose={handleClose}
@@ -485,8 +495,7 @@ const courierServiceSelector = (e) => {
                       }
                       </Box>
           </Modal>
-        </div>
-
+        </>
       )
   );
 }

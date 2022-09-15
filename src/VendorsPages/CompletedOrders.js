@@ -4,7 +4,7 @@ import Footer from "../Components/Footer";
 import OrderTable from "../Components/OrderTable";
 import OrderTable3 from "../Components/OrderTable3";
 import { AuthContext } from "../Context/AuthContext";
-import { GET_COMPLETED_ORDERS, GET_CURRENT_ORDERS, GET_RETURN_ORDERS } from "../Context/Types";
+import { GET_ALL_CATEGORY, GET_COMPLETED_ORDERS, GET_CURRENT_ORDERS, GET_RETURN_ORDERS } from "../Context/Types";
 
 function CompletedOrders() {
   const { dispatch } = useContext(AuthContext);
@@ -13,18 +13,48 @@ function CompletedOrders() {
   const [currentOrdersData, setCurrentOrdersData] = useState([]);
   const [returnOrdersData, setReturnOrdersData] = useState([]);
 
-
+  const [page, setPage] = ("1");
   const [isLoading, setIsLoading] = useState(false);
+
+  const [categoryName, setCategoryName] = useState({id: "", name: "All"});
+  const [allCategory, setAllCategory] = useState([]);
+
+  const handleCat = (e) => {
+    if(e.target.value === "") {
+      setCategoryName({id: "", name: ""});      
+    }else {      
+      const parsedData = JSON.parse(e.target.value);
+      setCategoryName({id: parsedData._id, name: parsedData.name});
+    }
+  };
+
+
   const getCompletedOrders = () => {
     dispatch({
       type: GET_COMPLETED_ORDERS,
       upDateState: setData,
       setIsLoading,
+      limit: '10',
+      page
     });
   };
+
+  const pageChangeHandler = (e, value) => {
+    setPage(value);
+  }
   useEffect(() => {
     getCompletedOrders();
+  }, [categoryName, page]);
+
+  useEffect(() => {
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      upDateState: setAllCategory,
+      setIsLoading,
+    });
   }, []);
+
+
   return (
     <>
       <div
@@ -33,6 +63,8 @@ function CompletedOrders() {
           fontWeight: "600",
           marginLeft: "60px",
           marginTop: "50px",
+          display: 'flex',
+            justifyContent: 'space-between'
         }}
       >
         <Link
@@ -60,9 +92,19 @@ function CompletedOrders() {
           >
             Ongoing Orders
         </Link>
+        <div style={{marginRight: '40px', display: 'inline-block', marginLeft: 'auto'}}>
+          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option value="">All</option>
+            {
+              allCategory?.map((item) => {
+                return <option value={JSON.stringify(item)}>{item?.name}</option>
+              })
+            }
+          </select>
+        </div>
       </div>
       <div  style={{margin: '10px 10px 100px 10px'}}>
-        <OrderTable3 data={data} isLoading={isLoading}/>
+        <OrderTable3 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler}/>
       </div>
 
       <Footer />

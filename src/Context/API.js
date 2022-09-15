@@ -224,7 +224,6 @@ export const denyAffiliateRequest = (id) => {
 
 export const getPaidToAffiliate = (page, limit, category) => {
   // return API.get("/ord/paidToAffiliate");
-  console.log(category)
   if(category.id === "") {
     return API.get(
       `/ord/paidToAffiliate?pg=${page}&lm=${limit}`
@@ -271,17 +270,51 @@ export const placeOrder = (response, productIds, amount) => {
 };
 
 //orders
-export const getCurrentOrdersRequest = () => {
-  return API.get("/ord/getNewOrders");
+export const getCurrentOrdersRequest = (limit, page, category) => {
+  if(category === "") {
+    return API.get(
+      `/ord/getNewOrders?pageno=${page}&limit=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/getNewOrders?pageno=${page}&limit=${limit}&category=${category}`
+    );
+  }
 };
-export const getReturnOrdersRequest = () => {
-  return API.get("/ord/myRequests");
+export const getReturnOrdersRequest = (limit, page, category) => {
+  if(category === "") {
+    return API.get(
+      `/ord/myRequests?pageno=${page}&limit=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/myRequests?pageno=${page}&limit=${limit}&category=${category}`
+    );
+  }
 };
-export const getCompletedOrdersRequest = () => {
-  return API.get("/ord/getPreviousOrders");
+export const getCompletedOrdersRequest = (limit, page, category) => {
+  // return API.get(`/ord/getPreviousOrders?pageno=${page}&limit=${limit}`);
+  if(category === "") {
+    return API.get(
+      `/ord/getPreviousOrders?pageno=${page}&limit=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/getPreviousOrders?pageno=${page}&limit=${limit}&category=${category}`
+    );
+  }
 };
-export const getOngoingOrdersRequest = () => {
-  return API.get("/ord/getOngoingOrders");
+export const getOngoingOrdersRequest = (limit, page, category) => {
+  // return API.get(`/ord/getOngoingOrders?pageno=${page}&limit=${limit}`);
+  if(category === "") {
+    return API.get(
+      `/ord/getOngoingOrders?pageno=${page}&limit=${limit}`
+    );
+  }else {
+    return API.get(
+      `/ord/getOngoingOrders?pageno=${page}&limit=${limit}&category=${category}`
+    );
+  }
 };
 export const returnItemRequest = (values) => {
   return API.post("/orders/return", values);
@@ -299,4 +332,16 @@ export const createVendorOrderRazor = (totalPrice) => {
   return API.post("/ads/createOrderId", { price: String(totalPrice) });
 };
 
+
+export const getRevenue = (typeOfDate, category) => {
+  if(category === "") {
+    return API.get(
+      `/ord/myRevenue?type=${typeOfDate}`
+    );
+  }else {
+    return API.get(
+      `/ord/myRevenue?type=${typeOfDate}&category=${category}`
+    );
+  }
+}
 //shiprocket

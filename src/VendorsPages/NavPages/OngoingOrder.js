@@ -4,18 +4,45 @@ import Footer from "../../Components/Footer";
 import OrderTable from "../../Components/OrderTable";
 import OrderTable4 from "../../Components/OrderTable4";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_CURRENT_ORDERS, ONGOING_ORDER } from "../../Context/Types";
+import { GET_ALL_CATEGORY, GET_CURRENT_ORDERS, ONGOING_ORDER } from "../../Context/Types";
 
 const VHome2 = () => {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const getOngoingOrders = () => {
-    dispatch({ type: ONGOING_ORDER, upDateState: setData, setIsLoading });
+  const [categoryName, setCategoryName] = useState({id: "", name: "All"});
+  const [allCategory, setAllCategory] = useState([]);
+  const [page, setPage] = ("1");
+
+
+  const handleCat = (e) => {
+    if(e.target.value === "") {
+      setCategoryName({id: "", name: ""});      
+    }else {      
+      const parsedData = JSON.parse(e.target.value);
+      setCategoryName({id: parsedData._id, name: parsedData.name});
+    }
   };
+
+  const getOngoingOrders = () => {
+    dispatch({ type: ONGOING_ORDER, upDateState: setData, setIsLoading, limit: '10', page });
+  };
+  const pageChangeHandler = (e, value) => {
+    setPage(value);
+  }
   useEffect(() => {
     getOngoingOrders();
+  }, [categoryName, page]);
+
+  useEffect(() => {
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      upDateState: setAllCategory,
+      setIsLoading,
+    });
   }, []);
+
+
   return (
     <>
       <div>
@@ -25,6 +52,8 @@ const VHome2 = () => {
             fontWeight: "600",
             marginLeft: "10px",
             marginTop: "50px",
+            display: 'flex',
+            justifyContent: 'space-between'
           }}
         >
           <Link
@@ -60,10 +89,20 @@ const VHome2 = () => {
           <span style={{ marginLeft: "50px", borderBottom: "1px solid orange" }}>
                 Ongoing Orders
             </span>
+        <div style={{marginRight: '40px', display: 'inline-block', marginLeft: 'auto'}}>
+          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+            <option value="">All</option>
+            {
+              allCategory?.map((item) => {
+                return <option value={JSON.stringify(item)}>{item?.name}</option>
+              })
+            }
+          </select>
+        </div>
         </div>
         <div style={{margin: '10px 10px 100px 10px'}}>
           {/* <BuyersDetailCont /> */}
-          <OrderTable4 data={data} isLoading={isLoading}/>
+          <OrderTable4 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler}/>
         </div>
         {/* <AssignedAndStausFormVhome2 /> */}
       </div>

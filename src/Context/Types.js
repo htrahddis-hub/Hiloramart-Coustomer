@@ -52,6 +52,7 @@ export const CHANGE_CURRENT_ADDRESS = "change current address";
 export const DELETE_SAVED_ADDRESS = "delete saved address";
 export const UPDATE_PROFILE = "update profile";
 export const ONGOING_ORDER="ongoing order";
+export const GET_REVENUE_GRAPH_DATA="get revenue graph data";
 
 export const VENDOR_SALE = "my sale";
 export const VENDOR_ALL_SALE = "my all";

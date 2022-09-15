@@ -86,6 +86,7 @@ import {
   USER_VERIFYCODE,
   RESET_USER_PASSWORD,
   ONGOING_ORDER,
+  GET_REVENUE_GRAPH_DATA,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -129,6 +130,7 @@ import {
   getMyOrder,
   getOngoingOrders,
   getReturnOrders,
+  getRevenueData,
   returnITem,
 } from "./Reducer/OrderReducer";
 import {
@@ -462,16 +464,16 @@ const AuthContextComponent = ({ children }) => {
         );
         break;
       case GET_CURRENT_ORDERS:
-        getCurrentOrders(action.upDateState, action.setIsLoading);
+        getCurrentOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
         break;
       case ONGOING_ORDER:
-        getOngoingOrders(action.upDateState, action.setIsLoading);
+        getOngoingOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
         break;
       case GET_RETURN_ORDERS:
-        getReturnOrders(action.upDateState, action.setIsLoading);
+        getReturnOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
         break;
       case GET_COMPLETED_ORDERS:
-        getCompletedOrders(action.upDateState, action.setIsLoading);
+        getCompletedOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
         break;
       case RETURN_ITEM:
         returnITem(action.payload, action.upDateState, action.setIsLoading);
@@ -562,6 +564,10 @@ const AuthContextComponent = ({ children }) => {
 
       case GET_VENDOR_ADS:
         getVendorAds(action.setAllAds, action.setIsLoading);
+        break;
+
+      case GET_REVENUE_GRAPH_DATA:
+        getRevenueData(action.typeOfDate, action.setGraphData, action.category);
         break;
     }
   };

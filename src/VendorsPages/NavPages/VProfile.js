@@ -62,14 +62,6 @@ const VProfile = () => {
                 <p> location</p>
                 <p>{profileData?.address[0]?.line1} </p>
               </div>
-              {AuthRole === "vendor" && (
-                <div className="details">
-                  <p> My Plans</p>
-                  <Link to={"/my-plans"}>
-                    <img src={arrow} alt="plan"/>
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
           {/* vendor's side */}
