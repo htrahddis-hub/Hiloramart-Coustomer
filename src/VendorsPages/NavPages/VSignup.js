@@ -21,7 +21,7 @@ const SignUp = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (confirmPassword !== password) {
-      window.alert("Password dosent match");
+      window.alert("Password doesn't match");
     }
     const config = {
       headers: {
@@ -39,7 +39,6 @@ const SignUp = () => {
       console.log(res.data.user._id);
       window.alert("Mail Sent");
       localStorage.clear();
-
       localStorage.setItem("id", res.data.user._id);
       var id = localStorage.getItem("token");
       navigate("/Validation");
