@@ -1,0 +1,82 @@
+.profile-container {
+  position: relative;
+}
+.top-image-container {
+  width: 100%;
+  padding: 1rem 2rem;
+  height: 300px;
+}
+.top-image {
+  width: 100%;
+}
+.details {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-family: "Poppins";
+  letter-spacing: 0.48px;
+  color: #000000;
+  font-size: 1.2rem;
+}
+.details-value {
+  font-family: "Poppins";
+  letter-spacing: 0.48px;
+  color: #000000;
+  opacity: 1;
+  font-weight: 500;
+}
+.cont {
+  width: 600px;
+  /* height: 1008px; */
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.mainCont {
+  position: absolute;
+  display: flex;
+  background-color: white;
+  border-radius: 20px;
+  border: 0.5px solid gray;
+  top: 64%;
+  left: 50%;
+  margin-left: -30rem;
+  margin-bottom: 2rem;
+}
+
+.details p:first-of-type {
+  color: grey;
+}
+
+.img {
+  margin-left: 130px;
+  margin-top: 50px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logout-cont {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+.btn-profile {
+  background-color: white;
+  color: orange;
+  border: 1px solid orange;
+}
+.basic-cont {
+  display: flex;
+  flex-direction: column;
+}
+.basic-cont :nth-child(1),
+.account-cont :nth-child(1) {
+  justify-self: center;
+  align-self: center;
+}
+.account-cont {
+  display: flex;
+  flex-direction: column;
+}

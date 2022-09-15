@@ -100,95 +100,112 @@ const ProductDetail = ({ item, id }) => {
     });
   }, []);
   return productDetails ? (
-    <div className="productDMainCont">
-      <div className="imageAndVideo">
-        <div className="videoContainer">
-          <div
-            className="wishlist-cont"
-            onClick={!isWishlist ? addToWishlist : removeFromWishlist}
-          >
-            {isWishlistLoading ? (
-              <CircularProgress sx={{ color: "black" }} size={25} />
-            ) : (
-              <img src={isWishlist ? active_wishlist_icon : wishlist_icon} />
-            )}
-          </div>
-          {productDetails[0].productVideos[0] ? (
-            selectedImage ? (
-              <img src={selectedImage} alt="" className="active-preview" />
-            ) : (
-              <ReactPlayer
-                url={productDetails[0].productVideos[0]}
-                light
-                playsinline
-                controls
-                className="active-preview"
-              />
-            )
-          ) : (
-            <img
-              src={productDetails[0].productImage[0]}
-              alt=""
-              className="active-preview"
-            />
-          )}
-        </div>
-        <div className="SmallImageCont">
-          {productDetails[0].productImage.map((item, index) => {
-            return (
-              <img
-                src={item}
-                alt=""
-                className="product-preview-image"
-                onClick={() => {
-                  setSelectedImage(item);
-                }}
-              />
-            );
-          })}
-          <ReactPlayer
-            url={productDetails[0].productVideos[0]}
-            className="product-preview-image"
-            style={{ width: "60px", height: "60px" }}
-            onClick={() => {
-              setSelectedImage(item);
-            }}
-          />
-        </div>
-      </div>
-      <div className="ProdInfo">
-        <div className="ProCont1 prodc-cont">
-          <div id="ProHead">{productDetails[0].name}</div>
-          <div className="Stars">
-            <Rating onClick={handleRating} ratingValue={rating} />
-          </div>
-        </div>
-        <div id="PriceCont">
-          <div id="ProdPrice">RS {productDetails[0].price * counter}</div>
-
-          <div id="counter">
-            <ButtonIncrement onClickFunc={incrementCounter} />
-            <Display message={counter} />
-            <ButtonDecrement onClickFunc={decrementCounter} />
-          </div>
-        </div>
-        <div id="buttonContainer">
-          <div>
-            <button id="AddToCart" onClick={addToCart}>
-              {isAddedToCartLoading ? (
+    <div className="productDMainCont row">
+      <div className="col-7">
+        <div className="imageAndVideo">
+          <div className="videoContainer">
+            <div
+              className="wishlist-cont"
+              onClick={!isWishlist ? addToWishlist : removeFromWishlist}
+            >
+              {isWishlistLoading ? (
                 <CircularProgress sx={{ color: "black" }} size={25} />
               ) : (
-                <>
-                  <img src={Cart} alt="" />
-                  {isAddedToCart ? "Added to cart" : "Add to cart"}
-                </>
+                <img src={isWishlist ? active_wishlist_icon : wishlist_icon} />
               )}
-            </button>
+            </div>
+            {productDetails[0].productVideos[0] ? (
+              selectedImage ? (
+                <img src={selectedImage} alt="" className="active-preview" />
+              ) : (
+                <ReactPlayer
+                  url={productDetails[0].productVideos[0]}
+                  light
+                  playsinline
+                  controls
+                  className="active-preview"
+                />
+              )
+            ) : (
+              <img
+                src={productDetails[0].productImage[0]}
+                alt=""
+                className="active-preview"
+              />
+            )}
           </div>
-          <div>
-            <button id="BuyNow" onClick={handleBuy}>
-              Buy Now
-            </button>
+          <div className="SmallImageCont">
+            {productDetails[0].productImage.map((item, index) => {
+              return (
+                <img
+                  src={item}
+                  alt=""
+                  className="product-preview-image"
+                  onClick={() => {
+                    setSelectedImage(item);
+                  }}
+                />
+              );
+            })}
+            <ReactPlayer
+              url={productDetails[0].productVideos[0]}
+              className="product-preview-image"
+              style={{ width: "60px", height: "60px" }}
+              onClick={() => {
+                setSelectedImage(item);
+              }}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="col-5">
+        <div className="ProdInfo ">
+          <div
+            className="d-flex flex-column justify-content-between"
+            style={{ height: "360px" }}
+          >
+            <div>
+              <div className="ProCont1 prodc-cont">
+                <div id="ProHead">{productDetails[0].name}</div>
+                <div className="Stars">
+                  <Rating
+                    onClick={handleRating}
+                    ratingValue={rating}
+                    size="21px"
+                  />
+                </div>
+              </div>
+              <div id="PriceCont" className="mt-5">
+                <div id="ProdPrice">Rs {productDetails[0].price * counter} = Rs {productDetails[0].price} X {counter}</div>
+                <div className="d-flex flex-column align-items-center">
+                  <div className="h4 mb-3">Quantity</div>
+                  <div id="counter">
+                    <ButtonIncrement onClickFunc={incrementCounter} />
+                    <Display message={counter} />
+                    <ButtonDecrement onClickFunc={decrementCounter} />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="buttonContainer">
+              <div>
+                <button id="AddToCart" onClick={addToCart}>
+                  {isAddedToCartLoading ? (
+                    <CircularProgress sx={{ color: "black" }} size={25} />
+                  ) : (
+                    <>
+                      <img src={Cart} alt="" />
+                      {isAddedToCart ? "Added to cart" : "Add to cart"}
+                    </>
+                  )}
+                </button>
+              </div>
+              <div>
+                <button id="BuyNow" onClick={handleBuy}>
+                  Buy Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

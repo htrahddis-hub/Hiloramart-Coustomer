@@ -14,8 +14,8 @@ import { useLocation } from "react-router-dom";
 
 const VmyProduct = () => {
   const { dispatch } = useContext(AuthContext);
-  const location=useLocation();
-  
+  const location = useLocation();
+
   const [allProducts, setAllProducts] = useState([]);
   const [allCategory, setAllCategory] = useState([]);
 
@@ -94,10 +94,21 @@ const VmyProduct = () => {
           </div>
           {isDropdown && (
             <div
-              style={{ position: "absolute", top: "30%", right: "3%",zIndex:"10" }}
+              style={{
+                position: "absolute",
+                top: "30%",
+                right: "3%",
+                zIndex: "10",
+              }}
               className="category-list"
             >
-              <div className="cat-li" onClick={getProducts}>
+              <div
+                className="cat-li"
+                onClick={() => {
+                  getProducts();
+                  setCategoryName("All");
+                }}
+              >
                 All
               </div>
               {allCategory?.map((item, index) => {
@@ -125,7 +136,7 @@ const VmyProduct = () => {
           ) : allProducts?.length !== 0 ? (
             allProducts?.map((item, index) => {
               return (
-                <MyProductCont key={item._id} data={item} cb={getProducts}/>
+                <MyProductCont key={item._id} data={item} cb={getProducts} />
               );
             })
           ) : (

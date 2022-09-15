@@ -8,6 +8,7 @@ import wishlist_icon from "../../Assets/Images/wishlist.svg";
 import active_wishlist_icon from "../../Assets/Images/active-wishlist.svg";
 import { AuthContext } from "../../Context/AuthContext";
 import { REMOVE_ITEM_TO_WISHLIST } from "../../Context/Types";
+import { Link } from "react-router-dom";
 
 const YourWishlistCont = ({ cb,item }) => {
   const { dispatch } = useContext(AuthContext);
@@ -39,11 +40,13 @@ const YourWishlistCont = ({ cb,item }) => {
       </div>
 
       <div className="Images">
+        <Link to={`/HomeProductDetail/${item?._id}`}>
         <img
           src={item?.productImage}
           alt=""
           style={{ height: "8rem", width: "8rem" }}
         />
+        </Link>
       </div>
       <div className="product-title-cont">
         <div className="discription">{item?.name}</div>

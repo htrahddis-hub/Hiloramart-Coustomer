@@ -17,6 +17,7 @@ import {
   getAds,
   getProductByCategory,
   getTopSellingProduct,
+  searchProduct,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -125,8 +126,34 @@ export const addProduct = async (
   }
 };
 
+export const searchProducts = async (
+  name,
+  catId,
+  upDateState,
+  setIsLoading
+) => {
+  try {
+    const res = await searchProduct(name, catId);
+    if (res.data.success) {
+      upDateState(res.data.data);
+      setIsLoading(false);
+    }
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
-export const updateProduct = async(inputData, setIsLoading, navigate, id, urls, videoUrlResponse, productDetails2) => {
+export const updateProduct = async (
+  inputData,
+  setIsLoading,
+  navigate,
+  id,
+  urls,
+  videoUrlResponse,
+  productDetails2
+) => {
   try {
     const values = {
       name: inputData.name,
@@ -191,10 +218,8 @@ export const getALLproducts = async (upDateState) => {
   }
 };
 
-//the API doesn't take page limit although it is shown in decumentation 
-export const getTopProducts = async (
-  upDateState,
-) => {
+//the API doesn't take page limit although it is shown in decumentation
+export const getTopProducts = async (upDateState) => {
   try {
     const res = await getTopSellingProduct();
     if (res.data) {

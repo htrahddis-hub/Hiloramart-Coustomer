@@ -8,7 +8,7 @@ import Footer from "../Components/Footer";
 
 import { AuthContext } from "../Context/AuthContext";
 import CheckoutProductCard from "../Components/CheckoutProductCard";
-import { ONLINE_PAYMENT } from "../Context/Types";
+import { ONLINE_PAYMENT,GET_USER_PROFILE } from "../Context/Types";
 import { CircularProgress } from "@mui/material";
 
 const Checkout = () => {

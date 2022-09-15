@@ -106,3 +106,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+.submit-button{
+  width:70px;
+  padding: 5px;
+  margin-top: 8px;
+  border: 1px solid #ff8d22;
+  border-radius: 5px;
+  background-color: #ff8d22;
+  color: white;
+  align-self: flex-end;
+}
+
+.focus:focus-visible{
+  border: none;
+  outline: none;
+}

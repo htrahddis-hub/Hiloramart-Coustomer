@@ -9,8 +9,8 @@ import { AuthContext } from "../Context/AuthContext";
 import Profileimg from "../VendorsAssets/AffliateReqProfile.png";
 import { Button } from "@mui/material";
 import Cookies from "js-cookie";
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
 const NavBar = () => {
   const { AuthRole, setAuth } = useContext(AuthContext);
@@ -26,27 +26,27 @@ const NavBar = () => {
   };
   const user_nav_data = [
     {
-      id: '001',
+      id: "001",
       name: "Home",
       navigation: "/",
     },
     {
-      id: '002',
+      id: "002",
       name: "My Wallet",
       navigation: "/my-wallet",
     },
     {
-      id: '003',
+      id: "003",
       name: "My Wishlist",
       navigation: "/my-wishlist",
     },
     {
-      id: '004',
+      id: "004",
       name: "My Cart",
       navigation: "/my-cart",
     },
     {
-      id: '005',
+      id: "005",
       name: "My Orders",
       navigation: "/my-orders",
     },
@@ -54,17 +54,17 @@ const NavBar = () => {
 
   const vendor_nav_data = [
     {
-      id: '011',
+      id: "011",
       name: "Home",
       navigation: "/",
     },
     {
-      id: '021',
+      id: "021",
       name: "My Products",
       navigation: "/my-products",
     },
     {
-      id: '031',
+      id: "031",
       name: "My Revenue",
       navigation: "/my-revenue",
     },
@@ -74,22 +74,22 @@ const NavBar = () => {
     //   navigation: "/my-sales",
     // },
     {
-      id: '051',
+      id: "051",
       name: "My Wallet",
       navigation: "/my-wallet",
     },
     {
-      id: '061',
+      id: "061",
       name: "Advertisement",
       navigation: "/advertisement",
     },
     {
-      id: '071',
+      id: "071",
       name: "Affiliate Requests",
       navigation: "/affiliate-request",
     },
     {
-      id: '081',
+      id: "081",
       name: "Orders",
       navigation: "/orders-current",
     },
@@ -119,7 +119,7 @@ const NavBar = () => {
     Cookies.remove("role");
     setAuth(false);
     navigate("/choose-role-login", { replace: true });
-  }
+  };
   return (
     <>
       <div className="NavMain">
@@ -180,9 +180,9 @@ const NavBar = () => {
 
           <Button
             id="basic-button"
-            aria-controls={open ? 'basic-menu' : undefined}
+            aria-controls={open ? "basic-menu" : undefined}
             aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
+            aria-expanded={open ? "true" : undefined}
             onClick={handleClick}
             className="linkT NavICon"
           >
@@ -194,10 +194,17 @@ const NavBar = () => {
             open={open}
             onClose={handleClose}
             MenuListProps={{
-              'aria-labelledby': 'basic-button',
+              "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={() => {navigate("/profile"); handleClose()}}>Profile</MenuItem>
+            <MenuItem
+              onClick={() => {
+                navigate(AuthRole === "user" ? "/userprofile" : "/profile");
+                handleClose();
+              }}
+            >
+              Profile
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

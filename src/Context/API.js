@@ -78,24 +78,27 @@ export const getVendorAddresss = () => {
   return API.get("/vendor/getMyaddress");
 };
 
+export const getUserAddresss = () => {
+  return API.get("/address");
+};
+
 export const getVendorSale = (
   // startDate, endDate,
-   category) => {
-  if(category.id === "") {
+  category
+) => {
+  if (category.id === "") {
     // return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}`);
     return API.get(`/ord/salesCount`);
-  }else {
+  } else {
     // return API.get(`/ord/salesCount?startDate=${startDate}&endDate=${endDate}&category=${category}`);
     return API.get(`/ord/salesCount?category=${category}`);
   }
 };
 
 export const getVendorAllSale = (page, limit, category) => {
-  if(category.id === "") {
-    return API.get(
-      `/ord/mySales?pageno=${page}&limit=${limit}`
-    );
-  }else {
+  if (category.id === "") {
+    return API.get(`/ord/mySales?pageno=${page}&limit=${limit}`);
+  } else {
     return API.get(
       `/ord/mySales?pageno=${page}&limit=${limit}&category=${category}`
     );
@@ -112,6 +115,34 @@ export const changeCurrentAddress = (id) => {
 
 export const deleteSavedAddress = (id) => {
   return API.get(`/vendor/removeAddress?addressId=${id}`);
+};
+
+export const addUserAddress = (data) => {
+  return API.post("/address/add", data);
+};
+
+export const changeCurrentUserAddress = (id) => {
+  return API.post(`/address/changeCurrentAddress`, { addressId: id });
+};
+
+export const updateUserAddress = (id, data) => {
+  return API.post(`/address/edit?addressId=${id}`, data);
+};
+
+export const deleteSavedUserAddress = (id) => {
+  return API.delete(`/address/remove?addressId=${id}`);
+};
+
+export const searchProduct = (name, categoryId) => {
+  return API.get(`product/searchProducts?name=${name}&category=${categoryId}`);
+};
+
+export const updateUserProfile = (data) => {
+  return API.post(`profile/updateAll`, data);
+};
+
+export const updateUserProfilePic = (data) => {
+  return API.post(`profile/updateProfilePic`, data);
 };
 
 export const updateProfile = (data, id) => {
@@ -224,12 +255,10 @@ export const denyAffiliateRequest = (id) => {
 
 export const getPaidToAffiliate = (page, limit, category) => {
   // return API.get("/ord/paidToAffiliate");
-  console.log(category)
-  if(category.id === "") {
-    return API.get(
-      `/ord/paidToAffiliate?pg=${page}&lm=${limit}`
-    );
-  }else {
+  console.log(category);
+  if (category.id === "") {
+    return API.get(`/ord/paidToAffiliate?pg=${page}&lm=${limit}`);
+  } else {
     return API.get(
       `/ord/paidToAffiliate?pg=${page}&lm=${limit}&category=${category}`
     );

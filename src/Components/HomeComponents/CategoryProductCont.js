@@ -7,28 +7,35 @@ import "../../Styles/Components/YourWishlistCont.css";
 import wishlist_icon from "../../Assets/Images/wishlist.svg";
 import active_wishlist_icon from "../../Assets/Images/active-wishlist.svg";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Link } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CloseIcon from "@mui/icons-material/Close";
+import ReviewModal from "../ReviewModal";
 import { AuthContext } from "../../Context/AuthContext";
 import {
   REMOVE_ITEM_TO_WISHLIST,
   CHECK_WISHLIST_STATUS,
   ADD_ITEM_TO_WISHLIST,
   ADD_ITEM_CART,
-  DELETE_ITEM_FROM_CART,
 } from "../../Context/Types";
 
 const YourWishlistCont = ({ data, cb }) => {
   const { dispatch } = useContext(AuthContext);
-  const [rating, setRating] = useState(data?.rating); // initial rating value
+  // const [rating, setRating] = useState(data?.rating); // initial rating value
   const [isWishlist, setIsWishlist] = useState(true);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const [counter, setCounter] = useState(1);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToCartLoading, setIsAddedToCartLoading] = useState(false);
+
   // Catch Rating value
-  const handleRating = (rate) => {
-    setRating(rate);
-    // other logic
-  };
+  // const handleRating = (rate) => {
+  //   setRating(rate);
+  //   handleOpen();
+  //   // other logic
+  // };
 
   useEffect(() => {
     dispatch({
@@ -82,16 +89,18 @@ const YourWishlistCont = ({ data, cb }) => {
       <div className="ProCont1">
         <div className="ProHead">{data?.owner?.name}</div>
         <div className="Stars">
-          <Rating onClick={handleRating} ratingValue={rating} size={20} />
+          <Rating ratingValue={data?.rating} size={20} readonly/>
         </div>
       </div>
 
       <div className="Images">
-        <img
-          src={data?.productImage[0]}
-          alt=""
-          style={{ height: "8rem", width: "8rem" }}
-        />
+        <Link to={`/HomeProductDetail/${data._id}`}>
+          <img
+            src={data?.productImage[0]}
+            alt=""
+            style={{ height: "8rem", width: "8rem" }}
+          />
+        </Link>
       </div>
       <div className="product-title-cont">
         <div className="discription">{data.name}</div>

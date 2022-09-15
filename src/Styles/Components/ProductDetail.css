@@ -1,14 +1,16 @@
 .productDMainCont {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
+  width: 99vw;
   padding: 1rem;
-  gap: 2rem;
+  /* gap: 2rem; */
 }
 .SmallImageCont {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   overflow-y: scroll;
+  margin-right: 30px;
 }
 .SmallImageCont::-webkit-scrollbar {
   display: none;
@@ -17,13 +19,14 @@
   display: flex;
   flex: 1;
   gap: 2rem;
-  justify-content: space-around;
-  border-right: 1px solid gray;
+  justify-content: space-between;
+  border-right: 2px solid #efefef;
   padding-right: 2rem;
 }
 .videoContainer {
   /* flex: 1; */
   position: relative;
+  margin-left: 50px;
 }
 #BuyNow {
   background-color: #ff8d22;
@@ -77,13 +80,14 @@
   width: 60%;
 }
 #ProdPrice {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 }
 .ProdInfo {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-right: 30px;
 }
 #buttonContainer {
   display: flex;
@@ -97,11 +101,15 @@
   width: 60px !important;
   height: 60px !important;
   cursor: pointer;
+  padding: 3px;
+  border-radius: 10px;
 }
 .active-preview {
-  height: 360px !important;
-  aspect-ratio: 16/9;
-  object-fit: contain;
+  height: 360px;
+  /* width: 500px; */
+  /* width: 100%; */
+  aspect-ratio: 7/5; 
+  /* object-fit: contain; */
 }
 .wishlist-cont {
   background-color: white;
@@ -109,6 +117,8 @@
   border-radius: 50px;
   position: absolute;
   right: 1rem;
-  box-shadow: 2px 2px 5px 2px #dfdbdb;
+  /* box-shadow: 2px 2px 5px 2px #dfdbdb; */
+  border: 1px solid  #ececec;
   top: 1rem;
+  cursor: pointer;
 }

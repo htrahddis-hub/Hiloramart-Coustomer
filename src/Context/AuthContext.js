@@ -86,6 +86,12 @@ import {
   USER_VERIFYCODE,
   RESET_USER_PASSWORD,
   ONGOING_ORDER,
+  SEARCG_PRODUCT,
+  ADD_USER_ADDRESS,
+  GET_USER_ADDRESS,
+  CHANGE_USER_CURRENT_ADDRESS,
+  UPLOAD_PROFILE_PIC,
+  UPDATE_USER_PROFILE,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -110,18 +116,23 @@ import {
   addProductForAds,
   removeProductForAds,
   getProductByCatId,
+  searchProducts,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import {
+  addUserAddressData,
   addVendorAddressData,
   changeCurrentAdd,
   deleteSavedAdd,
+  getUserAddress,
+  changeCurrentUserAdd,
   getVendorAddress,
   getVendorAds,
   updateProfileFun,
   userProfile,
   vendorProfile,
   vendorProfile2,
+  updateUserProfiles,
 } from "./Reducer/ProfileReducer";
 import {
   getCompletedOrders,
@@ -143,6 +154,7 @@ import {
   denyAffiliateRequest,
   getAmountToAffiliate,
   updateOrderRequest,
+  updateUserProfilePic,
 } from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
 import {
@@ -270,6 +282,14 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading
         );
         break;
+      case SEARCG_PRODUCT:
+        searchProducts(
+          action.name,
+          action.catId,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
       case ADD_VENDOR_ADDRESS:
         addVendorAddressData(
           action.address,
@@ -287,7 +307,26 @@ const AuthContextComponent = ({ children }) => {
       case DELETE_SAVED_ADDRESS:
         deleteSavedAdd(action.id, action.setVendorAddress);
         break;
-
+      case GET_USER_ADDRESS:
+        getUserAddress(action.setUserAddress);
+        break;
+      case CHANGE_USER_CURRENT_ADDRESS:
+        changeCurrentUserAdd(action.id);
+        break;
+      case ADD_USER_ADDRESS:
+        addUserAddressData(
+          action.address,
+          action.setIsLoading2,
+          action.handleClose,
+          action.setVendorAddress
+        );
+        break;
+      case UPLOAD_PROFILE_PIC:
+        updateUserProfilePic(action.data);
+        break;
+      case UPDATE_USER_PROFILE:
+        updateUserProfiles(action.data)
+        break;
       case UPDATE_PROFILE:
         updateProfileFun(
           action.data,
@@ -332,7 +371,7 @@ const AuthContextComponent = ({ children }) => {
         vendorResendOtp(action.payload, action.setIsLoading);
         break;
       case GET_USER_PROFILE:
-        userProfile(action.upDateState);
+        userProfile(action.upDateState,action.setImage,action.setUpdatePf);
         break;
       case GET_VENDOR_PROFILE:
         vendorProfile(
@@ -354,7 +393,9 @@ const AuthContextComponent = ({ children }) => {
         getVSale(
           // action.startDate,
           // action.endDate,
-           action.upDateState, action.category);
+          action.upDateState,
+          action.category
+        );
         break;
       case VENDOR_ALL_SALE:
         getVAllSale(
@@ -368,7 +409,13 @@ const AuthContextComponent = ({ children }) => {
         );
         break;
       case PAID_TO_AFFILIATE:
-        getPaidTOAffiliates(action.setPaidToAffiliates, action.setIsLoading, action.page2, action.limit, action.category);
+        getPaidTOAffiliates(
+          action.setPaidToAffiliates,
+          action.setIsLoading,
+          action.page2,
+          action.limit,
+          action.category
+        );
         break;
       case AMOUNT_TO_AFFILIATE:
         getAmountToAffiliates(

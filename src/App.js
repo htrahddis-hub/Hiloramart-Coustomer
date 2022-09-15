@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import "react-notifications-component/dist/theme.css";
 
 import AuthContextComponent, { AuthContext } from "./Context/AuthContext";
-import OngoingOrder from './VendorsPages/NavPages/OngoingOrder';
+import OngoingOrder from "./VendorsPages/NavPages/OngoingOrder";
 
 import "./App.css";
 import Welcome from "./Pages/Welcome";
@@ -60,6 +60,8 @@ import ProductUpdated from "./Pages/ProductUpdated";
 import MyProductsForAds from "./VendorsPages/NavPages/MyProductsForAds";
 import VerifyOtp from "./Pages/VerifyOtp";
 import ForgotForm from "./Pages/ForgotForm";
+import UserProfile from "./Pages/UserProfile";
+import EditUserProfile from "./Pages/EditUserProfile";
 function App() {
   return (
     <>
@@ -165,6 +167,16 @@ function App() {
                 exact
                 path="/edit-profile"
                 element={<VEditProfile />}
+              ></Route>
+              <Route
+                exact
+                path="/userprofile"
+                element={<UserProfile />}
+              ></Route>
+              <Route
+                exact
+                path="/edit-user-profile"
+                element={<EditUserProfile />}
               ></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
               <Route exact path="/my-plans" element={<MyPlans />}></Route>

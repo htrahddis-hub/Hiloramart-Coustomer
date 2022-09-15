@@ -50,8 +50,17 @@ export const ADD_VENDOR_ADDRESS = "add vendor address";
 export const GET_VENDOR_ADDRESS = "get vendor address";
 export const CHANGE_CURRENT_ADDRESS = "change current address";
 export const DELETE_SAVED_ADDRESS = "delete saved address";
+export const ADD_USER_ADDRESS = "add user address";
+export const GET_USER_ADDRESS = "get user address";
+export const CHANGE_USER_ADDRESS = "change user address";
+export const CHANGE_USER_CURRENT_ADDRESS = "change user current address";
+export const DELETE_USER_ADDRESS = "delete user address";
+export const UPLOAD_PROFILE_PIC = "upload profile pic";
+export const UPDATE_USER_PROFILE = "update profile";
 export const UPDATE_PROFILE = "update profile";
-export const ONGOING_ORDER="ongoing order";
+export const ONGOING_ORDER = "ongoing order";
+
+export const SEARCG_PRODUCT = "search products";
 
 export const VENDOR_SALE = "my sale";
 export const VENDOR_ALL_SALE = "my all";
@@ -74,4 +83,4 @@ export const GET_PRODUCT_BY_CATEGORY = "get product by category";
 
 export const GET_VENDOR_ADS = "get vendor plan";
 
-export const CREATE_VENDOR_ORDER="create vendor order razorpay";
+export const CREATE_VENDOR_ORDER = "create vendor order razorpay";
