@@ -5,6 +5,7 @@ import {
   getMyOrderRequest,
   getOngoingOrdersRequest,
   getReturnOrdersRequest,
+  getRevenue,
   returnItemRequest,
   updateOrderRequest,
 } from "../API";
@@ -40,11 +41,12 @@ export const returnITem = async (values, upDateState, setIsLoading) => {
 };
 //vendor
 
-export const getReturnOrders = async (upDateState, setIsLoading) => {
+export const getReturnOrders = async (upDateState, setIsLoading, limit, page, category) => {
   setIsLoading(true);
   try {
-    const res = await getReturnOrdersRequest();
+    const res = await getReturnOrdersRequest(limit, page, category);
     upDateState(res.data.data);
+    console.log(res);
   } catch (err) {
     console.log(err);
   } finally {
@@ -53,14 +55,14 @@ export const getReturnOrders = async (upDateState, setIsLoading) => {
 };
 
 
-export const getCurrentOrders = async (upDateState, setIsLoading) => {
+export const getCurrentOrders = async (upDateState, setIsLoading, limit, page, category) => {
   setIsLoading(true);
   try {
-    const res = await getCurrentOrdersRequest();
+    const res = await getCurrentOrdersRequest(limit, page, category);
     upDateState(res.data.data);
     console.log(res, "all order here");
     if(res.status === 200) {
-      res?.data?.data?.forEach(async(order) => {
+      res?.data?.data?.data?.forEach(async(order) => {
         try {
           const res2 = await getDetailsOfSpecificShipment(order?.SKUshipmentId);
           console.log(res2);
@@ -74,7 +76,7 @@ export const getCurrentOrders = async (upDateState, setIsLoading) => {
             })
           }
           try {
-            const res4 = await getCurrentOrdersRequest();
+            const res4 = await getCurrentOrdersRequest(limit, page, category);
             upDateState(res4.data.data);
           } catch (error) {
             console.log(error);
@@ -91,14 +93,14 @@ export const getCurrentOrders = async (upDateState, setIsLoading) => {
   }
 };
 
-export const getCompletedOrders = async (upDateState, setIsLoading) => {
+export const getCompletedOrders = async (upDateState, setIsLoading, limit, page, category) => {
   setIsLoading(true);
   try {
-    const res = await getCompletedOrdersRequest();
+    const res = await getCompletedOrdersRequest(limit, page, category);
     upDateState(res.data.data);
     console.log(res);
     if(res.status === 200) {
-      res?.data?.data?.forEach(async(order) => {
+      res?.data?.data?.data?.forEach(async(order) => {
         try {
           const res2 = await getDetailsOfSpecificShipment(order?.SKUshipmentId);
           console.log(res2);
@@ -148,7 +150,7 @@ export const getCompletedOrders = async (upDateState, setIsLoading) => {
             }
           }
           try {
-            const res4 = await getCompletedOrdersRequest();
+            const res4 = await getCompletedOrdersRequest(limit, page, category);
             upDateState(res4.data.data);
           } catch (error) {
             console.log(error);
@@ -165,14 +167,14 @@ export const getCompletedOrders = async (upDateState, setIsLoading) => {
   }
 };
 
-export const getOngoingOrders = async (upDateState, setIsLoading) => {
+export const getOngoingOrders = async (upDateState, setIsLoading, limit, page, category) => {
   setIsLoading(true);
   try {
-    const res = await getOngoingOrdersRequest();
+    const res = await getOngoingOrdersRequest(limit, page, category);
     upDateState(res.data.data);
     console.log(res);
     if(res.status === 200) {
-      res?.data?.data?.forEach(async(order) => {
+      res?.data?.data?.data?.forEach(async(order) => {
         try {
           const res2 = await getDetailsOfSpecificShipment(order?.SKUshipmentId);
           console.log(res2);
@@ -222,7 +224,7 @@ export const getOngoingOrders = async (upDateState, setIsLoading) => {
             }
           }
           try {
-            const res4 = await getCompletedOrdersRequest();
+            const res4 = await getOngoingOrdersRequest(limit, page, category);
             upDateState(res4.data.data);
           } catch (error) {
             console.log(error);
@@ -240,3 +242,13 @@ export const getOngoingOrders = async (upDateState, setIsLoading) => {
 };
 
 
+
+export const getRevenueData = async(typeOfDate, setGraphData, category) => {
+  try {
+    const res = await getRevenue(typeOfDate, category);
+    console.log(res);
+    setGraphData(res?.data?.data)
+  } catch (error) {
+    console.log(error);
+  } 
+}

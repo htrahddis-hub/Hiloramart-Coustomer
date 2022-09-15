@@ -26,18 +26,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 const getFirstDayofMonth = () => {
@@ -196,13 +184,15 @@ const VmyWallet = () => {
   //   setDropdown((old) => !old);
   // };
 
-  const pageChangeHandler1 = (e) => {
-    const pg = e.target.innerText;
-    setPage(String(pg))
+  const pageChangeHandler1 = (e, value) => {
+    setPage(value)
+    // const pg = e.target.innerText;
+    // setPage(String(pg))
   }
-  const pageChangeHandler2 = (e) => {
-    const pg = e.target.innerText;
-    setPage2(String(pg))    
+  const pageChangeHandler2 = (e, value) => {
+    setPage2(value)
+    // const pg = e.target.innerText;
+    // setPage2(String(pg))    
   }
 
   useEffect(() => {
@@ -437,7 +427,7 @@ const VmyWallet = () => {
                 </TableContainer>
 
                 <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
-                  <Pagination hideNextButton hidePrevButton onChange={pageChangeHandler1} count={sales?.totalPages} />
+                  <Pagination onChange={pageChangeHandler1} count={sales?.totalPages} />
                 </Stack>
                 </>
               )}
@@ -473,10 +463,11 @@ const VmyWallet = () => {
                       <TableRow>
                         <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
                         <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
+                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
                         <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
+                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Invoice</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -489,6 +480,7 @@ const VmyWallet = () => {
                           <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0, 10)}</TableCell>
                           <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0, 10)}</TableCell>
                           <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
+                          <TableCell style={{width: '10%'}} align="center"><a style={{color: '#ff8d22', textDecoration: 'none'}} href={row?.invoice}>Download</a></TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -496,7 +488,7 @@ const VmyWallet = () => {
                 </TableContainer>
 
                 <Stack style={{display: 'grid', placeItems: 'center', margin: '30px 0'}} spacing={2}>
-                  <Pagination hideNextButton hidePrevButton onChange={pageChangeHandler2} count={amountToAffiliates?.totalPages} />
+                  <Pagination onChange={pageChangeHandler2} count={amountToAffiliates?.totalPages} />
                 </Stack>
                 </>
               )}

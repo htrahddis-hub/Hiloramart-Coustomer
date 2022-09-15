@@ -5,7 +5,7 @@ import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_ADS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_VENDOR_PROFILE2, VENDOR_SALE } from "../../Context/Types";
+import { GET_ADS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_REVENUE_GRAPH_DATA, GET_VENDOR_PROFILE2, VENDOR_SALE } from "../../Context/Types";
 import revenue1 from '../../Assets/revenue1.svg';
 import wallet from "../../Assets/Images/wallet.png";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
@@ -67,8 +67,9 @@ export const data = {
       data: ["20", "40", "3", "4", "60", "44", "30"],
       borderColor: "#FF8D22",
       fill: true,
-      backgroundColor: '#FF8D22'
-
+      backgroundColor: '#FF8D22',
+      tension: 0.5,
+      pointHoverBackgroundColor: "#FF8D22"
     },
   ],
 };
@@ -154,6 +155,22 @@ const VmyRevenue = () => {
   const [dropdown, setDropdown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [countdata, setCountData] = useState({});
+  const [typeOfDate, setTypeOfDate] = useState("Week");
+  const [graphData, setGraphData] = useState([]);
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Revenue",
+        data: graphData,
+        borderColor: "#FF8D22",
+        fill: true,
+        backgroundColor: '#FF8D22',
+        tension: 0.5,
+        pointHoverBackgroundColor: "#FF8D22"
+      },
+    ],
+  };
  
 
   const handleDate = (e) => {
@@ -178,9 +195,15 @@ const VmyRevenue = () => {
     })
   }
 
+  const changeGraphDate = (e) => {
+    setTypeOfDate(e.target.value);
+  }
+
   useEffect(() => {
     getCountData();
   }, [categoryName])
+
+
 
   useEffect(() => {
     dispatch({
@@ -190,8 +213,23 @@ const VmyRevenue = () => {
     });
   }, []);
 
+  const getRevenueGraphData = () => {
+    dispatch({
+      type: GET_REVENUE_GRAPH_DATA,
+      typeOfDate,
+      setGraphData,
+      category: categoryName.id
+    })
+  }
 
- console.log("profiledata:",allCategory)
+
+  useEffect(() => {
+    getRevenueGraphData();
+  }, [typeOfDate, categoryName])
+
+
+
+ console.log("profiledata:",graphData)
   return (
     <>
         {/* <div
@@ -276,6 +314,11 @@ const VmyRevenue = () => {
 
         <div style={{width: '70%', padding: '30px 80px', height: '100px'}}>
 
+        <select defaultValue={typeOfDate} onChange={changeGraphDate} style={{width: '150px', border: 'none', outline:'none', marginBottom: '-12px'}} name="graph" id="graph">
+          <option value="Week">Last Week</option>
+          <option value="Month">Last Month</option>
+          <option value="Year">Last Year</option>
+        </select>
         <Line options={options} data={data} />
           <div style={{display: 'flex', justifyContent: 'space-between'}}> 
             <div style={{display: 'flex', flexDirection: 'column', width: '30%'}} className="WalletCont1">

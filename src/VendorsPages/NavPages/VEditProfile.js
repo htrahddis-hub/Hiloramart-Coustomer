@@ -59,6 +59,7 @@ const VEditProfile = () => {
         bank_name: "",
         branch_name: "",
         account_holder_name: "",
+        swift_code: ""
     })
 
     const [updatedProfileData, setUpdatedProfileData] = useState({
@@ -201,11 +202,11 @@ const VEditProfile = () => {
 
   return (
     <div style={{padding: '0 30px'}}>
-        <div
+        {/* <div
           style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center", margin: '55px 0' }}
         >
           Edit Profile
-        </div>
+        </div> */}
 
         <div style={{display: 'flex', justifyContent: 'center', margin: '20px 0'}}>
             <div style={{width: '100px', height: '100px', borderRadius: '50%', overflow: 'hidden', position: 'relative'}}>
@@ -249,6 +250,10 @@ const VEditProfile = () => {
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <label htmlFor="account_holder_name">Account Holder Name</label>
                         <input onChange={accountDetailHandler} type="text" id='account_holder_name' name='account_holder_name' defaultValue={profileData?.bankDetails?.account_holder_name}/>
+                    </div>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <label htmlFor="account_holder_name">Swift Code</label>
+                        <input onChange={accountDetailHandler} type="text" id='swift_code' name='swift_code' defaultValue={profileData?.bankDetails?.swift_code}/>
                     </div>
                 </div>
             </div>

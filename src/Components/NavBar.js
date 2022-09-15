@@ -91,7 +91,7 @@ const NavBar = () => {
     {
       id: "081",
       name: "Orders",
-      navigation: "/orders-current",
+      navigation: "/orders-new",
     },
   ];
   const data = AuthRole === "user" ? user_nav_data : vendor_nav_data;
