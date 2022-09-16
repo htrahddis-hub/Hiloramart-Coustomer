@@ -91,20 +91,24 @@ export const addProduct = async (
   setIsLoading,
   resetform,
   navigate,
-  productDetails2
+  // productDetails2
 ) => {
   try {
     const values = {
       name: inputData.productName,
       description: inputData.productDescription,
-      detail: productDetails2,
+      stock: inputData.stock,
+      size: inputData.size,
+      price: inputData.price,
+      // detail: productDetails2,
       productImage: urlResponse,
       productVideos: videoUrlResponse,
       owner: inputData.id,
       category: catId,
     };
-    // console.log(values);
+    console.log(values);
     const res = await addProductRequest(values);
+    console.log(res);
     if (res.data.success) {
       resetform();
       navigate("/product-success", {

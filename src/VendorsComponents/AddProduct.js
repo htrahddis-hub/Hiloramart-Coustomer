@@ -20,22 +20,26 @@ const AddProduct = () => {
 
   const { dispatch, currentUser } = useContext(AuthContext);
   const [isDropdown, setIsDropDown] = useState(false);
+  const [isSizeShow, setIsSizeShow] = useState(false);
   const [category, setCategory] = useState({
     name: "",
     id: "",
   });
 
-  const [productDetails, setProductDetails] = useState({
-    size: '',
-    stock: '',
-    price: ''
-  })
+  // const [productDetails, setProductDetails] = useState({
+  //   size: '',
+  //   stock: '',
+  //   price: ''
+  // })
 
   const [productDetails2, setProductDetails2] = useState([]);
 
   const [inputData, setInputData] = useState({
     productName: "",
     productDescription: "",
+    size: "",
+    stock: "",
+    price: ""
   });
   const [allCategory, setAllCategory] = useState([]);
   const [file, setFile] = useState([]);
@@ -131,7 +135,7 @@ const AddProduct = () => {
       urls: urlResponse,
       videoUrlResponse,
       catId: category.id,
-      productDetails2,
+      // productDetails2,
       setIsLoading,
       resetform,
       navigate,
@@ -157,10 +161,15 @@ const AddProduct = () => {
     });
   }, []);
 
-  const handleCat = (e) => {
+  const handleCat = (item) => {
+    if(item.name === "Fashion") {
+      setIsSizeShow(true);
+    }else {
+      setIsSizeShow(false);
+    }
     setCategory({
-      name: e.target.innerText,
-      id: e.target.catId,
+      name: item?.name,
+      id: item?._id,
     });
     setIsDropDown(false);
     // console.log(e);
@@ -171,17 +180,17 @@ const AddProduct = () => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const handleDetailHandler = (e) => {
-    setProductDetails((prev) => {
-      return {...prev, [e.target.name]: e.target.value}
-    })
-  }
+  // const handleDetailHandler = (e) => {
+  //   setProductDetails((prev) => {
+  //     return {...prev, [e.target.name]: e.target.value}
+  //   })
+  // }
 
-  const addDetailsHandler = () => {
-    setProductDetails2((prev) => [...prev, productDetails])
-  }
+  // const addDetailsHandler = () => {
+  //   setProductDetails2((prev) => [...prev, productDetails])
+  // }
 
-  console.log(productDetails2, productDetails);
+  // console.log(productDetails2, productDetails);
 
   return (
     <Container>
@@ -208,7 +217,7 @@ const AddProduct = () => {
                       <div
                         data-cat-id={item._id}
                         className="cat-li-imp"
-                        onClick={handleCat}
+                        onClick={()=>handleCat(item)}
                       >
                         {item.name}
                       </div>
@@ -237,17 +246,23 @@ const AddProduct = () => {
                 onChange={handleInputChange}
               />
             </div>
-                <h6 style={{marginBottom: '-10px'}}>Add Size with Stock and Price</h6>
+                {isSizeShow ? <h6 style={{marginBottom: '-10px'}}>Add Size with Stock and Price</h6> : <h6 style={{marginBottom: '-10px'}}>Add Stock and Price</h6>}
             <div className="cont-item">
               {/* <div> */}
-                <input
-                  type="text"
-                  placeholder="Size"
-                  className="VinputBox2"
-                  name="size"
-                  value={productDetails.size}
-                  onChange={handleDetailHandler}
-                />
+                {
+                  isSizeShow && (
+                      <input
+                        type="text"
+                        placeholder="Size"
+                        className="VinputBox2"
+                        name="size"
+                        // value={productDetails.size}
+                        // onChange={handleDetailHandler}
+                        value={inputData.size}
+                      onChange={handleInputChange}
+                      />
+                  )
+                }
               {/* </div> */}
               {/* <div> */}
                 <input
@@ -255,8 +270,10 @@ const AddProduct = () => {
                   placeholder="Stock"
                   className="VinputBox2"
                   name="stock"
-                  value={productDetails.stock}
-                  onChange={handleDetailHandler}
+                  // value={productDetails.stock}
+                  // onChange={handleDetailHandler}
+                  value={inputData.stock}
+                onChange={handleInputChange}
                 />
               {/* </div>
               <div> */}
@@ -265,13 +282,15 @@ const AddProduct = () => {
                   placeholder="Price"
                   className="VinputBox2"
                   name="price"
-                  value={productDetails.price}
-                  onChange={handleDetailHandler}
+                  // value={productDetails.price}
+                  // onChange={handleDetailHandler}
+                  value={inputData.price}
+                onChange={handleInputChange}
                 />
-                <Button onClick={addDetailsHandler} style={{color: '#ff8d22'}}><AddIcon/></Button>
+                {/* <Button onClick={addDetailsHandler} style={{color: '#ff8d22'}}><AddIcon/></Button> */}
               {/* </div> */}
             </div>
-            <Accordion style={{margin: '10px 0 20px 0', border: '1px solid #ff8d22', borderRadius: '8px'}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+            {/* <Accordion style={{margin: '10px 0 20px 0', border: '1px solid #ff8d22', borderRadius: '8px'}} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls="panel1bh-content"
@@ -293,7 +312,7 @@ const AddProduct = () => {
               </AccordionDetails>
                 ))
               }
-            </Accordion>
+            </Accordion> */}
             <div id="hide">
               <div className="VsmallInputCon">
                 <label className="VsmallInputLabel">

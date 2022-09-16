@@ -54,6 +54,8 @@ const VmyProduct = () => {
     setIsDropDown((old) => !old);
   };
 
+  console.log(allProducts, allCategory);
+
   return (
     <>
       <div style={{ margin: "3%" }}>
@@ -96,7 +98,7 @@ const VmyProduct = () => {
               <ProductsLoading />
             </>
           ) : (
-            allProducts?.length !== 0 ? (
+            allProducts?.data?.length !== 0 ? (
               allProducts?.map((item, index) => {
                 return (
                   <MyProductCont key={item._id} cb={getProducts} {...item} />

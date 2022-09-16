@@ -263,7 +263,7 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.resetform,
           action.navigate,
-          action.productDetails2
+          // action.productDetails2
         );
         break;
       case UPDATE_PRODUCT:
