@@ -156,13 +156,16 @@ export const updateProduct = async (
   id,
   urls,
   videoUrlResponse,
-  productDetails2
+  // productDetails2
 ) => {
   try {
     const values = {
       name: inputData.name,
       description: inputData.description,
-      detail: productDetails2,
+      stock: inputData.stock,
+      price: inputData.price,
+      size: inputData.size,
+      // detail: productDetails2,
       productImage: urls,
       productVideos: videoUrlResponse,
     };

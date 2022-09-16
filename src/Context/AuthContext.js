@@ -274,7 +274,7 @@ const AuthContextComponent = ({ children }) => {
           action.id,
           action.urls,
           action.videoUrlResponse,
-          action.productDetails2
+          // action.productDetails2
         );
         break;
       case GET_VENDOR_PRODUCTS:

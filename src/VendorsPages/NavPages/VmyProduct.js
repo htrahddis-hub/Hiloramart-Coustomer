@@ -99,7 +99,7 @@ const VmyProduct = () => {
             </>
           ) : (
             allProducts?.data?.length !== 0 ? (
-              allProducts?.map((item, index) => {
+              allProducts?.data?.map((item, index) => {
                 return (
                   <MyProductCont key={item._id} cb={getProducts} {...item} />
                 );
