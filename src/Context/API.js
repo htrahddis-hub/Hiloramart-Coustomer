@@ -166,6 +166,9 @@ export const updateVendorProduct = (values, id) => {
 export const getVendorProductsRequest = (id) => {
   return API.get(`/product/allproducts/${id}`);
 };
+export const getVendorNonAppProductsRequest = (id) => {
+  return API.get(`/product/unapprovedproducts/${id}`);
+};
 
 export const deleteProductRequest = (id) => {
   return API.post(`/product/deleteProduct?id=${id}`);

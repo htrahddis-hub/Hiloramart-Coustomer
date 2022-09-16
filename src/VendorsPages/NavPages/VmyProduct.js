@@ -4,7 +4,7 @@ import "../../VendorsStyle/VmyProduct.css";
 import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_VENDOR_PRODUCTS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY } from "../../Context/Types";
+import { GET_VENDOR_PRODUCTS, GET_ALL_CATEGORY, GET_PRODUCT_BY_CATEGORY, GET_VENDOR_APP_PRODUCT, GET_VENDOR_NONAPP_PRODUCT } from "../../Context/Types";
 import ProductsLoading from "../../Components/Skeleton-loading/Products-loading";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 
@@ -16,7 +16,7 @@ const VmyProduct = () => {
   const [isDropdown, setIsDropDown] = useState(false);
   const [categoryName, setCategoryName] = useState("All");
   const [isLoading, setIsLoading] = useState(false);
-  const getProducts = () => {
+  const getApprovalProducts = () => {
     dispatch({
       type: GET_VENDOR_PRODUCTS,
       upDateState: setAllProducts,
@@ -24,9 +24,18 @@ const VmyProduct = () => {
     });
     setIsDropDown(false);
   };
+  const getNonApprovalProducts = () => {
+    setAllProducts([]);
+    dispatch({
+      type: GET_VENDOR_NONAPP_PRODUCT,
+      upDateState: setAllProducts,
+      setIsLoading,
+    });
+    setIsDropDown(false);
+  };
 
   useEffect(() => {
-    getProducts();
+    getApprovalProducts();
   }, []);
 
   //to get all  category
@@ -54,13 +63,22 @@ const VmyProduct = () => {
     setIsDropDown((old) => !old);
   };
 
-  console.log(allProducts, allCategory);
+  const getApprovalsProducts = (e) => {
+    if(e.target.value === "approval") {
+      getApprovalProducts();
+    }else {
+      getNonApprovalProducts();
+    }
+  }
 
   return (
     <>
       <div style={{ margin: "3%" }}>
-        <div style={{display: 'flex', justifyContent: 'end'}} className="d-flex justify-content-space-between align-items-center">
-          {/* <div style={{width: '33.33%'}}></div> */}
+        <div style={{display: 'flex', justifyContent: 'space-between'}} className="d-flex justify-content-space-between align-items-center">
+          <select onChange={getApprovalsProducts} style={{border: 'none', outline: 'none'}} name="approval" id="approval">
+            <option value="approval">Approved Products</option>
+            <option value="nonapproval">Non Approved Products</option>
+          </select>
           {/* <div style={{width: '33.33%', marginRight: 0, textAlign: 'center'}} className="h1 end">My Product</div> */}
           <div style={{display: 'flex', justifyContent: 'end', position: 'relative'}} className="cat-div" onClick={handleDropdown}>
             {categoryName ? categoryName : "All"}
@@ -70,7 +88,7 @@ const VmyProduct = () => {
             <div style={{position: 'absolute', top: '27%', right: '3%'}} className="category-list">
               <div
                     className="cat-li"
-                    onClick={getProducts}
+                    onClick={getNonApprovalProducts}
                   >
                     All
               </div>
@@ -101,7 +119,7 @@ const VmyProduct = () => {
             allProducts?.data?.length !== 0 ? (
               allProducts?.data?.map((item, index) => {
                 return (
-                  <MyProductCont key={item._id} cb={getProducts} {...item} />
+                  <MyProductCont key={item._id} cb={getNonApprovalProducts} {...item} />
                 );
               })
             ) : (

@@ -59,6 +59,7 @@ export const UPLOAD_PROFILE_PIC = "upload profile pic";
 export const UPDATE_USER_PROFILE = "update profile";
 export const UPDATE_PROFILE = "update profile";
 export const ONGOING_ORDER = "ongoing order";
+export const GET_VENDOR_NONAPP_PRODUCT="get vendor nonapproval products";
 
 export const SEARCG_PRODUCT = "search products";
 export const GET_REVENUE_GRAPH_DATA="get revenue graph data";

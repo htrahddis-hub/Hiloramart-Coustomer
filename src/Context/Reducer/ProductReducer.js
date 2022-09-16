@@ -18,6 +18,8 @@ import {
   getProductByCategory,
   getTopSellingProduct,
   searchProduct,
+  getVendorAppProductsRequest,
+  getVendorNonAppProductsRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -196,6 +198,17 @@ export const getVendorProducts = async (id, upDateState, setIsLoading) => {
   setIsLoading(true);
   try {
     const res = await getVendorProductsRequest(id);
+    upDateState(res.data.data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const getVendorNonAppProducts = async (id, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await getVendorNonAppProductsRequest(id);
     upDateState(res.data.data);
   } catch (err) {
     console.log(err);
