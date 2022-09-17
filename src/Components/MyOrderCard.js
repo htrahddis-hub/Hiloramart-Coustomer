@@ -34,6 +34,11 @@ function MyOrderCard({ data }) {
       setIsLoading: setIsReturnLoading,
     });
   };
+
+  const handleInvoice = () => {
+    window.open(data?.invoice);
+  };
+
   return (
     <div className="my-order-card-cont">
       <div className="my-order-card-product-details">
@@ -94,7 +99,9 @@ function MyOrderCard({ data }) {
         </div>
       </div>
       <div className="my-order-download-btn-cont">
-        <button className="download-btn">Download Invoice</button>
+        <button className="download-btn" onClick={handleInvoice}>
+          Download Invoice
+        </button>
       </div>
     </div>
   );

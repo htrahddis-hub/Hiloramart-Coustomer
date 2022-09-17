@@ -32,6 +32,7 @@ import VSignup from "./VendorsPages/NavPages/VSignup";
 import VBank from "./VendorsPages/NavPages/VBank";
 import VHome2 from "./VendorsPages/NavPages/VHome2";
 import CategoryProduct from "./Components/HomeComponents/CategoryProduct";
+import SearchProduct from "./Pages/SearchedProduct";
 import {
   BrowserRouter as Router,
   Outlet,
@@ -172,6 +173,11 @@ function App() {
                 exact
                 path="/userprofile"
                 element={<UserProfile />}
+              ></Route>
+              <Route
+                exact
+                path="/search/:name"
+                element={<SearchProduct />}
               ></Route>
               <Route
                 exact
