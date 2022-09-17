@@ -32,8 +32,8 @@ const AdContainer = ({ image }) => {
 function Advertisement() {
   return (
     <>
-    <div style={{marginBottom: '100px'}} className="adver-container">
-      <div className="adver-title">Advertisement</div>
+    <div style={{marginBottom: '100px', marginTop: '40px'}} className="adver-container">
+      {/* <div className="adver-title">Advertisement</div> */}
       <div>
         <AdContainer image={Hiloramart} />
       </div>

@@ -48,6 +48,7 @@ const style = {
   p: 4,
   borderRadius: "8px",
   border: "none",
+  display: 'flex', flexDirection: 'column', justifyContent: 'space-between'
 };
 
 const MyProductCont = (props) => {
@@ -56,7 +57,10 @@ const MyProductCont = (props) => {
     description,
     productImage,
     _id,
-    detail,
+    // detail,
+    size,
+    stock,
+    price,
     cb,
     productVideos,
     name,
@@ -73,13 +77,16 @@ const MyProductCont = (props) => {
   const [inputData, setInputData] = useState({
     name: name,
     description: description,
+    stock: stock,
+    price: price,
+    size: size
   });
-  const [productDetails, setProductDetails] = useState({
-    size: '',
-    stock: '',
-    price: ''
-  })
-  const [productDetails2, setProductDetails2] = useState(detail);
+  // const [productDetails, setProductDetails] = useState({
+  //   size: '',
+  //   stock: '',
+  //   price: ''
+  // })
+  // const [productDetails2, setProductDetails2] = useState(detail);
   const [file, setFile] = useState([]);
   const [videoFile, setVideoFile] = useState();
   let urlResponse = [...productImage];
@@ -175,7 +182,7 @@ const MyProductCont = (props) => {
       navigate,
       urls: urlResponse,
       videoUrlResponse,
-      productDetails2
+      // productDetails2
     });
   };
 
@@ -189,17 +196,16 @@ const MyProductCont = (props) => {
     uploadFile();
   };
 
-  const handleDetailHandler = (e) => {
-    setProductDetails((prev) => {
-      return {...prev, [e.target.name]: e.target.value}
-    })
-  }
+  // const handleDetailHandler = (e) => {
+  //   setProductDetails((prev) => {
+  //     return {...prev, [e.target.name]: e.target.value}
+  //   })
+  // }
 
-  const addDetailsHandler = () => {
-    setProductDetails2((prev) => [...prev, productDetails])
-  }
+  // const addDetailsHandler = () => {
+  //   setProductDetails2((prev) => [...prev, productDetails])
+  // }
 
-  console.log(productDetails2, productDetails)
   console.log(props, "prosp");
   return (
     <div
@@ -213,17 +219,18 @@ const MyProductCont = (props) => {
         <div className="product-detail">
           <div className="CPCin1">{name}</div>
           <select onChange={sizeChangeHandler} name="size" id="size">
-            <option value="">Select Size</option>
-            {
+            <option value="">{size}</option>
+            {/* {
               detail?.map((item) => (
                 <option value={JSON.stringify(item)}>{item.size}</option>
               ))
-            }
+            } */}
           </select>
-          <div className="CPCin2">RS. {pdetails?.price}</div>
-          <p style={!pdetails?.stock ? { color: "red" } : { color: "green" }}>
+          <div className="CPCin2">RS. {price}</div>
+          <p style={stock || Number(stock) > 0 ? { color: "green" } : { color: "red" }}>{stock ? stock : 0}</p>
+          {/* <p style={!pdetails?.stock ? { color: "red" } : { color: "green" }}>
             Stock: {pdetails?.stock ? pdetails?.stock : "0"}
-          </p>
+          </p> */}
         </div>
       </div>
       <div className="product-options">
@@ -357,51 +364,57 @@ const MyProductCont = (props) => {
                 />
               </div>
             </div>
-            <h6 style={{marginTop: '20px'}}>Select Size</h6>
-            <select onChange={sizeChangeHandler} style={{height: '40px', margin: '0 0 20px 0', border: '2px solid #ff8d22', borderRadius: '8px', outline: 'none'}} name="data" id="data">
+            {/* <h6 style={{marginTop: '20px'}}>Select Size</h6> */}
+            {/* <select onChange={sizeChangeHandler} style={{height: '40px', margin: '0 0 20px 0', border: '2px solid #ff8d22', borderRadius: '8px', outline: 'none'}} name="data" id="data">
               <option value="">Add New</option>
               {
                 detail?.map((item) => (
                   <option value={JSON.stringify(item)}>{item?.size}</option>
                 ))
               }
-            </select>
+            </select> */}
 
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
               <div className="input-container2">
-                <label htmlFor="stock">Size:</label>
+                <label style={{marginBottom: '10px'}} htmlFor="stock">Size:</label>
                 <OutlinedInput
-                  onChange={handleDetailHandler}
+                  // onChange={handleDetailHandler}
                   id="size"
-                  placeholder={pdetails?.size}
+                  onChange={inputHandler}
+                  defaultValue={inputData?.size}
+                  // placeholder={pdetails?.size}
                   name="size"
                   style={{height: '40px'}}
                 />
               </div>
               <div style={{ display: "flex" }} className="input-container2">
-                <label htmlFor="price">Price:</label>
+                <label style={{marginBottom: '10px'}} htmlFor="price">Price:</label>
                 <OutlinedInput
-                  onChange={handleDetailHandler}
+                  // onChange={handleDetailHandler}
                   id="price"
-                  placeholder={pdetails?.price}
+                  // placeholder={pdetails?.price}
+                  onChange={inputHandler}
+                  defaultValue={inputData?.price}
                   name="price"
                   style={{height: '40px'}}
                 />
               </div>
               <div className="input-container2">
-                <label htmlFor="stock">Stock:</label>
+                <label style={{marginBottom: '10px'}} htmlFor="stock">Stock:</label>
                 <OutlinedInput
-                  onChange={handleDetailHandler}
+                  // onChange={handleDetailHandler}
                   id="stock"
-                  placeholder={pdetails?.stock}
+                  // placeholder={pdetails?.stock}
+                  onChange={inputHandler}
+                  defaultValue={inputData?.stock}
                   name="stock"
                   style={{height: '40px'}}
                 />
               </div>
-              <Button onClick={addDetailsHandler} style={{color: '#ff8d22', width: '50px', height: '50px', position: 'relative'}}>
+              {/* <Button onClick={addDetailsHandler} style={{color: '#ff8d22', width: '50px', height: '50px', position: 'relative'}}>
                 <AddIcon/>
                 <span>{productDetails2?.length}</span>
-              </Button>
+              </Button> */}
             </div>
 
             <div id="hide">
@@ -713,7 +726,7 @@ const MyProductCont = (props) => {
             </div>
           </FormControl>
 
-          <div className="button-container">
+          <div style={{marginTop: 'auto'}} className="button-container">
             <Button
               onClick={AddProductForm}
               style={{ backgroundColor: "#FF8D22", marginRight: "8px" }}

@@ -20,10 +20,17 @@ const ImageGallaryComponent = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const lastProduct = allProducts[0]
-  const secondLastProduct = allProducts[1]
+  let lastProduct;
+  let secondLastProduct;
+
+  if(allProducts?.data?.length > 0) {
+    lastProduct = allProducts?.data[0]
+    secondLastProduct = allProducts?.data[1]
+
+  }
 
   console.log(lastProduct, secondLastProduct)
+  console.log(allProducts)
 
   useEffect(() => {
     if(AuthRole === "user") {
@@ -118,12 +125,12 @@ const ImageGallaryComponent = () => {
         <CircularProgress style={{color: '#FF8D22'}} />
         </div>
       ) : (
-        allProducts.length === 0 ? (
+        allProducts?.data?.length === 0 ? (
           <>
-            <div className="empty-container">
+            <div style={{height: '90vh'}} className="empty-container">
               <div className="left">
-                <div className="imgContainer">
-                  <img src={nodata} alt="nothing" />
+                <div style={{width: '400px', height: '400px'}} className="imgContainer">
+                  <img style={{width: '100%', height: '100%'}} src={nodata} alt="nothing" />
                 </div>
               </div>
               <div className="right">
@@ -132,7 +139,7 @@ const ImageGallaryComponent = () => {
             </div>
           </>
         ) : (
-            allProducts.length === 1 ? (
+            allProducts?.data?.length === 1 ? (
               <div
               id="LPmainCont"
               style={{ background: "#FFC577", borderRadius: "30px", margin: "2%" }}

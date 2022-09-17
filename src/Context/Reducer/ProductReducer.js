@@ -18,6 +18,8 @@ import {
   getProductByCategory,
   getTopSellingProduct,
   searchProduct,
+  getVendorAppProductsRequest,
+  getVendorNonAppProductsRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -91,20 +93,24 @@ export const addProduct = async (
   setIsLoading,
   resetform,
   navigate,
-  productDetails2
+  // productDetails2
 ) => {
   try {
     const values = {
       name: inputData.productName,
       description: inputData.productDescription,
-      detail: productDetails2,
+      stock: inputData.stock,
+      size: inputData.size,
+      price: inputData.price,
+      // detail: productDetails2,
       productImage: urlResponse,
       productVideos: videoUrlResponse,
       owner: inputData.id,
       category: catId,
     };
-    // console.log(values);
+    console.log(values);
     const res = await addProductRequest(values);
+    console.log(res);
     if (res.data.success) {
       resetform();
       navigate("/product-success", {
@@ -152,13 +158,16 @@ export const updateProduct = async (
   id,
   urls,
   videoUrlResponse,
-  productDetails2
+  // productDetails2
 ) => {
   try {
     const values = {
       name: inputData.name,
       description: inputData.description,
-      detail: productDetails2,
+      stock: inputData.stock,
+      price: inputData.price,
+      size: inputData.size,
+      // detail: productDetails2,
       productImage: urls,
       productVideos: videoUrlResponse,
     };
@@ -189,6 +198,17 @@ export const getVendorProducts = async (id, upDateState, setIsLoading) => {
   setIsLoading(true);
   try {
     const res = await getVendorProductsRequest(id);
+    upDateState(res.data.data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const getVendorNonAppProducts = async (id, upDateState, setIsLoading) => {
+  setIsLoading(true);
+  try {
+    const res = await getVendorNonAppProductsRequest(id);
     upDateState(res.data.data);
   } catch (err) {
     console.log(err);

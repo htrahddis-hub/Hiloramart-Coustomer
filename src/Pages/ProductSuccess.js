@@ -15,6 +15,7 @@ function ProductSuccess() {
         </div>
         <div>
           <p>Product Successfully Uploaded For Buyers</p>
+          <p>Once Admin Approve, it will be seen by Buyer</p>
         </div>
       </div>
       <div className="product-success-second">

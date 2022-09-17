@@ -93,6 +93,8 @@ import {
   UPLOAD_PROFILE_PIC,
   UPDATE_USER_PROFILE,
   GET_REVENUE_GRAPH_DATA,
+  GET_VENDOR_APP_PRODUCT,
+  GET_VENDOR_NONAPP_PRODUCT,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -118,6 +120,8 @@ import {
   removeProductForAds,
   getProductByCatId,
   searchProducts,
+  getVendorAppProducts,
+  getVendorNonAppProducts,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import {
@@ -263,7 +267,7 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.resetform,
           action.navigate,
-          action.productDetails2
+          // action.productDetails2
         );
         break;
       case UPDATE_PRODUCT:
@@ -274,11 +278,18 @@ const AuthContextComponent = ({ children }) => {
           action.id,
           action.urls,
           action.videoUrlResponse,
-          action.productDetails2
+          // action.productDetails2
         );
         break;
       case GET_VENDOR_PRODUCTS:
         getVendorProducts(
+          currentUser.id,
+          action.upDateState,
+          action.setIsLoading
+        );
+        break;
+      case GET_VENDOR_NONAPP_PRODUCT:
+        getVendorNonAppProducts(
           currentUser.id,
           action.upDateState,
           action.setIsLoading
