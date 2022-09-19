@@ -210,7 +210,7 @@ const MyProductCont = (props) => {
   return (
     <div
       className="CPCmain"
-      style={{ background: "rgba(112,112,112,0.05)", cursor: "pointer" }}
+      style={{ background: "rgba(112,112,112,0.10)", cursor: "pointer" }}
     >
       <div className="CPCmain">
         <div onClick={handleOpen2} className="CPC1">
@@ -218,14 +218,19 @@ const MyProductCont = (props) => {
         </div>
         <div className="product-detail">
           <div className="CPCin1">{name}</div>
-          <select onChange={sizeChangeHandler} name="size" id="size">
-            <option value="">{size}</option>
-            {/* {
-              detail?.map((item) => (
-                <option value={JSON.stringify(item)}>{item.size}</option>
-              ))
-            } */}
-          </select>
+          <span style={{color: 'gray', marginBottom: '10px', fontSize: '13px'}}>{description}</span>
+          {
+            size === "" ? "" : (
+            <select onChange={sizeChangeHandler} name="size" id="size">
+              <option value="">{size}</option>
+              {/* {
+                detail?.map((item) => (
+                  <option value={JSON.stringify(item)}>{item.size}</option>
+                ))
+              } */}
+            </select>
+            )
+          }
           <div className="CPCin2">RS. {price}</div>
           <p style={stock || Number(stock) > 0 ? { color: "green" } : { color: "red" }}>{stock ? stock : 0}</p>
           {/* <p style={!pdetails?.stock ? { color: "red" } : { color: "green" }}>
@@ -288,7 +293,7 @@ const MyProductCont = (props) => {
           <div className="mid1">
             <div className="midinner1">
               <span>Price</span>
-              <span className="middetails">RS. {pdetails?.price}</span>
+              <span className="middetails">RS. {price}</span>
             </div>
             <div className="midinner2">
               <span>Posted Date</span>

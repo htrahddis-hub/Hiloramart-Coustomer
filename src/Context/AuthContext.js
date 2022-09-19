@@ -256,7 +256,7 @@ const AuthContextComponent = ({ children }) => {
         getVendorAddress(action.setVendorAddress);
         break;
       case GET_ALL_CATEGORY:
-        getALlCategory(action.upDateState);
+        getALlCategory(action.upDateState, action.setIsLoading);
         break;
       case ADD_PRODUCT:
         addProduct(
@@ -407,7 +407,8 @@ const AuthContextComponent = ({ children }) => {
           // action.startDate,
           // action.endDate,
           action.upDateState,
-          action.category
+          action.category,
+          action.setIsLoading
         );
         break;
       case VENDOR_ALL_SALE:

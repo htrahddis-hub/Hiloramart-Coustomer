@@ -11,6 +11,7 @@ import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import logo from '../Assets/Images/hiloralogo.jpeg';
 
 const NavBar = () => {
   const { AuthRole, setAuth } = useContext(AuthContext);
@@ -126,7 +127,9 @@ const NavBar = () => {
         <div className="Nav1">
           <NavLink to="/" style={{ color: "inherit", textDecoration: "none" }}>
             <div id="logo">
-              <img style={{ height: "3rem" }} src={Hiloramart} alt="" />
+              <img style={{ height: "3rem" }} src={logo} alt="" />
+              {/* <span style={{border: 'none', underline: 'none'}} >Hiloramart</span> */}
+              {/* <img style={{ height: "3rem" }} src={Hiloramart} alt="" /> */}
             </div>
           </NavLink>
         </div>

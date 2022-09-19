@@ -169,7 +169,7 @@ export const vendorLogin = async (
 
     // https://cors-fix-kylo.herokuapp.com/
     const res2 = await axios.post(
-      "https://cors-fix-kylo.herokuapp.com/https://apiv2.shiprocket.in/v1/external/auth/login",
+      "https://apiv2.shiprocket.in/v1/external/auth/login",
       {
         email: "iamaditityagi@gmail.com",
         password: "Qwerty@199938"
@@ -227,13 +227,14 @@ export const vendorForgotPass = async (email, navigate) => {
 
 export const getVSale = async (
   // startDate, endDate,
-   upDateState, category) => {
+   upDateState, category, setIsLoading) => {
   try {
     const res = await getVendorSale(
       // startDate, endDate,
        category);
     upDateState(res.data.data);
     console.log("res,", res);
+    setIsLoading(false);
   } catch (err) {}
 };
 
@@ -362,6 +363,7 @@ export const vendorAccActivate = async (values, id, setIsLoading, navigate) => {
   };
   try {
     const res = await vendorAccActivateRequest(formvalues);
+    console.log(res);
     if (res.data) {
       navigate("/login", {
         state: {
