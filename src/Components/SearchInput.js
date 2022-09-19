@@ -3,8 +3,10 @@ import "../Styles/Components/SearchInput.css";
 import search_icon from "../Assets/Images/search.svg";
 import HistoryIcon from "@mui/icons-material/History";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 function SearchInput() {
+  const navigate = useNavigate();
   const [dropdown, setDropdown] = React.useState(false);
   const [search, setSearch] = React.useState("");
 
@@ -17,7 +19,7 @@ function SearchInput() {
   };
 
   const handleSubmit = () => {
-    
+    navigate(`search/${search}`);
   };
 
   const handleKeyDown = (event) => {
@@ -31,12 +33,13 @@ function SearchInput() {
       <div onClick={handleSubmit}>
         <img src={search_icon} className="search_icon" />
       </div>
-      <div onClick={handleDropdown} onKeyDown={handleKeyDown}>
+      <div onClick={handleDropdown} >
         <input
           placeholder="Seacrh here"
           className="search-input"
           value={search}
           onChange={handelChange}
+          onKeyDown={handleKeyDown}
         />
       </div>
       {dropdown && (

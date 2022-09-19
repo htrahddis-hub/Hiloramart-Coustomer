@@ -12,7 +12,6 @@ import Footer from "../Components/Footer";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import {
-  DELETE_ITEM_FROM_CART,
   GET_CART_ITEMS,
   ONLINE_PAYMENT,
 } from "../Context/Types";
