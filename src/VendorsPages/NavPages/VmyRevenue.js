@@ -23,6 +23,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { Calendar } from "react-calendar";
+import { CircularProgress } from "@mui/material";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -188,10 +189,12 @@ const VmyRevenue = () => {
   };
 
   const getCountData = () => {
+    setIsLoading(true);
     dispatch({
       type: VENDOR_SALE,
       upDateState: setCountData,
-      category: categoryName.id
+      category: categoryName.id,
+      setIsLoading
     })
   }
 
@@ -206,6 +209,7 @@ const VmyRevenue = () => {
 
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch({
       type: GET_ALL_CATEGORY,
       upDateState: setAllCategory,
@@ -263,7 +267,9 @@ const VmyRevenue = () => {
           )}
         </div>
       </div> */}
-      <div style={{display: 'flex', minHeight: '800px'}}>
+      {
+        isLoading ? <div style={{height: '90vh', display: 'grid', placeItems:'center'}}><CircularProgress style={{color: '#ff8d22'}}/></div> : (
+          <div style={{display: 'flex', minHeight: '800px'}}>
         {/* <div
           style={{ fontSize: "24px", fontWeight: "bold", textAlign: "center", margin: '55px 0' }}
         >
@@ -386,7 +392,10 @@ const VmyRevenue = () => {
            />
           <LastTransections ads={ads}/>
         </div> */}
-      </div>
+          </div>
+        )
+      }
+
       <Footer />
     </>
   );

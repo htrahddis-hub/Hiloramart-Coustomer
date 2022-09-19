@@ -122,31 +122,34 @@ const MyProductsForAds = () => {
     })
   }
 
-  console.log(productIds);
+  console.log(allProducts)
+
 
   return (
     <>
     <div style={{textAlign: 'center'}} className="adver-title">Product for ADS</div>
-    <div style={{display: 'flex', flex: '1 1', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 30px', height: '100vh', overflow: 'auto'}}>
-          {allProducts?.length !== 0 ? (
-            allProducts?.map((item, index) => {
+    {
+
+      isLoading ? <div style={{height: '400px', display: 'grid', placeItems: 'center'}}><CircularProgress style={{color: "#ff8d22"}}/></div> : (
+   <> <div style={{display: 'flex', flex: '1 1', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 30px', height: '100vh', overflow: 'auto'}}>
+          {allProducts?.data?.length !== 0 ? (
+            allProducts?.data?.map((item, index) => {
               return (
                 <MyProductItem item={item} setSelectedProducts={setSelectedProducts} setTotalPrice={setTotalPrice} totalPrice={totalPrice} setProductIds={setProductIds}/>
               );
             })
           ) : (
             <>
-              <ProductsLoading />
-              <ProductsLoading />
-              <ProductsLoading />
-              <ProductsLoading />
+              <CircularProgress />
             </>
           )}
     </div>
-
     <div style={{display: 'grid', placeItems: 'center', margin: '20px 0 40px 0'}}>
       <Button onClick={handleOpen} variant='contained' style={{width: '200px', backgroundColor: "#ff8d22"}}>Continue</Button>
-    </div>
+    </div></>
+      )
+    }
+
 
     <Modal
         open={open}
@@ -175,7 +178,8 @@ const MyProductsForAds = () => {
           <hr />
           <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '5px'}}>
             <h5>Total</h5>
-            <span>{`RS. ${totalPrice}`}</span>
+            <span>{`RS. ${selectedProducts.length} x 100 = ${Number(selectedProducts?.length) * 100}`}</span>
+            {/* <span>{`RS. ${totalPrice}`}</span> */}
           </div>
 
           <div>

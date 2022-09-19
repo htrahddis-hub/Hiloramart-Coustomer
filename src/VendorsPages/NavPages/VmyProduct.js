@@ -119,7 +119,7 @@ const VmyProduct = () => {
             allProducts?.data?.length !== 0 ? (
               allProducts?.data?.map((item, index) => {
                 return (
-                  <MyProductCont key={item._id} cb={getNonApprovalProducts} {...item} />
+                  <MyProductCont key={item._id} cb={getApprovalProducts} {...item} />
                 );
               })
             ) : (

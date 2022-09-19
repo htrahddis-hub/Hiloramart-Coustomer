@@ -54,18 +54,20 @@ const VEditProfile = () => {
     });
 
     const [bankDetails, setBankDetails] = useState({
-        account_no: "",
-        ifsc_code: "",
-        bank_name: "",
-        branch_name: "",
-        account_holder_name: "",
-        swift_code: ""
+        account_no: profileData?.bankDetails?.account_no,
+        ifsc_code: profileData?.bankDetails?.ifsc_code,
+        bank_name: profileData?.bankDetails?.bank_name,
+        branch_name: profileData?.bankDetails?.branch_name,
+        account_holder_name: profileData?.bankDetails?.account_holder_name,
+        swift_code: profileData?.bankDetails?.swift_code
     })
 
     const [updatedProfileData, setUpdatedProfileData] = useState({
-        profilePic: "",
-        name: "",
-        number: "",
+        profilePic: profileData?.profilePic,
+        name: profileData?.name,
+        number: profileData?.number,
+        gst: profileData?.gst,
+        email:profileData?.email
     })
 
     const getProfileData = (setUpdatedProfileData, setBankDetails) => {
@@ -163,7 +165,7 @@ const VEditProfile = () => {
         })
     }
 
-    const updateProfile = () => {
+    const updateProfile2 = () => {
         const data = {
             ...updatedProfileData,
             address: vendorAddress?.address,
@@ -197,7 +199,7 @@ const VEditProfile = () => {
     // console.log(bankDetails, "bank detail");
     // console.log(updatedProfileData, "vendor detail");
 
-    console.log(shiprocketAddressResponse);
+    console.log(profileData);
 
 
   return (
@@ -217,6 +219,8 @@ const VEditProfile = () => {
 
         <div style={{display: 'flex', padding: '0 20px'}}>
             <div style={{width: '50%'}}>
+                <div style={{padding: '20px', borderRadius: '8px', boxShadow: '0 0 6px rgba(0,0,0,0.22)'}}>
+
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <label htmlFor="vname">Name</label>
                     <input onChange={profileDetailHandler} type="text" id='vname' name='name' defaultValue={profileData?.name} placeholder={profileData?.name}/>
@@ -226,10 +230,15 @@ const VEditProfile = () => {
                     <input onChange={profileDetailHandler} type="text" id='mobile' name='number' defaultValue={profileData?.number} placeholder={profileData?.number}/>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <label htmlFor="gst">GST</label>
+                    <input type="text" id='gst' name='gst'  defaultValue={profileData?.gst} value={profileData?.gst}/>
+                </div>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
                     <label htmlFor="email">Email</label>
                     <input type="text" id='email' name='email'  defaultValue={profileData?.email} value={profileData?.email} disabled/>
                 </div>
-                <div style={{marginTop: '30px'}}>
+                </div>
+                <div style={{marginTop: '30px',padding: '20px', borderRadius: '8px', boxShadow: '0 0 6px rgba(0,0,0,0.22)'}}>
                     <h5>Account Details</h5>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <label htmlFor="account-no">Account No.</label>
@@ -259,7 +268,7 @@ const VEditProfile = () => {
             </div>
 
             <div style={{width: '50%', padding: '0 20px'}}>
-                <div>
+                <div style={{padding: '20px', borderRadius: '8px', boxShadow: '0 0 6px rgba(0,0,0,0.22)'}}>
                     <h5 style={{textAlign: 'center'}}>Current Address</h5>
 
                     {
@@ -362,7 +371,7 @@ const VEditProfile = () => {
         </div>
 
         <div style={{margin: '40px 0', display: 'flex', justifyContent: 'center'}}>
-            <Button onClick={updateProfile}  variant='contained' style={{backgroundColor: '#FF8D22'}}>{isLoading ? <CircularProgress /> :"Update Profile"}</Button>
+            <Button onClick={updateProfile2}  variant='contained' style={{backgroundColor: '#FF8D22'}}>{isLoading ? <CircularProgress /> :"Update Profile"}</Button>
         </div>
 
 

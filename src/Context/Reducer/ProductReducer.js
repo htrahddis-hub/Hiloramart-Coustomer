@@ -27,10 +27,11 @@ import { Navigate } from "react-router-dom";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { useState } from "react";
-export const getALlCategory = async (upDateState) => {
+export const getALlCategory = async (upDateState, setIsLoading) => {
   try {
     const res = await getAllCategoryRequest();
     upDateState(res.data.data);
+    setIsLoading(false);
   } catch (err) {
     console.log(err);
   }

@@ -5,16 +5,17 @@ import arrow from "../Assets/Images/arrow.svg";
 import google from "../Assets/Images/google.svg";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import logo from '../Assets/Images/hiloralogo.jpeg';
 const AdContainer = ({ image }) => {
 
   const navigate = useNavigate();
 
   return (
     <div className="adver-box">
-      <div>
-        <img src={image} />
+      <div style={{width: '80px', height: '80px'}}>
+        <img src={logo} style={{width: '100%'}}/>
       </div>
-      <div>Rs. 1</div>
+      <div>Rs. 100</div>
       <div>Grow your business within Our web</div>
       <div>
         Get More customers in your products with business ads that help people

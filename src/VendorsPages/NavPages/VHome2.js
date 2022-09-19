@@ -9,7 +9,7 @@ const VHome2 = () => {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = ("1");
+  const [page, setPage] = useState("1");
   const [categoryName, setCategoryName] = useState({id: "", name: "All"});
   const [allCategory, setAllCategory] = useState([]);
 
@@ -29,6 +29,7 @@ const VHome2 = () => {
 
   
   const pageChangeHandler = (e, value) => {
+    console.log(value, "page");
     setPage(value);
   }
 

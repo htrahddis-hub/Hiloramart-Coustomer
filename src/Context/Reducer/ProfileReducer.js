@@ -194,6 +194,7 @@ export const deleteSavedAdd = async (id, setVendorAddress) => {
 };
 
 export const updateProfileFun = async (data, id, setIsLoading, navigate) => {
+  console.log(data);
   try {
     setIsLoading(true);
     const res = await updateProfile(data, id);
