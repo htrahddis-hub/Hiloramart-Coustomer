@@ -23,9 +23,9 @@ const ImageGallaryComponent = () => {
   let lastProduct;
   let secondLastProduct;
 
-  if(allProducts?.data?.length > 0) {
-    lastProduct = allProducts?.data[0]
-    secondLastProduct = allProducts?.data[1]
+  if(allProducts?.length > 0) {
+    lastProduct = allProducts[0]
+    secondLastProduct = allProducts[1]
 
   }
 

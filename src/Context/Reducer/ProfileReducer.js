@@ -52,6 +52,7 @@ export const vendorProfile = async (
   console.log(id);
   try {
     const res = await vendorProfileRequest(id);
+    console.log(res);
     if (res.data) {
       upDateState(res.data.data);
       setUpdatedProfileData({
@@ -59,7 +60,8 @@ export const vendorProfile = async (
         name: res?.data?.data?.name,
         number: res?.data?.data?.number,
         gst: res?.data?.data?.gst,
-        email: res?.data?.data?.email
+        email: res?.data?.data?.email,
+        aadhar: res?.data?.data?.aadhar
       });
       setBankDetails({
         account_no: res?.data?.data?.bankDetails?.account_no,
@@ -67,6 +69,7 @@ export const vendorProfile = async (
         bank_name: res?.data?.data?.bankDetails?.bank_name,
         branch_name: res?.data?.data?.bankDetails?.branch_name,
         account_holder_name: res?.data?.data?.bankDetails?.account_holder_name,
+        swift_code: res?.data?.data?.bankDetails?.swift_code
       });
     }
   } catch (Err) {

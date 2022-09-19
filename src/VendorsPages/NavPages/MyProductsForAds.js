@@ -132,8 +132,8 @@ const MyProductsForAds = () => {
 
       isLoading ? <div style={{height: '400px', display: 'grid', placeItems: 'center'}}><CircularProgress style={{color: "#ff8d22"}}/></div> : (
    <> <div style={{display: 'flex', flex: '1 1', flexWrap: 'wrap', justifyContent: 'space-between', padding: '0 30px', height: '100vh', overflow: 'auto'}}>
-          {allProducts?.data?.length !== 0 ? (
-            allProducts?.data?.map((item, index) => {
+          {allProducts?.length !== 0 ? (
+            allProducts?.map((item, index) => {
               return (
                 <MyProductItem item={item} setSelectedProducts={setSelectedProducts} setTotalPrice={setTotalPrice} totalPrice={totalPrice} setProductIds={setProductIds}/>
               );

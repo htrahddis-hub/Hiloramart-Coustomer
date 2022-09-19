@@ -192,7 +192,7 @@ const VEditProfile = () => {
 
   return (
     <div style={{ padding: "0 30px" }}>
-      <div
+      {/* <div
         style={{
           fontSize: "24px",
           fontWeight: "bold",
@@ -201,7 +201,7 @@ const VEditProfile = () => {
         }}
       >
         Edit Profile
-      </div>
+      </div> */}
 
       <div
         style={{

@@ -36,7 +36,7 @@ const VmyProduct = () => {
 
   useEffect(() => {
     getApprovalProducts();
-  }, []);
+  }, [categoryName]);
 
   //to get all  category
   useEffect(() => {
@@ -70,7 +70,7 @@ const VmyProduct = () => {
       getNonApprovalProducts();
     }
   }
-
+console.log(allProducts)
   return (
     <>
       <div style={{ margin: "3%" }}>
@@ -116,8 +116,8 @@ const VmyProduct = () => {
               <ProductsLoading />
             </>
           ) : (
-            allProducts?.data?.length !== 0 ? (
-              allProducts?.data?.map((item, index) => {
+            allProducts?.length !== 0 ? (
+              allProducts?.map((item, index) => {
                 return (
                   <MyProductCont key={item._id} cb={getApprovalProducts} {...item} />
                 );

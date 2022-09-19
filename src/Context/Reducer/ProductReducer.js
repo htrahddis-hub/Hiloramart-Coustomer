@@ -199,7 +199,8 @@ export const getVendorProducts = async (id, upDateState, setIsLoading) => {
   setIsLoading(true);
   try {
     const res = await getVendorProductsRequest(id);
-    upDateState(res.data.data);
+    console.log(res);
+    upDateState(res.data.data.data);
   } catch (err) {
     console.log(err);
   } finally {
@@ -210,7 +211,7 @@ export const getVendorNonAppProducts = async (id, upDateState, setIsLoading) => 
   setIsLoading(true);
   try {
     const res = await getVendorNonAppProductsRequest(id);
-    upDateState(res.data.data);
+    upDateState(res.data.data.data);
   } catch (err) {
     console.log(err);
   } finally {
