@@ -55,16 +55,18 @@ export const vendorProfile = async (
     if (res.data) {
       upDateState(res.data.data);
       setUpdatedProfileData({
-        profilePic: res.data.data?.profilePic,
-        name: res.data.data?.name,
-        number: res.data.data?.number,
+        profilePic: res?.data?.data?.profilePic,
+        name: res?.data?.data?.name,
+        number: res?.data?.data?.number,
+        gst: res?.data?.data?.gst,
+        email: res?.data?.data?.email
       });
       setBankDetails({
-        account_no: res.data.data?.bankDetails?.account_no,
-        ifsc_code: res.data.data?.bankDetails?.ifsc_code,
-        bank_name: res.data.data?.bankDetails?.bank_name,
-        branch_name: res.data.data?.bankDetails?.branch_name,
-        account_holder_name: res.data.data?.bankDetails?.account_holder_name,
+        account_no: res?.data?.data?.bankDetails?.account_no,
+        ifsc_code: res?.data?.data?.bankDetails?.ifsc_code,
+        bank_name: res?.data?.data?.bankDetails?.bank_name,
+        branch_name: res?.data?.data?.bankDetails?.branch_name,
+        account_holder_name: res?.data?.data?.bankDetails?.account_holder_name,
       });
     }
   } catch (Err) {

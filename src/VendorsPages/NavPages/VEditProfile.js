@@ -54,20 +54,20 @@ const VEditProfile = () => {
     });
 
     const [bankDetails, setBankDetails] = useState({
-        account_no: profileData?.bankDetails?.account_no,
-        ifsc_code: profileData?.bankDetails?.ifsc_code,
-        bank_name: profileData?.bankDetails?.bank_name,
-        branch_name: profileData?.bankDetails?.branch_name,
-        account_holder_name: profileData?.bankDetails?.account_holder_name,
-        swift_code: profileData?.bankDetails?.swift_code
+        account_no: profileData?.bankDetails?.account_no || "",
+        ifsc_code: profileData?.bankDetails?.ifsc_code || "",
+        bank_name: profileData?.bankDetails?.bank_name || "",
+        branch_name: profileData?.bankDetails?.branch_name || "",
+        account_holder_name: profileData?.bankDetails?.account_holder_name || "",
+        swift_code: profileData?.bankDetails?.swift_code || ""
     })
 
     const [updatedProfileData, setUpdatedProfileData] = useState({
-        profilePic: profileData?.profilePic,
-        name: profileData?.name,
-        number: profileData?.number,
-        gst: profileData?.gst,
-        email:profileData?.email
+        profilePic: profileData?.profilePic || "",
+        name: profileData?.name || "",
+        number: profileData?.number || "",
+        gst: profileData?.gst || "",
+        email: profileData?.email || ""
     })
 
     const getProfileData = (setUpdatedProfileData, setBankDetails) => {
