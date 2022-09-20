@@ -12,7 +12,7 @@ const VHome2 = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [categoryName, setCategoryName] = useState({id: "", name: "All"});
   const [allCategory, setAllCategory] = useState([]);
-  const [page, setPage] = ("1");
+  const [page, setPage] = useState(1);
 
 
   const handleCat = (e) => {
@@ -48,18 +48,18 @@ const VHome2 = () => {
       <div>
         <div
           style={{
-            fontSize: "24px",
-            fontWeight: "600",
-            marginLeft: "10px",
-            marginTop: "50px",
-            display: 'flex',
-            justifyContent: 'space-between'
+            fontSize: "1rem",
+          fontWeight: "600",
+          marginLeft: "20px",
+          // marginTop: "50px",
+          display: 'flex',
+          justifyContent: 'space-between'
           }}
         >
           <Link
             to="/orders-new"
             style={{
-              marginLeft: "50px",
+              // marginLeft: "50px",
               color: "gray",
               textDecoration: "none",
             }}
@@ -90,7 +90,7 @@ const VHome2 = () => {
                 Ongoing Orders
             </span>
         <div style={{marginRight: '40px', display: 'inline-block', marginLeft: 'auto'}}>
-          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+          <select onChange={handleCat} style={{border:'none', borderRadius: '8px', outline: 'none', cursor: 'pointer'}} defaultValue="all" name="cat" id="cat">
             <option value="">All</option>
             {
               allCategory?.map((item) => {
@@ -100,9 +100,9 @@ const VHome2 = () => {
           </select>
         </div>
         </div>
-        <div style={{margin: '10px 10px 100px 10px'}}>
+        <div style={{margin: '10px 10px 100px 10px', minHeight: '80vh'}}>
           {/* <BuyersDetailCont /> */}
-          <OrderTable4 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler}/>
+          <OrderTable4 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler} page={page}/>
         </div>
         {/* <AssignedAndStausFormVhome2 /> */}
       </div>

@@ -8,7 +8,7 @@ import Modal from '@mui/material/Modal';
 import { AuthContext } from '../../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ADD_VENDOR_ADDRESS, CHANGE_CURRENT_ADDRESS, DELETE_SAVED_ADDRESS, GET_SHIPROCKET_COUNTRY, GET_SHIPROCKET_LOCALITY, GET_USER_PROFILE, GET_VENDOR_ADDRESS, GET_VENDOR_PROFILE, UPDATE_PROFILE } from '../../Context/Types';
-import { uploadFile } from '../../firebase/fileUpload';
+import { uploadFile, uploadFile2 } from '../../firebase/fileUpload';
 
 const style = {
     position: 'absolute',
@@ -23,12 +23,31 @@ const style = {
     p: 4,
     // overflow: 'auto',
   };
+const style2 = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '40%',
+    height: '40%',
+    bgcolor: 'background.paper',
+    borderRadius: '8px',
+    boxShadow: 24,
+    p: 4,
+    // overflow: 'auto',
+  };
 
 const VEditProfile = () => {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [open2, setOpen2] = React.useState(false);
+    const handleOpen2 = () => setOpen2(true);
+    const handleClose2 = () => setOpen2(false);
+    const [open3, setOpen3] = React.useState(false);
+    const handleOpen3 = () => setOpen3(true);
+    const handleClose3 = () => setOpen3(false);
     const {  AuthRole, dispatch, currentUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +55,8 @@ const VEditProfile = () => {
     const [profileData, setProfileData] = useState();
     const [allCountries, setAllCountries] = useState([]);
     const [allLocalities, setAllLocalities] = useState([]);
+
+    const [aadharUrl, setAadharUrl] = useState("");
 
     const [filePath, setFilePath] = useState("");
 
@@ -67,7 +88,8 @@ const VEditProfile = () => {
         name: "",
         number: "",
         gst: "",
-        email: ""
+        email: "",
+        aadhar: ""
     })
 
     const getProfileData = (setUpdatedProfileData, setBankDetails) => {
@@ -166,11 +188,14 @@ const VEditProfile = () => {
     }
 
     const updateProfile = () => {
+        debugger
         const data = {
             ...updatedProfileData,
             address: vendorAddress,
             bankDetails
         }
+        console.log(data);
+        debugger
         dispatch({
             type: UPDATE_PROFILE,
             data,
@@ -199,7 +224,9 @@ const VEditProfile = () => {
     // console.log(bankDetails, "bank detail");
     // console.log(updatedProfileData, "vendor detail");
 
-    console.log(updatedProfileData, vendorAddress);
+   const aadharUpload = (e) => {
+    uploadFile2(e, setAadharUrl, setUpdatedProfileData);
+}
 
 
   return (
@@ -366,6 +393,28 @@ const VEditProfile = () => {
                         </Box>
                     </Modal>
 
+                </div>
+                <div style={{padding: '20px', borderRadius: '8px', boxShadow: '0 0 6px rgba(0,0,0,0.22)', marginTop: '10px'}}>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <span>AADHAR: </span>
+                        <div>
+                            <input onChange={aadharUpload} type="file" name="aadhar" id="aadhar" />
+                            {/* <Button style={{backgroundColor: "#FF8D22", marginRight: '10px'}} variant='contained'>Upload</Button> */}
+                            <Button onClick={handleOpen2} style={{borderColor: '#FF8D22', color: '#FF8D22'}} variant='outlined'>View</Button>
+                        </div>
+                        <Modal
+                            open={open2}
+                            onClose={handleClose2}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <Box sx={style2}>
+                                <div style={{width: '100%', height: '100%'}}>
+                                    <img style={{width: '100%', height: '100%', objectFit: 'contain'}} src={aadharUrl || updatedProfileData?.aadhar} alt="aadhar" />
+                                </div>
+                            </Box>
+                        </Modal>
+                    </div>
                 </div>
             </div>
         </div>

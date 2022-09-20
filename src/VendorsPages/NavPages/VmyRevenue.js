@@ -245,7 +245,7 @@ const VmyRevenue = () => {
           <KeyboardArrowDownOutlinedIcon fontSize="large" />
         </div> */}
         <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
-        <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+        <select onChange={handleCat} style={{borderRadius: '8px', outline: 'none', border: 'none', cursor: "pointer"}} defaultValue="all" name="cat" id="cat">
             <option value="">All</option>
             {
               allCategory?.map((item) => {

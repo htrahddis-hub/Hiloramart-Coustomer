@@ -163,11 +163,11 @@ export const addProductRequest = (values) => {
 export const updateVendorProduct = (values, id) => {
   return API.post(`product/updateProduct?id=${id}`, values);
 };
-export const getVendorProductsRequest = (id) => {
-  return API.get(`/product/allproducts/${id}`);
+export const getVendorProductsRequest = (id, page, limit) => {
+  return API.get(`/product/allproducts/${id}?page=${page}&limit=${limit}`);
 };
-export const getVendorNonAppProductsRequest = (id) => {
-  return API.get(`/product/unapprovedproducts/${id}`);
+export const getVendorNonAppProductsRequest = (id, page, limit) => {
+  return API.get(`/product/unapprovedproducts/${id}?page=${page}&limit=${limit}`);
 };
 
 export const deleteProductRequest = (id) => {

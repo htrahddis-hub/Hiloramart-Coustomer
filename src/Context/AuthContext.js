@@ -95,6 +95,7 @@ import {
   GET_REVENUE_GRAPH_DATA,
   GET_VENDOR_APP_PRODUCT,
   GET_VENDOR_NONAPP_PRODUCT,
+  GET_PRODUCT_BY_CATEGORY2,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -122,6 +123,7 @@ import {
   searchProducts,
   getVendorAppProducts,
   getVendorNonAppProducts,
+  getProductByCatId2,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import {
@@ -285,14 +287,20 @@ const AuthContextComponent = ({ children }) => {
         getVendorProducts(
           currentUser.id,
           action.upDateState,
-          action.setIsLoading
+          action.setIsLoading,
+          action.setTotalPage,
+          action.page,
+          action.limit
         );
         break;
       case GET_VENDOR_NONAPP_PRODUCT:
         getVendorNonAppProducts(
           currentUser.id,
           action.upDateState,
-          action.setIsLoading
+          action.setIsLoading,
+          action.setTotalPage,
+          action.page,
+          action.limit
         );
         break;
       case SEARCG_PRODUCT:
@@ -618,6 +626,14 @@ const AuthContextComponent = ({ children }) => {
           action.catId,
           action.setAllProducts,
           action.setIsLoading
+        );
+        break;
+      case GET_PRODUCT_BY_CATEGORY2:
+        getProductByCatId2(
+          action.catId,
+          action.setAllProducts,
+          action.setIsLoading,
+          action.approvalType
         );
         break;
 

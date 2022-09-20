@@ -44,6 +44,7 @@ const style = {
   width: "70%",
   height: '95%',
   bgcolor: "background.paper",
+  outline: 'none',
   boxShadow: 24,
   p: 4,
   borderRadius: "8px",
@@ -212,7 +213,7 @@ const MyProductCont = (props) => {
       className="CPCmain"
       style={{ background: "rgba(112,112,112,0.10)", cursor: "pointer" }}
     >
-      <div className="CPCmain">
+      <div className="CPCmain2">
         <div onClick={handleOpen2} className="CPC1">
           <img style={{ borderRadius: "8px" }} src={productImage[0]} alt="" />
         </div>
@@ -232,7 +233,7 @@ const MyProductCont = (props) => {
             )
           }
           <div className="CPCin2">RS. {price}</div>
-          <p style={stock || Number(stock) > 0 ? { color: "green" } : { color: "red" }}>{stock ? stock : 0}</p>
+          <p style={stock || Number(stock) > 0 ? { color: "green" } : { color: "red" }}>{stock ? "Stock: " + stock : "Stock: " + 0}</p>
           {/* <p style={!pdetails?.stock ? { color: "red" } : { color: "green" }}>
             Stock: {pdetails?.stock ? pdetails?.stock : "0"}
           </p> */}

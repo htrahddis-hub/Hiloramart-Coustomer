@@ -25,7 +25,7 @@ const style = {
   border: 'none'
 };
 
-function OrderTable3({ data, isLoading, pageChangeHandler }) {
+function OrderTable3({ data, isLoading, pageChangeHandler, page }) {
   const { dispatch, AuthRole, currentUser } = useContext(AuthContext);
   const columns = [
     {
@@ -53,7 +53,7 @@ function OrderTable3({ data, isLoading, pageChangeHandler }) {
 
   console.log(data);
   return (
-      isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
+      isLoading ? ( <div style={{width: '100%', display: 'grid', height: '80vh', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0', height: '300px'}}>No Data Found!</p> : (
         <>
         <div style={{height: '100vh', overflow: 'auto', padding: '10px'}} className="table-container">
@@ -103,7 +103,7 @@ function OrderTable3({ data, isLoading, pageChangeHandler }) {
         </div>
         <div style={{display: 'grid', placeItems: 'center'}}>
             <Stack spacing={2}>
-              <Pagination count={data?.totalPages} onChange={pageChangeHandler} />
+              <Pagination count={data?.totalPages} onChange={pageChangeHandler} page={page}/>
             </Stack>
         </div>
         </>
