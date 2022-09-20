@@ -2,7 +2,7 @@ import axios from "axios";
 
 // https://cors-fix-kylo.herokuapp.com/
 const API = axios.create({
-    baseURL: 'https://apiv2.shiprocket.in/v1'
+    baseURL: 'https://cors-fix-kylo.herokuapp.com/https://apiv2.shiprocket.in/v1'
 });
 
 

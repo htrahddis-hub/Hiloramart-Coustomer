@@ -54,20 +54,20 @@ const VEditProfile = () => {
     });
 
     const [bankDetails, setBankDetails] = useState({
-        account_no: profileData?.bankDetails?.account_no,
-        ifsc_code: profileData?.bankDetails?.ifsc_code,
-        bank_name: profileData?.bankDetails?.bank_name,
-        branch_name: profileData?.bankDetails?.branch_name,
-        account_holder_name: profileData?.bankDetails?.account_holder_name,
-        swift_code: profileData?.bankDetails?.swift_code
+        account_no: "",
+        ifsc_code: "",
+        bank_name: "",
+        branch_name: "",
+        account_holder_name: "",
+        swift_code: ""
     })
 
     const [updatedProfileData, setUpdatedProfileData] = useState({
-        profilePic: profileData?.profilePic,
-        name: profileData?.name,
-        number: profileData?.number,
-        gst: profileData?.gst,
-        email:profileData?.email
+        profilePic: "",
+        name: "",
+        number: "",
+        gst: "",
+        email: ""
     })
 
     const getProfileData = (setUpdatedProfileData, setBankDetails) => {
@@ -165,10 +165,10 @@ const VEditProfile = () => {
         })
     }
 
-    const updateProfile2 = () => {
+    const updateProfile = () => {
         const data = {
             ...updatedProfileData,
-            address: vendorAddress?.address,
+            address: vendorAddress,
             bankDetails
         }
         dispatch({
@@ -199,7 +199,7 @@ const VEditProfile = () => {
     // console.log(bankDetails, "bank detail");
     // console.log(updatedProfileData, "vendor detail");
 
-    console.log(profileData);
+    console.log(updatedProfileData, vendorAddress);
 
 
   return (
@@ -231,7 +231,7 @@ const VEditProfile = () => {
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <label htmlFor="gst">GST</label>
-                    <input type="text" id='gst' name='gst'  defaultValue={profileData?.gst} value={profileData?.gst}/>
+                    <input onChange={profileDetailHandler} type="text" id='gst' name='gst'  defaultValue={profileData?.gst} value={profileData?.gst}/>
                 </div>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <label htmlFor="email">Email</label>
@@ -371,7 +371,7 @@ const VEditProfile = () => {
         </div>
 
         <div style={{margin: '40px 0', display: 'flex', justifyContent: 'center'}}>
-            <Button onClick={updateProfile2}  variant='contained' style={{backgroundColor: '#FF8D22'}}>{isLoading ? <CircularProgress /> :"Update Profile"}</Button>
+            <Button onClick={updateProfile}  variant='contained' style={{backgroundColor: '#FF8D22'}}>{isLoading ? <CircularProgress size={"30px"}/> :"Update Profile"}</Button>
         </div>
 
 

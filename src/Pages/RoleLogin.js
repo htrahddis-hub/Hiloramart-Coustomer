@@ -1,15 +1,16 @@
 import React from "react";
 import "../Styles/pages/Login.css";
 //
-import logo from "../Assets/Images/logo.svg";
+// import logo from "../Assets/Images/logo.svg";
 import { Link } from "react-router-dom";
+import logo from '../Assets/Images/hiloralogo.jpeg'
 function RoleLogin() {
   return (
     <div className="LoginMainContainer">
       <div className="LoginContainer1">
         <div id="loginDiv1">Welcome</div>
-        <div>
-          <img src={logo} />
+        <div style={{width: '100px'}}>
+          <img src={logo} style={{width: '100%'}} alt="logo"/>
         </div>
         <div className="text-style">Are you</div>
         <div>
