@@ -13,7 +13,7 @@ const VReturn = () => {
   const { dispatch } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = ("1");
+  const [page, setPage] = useState(1);
   const [categoryName, setCategoryName] = useState({id: "", name: "All"});
   const [allCategory, setAllCategory] = useState([]);
 
@@ -51,10 +51,10 @@ console.log(data);
     <>
       <div
         style={{
-          fontSize: "24px",
+          fontSize: "1rem",
           fontWeight: "600",
-          marginLeft: "60px",
-          marginTop: "50px",
+          marginLeft: "20px",
+          // marginTop: "50px",
           display: 'flex',
           justifyContent: 'space-between'
         }}
@@ -85,7 +85,7 @@ console.log(data);
             Ongoing Orders
           </Link>
           <div style={{marginRight: '40px', display: 'inline-block', marginLeft: 'auto'}}>
-          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+          <select onChange={handleCat} style={{border:'none', borderRadius: '8px', outline: 'none', cursor: 'pointer'}} defaultValue="all" name="cat" id="cat">
             <option value="">All</option>
             {
               allCategory?.map((item) => {
@@ -95,8 +95,8 @@ console.log(data);
           </select>
         </div>
       </div>
-      <div style={{margin: '10px 10px 100px 10px'}}>
-        <OrderTable2 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler}/>
+      <div style={{margin: '10px 10px 100px 10px', minHeight: '80vh'}}>
+        <OrderTable2 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler} page={page}/>
       </div>
 
       <Footer />

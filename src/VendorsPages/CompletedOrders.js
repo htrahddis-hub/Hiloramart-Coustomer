@@ -13,7 +13,7 @@ function CompletedOrders() {
   const [currentOrdersData, setCurrentOrdersData] = useState([]);
   const [returnOrdersData, setReturnOrdersData] = useState([]);
 
-  const [page, setPage] = ("1");
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const [categoryName, setCategoryName] = useState({id: "", name: "All"});
@@ -60,12 +60,12 @@ function CompletedOrders() {
     <>
       <div
         style={{
-          fontSize: "24px",
+          fontSize: "1rem",
           fontWeight: "600",
-          marginLeft: "60px",
-          marginTop: "50px",
+          marginLeft: "20px",
+          // marginTop: "50px",
           display: 'flex',
-            justifyContent: 'space-between'
+          justifyContent: 'space-between'
         }}
       >
         <Link
@@ -94,7 +94,7 @@ function CompletedOrders() {
             Ongoing Orders
         </Link>
         <div style={{marginRight: '40px', display: 'inline-block', marginLeft: 'auto'}}>
-          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+          <select onChange={handleCat} style={{border:'none', borderRadius: '8px', outline: 'none', cursor: 'pointer'}} defaultValue="all" name="cat" id="cat">
             <option value="">All</option>
             {
               allCategory?.map((item) => {
@@ -104,8 +104,8 @@ function CompletedOrders() {
           </select>
         </div>
       </div>
-      <div  style={{margin: '10px 10px 100px 10px'}}>
-        <OrderTable3 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler}/>
+      <div  style={{margin: '10px 10px 100px 10px', minHeight: '80vh'}}>
+        <OrderTable3 data={data} isLoading={isLoading} pageChangeHandler={pageChangeHandler} page={page}/>
       </div>
 
       <Footer />

@@ -35,7 +35,7 @@ function Advertisement() {
     <>
     <div style={{marginBottom: '100px', marginTop: '40px'}} className="adver-container">
       {/* <div className="adver-title">Advertisement</div> */}
-      <div>
+      <div style={{minHeight: '80vh'}}>
         <AdContainer image={Hiloramart} />
       </div>
     </div>

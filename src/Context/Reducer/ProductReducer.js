@@ -195,23 +195,24 @@ export const updateProduct = async (
   }
 };
 
-export const getVendorProducts = async (id, upDateState, setIsLoading) => {
+export const getVendorProducts = async (id, upDateState, setIsLoading, setTotalPage, page, limit) => {
   setIsLoading(true);
   try {
-    const res = await getVendorProductsRequest(id);
-    console.log(res);
+    const res = await getVendorProductsRequest(id, page, limit);
     upDateState(res.data.data.data);
+    setTotalPage(res?.data?.data?.totalPages);
   } catch (err) {
     console.log(err);
   } finally {
     setIsLoading(false);
   }
 };
-export const getVendorNonAppProducts = async (id, upDateState, setIsLoading) => {
+export const getVendorNonAppProducts = async (id, upDateState, setIsLoading, setTotalPage, page, limit) => {
   setIsLoading(true);
   try {
-    const res = await getVendorNonAppProductsRequest(id);
+    const res = await getVendorNonAppProductsRequest(id, page, limit);
     upDateState(res.data.data.data);
+    setTotalPage(res?.data?.data?.totalPages);
   } catch (err) {
     console.log(err);
   } finally {
@@ -409,6 +410,28 @@ export const getProductByCatId = async (
     setIsLoading(true);
     const res = await getProductByCategory(catId);
     setAllProducts(res?.data?.data);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+export const getProductByCatId2 = async (
+  catId,
+  setAllProducts,
+  setIsLoading,
+  approvalType
+) => {
+  try {
+    setIsLoading(true);
+    const res = await getProductByCategory(catId);
+    console.log(approvalType, catId);
+    if(approvalType === "approval") {
+      setAllProducts(res?.data?.data?.filter((item) => item?.isApproved === true && item?.category?._id == catId))
+    } else {
+      setAllProducts(res?.data?.data?.filter((item) => item?.isApproved === false && item?.category?._id == catId));
+    }
+
   } catch (error) {
     console.log(error);
   } finally {

@@ -20,7 +20,7 @@ const Footer = () => {
           <div className="Fcontainer1">
             <div className="Fhead">GET IN TOUCH</div>
             <div className="item">
-              For any other Enquiry : +91-9311950083 Call only ( 10AM to 6PM )
+              <span>For any other Enquiry :</span> +91-9311950083 Call only ( 10AM to 6PM )
             </div>
             <div className="item">For more query: 011-46026509</div>
             <div className="item">
@@ -48,23 +48,25 @@ const Footer = () => {
         <hr id="horizLine" style={{ marginTop: "25px" }} />
 
         <div className="iconContainer">
-          <div className="icon">
-            <img src={InstaGram} alt="InstaGram" />
-          </div>
-          <div className="icon">
-            <img src={Twitter} alt="Twitter" />
-          </div>
-          <div className="icon">
-            <img src={FaceBook} alt="FaceBook" />
+          <div id="CopyRtext">© 2022 hiloramart.com</div>
+          <div className="iconContainer">
+            <div className="icon">
+              <img src={InstaGram} alt="InstaGram" />
+            </div>
+            <div className="icon">
+              <img src={Twitter} alt="Twitter" />
+            </div>
+            <div className="icon">
+              <img src={FaceBook} alt="FaceBook" />
+            </div>
           </div>
         </div>
-        <hr id="horizLine" style={{ marginBottom: "25px" }} />
+        {/* <hr id="horizLine" style={{ marginBottom: "25px" }} /> */}
 
-        <div className="FlastContainer">
+        {/* <div className="FlastContainer">
           <div id="CopyRtext">© 2022 hiloramart.com</div>
           <div id="FLasttext">Powered by Shopify</div>
-          <div> </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

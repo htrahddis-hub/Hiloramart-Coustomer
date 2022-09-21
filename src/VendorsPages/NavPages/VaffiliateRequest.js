@@ -25,7 +25,7 @@ const VaffiliateRequest = () => {
   return (
     <>
       <div style={{ paddingBottom: "10%" }}>
-        <h1
+        {/* <h1
           style={{
             fontSize: "32px",
             fontWeight: "bold",
@@ -35,12 +35,14 @@ const VaffiliateRequest = () => {
           }}
         >
           Affiliate Request
-        </h1>
-        <div style={{ display: "flex", justifyContent: "space-around" }}>
+        </h1> */}
+        <div style={{ display: "flex", justifyContent: "space-around", minHeight: '80vh' }}>
           { 
             isLoading ? (<div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress  style={{color: '#FF8D22'}}/></div>) : 
             allRequest.length === 0 ? (
-                  <p style={{textAlign: 'center', margin: '40px 0'}}>No Affiliate Request Found!</p>
+                  <div style={{width: '100%', height: '80vh', display: 'grid', placeItems: 'center'}}>
+                  <p>No Affiliate Request Found!</p>
+                  </div>
             ) :
             allRequest?.map((item) => {
             return (

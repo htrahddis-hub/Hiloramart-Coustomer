@@ -268,7 +268,7 @@ const AddProduct = () => {
                 <input
                   type="text"
                   placeholder="Stock"
-                  className="VinputBox2"
+                  className={isSizeShow ? `stockH` : "VinputBox3"}
                   name="stock"
                   // value={productDetails.stock}
                   // onChange={handleDetailHandler}
@@ -280,7 +280,7 @@ const AddProduct = () => {
                 <input
                   type="number"
                   placeholder="Price"
-                  className="VinputBox2"
+                  className="VinputBox"
                   name="price"
                   // value={productDetails.price}
                   // onChange={handleDetailHandler}

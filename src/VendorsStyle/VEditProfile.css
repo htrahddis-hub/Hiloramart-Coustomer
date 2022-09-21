@@ -13,3 +13,9 @@ input, .selector {
 /* ::-webkit-scrollbar {
     visibility: hidden;
 } */
+
+#aadhar[type="file"] {
+    margin-right: 10px;
+ width: 200px;
+ height: 35px;
+}

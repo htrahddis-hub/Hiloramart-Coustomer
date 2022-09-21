@@ -25,7 +25,7 @@ const style = {
   border: 'none'
 };
 
-function OrderTable({ data, isLoading, pageChangeHandler }) {
+function OrderTable({ data, isLoading, pageChangeHandler, page }) {
   const { dispatch, AuthRole, currentUser } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -196,7 +196,7 @@ const courierServiceSelector = (e) => {
     },
   ];
   return (
-    isLoading ? ( <div style={{width: '100%', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
+    isLoading ? ( <div style={{width: '100%', height: '80vh', display: 'grid', placeItems: 'center', margin: '40px 0'}}><CircularProgress style={{color: '#FF8D22'}}/></div> ) :
       data?.data?.length === 0 ? <p style={{textAlign: 'center', margin: '40px 0', height: '300px'}}>No Data Found!</p> : (
         <>
         <div style={{height: '100vh', overflow: 'auto', padding: '10px'}} className="table-container">
@@ -245,7 +245,7 @@ const courierServiceSelector = (e) => {
         </div>
           <div style={{display: 'grid', placeItems: 'center', marginTop: '20px'}}>
             <Stack spacing={2}>
-              <Pagination count={data?.totalPages} onChange={pageChangeHandler} />
+              <Pagination page={page} count={data?.totalPages} onChange={pageChangeHandler} />
             </Stack>
           </div>
           <Modal

@@ -225,7 +225,7 @@ const VmyWallet = () => {
             )}
           </div> */}
           <div style={{display: 'flex', justifyContent: 'end', marginRight: '40px'}} className="d-flex justify-content-space-between align-items-center">
-          <select onChange={handleCat} style={{border:'1px solid', borderRadius: '8px', outline: 'none'}} defaultValue="all" name="cat" id="cat">
+          <select onChange={handleCat} style={{border:'none', borderRadius: '8px', outline: 'none', cursor: 'pointer'}} defaultValue="all" name="cat" id="cat">
             <option value="">All</option>
             {
               allCategory?.map((item) => {
@@ -377,7 +377,7 @@ const VmyWallet = () => {
           </div>
         </div> */}
 
-        <div style={{textAlign:'center', fontWeight: 'bold'}} id="MWcont2">Product Sold</div>
+        <div style={{textAlign:'left', fontWeight: 'bold'}} id="MWcont2">Product Sold</div>
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
@@ -402,24 +402,24 @@ const VmyWallet = () => {
                   <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                       <TableRow>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
+                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">S. No</TableCell>
                         <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
                         <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {sales?.detail?.map((row, index) => (
                         <TableRow
                         >
-                          <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
-                          <TableCell style={{width: '30%'}} align="center">{row?.productId?.name}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0,10)}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0,10)}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '10%'}} align="center">{index + 1}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '30%'}} align="center">{row?.productId?.name}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '20%'}} align="center">{row?.createdAt.slice(0,10)}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '20%'}} align="center">{row?.vendorDate.slice(0,10)}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -435,7 +435,7 @@ const VmyWallet = () => {
           </div>
         </div>
 
-        <div style={{textAlign: 'center', fontWeight: 'bold'}} id="MWcont2">Affiliate Earning</div>
+        <div style={{textAlign: 'left', fontWeight: 'bold'}} id="MWcont2">Affiliate Earning</div>
         <div id="MWcont3">
           <div id="AdmainCont">
             <div id="LastTcont1">
@@ -461,26 +461,24 @@ const VmyWallet = () => {
                   <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                       <TableRow>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}}>S. No</TableCell>
-                        <TableCell style={{width: '30%', fontWeight: 'bold'}} align="center">Product</TableCell>
+                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">S. No</TableCell>
+                        <TableCell style={{width: '35%', fontWeight: 'bold'}} align="center">Product</TableCell>
                         <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Quantity</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Sold</TableCell>
                         <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Date of Payment</TableCell>
-                        <TableCell style={{width: '10%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
-                        <TableCell style={{width: '5%', fontWeight: 'bold'}} align="center">Invoice</TableCell>
+                        <TableCell style={{width: '20%', fontWeight: 'bold'}} align="center">Total Amount</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
                       {paidToAffiliates?.data?.map((row, index) => (
                         <TableRow
                         >
-                          <TableCell style={{width: '10%'}} align="left">{index + 1}</TableCell>
-                          <TableCell style={{width: '30%'}} align="center">{row?.productId?.name}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row?.createdAt.slice(0, 10)}</TableCell>
-                          <TableCell style={{width: '20%'}} align="center">{row?.vendorDate.slice(0, 10)}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center">RS. {row?.totalPrice}</TableCell>
-                          <TableCell style={{width: '10%'}} align="center"><a style={{color: '#ff8d22', textDecoration: 'none'}} href={row?.invoice}>Download</a></TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '5%'}} align="center">{index + 1}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '35%'}} align="center">{row?.productId?.name}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '10%'}} align="center">{row?.quantity}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '20%'}} align="center">{row?.createdAt.slice(0, 10)}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '20%'}} align="center">{row?.vendorDate.slice(0, 10)}</TableCell>
+                          <TableCell className="wallet_product_sold" style={{width: '20%'}} align="center">RS. {row?.totalPrice}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
