@@ -23,14 +23,25 @@
 }
 #LPtextCont {
   text-align: left;
+  color: black;
+  text-decoration: none;
 }
 .landing-top-section {
   background-color: #ffc577;
   border-radius: 20px;
-  margin: 1rem 2rem 1rem 2rem;
   /* min-height: 100vh; */
 }
 
+.new-banner-1 {
+  background-color: #02b695;
+  /* min-height: 100vh; */
+}
+
+.white-border-new {
+  margin: 10px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
 .empty-container {
   display: flex;
 }
@@ -52,4 +63,17 @@
 .empty-container .left .imgContainer img {
   width: 100%;
   height: 100%;
+}
+
+.carousel-indicators {
+  bottom: -70px;
+}
+
+.carousel-indicators [data-bs-target] {
+  background-color: #ff8d22;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 50%;
 }

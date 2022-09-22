@@ -19,6 +19,12 @@
   font-size: 1.1rem;
 }
 
+.log-heading{
+  color: black;
+  font-size: 27px;
+  margin-left: 50px;
+}
+
 .linkT .NavLink:hover {
   opacity: 1;
   text-decoration: underline;
@@ -35,7 +41,7 @@
 .linkT {
   text-decoration: none;
 }
-.active > div {
+.active1 > div {
   color: #ff8d22;
   text-decoration: underline;
   text-decoration-color: #ff8d22;

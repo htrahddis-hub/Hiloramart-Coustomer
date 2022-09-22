@@ -33,7 +33,7 @@ function SearchInput() {
       <div onClick={handleSubmit}>
         <img src={search_icon} className="search_icon" />
       </div>
-      <div onClick={handleDropdown} >
+      <div onClick={handleDropdown}>
         <input
           placeholder="Seacrh here"
           className="search-input"

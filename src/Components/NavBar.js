@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import Profile from "../Assets/Images/Navbar/Profile.png";
 import notification_icon from "../Assets/Images/notification.svg";
-import Hiloramart from "../Assets/Images/Navbar/Hiloramart.png";
 import "../Styles/Components/Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
@@ -10,7 +9,7 @@ import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import logo from "../Assets/Images/hiloralogo.jpeg";
+import SearchInput from "./SearchInput";
 
 const NavBar = () => {
   const { setAuth, auth } = useContext(AuthContext);
@@ -83,22 +82,24 @@ const NavBar = () => {
       <div className="NavMain">
         <div className="Nav1">
           <NavLink to="/" style={{ color: "inherit", textDecoration: "none" }}>
-            <div id="logo">
-              <img style={{ height: "3rem" }} src={logo} alt="" />
-              {/* <span style={{border: 'none', underline: 'none'}} >Hiloramart</span> */}
-              <img style={{ height: "3rem" }} src={Hiloramart} alt="" />
+            <div id="logo" className="log-heading">
+              HILORAMART
             </div>
           </NavLink>
         </div>
 
         <div className="Nav2">
+          <div className="NavLink">
+            <SearchInput tabIndex={200}/>
+          </div>
+
           {data.map((item) => {
             return (
               <NavLink
                 key={item.id}
                 to={item.navigation}
                 className={({ isActive }) =>
-                  (isActive ? "active" : "inactive") + " " + "linkT"
+                  (isActive ? "active1" : "inactive") + " linkT"
                 }
               >
                 <div className="NavLink">{item.name}</div>
