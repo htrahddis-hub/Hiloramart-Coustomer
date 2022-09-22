@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../Styles/pages/ForgotPass.css";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { USER_FORGOTPASSWORD, VENDOR_FORGOTPASSWORD } from "../Context/Types";
+import { USER_FORGOTPASSWORD } from "../Context/Types";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { CircularProgress } from "@mui/material";
@@ -15,13 +14,7 @@ const initialValues = {
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { dispatch, AuthRole, setAuthRole } = useContext(AuthContext);
-
-  console.log(location.state?.role);
-  useEffect(() => {
-    setAuthRole(location.state?.role);
-  }, []);
+  const { dispatch } = useContext(AuthContext);
 
   const validate = Yup.object().shape({
     email: Yup.string()
@@ -30,19 +23,11 @@ const ForgotPassword = () => {
   });
 
   const onSubmitHandler = (email) => {
-    if (AuthRole === "user") {
-      dispatch({
-        type: USER_FORGOTPASSWORD,
-        email,
-        navigate,
-      });
-    } else {
-      dispatch({
-        type: VENDOR_FORGOTPASSWORD,
-        email,
-        navigate,
-      });
-    }
+    dispatch({
+      type: USER_FORGOTPASSWORD,
+      email,
+      navigate,
+    });
   };
 
   return (

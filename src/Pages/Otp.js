@@ -1,17 +1,15 @@
 import { CircularProgress } from "@mui/material";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 import {
   USER_ACCOUNT_ACTIVATE,
   USER_RESEND_OTP,
-  VENDOR_ACCOUNT_ACTIVATE,
-  VENDOR_RESEND_OTP,
 } from "../Context/Types";
 import "../Styles/pages/Otp.css";
 
 const Otp = () => {
-  const { dispatch, AuthRole, setAuthRole } = useContext(AuthContext);
+  const { dispatch } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -23,9 +21,7 @@ const Otp = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [otpIsLoading, setOtpIsLoading] = useState(false);
-  useEffect(() => {
-    setAuthRole(location.state?.role);
-  }, []);
+  
 
   if (location.state?.isSigned !== true)
     return <Navigate to="/choose-role-login" />;
@@ -37,7 +33,7 @@ const Otp = () => {
   };
   const optSubmit = (e) => {
     e.preventDefault();
-    if (AuthRole === "user") {
+    
       dispatch({
         type: USER_ACCOUNT_ACTIVATE,
         payload: otpValue,
@@ -45,26 +41,11 @@ const Otp = () => {
         setIsLoading,
         navigate,
       });
-    } else {
-      dispatch({
-        type: VENDOR_ACCOUNT_ACTIVATE,
-        payload: otpValue,
-        id: location.state?.id,
-        setIsLoading,
-        navigate,
-      });
-    }
   };
   const resendOtp = () => {
-    if (AuthRole === "user")
+    
       dispatch({
         type: USER_RESEND_OTP,
-        payload: location.state?.id,
-        setIsLoading: setOtpIsLoading,
-      });
-    else
-      dispatch({
-        type: VENDOR_RESEND_OTP,
         payload: location.state?.id,
         setIsLoading: setOtpIsLoading,
       });

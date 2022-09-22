@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import AffiliateRequestCont from "../../VendorsComponents/affiliateRequestCont";
-import VNavBar from "../../VendorsComponents/VNavBar";
 import Footer from "../../Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
 import { GET_AFFILIATE_REQUEST } from "../../Context/Types";

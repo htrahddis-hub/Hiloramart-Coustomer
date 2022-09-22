@@ -1,8 +1,5 @@
 import { createContext, useEffect, useReducer, useState } from "react";
 import {
-  getVSale,
-  getVAllSale,
-  resetPassword,
   userAccActivate,
   userLogin,
   userResendOtp,
@@ -10,35 +7,22 @@ import {
   userForgotPass,
   userVerifyOtp,
   resetUserPassword,
-  vendorAccActivate,
-  vendorForgotPass,
-  vendorLogin,
-  vendorResendOtp,
-  vendorSignup,
-  vendorVerifyOtp,
 } from "./Reducer/AuthReducer";
 import {
   ACCEPT_REQUEST,
   ADD_ITEM_CART,
   ADD_ITEM_TO_WISHLIST,
-  ADD_PRODUCT,
   CHECK_ITEM_IN_CART,
   CHECK_WISHLIST_STATUS,
   DELETE_ITEM_FROM_CART,
-  DELETE_PRODUCT,
   DENY_REQUEST,
   GET_AFFILIATE_REQUEST,
   GET_ALL_CATEGORY,
   GET_ALL_PRODUCTS,
   GET_CART_ITEMS,
-  GET_COMPLETED_ORDERS,
-  GET_CURRENT_ORDERS,
   GET_MY_ORDERS,
   GET_PRODUCT_DETAILS,
-  GET_RETURN_ORDERS,
   GET_USER_PROFILE,
-  GET_VENDOR_PRODUCTS,
-  GET_VENDOR_PROFILE,
   GET_WISHLIST_ITEMS,
   GET_TOP_PRODUCTS,
   JOIN_AFFILIATE,
@@ -49,52 +33,23 @@ import {
   USER_LOGIN,
   USER_RESEND_OTP,
   USER_SIGNUP,
-  VENDOR_ACCOUNT_ACTIVATE,
-  VENDOR_LOGIN,
-  VENDOR_RESEND_OTP,
-  VENDOR_SIGNUP,
-  UPDATE_PRODUCT,
   GET_ADS,
   PAID_TO_AFFILIATE,
   AMOUNT_TO_AFFILIATE,
-  GET_VENDOR_ADDRESS,
-  SHIPROCKET_CREATE_ORDER_VENDOR,
-  ADD_SHIPROCKET_PICKUP_LOCATION,
-  GET_SHIPROCKET_ADDRESS,
   GET_SHIPROCKET_COUNTRY,
   GET_SHIPROCKET_LOCALITY,
-  ADD_VENDOR_ADDRESS,
-  CHANGE_CURRENT_ADDRESS,
-  DELETE_SAVED_ADDRESS,
   UPDATE_PROFILE,
-  ADD_SHIPROCKET_PICKUP_LOCATION2,
-  GET_VENDOR_PROFILE2,
-  GET_SHIPROCKET_COURIER_SERVICE,
-  GENERATE_SHIPROCKET_AWB,
-  UPDATE_VENDOR_ORDER,
-  VENDOR_FORGOTPASSWORD,
-  VENDOR_VERIFYCODE,
-  RESET_VENDOR_PASSWORD,
-  VENDOR_SALE,
-  VENDOR_ALL_SALE,
   PRODUCT_ADD_FOR_ADS,
   PRODUCT_REMOVE_FOR_ADS,
   GET_PRODUCT_BY_CATEGORY,
-  GET_VENDOR_PLAN,
-  GET_VENDOR_ADS,
   USER_FORGOTPASSWORD,
   USER_VERIFYCODE,
   RESET_USER_PASSWORD,
-  ONGOING_ORDER,
   SEARCG_PRODUCT,
   ADD_USER_ADDRESS,
   GET_USER_ADDRESS,
   CHANGE_USER_CURRENT_ADDRESS,
-  UPLOAD_PROFILE_PIC,
   UPDATE_USER_PROFILE,
-  GET_REVENUE_GRAPH_DATA,
-  GET_VENDOR_APP_PRODUCT,
-  GET_VENDOR_NONAPP_PRODUCT,
   GET_PRODUCT_BY_CATEGORY2,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
@@ -102,18 +57,14 @@ import Cookies from "js-cookie";
 import {
   addItemToCart,
   addItemToWishlist,
-  addProduct,
   checkItemInCart,
   checkProductWishlistStatus,
   deleteItemFromCart,
-  deleteProduct,
-  updateProduct,
   getALlCategory,
   getALLproducts,
   getTopProducts,
   getCartItems,
   getProductDetails,
-  getVendorProducts,
   getWishlistItems,
   removeItemFromWishlist,
   getAllAds,
@@ -121,33 +72,19 @@ import {
   removeProductForAds,
   getProductByCatId,
   searchProducts,
-  getVendorAppProducts,
-  getVendorNonAppProducts,
   getProductByCatId2,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import {
   addUserAddressData,
-  addVendorAddressData,
-  changeCurrentAdd,
-  deleteSavedAdd,
   getUserAddress,
   changeCurrentUserAdd,
-  getVendorAddress,
-  getVendorAds,
   updateProfileFun,
   userProfile,
-  vendorProfile,
-  vendorProfile2,
   updateUserProfiles,
 } from "./Reducer/ProfileReducer";
 import {
-  getCompletedOrders,
-  getCurrentOrders,
   getMyOrder,
-  getOngoingOrders,
-  getReturnOrders,
-  getRevenueData,
   returnITem,
 } from "./Reducer/OrderReducer";
 import {
@@ -158,23 +95,7 @@ import {
   getPaidTOAffiliates,
   joinAffliate,
 } from "./Reducer/AffiliateReducer";
-import {
-  denyAffiliateRequest,
-  getAmountToAffiliate,
-  updateOrderRequest,
-  updateUserProfilePic,
-} from "./API";
 import { onlinePayment } from "./Reducer/PaymentReducer";
-import {
-  createShiprocketLocation,
-  createShiprocketLocation2,
-  createShiprocketVendorOrder,
-  generateAWBNow,
-  getAllShiprocketAddress,
-  getCourierServices,
-  getShipRocketCountry,
-  getShipRocketLocality,
-} from "./Reducer/ShiprocketReducer";
 export const AuthContext = createContext();
 export const notification = {
   insert: "top",
@@ -228,80 +149,8 @@ const AuthContextComponent = ({ children }) => {
       case RESET_USER_PASSWORD:
         resetUserPassword(action.data, action.navigate);
         break;
-      case VENDOR_LOGIN:
-        vendorLogin(
-          action.payload,
-          action.resetForm,
-          action.setIsLoading,
-          action.navigate,
-          setAuth
-        );
-        break;
-      case VENDOR_FORGOTPASSWORD:
-        vendorForgotPass(action.email, action.navigate);
-        break;
-      case VENDOR_VERIFYCODE:
-        vendorVerifyOtp(action.values, action.navigate);
-        break;
-      case RESET_VENDOR_PASSWORD:
-        resetPassword(action.data, action.navigate);
-        break;
-      case VENDOR_SIGNUP:
-        vendorSignup(
-          action.payload,
-          action.resetForm,
-          action.setIsLoading,
-          action.navigate
-        );
-        break;
-      case GET_VENDOR_ADDRESS:
-        getVendorAddress(action.setVendorAddress);
-        break;
       case GET_ALL_CATEGORY:
         getALlCategory(action.upDateState, action.setIsLoading);
-        break;
-      case ADD_PRODUCT:
-        addProduct(
-          action.payload,
-          action.urls,
-          action.videoUrlResponse,
-          action.catId,
-          action.setIsLoading,
-          action.resetform,
-          action.navigate,
-          // action.productDetails2
-        );
-        break;
-      case UPDATE_PRODUCT:
-        updateProduct(
-          action.payload,
-          action.setIsLoading,
-          action.navigate,
-          action.id,
-          action.urls,
-          action.videoUrlResponse,
-          // action.productDetails2
-        );
-        break;
-      case GET_VENDOR_PRODUCTS:
-        getVendorProducts(
-          currentUser.id,
-          action.upDateState,
-          action.setIsLoading,
-          action.setTotalPage,
-          action.page,
-          action.limit
-        );
-        break;
-      case GET_VENDOR_NONAPP_PRODUCT:
-        getVendorNonAppProducts(
-          currentUser.id,
-          action.upDateState,
-          action.setIsLoading,
-          action.setTotalPage,
-          action.page,
-          action.limit
-        );
         break;
       case SEARCG_PRODUCT:
         searchProducts(
@@ -310,23 +159,6 @@ const AuthContextComponent = ({ children }) => {
           action.upDateState,
           action.setIsLoading
         );
-        break;
-      case ADD_VENDOR_ADDRESS:
-        addVendorAddressData(
-          action.address,
-          action.setIsLoading2,
-          action.handleClose,
-          action.setVendorAddress,
-          action.profileData
-        );
-        break;
-
-      case CHANGE_CURRENT_ADDRESS:
-        changeCurrentAdd(action.id);
-        break;
-
-      case DELETE_SAVED_ADDRESS:
-        deleteSavedAdd(action.id, action.setVendorAddress);
         break;
       case GET_USER_ADDRESS:
         getUserAddress(action.setUserAddress);
@@ -342,11 +174,8 @@ const AuthContextComponent = ({ children }) => {
           action.setVendorAddress
         );
         break;
-      case UPLOAD_PROFILE_PIC:
-        updateUserProfilePic(action.data);
-        break;
       case UPDATE_USER_PROFILE:
-        updateUserProfiles(action.data)
+        updateUserProfiles(action.data);
         break;
       case UPDATE_PROFILE:
         updateProfileFun(
@@ -359,26 +188,8 @@ const AuthContextComponent = ({ children }) => {
       case GET_ADS:
         getAllAds(action.setAds);
         break;
-      case DELETE_PRODUCT:
-        deleteProduct(
-          action.payload,
-          action.setIsLoading,
-          action.cb,
-          action.productImage,
-          action.productVideos
-        );
-        break;
-
       case USER_ACCOUNT_ACTIVATE:
         userAccActivate(
-          action.payload,
-          action.id,
-          action.setIsLoading,
-          action.navigate
-        );
-        break;
-      case VENDOR_ACCOUNT_ACTIVATE:
-        vendorAccActivate(
           action.payload,
           action.id,
           action.setIsLoading,
@@ -388,47 +199,8 @@ const AuthContextComponent = ({ children }) => {
       case USER_RESEND_OTP:
         userResendOtp(action.payload, action.setIsLoading);
         break;
-      case VENDOR_RESEND_OTP:
-        vendorResendOtp(action.payload, action.setIsLoading);
-        break;
       case GET_USER_PROFILE:
-        userProfile(action.upDateState,action.setImage,action.setUpdatePf);
-        break;
-      case GET_VENDOR_PROFILE:
-        vendorProfile(
-          action.payload,
-          action.upDateState,
-          action.setUpdatedProfileData,
-          action.setBankDetails,
-          action.setShiprocketAddressResponse
-        );
-        break;
-      case GET_VENDOR_PROFILE2:
-        vendorProfile2(action.id, action.upDateState);
-        // vendorProfile(action.id, action.upDateState, action.setUpdatedProfileData, action.setBankDetails);
-        break;
-      // case  VENDOR_SALE:
-      //   getVSale(action.startDate,action.endDate);
-      //   break;
-      case VENDOR_SALE:
-        getVSale(
-          // action.startDate,
-          // action.endDate,
-          action.upDateState,
-          action.category,
-          action.setIsLoading
-        );
-        break;
-      case VENDOR_ALL_SALE:
-        getVAllSale(
-          // action.startDate,
-          // action.endDate,
-          action.page,
-          action.limit,
-          action.upDateState,
-          action.setIsLoading,
-          action.category
-        );
+        userProfile(action.upDateState, action.setImage, action.setUpdatePf);
         break;
       case PAID_TO_AFFILIATE:
         getPaidTOAffiliates(
@@ -530,77 +302,8 @@ const AuthContextComponent = ({ children }) => {
           action.handleClose
         );
         break;
-      case GET_CURRENT_ORDERS:
-        getCurrentOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
-        break;
-      case ONGOING_ORDER:
-        getOngoingOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
-        break;
-      case GET_RETURN_ORDERS:
-        getReturnOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
-        break;
-      case GET_COMPLETED_ORDERS:
-        getCompletedOrders(action.upDateState, action.setIsLoading, action.limit, action.page, action.category);
-        break;
       case RETURN_ITEM:
         returnITem(action.payload, action.upDateState, action.setIsLoading);
-        break;
-
-      //shiprocket
-
-      case SHIPROCKET_CREATE_ORDER_VENDOR:
-        createShiprocketVendorOrder(
-          action.orderData,
-          action.item,
-          action.pickupAddressToCreateOrder,
-          action.setShiprocketCreatedOrder,
-          action.setCourierServiceAvail,
-          action.pickupCode,
-          action.setIsLoading2,
-          action.setIsOrderCreated
-        );
-
-        //       case SHIPROCKET_CREATE_ORDER_VENDOR:
-        //         createShiprocketVendorOrder(action.orderData, action.item, action.pickupAddressToCreateOrder, action.setShiprocketCreatedOrders)
-        break;
-
-      case ADD_SHIPROCKET_PICKUP_LOCATION:
-        createShiprocketLocation(
-          action.profileData,
-          action.data,
-          action.setShiprocketAddress,
-          action.pickupAddress
-        );
-        break;
-      case ADD_SHIPROCKET_PICKUP_LOCATION2:
-        createShiprocketLocation2(action.pickupAddress, action.profileData);
-        break;
-
-      case GET_SHIPROCKET_ADDRESS:
-        getAllShiprocketAddress(action.setAllShiprocketAddress);
-        break;
-
-      case GET_SHIPROCKET_COUNTRY:
-        getShipRocketCountry(action.setAllCountries);
-        break;
-
-      case GET_SHIPROCKET_LOCALITY:
-        getShipRocketLocality(action.setAllLocalities, action.id);
-        break;
-
-      // case GET_SHIPROCKET_COURIER_SERVICE:
-      //   getCourierServices(action.pickupCode, action.deliveryCode, action.setCourierServiceAvail);
-      //   break;
-      case GENERATE_SHIPROCKET_AWB:
-        generateAWBNow(
-          action.shipmentId,
-          action.setIsLoading3,
-          action.courierId,
-          action.handleClose,
-          action.orderId,
-          action.orderId2,
-          action.setAllOrders
-        );
         break;
       case PRODUCT_ADD_FOR_ADS:
         addProductForAds(
@@ -635,14 +338,6 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.approvalType
         );
-        break;
-
-      case GET_VENDOR_ADS:
-        getVendorAds(action.setAllAds, action.setIsLoading);
-        break;
-
-      case GET_REVENUE_GRAPH_DATA:
-        getRevenueData(action.typeOfDate, action.setGraphData, action.category);
         break;
     }
   };

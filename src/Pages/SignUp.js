@@ -1,21 +1,17 @@
-import React, { memo, useContext, useEffect, useState } from "react";
+import React, { memo, useContext,useState } from "react";
 import "../Styles/pages/SignUp.css";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form} from "formik";
 import * as Yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import { AuthContext } from "../Context/AuthContext";
-import { USER_SIGNUP, VENDOR_SIGNUP } from "../Context/Types";
-const SignUp = () => {
-  const { dispatch, AuthRole, setAuthRole } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
-  const navigate = useNavigate();
+import { USER_SIGNUP } from "../Context/Types";
 
-  useEffect(() => {
-    setAuthRole(location.state?.role);
-  }, []);
+const SignUp = () => {
+  const { dispatch } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const initialValues = {
     number: "",
@@ -42,29 +38,19 @@ const SignUp = () => {
   });
 
   const handleSubmit = (values, resetForm) => {
-    if (AuthRole === "user") {
-      dispatch({
-        type: USER_SIGNUP,
-        payload: values,
-        resetForm,
-        setIsLoading,
-        navigate,
-      });
-    } else {
-      dispatch({
-        type: VENDOR_SIGNUP,
-        payload: values,
-        resetForm,
-        setIsLoading: setIsLoading,
-        navigate,
-      });
-    }
+    dispatch({
+      type: USER_SIGNUP,
+      payload: values,
+      resetForm,
+      setIsLoading,
+      navigate,
+    });
   };
-  if (location.state == null) return <Navigate to={-1} />; // to have role defined is user or vendor
+
   return (
     <>
-      <div style={{height: '100vh'}} className="LoginMainContainer">
-        <div className="LoginContainer1" >
+      <div style={{ height: "100vh" }} className="LoginMainContainer">
+        <div className="LoginContainer1">
           <div id="loginDiv1" style={{ fontSize: "22px", margin: 0 }}>
             Create Account
           </div>
@@ -108,9 +94,6 @@ const SignUp = () => {
                       name="number"
                       className="inputBox"
                       placeholder="Phone"
-                      // type="password"
-                      // value={this.state.password}
-                      // onChange={this.handleInputChange}
                     />
                     <div className="error-container">
                       <div className="error">
@@ -125,9 +108,6 @@ const SignUp = () => {
                       name="email"
                       className="inputBox"
                       placeholder="Email"
-                      // type="password"
-                      // value={this.state.password}
-                      // onChange={this.handleInputChange}
                     />
                     <div className="error-container">
                       <div className="error">
@@ -143,8 +123,6 @@ const SignUp = () => {
                       className="inputBox"
                       placeholder="Password"
                       type="password"
-                      // value={this.state.password}
-                      // onChange={this.handleInputChange}
                     />
                     <div className="error-container">
                       <div className="error">
@@ -159,9 +137,6 @@ const SignUp = () => {
                       name="confirmPassword"
                       className="inputBox"
                       placeholder="Confirm Password"
-                      // type="password"
-                      // value={this.state.password}
-                      // onChange={this.handleInputChange}
                     />
                     <div className="error-container">
                       <div className="error">

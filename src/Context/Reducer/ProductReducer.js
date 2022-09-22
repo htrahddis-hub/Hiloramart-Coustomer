@@ -1,32 +1,24 @@
 import {
   addItemToCartRequest,
   addItemToWishlistRequest,
-  addProductRequest,
   checkItemInCartRequest,
   checkItemWishlistStatus,
   deleteItemFromCartRequest,
-  deleteProductRequest,
   getAllCategoryRequest,
   getAllProductsRequest,
   getCartItemsRequest,
   getProductDetailsRequest,
-  getVendorProductsRequest,
   getWishlistItemsRequest,
   removeItemFromWishlistRequest,
-  updateVendorProduct,
   getAds,
   getProductByCategory,
   getTopSellingProduct,
   searchProduct,
-  getVendorAppProductsRequest,
-  getVendorNonAppProductsRequest,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
-import { Navigate } from "react-router-dom";
 import { deleteObject, ref } from "firebase/storage";
 import { storage } from "../../utils/firebase";
-import { useState } from "react";
 export const getALlCategory = async (upDateState, setIsLoading) => {
   try {
     const res = await getAllCategoryRequest();
@@ -34,102 +26,6 @@ export const getALlCategory = async (upDateState, setIsLoading) => {
     setIsLoading(false);
   } catch (err) {
     console.log(err);
-  }
-};
-
-export const deleteProduct = async (
-  id,
-  setIsLoading,
-  cb,
-  productImage,
-  productVideos
-) => {
-  setIsLoading(true);
-
-  try {
-    const res = await deleteProductRequest(id);
-    if (res.data.success) {
-      Store.addNotification({
-        ...notification,
-        type: "success",
-        message: res.data.message,
-      });
-      console.log(productImage, productVideos);
-      if (productImage.length > 0) {
-        productImage.forEach(async (item) => {
-          const desertRef = ref(storage, item);
-          try {
-            await deleteObject(desertRef);
-            console.log("file deleted successfully");
-          } catch (err) {
-            console.log(err);
-          }
-        });
-      }
-      if (productVideos.length > 0) {
-        productVideos.forEach(async (item) => {
-          const desertRef = ref(storage, item);
-          try {
-            await deleteObject(desertRef);
-            console.log("file deleted successfully");
-          } catch (err) {
-            console.log(err);
-          }
-        });
-      }
-      cb();
-    }
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-export const addProduct = async (
-  inputData,
-  urlResponse,
-  videoUrlResponse,
-  catId,
-  setIsLoading,
-  resetform,
-  navigate,
-  // productDetails2
-) => {
-  try {
-    const values = {
-      name: inputData.productName,
-      description: inputData.productDescription,
-      stock: inputData.stock,
-      size: inputData.size,
-      price: inputData.price,
-      // detail: productDetails2,
-      productImage: urlResponse,
-      productVideos: videoUrlResponse,
-      owner: inputData.id,
-      category: catId,
-    };
-    console.log(values);
-    const res = await addProductRequest(values);
-    console.log(res);
-    if (res.data.success) {
-      resetform();
-      navigate("/product-success", {
-        state: {
-          id: res.data.data._id,
-        },
-        replace: true,
-      });
-    }
-  } catch (err) {
-    console.log(err);
-    Store.addNotification({
-      ...notification,
-      type: "danger",
-      message: "somee error occured",
-    });
-  } finally {
-    setIsLoading(false);
   }
 };
 
@@ -145,74 +41,6 @@ export const searchProducts = async (
       upDateState(res.data.data);
       setIsLoading(false);
     }
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-export const updateProduct = async (
-  inputData,
-  setIsLoading,
-  navigate,
-  id,
-  urls,
-  videoUrlResponse,
-  // productDetails2
-) => {
-  try {
-    const values = {
-      name: inputData.name,
-      description: inputData.description,
-      stock: inputData.stock,
-      price: inputData.price,
-      size: inputData.size,
-      // detail: productDetails2,
-      productImage: urls,
-      productVideos: videoUrlResponse,
-    };
-    console.log(values, "hi there");
-    const res = await updateVendorProduct(values, id);
-    if (res.data.success) {
-      navigate("/product-updated", {
-        state: {
-          id: res.data.data._id,
-        },
-        replace: true,
-      });
-    }
-    console.log(res, "product updated");
-  } catch (error) {
-    console.log(error);
-    Store.addNotification({
-      ...notification,
-      type: "danger",
-      message: "somee error occured",
-    });
-  } finally {
-    setIsLoading(false);
-  }
-};
-
-export const getVendorProducts = async (id, upDateState, setIsLoading, setTotalPage, page, limit) => {
-  setIsLoading(true);
-  try {
-    const res = await getVendorProductsRequest(id, page, limit);
-    upDateState(res.data.data.data);
-    setTotalPage(res?.data?.data?.totalPages);
-  } catch (err) {
-    console.log(err);
-  } finally {
-    setIsLoading(false);
-  }
-};
-export const getVendorNonAppProducts = async (id, upDateState, setIsLoading, setTotalPage, page, limit) => {
-  setIsLoading(true);
-  try {
-    const res = await getVendorNonAppProductsRequest(id, page, limit);
-    upDateState(res.data.data.data);
-    setTotalPage(res?.data?.data?.totalPages);
   } catch (err) {
     console.log(err);
   } finally {
@@ -416,6 +244,7 @@ export const getProductByCatId = async (
     setIsLoading(false);
   }
 };
+
 export const getProductByCatId2 = async (
   catId,
   setAllProducts,
@@ -426,12 +255,19 @@ export const getProductByCatId2 = async (
     setIsLoading(true);
     const res = await getProductByCategory(catId);
     console.log(approvalType, catId);
-    if(approvalType === "approval") {
-      setAllProducts(res?.data?.data?.filter((item) => item?.isApproved === true && item?.category?._id == catId))
+    if (approvalType === "approval") {
+      setAllProducts(
+        res?.data?.data?.filter(
+          (item) => item?.isApproved === true && item?.category?._id == catId
+        )
+      );
     } else {
-      setAllProducts(res?.data?.data?.filter((item) => item?.isApproved === false && item?.category?._id == catId));
+      setAllProducts(
+        res?.data?.data?.filter(
+          (item) => item?.isApproved === false && item?.category?._id == catId
+        )
+      );
     }
-
   } catch (error) {
     console.log(error);
   } finally {

@@ -157,3 +157,11 @@
   font-weight: 600;
   font-size: 1rem;
 }
+
+.google {
+  border: 1px solid #ff8d22;
+  border-radius: 20px;
+  background-color: #ff8d22;
+  padding: 8px 30px;
+  color: white;
+}

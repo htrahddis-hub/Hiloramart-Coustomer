@@ -3,12 +3,12 @@ import Img from "../Assets/Images/NoPath.png";
 import "../Styles/pages/UserProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../Context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GET_USER_PROFILE } from "../Context/Types";
 import ProfileSkeleton from "../Components/Skeleton-loading/Profile.skeleton";
 
 const VProfile = () => {
-  const { setAuth, AuthRole, dispatch, currentUser } = useContext(AuthContext);
+  const { setAuth, AuthRole, dispatch} = useContext(AuthContext);
   console.log(AuthRole);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
@@ -21,7 +21,7 @@ const VProfile = () => {
     Cookies.remove("auth_token");
     Cookies.remove("role");
     setAuth(false);
-    navigate("/choose-role-login", { replace: true });
+    navigate("/login");
   };
 
   return !profileData ? (
