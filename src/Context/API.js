@@ -189,8 +189,11 @@ export const getMyOrderRequest = () => {
 };
 
 //orderbyid
-//searchOrder//siddharth
+//searchOrder //siddharth
 //add or update review // siddharth
+export const review =(data)=>{
+  return API.post("/orders/addReview",data)
+}
 //cod available
 
 export const returnItemRequest = (values) => {

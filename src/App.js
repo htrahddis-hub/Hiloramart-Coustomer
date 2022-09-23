@@ -38,6 +38,7 @@ import VerifyOtp from "./Pages/VerifyOtp";
 import ForgotForm from "./Pages/ForgotForm";
 import UserProfile from "./Pages/UserProfile";
 import EditUserProfile from "./Pages/EditUserProfile";
+import Orders from "./Pages/MyOrders";
 function App() {
   return (
     <>
@@ -132,6 +133,7 @@ function App() {
                 element={<EditUserProfile />}
               ></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
+              <Route exact path="/my-plans" element={<MyPlans />}></Route>
               <Route exact path="/my-plans" element={<MyPlans />}></Route>
               <Route
                 exact

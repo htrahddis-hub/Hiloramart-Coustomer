@@ -1,6 +1,6 @@
 #LPmainCont {
   display: flex;
-  padding: 3%;
+  padding: 1%;
   justify-content: space-between;
 }
 #LPtext1 {
@@ -66,13 +66,13 @@
 }
 
 .carousel-indicators {
-  bottom: -70px;
+  bottom: -50px;
 }
 
 .carousel-indicators [data-bs-target] {
   background-color: #ff8d22;
-  width: 14px;
-  height: 14px;
+  width: 11px;
+  height: 11px;
   margin-right: 5px;
   margin-left: 5px;
   border-radius: 50%;

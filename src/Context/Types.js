@@ -87,3 +87,4 @@ export const GET_PRODUCT_BY_CATEGORY = "get product by category";
 export const GET_VENDOR_ADS = "get vendor plan";
 
 export const CREATE_VENDOR_ORDER = "create vendor order razorpay";
+export const REVIEW ="review"

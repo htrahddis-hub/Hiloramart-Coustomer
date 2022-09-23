@@ -51,6 +51,7 @@ import {
   CHANGE_USER_CURRENT_ADDRESS,
   UPDATE_USER_PROFILE,
   GET_PRODUCT_BY_CATEGORY2,
+  REVIEW,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -73,6 +74,7 @@ import {
   getProductByCatId,
   searchProducts,
   getProductByCatId2,
+  reviews,
 } from "./Reducer/ProductReducer";
 import jwtDecode from "jwt-decode";
 import {
@@ -83,10 +85,7 @@ import {
   userProfile,
   updateUserProfiles,
 } from "./Reducer/ProfileReducer";
-import {
-  getMyOrder,
-  returnITem,
-} from "./Reducer/OrderReducer";
+import { getMyOrder, returnITem } from "./Reducer/OrderReducer";
 import {
   acceptAffiliate,
   denytAffiliate,
@@ -338,6 +337,9 @@ const AuthContextComponent = ({ children }) => {
           action.setIsLoading,
           action.approvalType
         );
+        break;
+      case REVIEW:
+        reviews(action.data);
         break;
     }
   };

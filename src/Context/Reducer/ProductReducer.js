@@ -14,6 +14,7 @@ import {
   getProductByCategory,
   getTopSellingProduct,
   searchProduct,
+  review,
 } from "../API";
 import { Store } from "react-notifications-component";
 import { notification } from "../AuthContext";
@@ -258,13 +259,13 @@ export const getProductByCatId2 = async (
     if (approvalType === "approval") {
       setAllProducts(
         res?.data?.data?.filter(
-          (item) => item?.isApproved === true && item?.category?._id == catId
+          (item) => item?.isApproved === true && item?.category?._id === catId
         )
       );
     } else {
       setAllProducts(
         res?.data?.data?.filter(
-          (item) => item?.isApproved === false && item?.category?._id == catId
+          (item) => item?.isApproved === false && item?.category?._id === catId
         )
       );
     }
@@ -315,4 +316,13 @@ export const removeProductForAds = (
   // setProductIds(filteredProductId);
   setProductIds((prev) => prev.filter((item1) => item1 !== item._id));
   console.log(productId);
+};
+
+export const reviews = async (data) => {
+  try {
+    const res = await review(data);
+    
+  } catch (err) {
+    console.log(err);
+  }
 };

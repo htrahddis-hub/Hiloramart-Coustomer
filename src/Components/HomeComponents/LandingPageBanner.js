@@ -6,19 +6,18 @@ import { Link } from "react-router-dom";
 
 const ImageGallaryComponent = () => {
   return (
-    <div className="py-5">
+    <div className="py-2">
       <div
         id="carouselExampleIndicators"
-        class="carousel slide "
-        data-bs-ride="false"
-        data-bs-interval="false"
+        className="carousel slide "
+        data-bs-ride="carousel"
       >
-        <div class="carousel-indicators">
+        <div className="carousel-indicators">
           <button
             type="button"
             data-bs-target="#carouselExampleIndicators"
             data-bs-slide-to="0"
-            class="active"
+            className="active"
             aria-current="true"
             aria-label="Slide 1"
           ></button>
@@ -35,26 +34,26 @@ const ImageGallaryComponent = () => {
             aria-label="Slide 3"
           ></button>
         </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active new-banner-1">
+        <div className="carousel-inner">
+          <div className="carousel-item active new-banner-1">
             <div id="banner-container" className="white-border-new">
               <div id="LPmainCont">
-                <div id="LPtextCont">
+                <div id="LPtextCont" style={{color:"white"}}>
                   <h1 id="LPtext1">
                     LOOP SCANO -200 ( 6550 ) X-RAY BAGGAGE SCANNER
                   </h1>
                   <div id="LPtext2">
-                    Installation. Service. Engineering. Global Support
+                    FASHION
                   </div>
                   <h2 id="LPtext3">From RS 95,000</h2>
                 </div>
                 <div>
-                  <img src={banner} alt="img" style={{ height: "28rem" }} />
+                  <img src={banner} alt="img" style={{ height: "20rem" }} />
                 </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item landing-top-section">
+          <div className="carousel-item landing-top-section">
             <div id="banner-container ">
               <div id="LPmainCont">
                 <div id="LPtextCont">
@@ -67,12 +66,12 @@ const ImageGallaryComponent = () => {
                   <h2 id="LPtext3">From RS 95,000</h2>
                 </div>
                 <div>
-                  <img src={machine} alt="img" style={{ height: "28rem" }} />
+                  <img src={machine} alt="img" style={{ height: "20rem" }} />
                 </div>
               </div>
             </div>
           </div>
-          <div class="carousel-item">
+          <div className="carousel-item">
             <div id="banner-container">
               {/* <img src={Banner} alt="LandingImage" /> */}
               <div id="LPmainCont">
@@ -86,7 +85,7 @@ const ImageGallaryComponent = () => {
                   <h2 id="LPtext3">From RS 95,000</h2>
                 </div>
                 <div>
-                  <img src={machine} alt="img" style={{ height: "28rem" }} />
+                  <img src={machine} alt="img" style={{ height: "20rem" }} />
                 </div>
               </div>
             </div>
