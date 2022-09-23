@@ -14,12 +14,28 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
+//authentication
+
 export const userSignUpRequest = (values) => {
   return API.post("/auth/register", values);
 };
 
+export const userResendOtpRequest = (values) => {
+  return API.post("auth/resendOtp", values);
+};
+
+export const userAccActivateRequest = (values) => {
+  return API.post("auth/activate", values);
+};
+
 export const userLoginRequest = (values) => {
   return API.post("/auth/login", values);
+};
+
+//social login api is in login.jsx
+
+export const userLogoutRequest = () => {
+  return API.get("/aut/logout");
 };
 
 export const userForgotpasswordRequest = (value) => {
@@ -33,6 +49,199 @@ export const userVerifyCode = (values) => {
 export const resetUserPasswordRequest = (data) => {
   return API.post("/auth/resetPassword", data);
 };
+
+
+//cart
+
+
+export const getCartItemsRequest = () => {
+  return API.get("/cart");
+};
+
+export const addItemToCartRequest = (values) => {
+  return API.post("cart/add", values);
+};
+
+export const checkItemInCartRequest = (id) => {
+  return API.get(`cart/checkItem?productId=${id}`);
+};
+
+export const updateItemToCartRequest = (values) => {
+  return API.post("cart/update", values);
+};
+
+export const deleteItemFromCartRequest = (values) => {
+  return API.delete("/cart/remove", {
+    data: values,
+  });
+};
+
+
+//wishlist
+
+
+export const getWishlistItemsRequest = async (id) => {
+  return API.get(`/wishlist`);
+};
+
+export const addItemToWishlistRequest = (id) => {
+  return API.post(`/wishlist/add`, {
+    product_id: id,
+  });
+};
+
+export const checkItemWishlistStatus = (id) => {
+  return API.get(`wishlist/checkItem?product_id=${id}`);
+};
+
+export const removeItemFromWishlistRequest = (id) => {
+  const data = { products: [id] };
+  return API.delete(`/wishlist/remove`, { data: data });
+};
+
+
+//Profile
+
+
+export const userProfileRequest = () => {
+  return API.get("/profile");
+};
+
+export const updateUserName = (data) => {
+  return API.post(`profile/updateName`, data);
+};
+
+export const updateUserEmailStart = (data) => {
+  return API.post(`profile/updateEmail`, data);
+};
+
+export const updateUserEmailComplete = (data) => {
+  return API.post(`profile/verifyUpdateEmail`, data);
+};
+
+export const updateUserMobile = (data) => {
+  return API.post(`profile/updateMobile`, data);
+};
+
+export const updateUserProfile = (data) => {
+  return API.post(`profile/updateAll`, data);
+};
+
+export const updateUserProfilePic = (data) => {
+  return API.post(`profile/updateProfilePic`, data);
+};
+
+
+//address
+
+
+export const getUserAddresss = () => {
+  return API.get("/address");
+};
+
+export const addUserAddress = (data) => {
+  return API.post("/address/add", data);
+};
+
+export const updateUserAddress = (id, data) => {
+  return API.post(`/address/edit?addressId=${id}`, data);
+};
+
+export const changeCurrentUserAddress = (id) => {
+  return API.post(`/address/changeCurrentAddress`, { addressId: id });
+};
+
+export const deleteSavedUserAddress = (id) => {
+  return API.delete(`/address/remove?addressId=${id}`);
+};
+
+
+//orders
+
+
+//need to be checked
+export const placeOrder = (response, productIds, amount) => {
+  console.log(productIds);
+  console.log(amount);
+  console.log(response);
+  const formValues = {
+    razorpayPaymentId: response.razorpay_payment_id,
+    orderCreationId: response.razorpay_order_id,
+    razorpaySignature: response.razorpay_signature,
+    products: productIds,
+    price: amount,
+    // isCOD: false, //if true, payment id, signature, order id will not come
+    // address: {
+    //   line1: "Fl no. 203, F wing, Shefalika Heights",
+    //   line2: "Shivtirthnagar, Paud Road, Kothrud",
+    //   city: "Pune",
+    //   state: "Maharashtra",
+    //   pincode: "411038",
+    //   country: "India",
+    // },
+    // "affiliateKey": "dfrgthe56htgar" //optional
+  };
+  return API.post("/ads/payForAd", formValues);
+};
+
+export const getMyOrderRequest = () => {
+  return API.get("/orders/myOrders");
+};
+
+//orderbyid
+//searchOrder//siddharth
+//add or update review // siddharth
+//cod available
+
+export const returnItemRequest = (values) => {
+  return API.post("/orders/return", values);
+};
+
+//orderbyproductid //for pop up to check when ordering
+//return requestbyId
+//myWallet //siddharth
+//allSalewithVendor 
+
+
+//ads for user side
+
+
+//all ads
+//ads by id
+//ad by category
+
+
+//vendor API needed in user side
+
+export const searchProduct = (name, categoryId) => {
+  return API.get(`product/searchProducts?name=${name}&category=${categoryId}`);
+};
+
+export const getAllCategoryRequest = () => {
+  return API.get("/product/getProductCategory");
+};
+
+export const getProductByCategory = (catId) => {
+  return API.post(`/product/getProductsbyCategoryId`, { category: [catId] });
+};
+
+export const getTopSellingProduct = () => {
+  return API.get(`/product/getSellingProducts`);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+// not needed
 
 export const vendorForgotpasswordRequest = (value) => {
   return API.post("api/vendor/forgot-password", { email: value });
@@ -53,24 +262,17 @@ export const vendorSignupRequest = (values) => {
   return API.post("/api/vendor/signup", values);
 };
 
-export const userAccActivateRequest = (values) => {
-  return API.post("auth/activate", values);
-};
+
 export const vendorAccActivateRequest = (values) => {
   return API.post("api/vendor/activate", values);
 };
 
-export const userResendOtpRequest = (values) => {
-  return API.post("auth/resendOtp", values);
-};
 
 export const vendorResendOtpRequest = (values) => {
   return API.post("api/vendor/resendOtp", values);
 };
 
-export const userProfileRequest = () => {
-  return API.get("profile");
-};
+
 export const vendorProfileRequest = (id) => {
   return API.get(`/vendor/getVendorProfile/${id}`);
 };
@@ -78,9 +280,7 @@ export const getVendorAddresss = () => {
   return API.get("/vendor/getMyaddress");
 };
 
-export const getUserAddresss = () => {
-  return API.get("/address");
-};
+
 
 export const getVendorSale = (
   // startDate, endDate,
@@ -117,45 +317,14 @@ export const deleteSavedAddress = (id) => {
   return API.get(`/vendor/removeAddress?addressId=${id}`);
 };
 
-export const addUserAddress = (data) => {
-  return API.post("/address/add", data);
-};
-
-export const changeCurrentUserAddress = (id) => {
-  return API.post(`/address/changeCurrentAddress`, { addressId: id });
-};
-
-export const updateUserAddress = (id, data) => {
-  return API.post(`/address/edit?addressId=${id}`, data);
-};
-
-export const deleteSavedUserAddress = (id) => {
-  return API.delete(`/address/remove?addressId=${id}`);
-};
-
-export const searchProduct = (name, categoryId) => {
-  return API.get(`product/searchProducts?name=${name}&category=${categoryId}`);
-};
-
-export const updateUserProfile = (data) => {
-  return API.post(`profile/updateAll`, data);
-};
-
-export const updateUserProfilePic = (data) => {
-  return API.post(`profile/updateProfilePic`, data);
-};
 
 export const updateProfile = (data, id) => {
   return API.post(`/vendor/updateVendorProfile/${id}`, data);
 };
 //products
-export const getAllCategoryRequest = () => {
-  return API.get("/product/getProductCategory");
-};
 
-export const getTopSellingProduct = () => {
-  return API.get(`/product/getSellingProducts`);
-};
+
+
 
 export const addProductRequest = (values) => {
   return API.post("/product/addProduct", values);
@@ -182,46 +351,10 @@ export const getProductDetailsRequest = (id) => {
   return API.get(`product/getProductsbyId/${id}`);
 };
 
-export const addItemToWishlistRequest = (id) => {
-  return API.post(`/wishlist/add`, {
-    product_id: id,
-  });
-};
-export const removeItemFromWishlistRequest = (id) => {
-  console.log({ products: [id] });
-  const data = { products: [id] };
-  return API.delete(`/wishlist/remove`, { data: data });
-};
 
-export const checkItemWishlistStatus = (id) => {
-  return API.get(`wishlist/checkItem?product_id=${id}`);
-};
 
-export const getWishlistItemsRequest = async (id) => {
-  return API.get(`/wishlist`);
-};
 
-export const addItemToCartRequest = (values) => {
-  return API.post("cart/add", values);
-};
 
-export const checkItemInCartRequest = (id) => {
-  return API.get(`cart/checkItem?productId=${id}`);
-};
-
-export const getCartItemsRequest = () => {
-  return API.get("/cart");
-};
-
-export const deleteItemFromCartRequest = (values) => {
-  return API.delete("/cart/remove", {
-    data: values,
-  });
-};
-
-export const getMyOrderRequest = () => {
-  return API.get("/orders/myOrders");
-};
 
 export const updateOrderRequest = (data) => {
   return API.post("/ord/updateOrder", data);
@@ -279,29 +412,7 @@ export const getOrderID = (cost) => {
   });
 };
 
-export const placeOrder = (response, productIds, amount) => {
-  console.log(productIds);
-  console.log(amount);
-  console.log(response);
-  const formValues = {
-    razorpayPaymentId: response.razorpay_payment_id,
-    orderCreationId: response.razorpay_order_id,
-    razorpaySignature: response.razorpay_signature,
-    products: productIds,
-    price: amount,
-    // isCOD: false, //if true, payment id, signature, order id will not come
-    // address: {
-    //   line1: "Fl no. 203, F wing, Shefalika Heights",
-    //   line2: "Shivtirthnagar, Paud Road, Kothrud",
-    //   city: "Pune",
-    //   state: "Maharashtra",
-    //   pincode: "411038",
-    //   country: "India",
-    // },
-    // "affiliateKey": "dfrgthe56htgar" //optional
-  };
-  return API.post("/ads/payForAd", formValues);
-};
+
 
 //orders
 export const getCurrentOrdersRequest = (limit, page, category) => {
@@ -350,13 +461,9 @@ export const getOngoingOrdersRequest = (limit, page, category) => {
     );
   }
 };
-export const returnItemRequest = (values) => {
-  return API.post("/orders/return", values);
-};
 
-export const getProductByCategory = (catId) => {
-  return API.post(`/product/getProductsbyCategoryId`, { category: [catId] });
-};
+
+
 
 export const getVendorAllAds = () => {
   return API.get("/ads/getMyAds");
