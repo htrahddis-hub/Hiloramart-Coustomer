@@ -4,7 +4,7 @@ import { Rating } from "react-simple-star-rating";
 import "../../Styles/Components/ProductContainer.css";
 import { Link } from "react-router-dom";
 const ProductContainer2 = (props) => {
-  const { price, title, description, ratings, productImage, name, owner } =
+  const { price, title, description, ratings, productImage, name, owner, _id } =
     props;
   const [rating, setRating] = useState(0); // initial rating value
 
@@ -15,7 +15,7 @@ const ProductContainer2 = (props) => {
   };
 
   return (
-    <div className="ProductMainContainer">
+    <div className="ProductMainContainer mx-3 px-4 py-2 d-flex flex-column justify-content-between ">
       <div className="ProCont1">
         <Link
           to="/affiliate"
@@ -36,14 +36,18 @@ const ProductContainer2 = (props) => {
           />
         </div>
       </div>
-
-      <div className="Images">
-        <img
-          src={productImage ? productImage[0] : null}
-          alt=""
-          style={{ height: "8rem", width: "8rem" }}
-        />
-      </div>
+      <Link
+        to={`/HomeProductDetail/${_id}`}
+        style={{ color: "inherit", textDecoration: "none",cursor:"pointer" }}
+      >
+        <div className="Images px-3">
+          <img
+            src={productImage ? productImage[0] : null}
+            alt=""
+            style={{ height: "13rem", width: "12rem" }}
+          />
+        </div>
+      </Link>
       <div className="discription">{name}</div>
       <div className="price">RS. {price}</div>
     </div>

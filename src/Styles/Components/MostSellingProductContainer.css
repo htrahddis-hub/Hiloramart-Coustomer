@@ -24,13 +24,14 @@
   display: none;
 }
 .arrow-scroll-cont {
-  gap: 1rem;
+  gap: 3rem;
   margin-bottom: 1rem;
 }
 .scroll-arrow {
   width: 40px;
   height: 40px;
-  /* background: cadetblue; */
+  color:#FF8D22;
+  border: 1px solid #FF8D22;
   border-radius: 50px;
   display: flex;
   justify-content: center;
@@ -39,4 +40,5 @@
 }
 .prod-cont {
   margin: 0 1rem;
+  
 }

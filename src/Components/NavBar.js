@@ -9,16 +9,22 @@ import { Button } from "@mui/material";
 import Cookies from "js-cookie";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import SearchInput from "./SearchInput";
+import search_icon from "../Assets/Images/search.svg";
+import HistoryIcon from "@mui/icons-material/History";
+import CloseIcon from "@mui/icons-material/Close";
 
 const NavBar = () => {
   const { setAuth, auth } = useContext(AuthContext);
   const [isNotifi, setIsNotifi] = useState(false);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [dropdown, setDropdown] = React.useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+  const handleDropdown = () => {
+    setDropdown((old) => !old);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -87,12 +93,41 @@ const NavBar = () => {
             </div>
           </NavLink>
         </div>
-
-        <div className="Nav2">
-          <div className="NavLink">
-            <SearchInput tabIndex={200}/>
+        <div className="d-flex align-items-center">
+          <img src={search_icon} className="search_icon" />
+          <input
+            className="border border-0 search-css"
+            type="text"
+            placeholder="Search for Products,Brands..."
+            aria-label="Search"
+            onClick={handleDropdown}
+          />
+          <div
+            className="dropbox-search"
+            tabIndex={1}
+            style={{ display: dropdown ? "block" : "none" }}
+          >
+            <div className="d-flex p-3 justify-content-between align-items-center">
+              <div className="d-flex">
+                <HistoryIcon /> <div className="ms-3">Shoes</div>
+              </div>{" "}
+              <CloseIcon fontSize="small" />
+            </div>
+            <div className="d-flex px-3 justify-content-between align-items-center">
+              <div className="d-flex">
+                <HistoryIcon /> <div className="ms-3">Detector machine</div>
+              </div>{" "}
+              <CloseIcon fontSize="small" />
+            </div>
+            <div className="d-flex p-3 justify-content-between align-items-center">
+              <div className="d-flex">
+                <HistoryIcon /> <div className="ms-3">Laptop</div>
+              </div>{" "}
+              <CloseIcon fontSize="small" />
+            </div>
           </div>
-
+        </div>
+        <div className="Nav2">
           {data.map((item) => {
             return (
               <NavLink

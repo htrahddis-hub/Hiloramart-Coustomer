@@ -16,7 +16,7 @@ const Home = () => {
         </div> */}
         <LandingPageBanner />
         <CategorySection />
-        <DealOfDayContainer />
+        {/* <DealOfDayContainer /> */}
         <Detectors />
         <Footer />
       </div>

@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import ProductContainer2 from "./ProductContainer2";
 import "../../Styles/Components/MostSellingProductContainer.css";
-import { Link } from "react-router-dom";
-import { Col, Container, Row } from "react-bootstrap";
 import { AuthContext } from "../../Context/AuthContext";
-import { GET_TOP_PRODUCTS, GET_ALL_CATEGORY } from "../../Context/Types";
+import {
+  GET_TOP_PRODUCTS,
+  GET_ALL_CATEGORY,
+  GET_ALL_PRODUCTS,
+} from "../../Context/Types";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ProductContainerSkeleton from "../Skeleton-loading/prductConatiner.skeleton";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-
-var filteredData = [];
 
 const Detectors = () => {
   const { dispatch } = useContext(AuthContext);
@@ -21,8 +20,9 @@ const Detectors = () => {
   const [categoryName, setCategoryName] = useState("All");
   const carousalRef = useRef();
   useEffect(() => {
-    dispatch({ type: GET_TOP_PRODUCTS, upDateState: setAllProducts });
+    dispatch({ type: GET_ALL_PRODUCTS, upDateState: setAllProducts });
   }, []);
+
   const handleBackward = () => {
     carousalRef.current.scrollLeft -= 200;
   };
@@ -38,64 +38,45 @@ const Detectors = () => {
     });
   }, []);
 
-  const handleDropdown = () => {
-    setIsDropDown((old) => !old);
-  };
-
-  const handleCat = (id, name) => {
-    setCategoryName(name);
-    setIsDropDown(false);
-  };
-
-  filteredData = allProducts.filter((item) => {
-    if (categoryName === "All") return true;
-    if (item.category?.name === categoryName) return true;
-  });
-  console.log(filteredData, categoryName);
-
   return (
     <>
-      <Container className="MSPmainContainer">
-        <div className="MSPcontiner1">Most Selling Products</div>
-        <div className="MSPCont2">
-          <div className="arrow-scroll-cont d-flex justify-content-end">
-            <div className="scroll-arrow">
-              <ArrowBackIosNewIcon onClick={handleBackward} />
-            </div>
-            <div className="scroll-arrow">
-              <ArrowForwardIosIcon onClick={handleForward} />
-            </div>
-          </div>
-          <div
-            style={{ width: "100%" }}
-            className="row-container"
-            ref={carousalRef}
-          >
-            {allProducts ? (
-              allProducts.map((item, index) => {
-                return (
-                  <div key={item._id} className="prod-cont">
-                    <Link
-                      to={`/HomeProductDetail/${item._id}`}
-                      style={{ color: "inherit", textDecoration: "none" }}
-                    >
-                      <ProductContainer2 {...item} />
-                    </Link>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="d-flex gap-5">
-                <ProductContainerSkeleton />
-                <ProductContainerSkeleton />
-                <ProductContainerSkeleton />
-                <ProductContainerSkeleton />
+      {allCategory?.map((cat) => (
+        <div className="MSPmainContainer mx-3">
+          <div className="MSPCont2">
+            <div className="arrow-scroll-cont d-flex justify-content-between">
+              <div className="MSPcontiner1">{cat?.name}</div>
+              <div className="d-flex">
+                <div className="scroll-arrow me-4">
+                  <ArrowBackIosNewIcon onClick={handleBackward} />
+                </div>
+                <div className="scroll-arrow">
+                  <ArrowForwardIosIcon onClick={handleForward} />
+                </div>
               </div>
-            )}
+            </div>
+            <div
+              style={{ width: "100%" }}
+              className="row-container"
+              ref={carousalRef}
+            >
+              {allProducts ? (
+                allProducts.map((item) => {
+                  if (item?.category?._id === cat?._id)
+                    return <ProductContainer2 {...item} key={item?._id}/>;
+                })
+              ) : (
+                <div className="d-flex gap-5">
+                  <ProductContainerSkeleton />
+                  <ProductContainerSkeleton />
+                  <ProductContainerSkeleton />
+                  <ProductContainerSkeleton />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </Container>
-      <Container className="MSPmainContainer">
+      ))}
+      {/* <Container className="MSPmainContainer">
         <div className="MSPcontiner1">Most Selling Products</div>
         <div className="MSPCont2">
           <div className="arrow-scroll-cont d-flex justify-content-between">
@@ -180,7 +161,7 @@ const Detectors = () => {
             )}
           </div>
         </div>
-      </Container>
+      </Container> */}
     </>
   );
 };
