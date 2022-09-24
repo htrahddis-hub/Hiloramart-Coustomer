@@ -8,7 +8,7 @@ import Footer from "../Components/Footer";
 
 import { AuthContext } from "../Context/AuthContext";
 import CheckoutProductCard from "../Components/CheckoutProductCard";
-import { ONLINE_PAYMENT,GET_USER_PROFILE } from "../Context/Types";
+import { ONLINE_PAYMENT,GET_USER_PROFILE,GET_USER_ADDRESS } from "../Context/Types";
 import { CircularProgress } from "@mui/material";
 
 const Checkout = () => {
@@ -19,6 +19,7 @@ const Checkout = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState(location.state?.productDetails[0]);
   const [counter, setCounter] = useState(location.state?.quantity);
+  const [userAddress, setUserAddress] = useState([]);
 
   const handlePay = () => {
     let finalProduct = [];
@@ -36,22 +37,37 @@ const Checkout = () => {
       navigate,
     });
   };
-  console.log(product);
+  const getAddress = () => {
+    dispatch({
+      type: GET_USER_ADDRESS,
+      setUserAddress: setUserAddress,
+    });
+  };
+  React.useEffect(()=>{
+    getAddress()
+  },[])
   if (!product) return <Navigate to={-1} />;
   return (
     <>
       <div id="CartMainDiv">
         <div id="cartDiv1">
           <div id="cart1">SHIPPING ADDRESS</div>
-          <div id="cart2">
-            <div id="add">
-              98, B-1, Apos;s Residency, Residency Road, Next To Konark Hotel
-              Residency Road
-            </div>
-            <div id="button">
-              <button id="Change">Change</button>
-            </div>
-          </div>
+          {userAddress?.map((item) => {
+            if (item.isCurrent) {
+              return (
+                <div id="cart2">
+                  <div id="add">
+                    {item.line1} {item.line2} {item.city}
+                    {"\n"}
+                    {item.state} {item.country}-{item.pincode}
+                  </div>
+                  <div id="button">
+                    <button id="Change">Change</button>
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
         <div id="CartDiv2main">
           <div id="cartDiv2">

@@ -52,6 +52,7 @@ import {
   UPDATE_USER_PROFILE,
   GET_PRODUCT_BY_CATEGORY2,
   REVIEW,
+  LOGOUT,
 } from "./Types";
 import { ReactNotifications } from "react-notifications-component";
 import Cookies from "js-cookie";
@@ -84,6 +85,7 @@ import {
   updateProfileFun,
   userProfile,
   updateUserProfiles,
+  userLogout,
 } from "./Reducer/ProfileReducer";
 import { getMyOrder, returnITem } from "./Reducer/OrderReducer";
 import {
@@ -341,6 +343,9 @@ const AuthContextComponent = ({ children }) => {
       case REVIEW:
         reviews(action.data);
         break;
+      case LOGOUT:
+        userLogout(action.navigate,setAuth);
+        break;
     }
   };
   const initialValues = {};
@@ -349,7 +354,6 @@ const AuthContextComponent = ({ children }) => {
   const values = {
     auth,
     dispatch,
-    auth,
     setAuth,
     AuthRole,
     setAuthRole,

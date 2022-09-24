@@ -12,9 +12,10 @@ import MenuItem from "@mui/material/MenuItem";
 import search_icon from "../Assets/Images/search.svg";
 import HistoryIcon from "@mui/icons-material/History";
 import CloseIcon from "@mui/icons-material/Close";
+import { LOGOUT } from "../Context/Types";
 
 const NavBar = () => {
-  const { setAuth, auth } = useContext(AuthContext);
+  const { setAuth, auth,dispatch } = useContext(AuthContext);
   const [isNotifi, setIsNotifi] = useState(false);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -78,10 +79,11 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    Cookies.remove("auth_token");
-    Cookies.remove("role");
-    setAuth(false);
-    navigate("/login");
+    dispatch({
+      type: LOGOUT,
+      navigate,
+    });
+    
   };
   return (
     <>

@@ -35,7 +35,7 @@ export const userLoginRequest = (values) => {
 //social login api is in login.jsx
 
 export const userLogoutRequest = () => {
-  return API.get("/aut/logout");
+  return API.get("/auth/logout");
 };
 
 export const userForgotpasswordRequest = (value) => {
@@ -190,7 +190,6 @@ export const getMyOrderRequest = () => {
 
 //orderbyid
 //searchOrder //siddharth
-//add or update review // siddharth
 export const review =(data)=>{
   return API.post("/orders/addReview",data)
 }

@@ -9,7 +9,9 @@ import {
   addUserAddress,
   updateUserProfilePic,
   updateUserProfile,
+  userLogoutRequest,
 } from "../API";
+import Cookies from "js-cookie";
 
 export const userProfile = async (upDateState, setImage, setUpdatePf) => {
   try {
@@ -28,7 +30,6 @@ export const userProfile = async (upDateState, setImage, setUpdatePf) => {
   }
 };
 
-
 export const getUserAddress = async (setUserAddress) => {
   try {
     const res = await getUserAddresss();
@@ -38,7 +39,6 @@ export const getUserAddress = async (setUserAddress) => {
     console.log(error);
   }
 };
-
 
 export const addUserAddressData = async (
   data,
@@ -139,5 +139,18 @@ export const getVendorAds = async (setAllAds, setIsLoading) => {
     console.log(error);
   } finally {
     setIsLoading(false);
+  }
+};
+
+export const userLogout = async (navigate, setAuth) => {
+  try {
+    const res = await userLogoutRequest();
+    if ((res.data = "User Logged out")) {
+      setAuth(false);
+      Cookies.remove("auth_token");
+      navigate("/login");
+    }
+  } catch (err) {
+    console.log(err);
   }
 };

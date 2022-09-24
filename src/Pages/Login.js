@@ -1,8 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import "../Styles/pages/Login.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { useAlert } from "react-alert";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { AuthContext } from "../Context/AuthContext";
@@ -15,7 +14,7 @@ import Cookies from "js-cookie";
 import { Google } from "@mui/icons-material";
 
 const Login = () => {
-  const { dispatch } = useContext(AuthContext);
+  const { dispatch, setAuth } = useContext(AuthContext);
   const passRef = useRef();
   const navigate = useNavigate();
 
@@ -57,7 +56,10 @@ const Login = () => {
           .post("https://hiloramart0.herokuapp.com/auth/socialLogin", {
             firebaseId: user.accessToken,
           })
-          .then((res) => Cookies.set("auth_token", res.data.token))
+          .then((res) => {
+            Cookies.set("auth_token", res.data.token);
+            setAuth((prev) => true);
+          })
           .catch((err) => console.log(err));
         navigate("/");
       })
@@ -146,7 +148,10 @@ const Login = () => {
               </Form>
             )}
           </Formik>
-          <button onClick={handleGoogleAuth} className="google align-items-center">
+          <button
+            onClick={handleGoogleAuth}
+            className="google align-items-center"
+          >
             Login With Google
             <Google />
           </button>

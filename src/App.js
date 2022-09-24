@@ -134,7 +134,7 @@ function App() {
               ></Route>
               <Route exact path="/my-wallet" element={<VmyWallet />}></Route>
               <Route exact path="/my-plans" element={<MyPlans />}></Route>
-              <Route exact path="/my-plans" element={<MyPlans />}></Route>
+              <Route exact path="/my-orders" element={<Orders />}></Route>
               <Route
                 exact
                 path="/categoryproducts"

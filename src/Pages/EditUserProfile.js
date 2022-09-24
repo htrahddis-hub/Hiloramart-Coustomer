@@ -99,7 +99,7 @@ const VEditProfile = () => {
       setUserAddress: setVendorAddress,
     });
   };
-  console.log(vendorAddress);
+  
 
   //the shiprocket api is send through cors fix kylo url,
   //where localhost:3000 is not allowed but the shiprocket APi I am using doeesn't need it
@@ -180,14 +180,6 @@ const VEditProfile = () => {
     getAddress();
     getShiprocketCountries();
   }, [open]);
-
-  // console.log(profileData);
-  // console.log(vendorAddress);
-  // console.log(allCountries, "all Countries")
-  // console.log(address, "my address")
-
-  // console.log(bankDetails, "bank detail");
-  // console.log(updatedProfileData, "vendor detail");
 
   return (
     <div style={{ padding: "0 30px" }}>

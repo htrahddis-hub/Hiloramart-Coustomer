@@ -59,11 +59,11 @@ export const UPLOAD_PROFILE_PIC = "upload profile pic";
 export const UPDATE_USER_PROFILE = "update user profile";
 export const UPDATE_PROFILE = "update profile";
 export const ONGOING_ORDER = "ongoing order";
-export const GET_VENDOR_NONAPP_PRODUCT="get vendor nonapproval products";
+export const GET_VENDOR_NONAPP_PRODUCT = "get vendor nonapproval products";
 export const GET_PRODUCT_BY_CATEGORY2 = "GET_PRODUCT_BY_CATEGORY2";
 
 export const SEARCG_PRODUCT = "search products";
-export const GET_REVENUE_GRAPH_DATA="get revenue graph data";
+export const GET_REVENUE_GRAPH_DATA = "get revenue graph data";
 
 export const VENDOR_SALE = "my sale";
 export const VENDOR_ALL_SALE = "my all";
@@ -87,4 +87,5 @@ export const GET_PRODUCT_BY_CATEGORY = "get product by category";
 export const GET_VENDOR_ADS = "get vendor plan";
 
 export const CREATE_VENDOR_ORDER = "create vendor order razorpay";
-export const REVIEW ="review"
+export const REVIEW = "review";
+export const LOGOUT = "logout";

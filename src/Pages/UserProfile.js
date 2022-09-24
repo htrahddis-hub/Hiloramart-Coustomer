@@ -4,11 +4,12 @@ import "../Styles/pages/UserProfile.css";
 import Cookies from "js-cookie";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { GET_USER_PROFILE } from "../Context/Types";
+import { GET_USER_PROFILE, LOGOUT } from "../Context/Types";
 import ProfileSkeleton from "../Components/Skeleton-loading/Profile.skeleton";
+import CameraAltOutlinedIcon from "@mui/icons-material/CameraAltOutlined";
 
 const VProfile = () => {
-  const { setAuth, AuthRole, dispatch} = useContext(AuthContext);
+  const { setAuth, AuthRole, dispatch } = useContext(AuthContext);
   console.log(AuthRole);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
@@ -21,7 +22,7 @@ const VProfile = () => {
     Cookies.remove("auth_token");
     Cookies.remove("role");
     setAuth(false);
-    navigate("/login");
+    dispatch({ type: LOGOUT, navigate });
   };
 
   return !profileData ? (
@@ -29,12 +30,11 @@ const VProfile = () => {
   ) : (
     <div className="profile-container">
       <div className="top-image-container">
-        <img src={Img} alt="image" className="top-image" />
+        <img src={Img} alt="imag" className="top-image" />
       </div>
-      <div className="mainCont">
-        <div className="cont">
-          <div className="basic-cont">
-            <div>Basic settings</div>
+      <div className="mainCont1 d-flex justify-content-between">
+        <div className="ps-5 pt-5 mt-2 w-75">
+          <div className="">
             <div>
               <div className="details">
                 <p>Name</p>
@@ -55,21 +55,26 @@ const VProfile = () => {
             </div>
           </div>
           <div className="logout-cont">
-            <button className="loginButton btn-profile" onClick={handleLogout}>
+            <button className="btn-profile1" onClick={handleLogout}>
               Logout
             </button>
           </div>
         </div>
-        <div className="img">
+        <div className="img1">
           <img
             style={{ borderRadius: "50%" }}
-            width={100}
-            height={100}
+            width="160px"
+            height="160px"
             src={profileData?.profile_pic}
             alt="/"
           />
           <div style={{ textAlign: "center" }}>
-            <p style={{ fontSize: "20px" }}>Hello {profileData.name}</p>
+            <p style={{ fontSize: "20px", width: "160px", paddingTop: "20px" }}>
+              Hello {profileData.name}
+            </p>
+            <div className="camera-icon">
+              <CameraAltOutlinedIcon />
+            </div>
             <button
               onClick={() => navigate("/edit-user-profile", { replace: true })}
               style={{

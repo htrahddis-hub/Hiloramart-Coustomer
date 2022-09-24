@@ -14,6 +14,7 @@ import { AuthContext } from "../Context/AuthContext";
 import {
   GET_CART_ITEMS,
   ONLINE_PAYMENT,
+  GET_USER_ADDRESS,
 } from "../Context/Types";
 import { CircularProgress } from "@mui/material";
 
@@ -23,7 +24,7 @@ const Cart2 = () => {
   const [cartItems, setCartitems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [userAddress, setUserAddress] = useState([]);
   const [cartProducts, setCartProducts] = useState(new Map());
   //todo -> GET ALL ITEMS IN THE CART
   const getCartItems = async () => {
@@ -31,6 +32,12 @@ const Cart2 = () => {
       type: GET_CART_ITEMS,
       setIsLoading: setIsLoading,
       upDateState: setCartitems,
+    });
+  };
+  const getAddress = () => {
+    dispatch({
+      type: GET_USER_ADDRESS,
+      setUserAddress: setUserAddress,
     });
   };
 
@@ -57,6 +64,7 @@ const Cart2 = () => {
   };
   useEffect(() => {
     getCartItems();
+    getAddress();
   }, []);
 
   useEffect(() => {
@@ -87,15 +95,22 @@ const Cart2 = () => {
       <div id="CartMainDiv">
         <div id="cartDiv1">
           <div id="cart1">SHIPPING ADDRESS</div>
-          <div id="cart2">
-            <div id="add">
-              98, B-1, Apos;s Residency, Residency Road, Next To Konark Hotel
-              Residency Road
-            </div>
-            <div id="button">
-              <button id="Change">Change</button>
-            </div>
-          </div>
+          {userAddress?.map((item) => {
+            if (item.isCurrent) {
+              return (
+                <div id="cart2">
+                  <div id="add">
+                    {item.line1} {item.line2} {item.city}
+                    {"\n"}
+                    {item.state} {item.country}-{item.pincode}
+                  </div>
+                  <div id="button">
+                    <button id="Change">Change</button>
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
         <div id="CartDiv2main">
           <div id="cartDiv2">
