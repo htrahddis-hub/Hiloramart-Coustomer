@@ -176,7 +176,10 @@ const ProductDetail = ({ item, id }) => {
                 </div>
               </div>
               <div id="PriceCont" className="mt-5">
-                <div id="ProdPrice">Rs {productDetails[0].price * counter} = Rs {productDetails[0].price} X {counter}</div>
+                <div id="ProdPrice">
+                  Rs {productDetails[0].price * counter} = Rs{" "}
+                  {productDetails[0].price} X {counter}
+                </div>
                 <div className="d-flex flex-column align-items-center">
                   <div className="h4 mb-3">Quantity</div>
                   <div id="counter">

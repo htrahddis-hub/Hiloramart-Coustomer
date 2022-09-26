@@ -13,58 +13,24 @@ const VmyProduct = () => {
   let { name } = useParams();
 
   const [allProducts, setAllProducts] = useState([]);
-  const [searchName, setSearchName] = useState(name);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getProducts = () => {
+  const getProducts = () => {};
+
+  useEffect(() => {
+    setIsLoading(true);
     dispatch({
       type: SEARCG_PRODUCT,
-      name: searchName,
+      name: name,
       catId: "",
       upDateState: setAllProducts,
       setIsLoading,
     });
-  };
-
-  useEffect(() => {
-    setIsLoading(true);
-    getProducts();
-  }, []);
-
-  const handleSubmit = () => {
-    setIsLoading(true);
-    getProducts();
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSubmit();
-    }
-  };
-
-  const handelChange = (e) => {
-    setSearchName(e.target.value);
-  };
+  }, [name]);
 
   return (
     <>
       <div style={{ margin: "2% 3%" }}>
-        <div className="d-flex justify-content-end">
-          <div className="search-input-cont">
-            <div onClick={handleSubmit}>
-              <img src={search_icon} className="search_icon" />
-            </div>
-            <div>
-              <input
-                placeholder="Seacrh here"
-                className="search-input"
-                value={searchName}
-                onChange={handelChange}
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-          </div>
-        </div>
         <div className="d-flex justify-content-center align-items-center">
           <div></div>
           <div

@@ -6,7 +6,7 @@ import "../../Styles/Components/YourWishlistCont.css";
 import wishlist_icon from "../../Assets/Images/wishlist.svg";
 import active_wishlist_icon from "../../Assets/Images/active-wishlist.svg";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import {
   REMOVE_ITEM_TO_WISHLIST,
@@ -15,50 +15,81 @@ import {
   ADD_ITEM_CART,
 } from "../../Context/Types";
 
+const arr= [];
+
 const YourWishlistCont = ({ data, cb }) => {
-  const { dispatch } = useContext(AuthContext);
-  const [isWishlist, setIsWishlist] = useState(true);
+  const navigate = useNavigate();
+  const { dispatch, auth } = useContext(AuthContext);
+  const [isWishlist, setIsWishlist] = useState(false);
   const [isWishlistLoading, setIsWishlistLoading] = useState(false);
   const [counter, setCounter] = useState(1);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [isAddedToCartLoading, setIsAddedToCartLoading] = useState(false);
 
-
   useEffect(() => {
-    dispatch({
-      type: CHECK_WISHLIST_STATUS,
-      payload: data._id,
-      upDateState: setIsWishlist,
-    });
-  }, []);
-
-  const toggleWishlist = async (id) => {
-    console.log("hello");
-    if (isWishlist) {
+    if (auth) {
       dispatch({
-        type: REMOVE_ITEM_TO_WISHLIST,
-        payload: id,
+        type: CHECK_WISHLIST_STATUS,
+        payload: data._id,
         upDateState: setIsWishlist,
-        setIsLoading: setIsWishlistLoading,
-        cb: cb,
+      });
+    }
+  }, [auth]);
+
+  const handleBuy = () => {
+    if (auth) {
+      arr.push(data)
+      navigate("/checkout", {
+        state: {
+          productDetails:arr,
+          quantity: counter,
+        },
       });
     } else {
-      dispatch({
-        type: ADD_ITEM_TO_WISHLIST,
-        payload: id,
-        upDateState: setIsWishlist,
-        setIsLoading: setIsWishlistLoading,
-      });
+      if (window.confirm("You are not logged in. Click ok to login")) {
+        navigate("/login");
+      }
+    }
+  };
+
+  const toggleWishlist = async (id) => {
+    if (auth) {
+      if (isWishlist) {
+        dispatch({
+          type: REMOVE_ITEM_TO_WISHLIST,
+          payload: id,
+          upDateState: setIsWishlist,
+          setIsLoading: setIsWishlistLoading,
+          cb: cb,
+        });
+      } else {
+        dispatch({
+          type: ADD_ITEM_TO_WISHLIST,
+          payload: id,
+          upDateState: setIsWishlist,
+          setIsLoading: setIsWishlistLoading,
+        });
+      }
+    } else {
+      if (window.confirm("You are not logged in. Click ok to login")) {
+        navigate("/login");
+      }
     }
   };
 
   const addItemToCart = (id) => {
-    dispatch({
-      type: ADD_ITEM_CART,
-      payload: [{ productId: id, quantity: counter }],
-      upDateState: setIsAddedToCart,
-      setIsLoading: setIsAddedToCartLoading,
-    });
+    if (auth) {
+      dispatch({
+        type: ADD_ITEM_CART,
+        payload: [{ productId: id, quantity: counter }],
+        upDateState: setIsAddedToCart,
+        setIsLoading: setIsAddedToCartLoading,
+      });
+    } else {
+      if (window.confirm("You are not logged in. Click ok to login")) {
+        navigate("/login");
+      }
+    }
   };
 
   const handleIncreaseCounter = () => {
@@ -76,10 +107,9 @@ const YourWishlistCont = ({ data, cb }) => {
       <div className="ProCont1">
         <div className="ProHead">{data?.owner?.name}</div>
         <div className="Stars">
-          <Rating ratingValue={data?.rating} size={20} readonly/>
+          <Rating ratingValue={data?.rating} size={20} readonly />
         </div>
       </div>
-
       <div className="Images">
         <Link to={`/HomeProductDetail/${data._id}`}>
           <img
@@ -98,14 +128,19 @@ const YourWishlistCont = ({ data, cb }) => {
           {isWishlistLoading ? (
             <CircularProgress sx={{ color: "black" }} size={25} />
           ) : (
-            <img src={isWishlist ? active_wishlist_icon : wishlist_icon} />
+            <img
+              src={isWishlist ? active_wishlist_icon : wishlist_icon}
+              alt="Wishlist"
+            />
           )}
         </div>
       </div>
       <div className="price">RS. {data?.price}</div>
       <div id="WishListButtonCont1">
         <div className="mb-2">
-          <button id="BUYbutton11">BUY NOW</button>
+          <button id="BUYbutton11" onClick={handleBuy}>
+            BUY NOW
+          </button>
         </div>
         <div className="d-flex justify-content-between">
           <div

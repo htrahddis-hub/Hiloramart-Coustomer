@@ -15,11 +15,17 @@ import CloseIcon from "@mui/icons-material/Close";
 import { LOGOUT } from "../Context/Types";
 
 const NavBar = () => {
-  const { setAuth, auth,dispatch } = useContext(AuthContext);
+  const { setAuth, auth, dispatch } = useContext(AuthContext);
   const [isNotifi, setIsNotifi] = useState(false);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [dropdown, setDropdown] = React.useState(false);
+  const [search, setSearch] = React.useState("");
+
+  const handelChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,8 +89,18 @@ const NavBar = () => {
       type: LOGOUT,
       navigate,
     });
-    
   };
+
+  const handleSubmit = () => {
+    navigate(`search/${search}`);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <>
       <div className="NavMain">
@@ -103,6 +119,9 @@ const NavBar = () => {
             placeholder="Search for Products,Brands..."
             aria-label="Search"
             onClick={handleDropdown}
+            // value={search}
+            onChange={handelChange}
+            onKeyDown={handleKeyDown}
           />
           <div
             className="dropbox-search"
